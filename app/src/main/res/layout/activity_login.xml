@@ -65,13 +65,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Don't have any account? "
-        android:textSize="40sp"
+        android:textSize="30sp"
         android:textStyle="bold"
         android:textAlignment="center"
         android:layout_below="@+id/buttonLogin"
         android:layout_marginTop="100sp"/>
 
     <Button
+        android:id="@+id/buttonRegister"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/registerTextview"
@@ -82,6 +83,8 @@
         android:text="Register"
         android:textAlignment="center"
         android:textSize="20sp" />
+
+
 
 
 

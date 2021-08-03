@@ -4,19 +4,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/dms_splash_background"
     tools:context=".MainActivity">
 
     <TextView
         android:id="@+id/welcome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Welcome to Dak Management System"
-        android:textSize="30sp"
-        android:textStyle="bold"
         android:fontFamily="sans-serif-condensed-medium"
+        android:padding="30sp"
+        android:text="Welcome to Dak Management System"
         android:textAlignment="center"
-        android:padding="30sp"/>
+        android:textSize="30sp"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:src="@drawable/dms_splash_background" />
 
     <TextView
         android:layout_alignParentBottom="true"
@@ -27,8 +32,7 @@
         android:textStyle="bold"
         android:textAlignment="center"
         android:padding="30sp"
-        android:fontFamily="sans-serif-condensed-medium"
-        />
+        android:fontFamily="sans-serif-condensed-medium"/>
 
 
 </RelativeLayout>
