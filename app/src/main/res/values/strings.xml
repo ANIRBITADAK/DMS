@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">DMS</string>
+    <string-array name="user_category">
+        <item>Select</item>
+        <item>Ticket Generator</item>
+        <item>Admin</item>
+        <item>User</item>
+    </string-array>
+</resources>
