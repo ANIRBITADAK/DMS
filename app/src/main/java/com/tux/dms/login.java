@@ -22,9 +22,8 @@ public class login extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(login.this,ProfileCreation.class);
+                Intent i = new Intent(login.this,TicketCreator.class);
                 startActivity(i);
-                finish();
             }
         });
 
@@ -34,7 +33,6 @@ public class login extends AppCompatActivity {
 
                 Intent i = new Intent(login.this,Register.class);
                 startActivity(i);
-                finish();
             }
         });
 

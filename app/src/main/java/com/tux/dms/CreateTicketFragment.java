@@ -7,13 +7,20 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link ScanFragment#newInstance} factory method to
+ * Use the {@link CreateTicketFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ScanFragment extends Fragment {
+public class CreateTicketFragment extends Fragment implements AdapterView.OnItemSelectedListener {
+
+
+    String[] sources = { "State", "District","Sub-Division","Gram Panchayat","Other Block Offices","Others" };
+    Spinner source;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -24,7 +31,7 @@ public class ScanFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public ScanFragment() {
+    public CreateTicketFragment() {
         // Required empty public constructor
     }
 
@@ -34,11 +41,11 @@ public class ScanFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment ScanFragment.
+     * @return A new instance of fragment CreateTicketFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static ScanFragment newInstance(String param1, String param2) {
-        ScanFragment fragment = new ScanFragment();
+    public static CreateTicketFragment newInstance(String param1, String param2) {
+        CreateTicketFragment fragment = new CreateTicketFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -59,6 +66,24 @@ public class ScanFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_scan, container, false);
+        View v= inflater.inflate(R.layout.fragment_create_ticket, container, false);
+        source=v.findViewById(R.id.source);
+        source.setOnItemSelectedListener(this);
+
+        ArrayAdapter ad = new ArrayAdapter(getContext(),android.R.layout.simple_spinner_item,sources);
+        ad.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        source.setAdapter(ad);
+
+        return v;
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
+
     }
 }

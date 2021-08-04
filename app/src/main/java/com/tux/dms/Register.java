@@ -20,9 +20,8 @@ public class Register extends AppCompatActivity {
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(Register.this,TicketCreator.class);
+                Intent i = new Intent(Register.this,login.class);
                 startActivity(i);
-                finish();
             }
         });
     }

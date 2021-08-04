@@ -20,7 +20,6 @@ public class MainActivity extends AppCompatActivity {
 
                 Intent mainIntent = new Intent(MainActivity.this,login.class);
                 startActivity(mainIntent);
-                finish();
             }
         }, SPLASH_DISPLAY_LENGTH);
     }

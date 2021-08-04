@@ -5,12 +5,15 @@
       <map>
         <entry key="app/src/main/res/drawable-v24/button_layout.xml" value="0.11666666666666667" />
         <entry key="app/src/main/res/drawable-v24/transparent_layout.xml" value="0.11388888888888889" />
-        <entry key="app/src/main/res/layout/activity_login.xml" value="0.15" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.12" />
+        <entry key="app/src/main/res/layout/activity_login.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.22" />
         <entry key="app/src/main/res/layout/activity_profile_creation.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_register.xml" value="0.21" />
         <entry key="app/src/main/res/layout/activity_ticket_creator.xml" value="0.23385416666666667" />
-        <entry key="app/src/main/res/layout/fragment_scan.xml" value="0.18" />
+        <entry key="app/src/main/res/layout/fragment_create_ticket.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_generate_report.xml" value="0.12604166666666666" />
+        <entry key="app/src/main/res/layout/fragment_report.xml" value="0.18" />
+        <entry key="app/src/main/res/layout/fragment_scan.xml" value="0.25" />
         <entry key="app/src/main/res/layout/nav_header.xml" value="0.24791666666666667" />
         <entry key="app/src/main/res/menu/drawer_menu.xml" value="0.24791666666666667" />
         <entry key="app/src/main/res/menu/drawer_menu_ticketgenerator.xml" value="0.24614404369447146" />

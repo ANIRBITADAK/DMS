@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CreateTicketFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="10sp">
+
+        <TextView
+            android:id="@+id/textViewheading"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40sp"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:text="Generate Ticket"
+            android:textAlignment="center"
+            android:textSize="25sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/subject"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textViewheading"
+            android:layout_marginTop="50sp"
+            android:hint="Enter Subject" />
+
+        <TextView
+            android:id="@+id/textSource"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/subject"
+            android:layout_marginTop="15sp"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:text="Enter Source"
+            android:textSize="20sp" />
+
+        <Spinner
+            android:id="@+id/source"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textSource"
+            android:layout_marginTop="15sp" />
+
+        <Button
+            android:id="@+id/buttonScan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/source"
+            android:layout_marginTop="90sp"
+            android:background="@drawable/button_layout"
+            android:text="Scan" />
+
+        <Button
+            android:id="@+id/buttonGenerate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/buttonScan"
+            android:layout_marginTop="40sp"
+            android:background="@drawable/button_layout"
+            android:text="Generate Ticket" />
+
+    </RelativeLayout>
+
+</FrameLayout>

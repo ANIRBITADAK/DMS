@@ -5,8 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".login"
-    android:background="@drawable/login_background1">
+    tools:context=".login">
 
 
     <LinearLayout
@@ -65,7 +64,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Don't have any account? "
-        android:textSize="30sp"
+        android:textSize="20sp"
         android:textStyle="bold"
         android:textAlignment="center"
         android:layout_below="@+id/buttonLogin"

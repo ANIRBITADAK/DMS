@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.os.Bundle;
@@ -32,13 +33,30 @@ public class TicketCreator extends AppCompatActivity implements NavigationView.O
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                    new ScanFragment()).commit();
-            navigationView.setCheckedItem(R.id.home);
+                    new CreateTicketFragment()).commit();
+            navigationView.setCheckedItem(R.id.ticket);
         }
     }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        return false;
+
+        switch (item.getItemId()) {
+            case R.id.ticket:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new CreateTicketFragment()).commit();
+                break;
+            case R.id.report:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new ReportFragment()).commit();
+                break;
+            case R.id.logout:
+                finishAndRemoveTask();
+                break;
+        }
+
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
     }
 }
+
