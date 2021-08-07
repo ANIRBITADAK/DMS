@@ -20,7 +20,7 @@ public class Register extends AppCompatActivity {
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(Register.this,login.class);
+                Intent i = new Intent(Register.this, Login.class);
                 startActivity(i);
             }
         });

@@ -1,6 +1,7 @@
 package com.tux.dms.api;
 
 import com.tux.dms.dto.JWTToken;
+import com.tux.dms.dto.UserCredential;
 
 import java.util.HashMap;
 
@@ -12,7 +13,7 @@ import retrofit2.http.POST;
 public interface RetroInterface {
 
     @POST("/api/auth")
-    Call<JWTToken> executeLogin(@Body HashMap<String,String> credential);
+    Call<JWTToken> executeLogin(@Body UserCredential credential);
 
     @POST("/api/users")
     Call<JWTToken> executeSignup (@Body HashMap<String,String> user);

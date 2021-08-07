@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.tux.dms.api.RetroInterface;
 import com.tux.dms.dto.JWTToken;
+import com.tux.dms.dto.UserCredential;
 import com.tux.dms.restclient.RetroRestClient;
 
 import java.util.HashMap;
@@ -20,7 +21,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
-public class login extends AppCompatActivity {
+public class Login extends AppCompatActivity {
 
     Button login,register;
     private RetroInterface retrofitInterface;
@@ -53,7 +54,7 @@ public class login extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                Intent i = new Intent(login.this,Register.class);
+                Intent i = new Intent(Login.this,Register.class);
                 startActivity(i);
             }
         });
@@ -62,14 +63,16 @@ public class login extends AppCompatActivity {
 
     private void handleLogin() {
 
-        HashMap<String, String> map = new HashMap<>();
-
+        /*HashMap<String, String> map = new HashMap<>();
         map.put("email", email.getText().toString());
-        map.put("password", password.getText().toString());
+        map.put("password", password.getText().toString());*/
 
-        Call<JWTToken> call = retrofitInterface.executeLogin(map);
+        UserCredential credential = new UserCredential();
+        credential.setEmail(email.getText().toString());
+        credential.setPassword(password.getText().toString());
+        Call<JWTToken> call = retrofitInterface.executeLogin(credential);
 
-        call.enqueue(new Callback<JWTToken>() {
+        call.enqueue( new Callback<JWTToken>() {
             @Override
             public void onResponse(Call<JWTToken> call, Response<JWTToken> response) {
 
@@ -79,7 +82,7 @@ public class login extends AppCompatActivity {
 
                     Toast.makeText(getApplicationContext(),token.getToken(),Toast.LENGTH_LONG).show();
 
-                } else if (response.code() == 404) {
+                } else if (response.code() == 400) {
                     Toast.makeText(getApplicationContext(), "Wrong Credentials",
                             Toast.LENGTH_LONG).show();
                 }
