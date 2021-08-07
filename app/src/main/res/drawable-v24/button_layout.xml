@@ -11,7 +11,7 @@
                 android:bottomRightRadius="20dp">
             </corners>
 
-            <stroke android:color="#E91E63"
+            <stroke android:color="#00BCD4"
                 android:width="5dp">
             </stroke>
         </shape>
