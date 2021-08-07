@@ -5,6 +5,7 @@ public class User {
     private String name;
     private String email;
     private String password;
+    private String phone;
 
     public String getName() {
         return name;
@@ -38,5 +39,4 @@ public class User {
         this.phone = phone;
     }
 
-    private String phone;
 }

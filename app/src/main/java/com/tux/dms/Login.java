@@ -14,8 +14,6 @@ import com.tux.dms.dto.JWTToken;
 import com.tux.dms.dto.UserCredential;
 import com.tux.dms.restclient.RetroRestClient;
 
-import java.util.HashMap;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -62,15 +60,11 @@ public class Login extends AppCompatActivity {
     }
 
     private void handleLogin() {
+        UserCredential user=new UserCredential();
+        user.setPassword(password.getText().toString());
+        user.setEmail(email.getText().toString());
+        Call<JWTToken> call = retrofitInterface.executeLogin(user);
 
-        /*HashMap<String, String> map = new HashMap<>();
-        map.put("email", email.getText().toString());
-        map.put("password", password.getText().toString());*/
-
-        UserCredential credential = new UserCredential();
-        credential.setEmail(email.getText().toString());
-        credential.setPassword(password.getText().toString());
-        Call<JWTToken> call = retrofitInterface.executeLogin(credential);
 
         call.enqueue( new Callback<JWTToken>() {
             @Override

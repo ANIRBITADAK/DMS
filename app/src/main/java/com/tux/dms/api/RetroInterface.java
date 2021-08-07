@@ -1,6 +1,8 @@
 package com.tux.dms.api;
 
 import com.tux.dms.dto.JWTToken;
+
+import com.tux.dms.dto.User;
 import com.tux.dms.dto.UserCredential;
 
 import java.util.HashMap;
@@ -16,6 +18,6 @@ public interface RetroInterface {
     Call<JWTToken> executeLogin(@Body UserCredential credential);
 
     @POST("/api/users")
-    Call<JWTToken> executeSignup (@Body HashMap<String,String> user);
+    Call<JWTToken> executeSignup (@Body User user);
 
 }
