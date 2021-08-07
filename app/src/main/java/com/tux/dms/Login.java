@@ -11,16 +11,15 @@ import android.widget.Toast;
 
 import com.tux.dms.api.RetroInterface;
 import com.tux.dms.dto.JWTToken;
+import com.tux.dms.dto.UserCredential;
 import com.tux.dms.restclient.RetroRestClient;
-
-import java.util.HashMap;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
-public class login extends AppCompatActivity {
+public class Login extends AppCompatActivity {
 
     Button login,register;
     private RetroInterface retrofitInterface;
@@ -53,7 +52,7 @@ public class login extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                Intent i = new Intent(login.this,Register.class);
+                Intent i = new Intent(Login.this,Register.class);
                 startActivity(i);
             }
         });
@@ -62,12 +61,11 @@ public class login extends AppCompatActivity {
 
     private void handleLogin() {
 
-        HashMap<String, String> map = new HashMap<>();
+        UserCredential user=new UserCredential();
+        user.setPassword(password.getText().toString());
+        user.setEmail(email.getText().toString());
 
-        map.put("email", email.getText().toString());
-        map.put("password", password.getText().toString());
-
-        Call<JWTToken> call = retrofitInterface.executeLogin(map);
+        Call<JWTToken> call = retrofitInterface.executeLogin(user);
 
         call.enqueue(new Callback<JWTToken>() {
             @Override

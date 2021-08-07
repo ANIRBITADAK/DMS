@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void run() {
 
-                Intent mainIntent = new Intent(MainActivity.this,login.class);
+                Intent mainIntent = new Intent(MainActivity.this, Login.class);
                 startActivity(mainIntent);
             }
         }, SPLASH_DISPLAY_LENGTH);
