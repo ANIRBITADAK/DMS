@@ -9,6 +9,7 @@ import java.util.HashMap;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.GET;
 import retrofit2.http.POST;
 
 
@@ -19,5 +20,8 @@ public interface RetroInterface {
 
     @POST("/api/users")
     Call<JWTToken> executeSignup (@Body User user);
+
+    @GET("/api/auth")
+    Call<User> getUser();
 
 }
