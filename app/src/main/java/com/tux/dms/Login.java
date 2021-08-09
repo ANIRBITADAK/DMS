@@ -4,71 +4,110 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
-import com.tux.dms.constantkeys.RESTApiConstant;
+import com.tux.dms.api.RestInterface;
 import com.tux.dms.dto.JWTToken;
-import com.tux.dms.restcall.LoginUser;
+import com.tux.dms.dto.User;
+import com.tux.dms.dto.UserCredential;
+import com.tux.dms.restclient.RetroRestClient;
 
 import java.util.HashMap;
 import java.util.Map;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 
 public class Login extends AppCompatActivity {
 
-    Button login,register;
-
-    EditText email,password;
-    LoginUser loginUser=new LoginUser();
-    Map<String,String> map=new HashMap<>();
-
-
-
+    Button login, register;
+    RestInterface restInterface = RetroRestClient.getRetroInterface();
+    String token ;
+    User usr;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        login=(Button) findViewById(R.id.buttonLogin);
-        register=(Button) findViewById(R.id.buttonRegister);
-        email=(EditText) findViewById(R.id.editTextEmail);
-        password=(EditText) findViewById(R.id.editTextPass);
-
-
-
+        login = (Button) findViewById(R.id.buttonLogin);
+        register = (Button) findViewById(R.id.buttonRegister);
 
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                 map=loginUser.handleLogin(email.getText().toString(),password.getText().toString());
-                 if(map.get(RESTApiConstant.RESPONSE_CODE_KEY).equalsIgnoreCase("200"))
-                 {
-                     JWTToken token=new JWTToken();
-                     token.setToken(map.get(RESTApiConstant.RESPONSE_VALUE_KEY));
-
-                     Toast.makeText(getApplicationContext(),token.getToken(),Toast.LENGTH_LONG).show();
-                 }
-                 else if(map.get(RESTApiConstant.RESPONSE_CODE_KEY).equalsIgnoreCase("500"))
-                 {
-                     Toast.makeText(getApplicationContext(),"Server Error",Toast.LENGTH_LONG).show();
-                 }
-
+                handleLongin();
             }
         });
 
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                Intent i = new Intent(Login.this,Register.class);
+                Intent i = new Intent(Login.this, Register.class);
                 startActivity(i);
             }
         });
 
     }
 
+    private  void handleLongin(){
+        getToken();
+       getUser(token);
+        Log.d("TAG",  usr.getName());
+    }
+    private void getToken(){
 
+        EditText email = (EditText) findViewById(R.id.editTextEmail);
+        EditText password = (EditText) findViewById(R.id.editTextPass);
+        UserCredential user=new UserCredential();
+        user.setPassword(password.getText().toString());
+        user.setEmail(email.getText().toString());
+        HashMap<String, String> map = new HashMap<>();
+
+        Call<JWTToken> call = restInterface.executeLogin(user);
+
+
+        call.enqueue( new Callback<JWTToken>() {
+            @Override
+            public void onResponse(Call<JWTToken> call, Response<JWTToken> response) {
+                Log.i("tag", "getting response of login");
+                JWTToken token = response.body();
+                setToken(token.getToken());
+            }
+
+            @Override
+            public void onFailure(Call<JWTToken> call, Throwable t) {
+
+            }
+        });
+
+    }
+
+    private void getUser(String token){
+
+        Call<User> call = restInterface.getUser(token);
+
+        call.enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+               User user =  response.body();
+               setUser(user);
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+
+            }
+        });
+    }
+    private  void setToken(String token){
+        this.token = token;
+    }
+    private void setUser(User user){
+
+    }
 }

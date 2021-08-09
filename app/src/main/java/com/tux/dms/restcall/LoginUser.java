@@ -30,8 +30,6 @@ public class LoginUser extends RESTBaseClass {
                 JWTToken token = response.body();
                 map.put(RESTApiConstant.RESPONSE_CODE_KEY,Integer.toString(response.code()));
                 map.put(RESTApiConstant.RESPONSE_VALUE_KEY,token.getToken());
-
-
             }
 
             @Override

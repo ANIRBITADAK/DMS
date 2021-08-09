@@ -2,29 +2,25 @@ package com.tux.dms;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.tux.dms.api.RetroInterface;
+import com.tux.dms.api.RestInterface;
 import com.tux.dms.dto.JWTToken;
 import com.tux.dms.dto.User;
-import com.tux.dms.dto.UserCredential;
-import com.tux.dms.restclient.RetroRestClient;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
 
 public class Register extends AppCompatActivity {
 
     Button register;
     EditText name, password,email,phone;
-    private RetroInterface retrofitInterface;
+    private RestInterface retrofitInterface;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,8 +32,8 @@ public class Register extends AppCompatActivity {
         email=(EditText) findViewById(R.id.editTextEmail);
         phone=(EditText) findViewById(R.id.editTextPhone);
 
-        Retrofit retrofitClient= RetroRestClient.getClient();
-        retrofitInterface = retrofitClient.create(RetroInterface.class);
+    /*    Retrofit retrofitClient= RetroRestClient.getClient();
+        retrofitInterface = retrofitClient.create(RetroInterface.class);*/
 
         register.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -10,10 +10,11 @@ import java.util.HashMap;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
 import retrofit2.http.POST;
 
 
-public interface RetroInterface {
+public interface RestInterface {
 
     @POST("/api/auth")
     Call<JWTToken> executeLogin(@Body UserCredential credential);
@@ -22,6 +23,6 @@ public interface RetroInterface {
     Call<JWTToken> executeSignup (@Body User user);
 
     @GET("/api/auth")
-    Call<User> getUser();
+    Call<User> getUser(@Header("x-auth-token") String authHeader);
 
 }

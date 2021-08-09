@@ -1,22 +1,16 @@
 package com.tux.dms.restcall;
 
-import com.tux.dms.api.RetroInterface;
-import com.tux.dms.restclient.RetroRestClient;
+import com.tux.dms.api.RestInterface;
 
 import retrofit2.Retrofit;
 
 public class RESTBaseClass {
 
-    protected RetroInterface retrofitInterface;
+    protected RestInterface retrofitInterface;
+    protected Retrofit retrofitClient;
 
-    public RESTBaseClass() {
-
-        Retrofit retrofitClient= RetroRestClient.getClient();
+    /*public RESTBaseClass() {
+        retrofitClient = RetroRestClient.getClient();
         retrofitInterface = retrofitClient.create(RetroInterface.class);
-
-    }
-
-
-
-
+    }*/
 }
