@@ -43,18 +43,23 @@ public class Login extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                 map=loginUser.handleLogin(email.getText().toString(),password.getText().toString());
+
+                Intent i=new Intent(Login.this,UserActivity.class);
+                startActivity(i);
+
+                 /*map=loginUser.handleLogin(email.getText().toString(),password.getText().toString());
                  if(map.get(RESTApiConstant.RESPONSE_CODE_KEY).equalsIgnoreCase("200"))
                  {
                      JWTToken token=new JWTToken();
                      token.setToken(map.get(RESTApiConstant.RESPONSE_VALUE_KEY));
 
                      Toast.makeText(getApplicationContext(),token.getToken(),Toast.LENGTH_LONG).show();
+
                  }
                  else if(map.get(RESTApiConstant.RESPONSE_CODE_KEY).equalsIgnoreCase("500"))
                  {
                      Toast.makeText(getApplicationContext(),"Server Error",Toast.LENGTH_LONG).show();
-                 }
+                 }*/
 
             }
         });
