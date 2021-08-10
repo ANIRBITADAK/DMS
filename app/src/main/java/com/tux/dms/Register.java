@@ -8,7 +8,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.tux.dms.api.RestInterface;
+import com.tux.dms.cache.SessionCache;
+import com.tux.dms.rest.ApiClient;
+import com.tux.dms.rest.ApiInterface;
 import com.tux.dms.dto.JWTToken;
 import com.tux.dms.dto.User;
 
@@ -20,7 +22,8 @@ public class Register extends AppCompatActivity {
 
     Button register;
     EditText name, password,email,phone;
-    private RestInterface retrofitInterface;
+    private ApiInterface retrofitInterface = ApiClient.getApiService();
+    private SessionCache sessionCache = SessionCache.getSessionCache();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,8 +63,8 @@ public class Register extends AppCompatActivity {
                 if (response.code() == 200) {
 
                     JWTToken token = response.body();
-
-                    Toast.makeText(getApplicationContext(),token.getToken(),Toast.LENGTH_LONG).show();
+                    sessionCache.setToken(token.getToken());
+                    Toast.makeText(getApplicationContext(), token.getToken(), Toast.LENGTH_LONG).show();
 
                 } else if (response.code() == 400) {
                     Toast.makeText(getApplicationContext(), "User Already Exists",

@@ -1,4 +1,4 @@
-package com.tux.dms.api;
+package com.tux.dms.rest;
 
 import com.tux.dms.dto.JWTToken;
 
@@ -14,7 +14,7 @@ import retrofit2.http.Header;
 import retrofit2.http.POST;
 
 
-public interface RestInterface {
+public interface ApiInterface {
 
     @POST("/api/auth")
     Call<JWTToken> executeLogin(@Body UserCredential credential);
@@ -25,4 +25,6 @@ public interface RestInterface {
     @GET("/api/auth")
     Call<User> getUser(@Header("x-auth-token") String authHeader);
 
+    /*@GET("/api/auth")
+    Call<User> getUser();*/
 }

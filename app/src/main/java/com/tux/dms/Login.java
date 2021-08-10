@@ -8,15 +8,15 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
-import com.tux.dms.api.RestInterface;
+import com.tux.dms.cache.SessionCache;
+import com.tux.dms.rest.ApiInterface;
 import com.tux.dms.dto.JWTToken;
 import com.tux.dms.dto.User;
 import com.tux.dms.dto.UserCredential;
-import com.tux.dms.restclient.RetroRestClient;
+import com.tux.dms.rest.ApiClient;
 
-import java.util.HashMap;
-import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -26,9 +26,10 @@ import retrofit2.Response;
 public class Login extends AppCompatActivity {
 
     Button login, register;
-    RestInterface restInterface = RetroRestClient.getRetroInterface();
-    String token ;
+    ApiInterface apiInterface = ApiClient.getApiService();
+    SessionCache sessionCache = SessionCache.getSessionCache();
     User usr;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,29 +55,35 @@ public class Login extends AppCompatActivity {
 
     }
 
-    private  void handleLongin(){
+    private void handleLongin() {
         getToken();
-       getUser(token);
-        Log.d("TAG",  usr.getName());
     }
-    private void getToken(){
+
+    private void getToken() {
 
         EditText email = (EditText) findViewById(R.id.editTextEmail);
         EditText password = (EditText) findViewById(R.id.editTextPass);
-        UserCredential user=new UserCredential();
+        UserCredential user = new UserCredential();
         user.setPassword(password.getText().toString());
         user.setEmail(email.getText().toString());
-        HashMap<String, String> map = new HashMap<>();
 
-        Call<JWTToken> call = restInterface.executeLogin(user);
+        Call<JWTToken> call = apiInterface.executeLogin(user);
 
 
-        call.enqueue( new Callback<JWTToken>() {
+        call.enqueue(new Callback<JWTToken>() {
             @Override
             public void onResponse(Call<JWTToken> call, Response<JWTToken> response) {
-                Log.i("tag", "getting response of login");
-                JWTToken token = response.body();
-                setToken(token.getToken());
+                if (response.code() == 200) {
+
+                    JWTToken token = response.body();
+                    sessionCache.setToken(token.getToken());
+                    getUser();
+
+                } else if (response.code() == 400) {
+                    Toast.makeText(getApplicationContext(), "Invalid credential",
+                            Toast.LENGTH_LONG).show();
+                }
+
             }
 
             @Override
@@ -87,15 +94,22 @@ public class Login extends AppCompatActivity {
 
     }
 
-    private void getUser(String token){
-
-        Call<User> call = restInterface.getUser(token);
+    private void getUser() {
+        System.out.println("------called get user ");
+        String token = sessionCache.getToken();
+        Call<User> call = apiInterface.getUser(token);
 
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
-               User user =  response.body();
-               setUser(user);
+
+                if (response.code() == 200) {
+                    User user = response.body();
+                    sessionCache.setUser(user);
+                    System.out.println("get users ===" + user);
+                    String loginMsg = user.getName() + " " + "logged in";
+                    Toast.makeText(getApplicationContext(), loginMsg, Toast.LENGTH_LONG).show();
+                }
             }
 
             @Override
@@ -103,11 +117,5 @@ public class Login extends AppCompatActivity {
 
             }
         });
-    }
-    private  void setToken(String token){
-        this.token = token;
-    }
-    private void setUser(User user){
-
     }
 }

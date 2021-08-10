@@ -21,6 +21,7 @@ import java.util.Calendar;
 public class ReportFragment extends Fragment implements DatePickerDialog.OnDateSetListener {
 
     Button fromDate,toDate, generateReport;
+    String fromdate,todate;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -74,7 +75,8 @@ public class ReportFragment extends Fragment implements DatePickerDialog.OnDateS
         fromDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showDatePickerDialog();
+
+                fromdate= showDatePickerDialog();
             }
         });
 
@@ -82,7 +84,8 @@ public class ReportFragment extends Fragment implements DatePickerDialog.OnDateS
         toDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showDatePickerDialog();
+
+                todate=showDatePickerDialog();
             }
         });
         return  v;
@@ -93,7 +96,9 @@ public class ReportFragment extends Fragment implements DatePickerDialog.OnDateS
 
     }
 
-    public void showDatePickerDialog(){
+    public String showDatePickerDialog(){
+
+        int day,month,year;
         DatePickerDialog datePickerDialog = new DatePickerDialog(
                 getContext(),
                 this,
@@ -101,5 +106,12 @@ public class ReportFragment extends Fragment implements DatePickerDialog.OnDateS
                 Calendar.getInstance().get(Calendar.MONTH),
                 Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
         datePickerDialog.show();
+
+        year=Calendar.getInstance().get(Calendar.YEAR);
+        month=Calendar.getInstance().get(Calendar.MONTH);
+        day=Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
+
+        String date=Integer.toString(day)+"/"+Integer.toString(month)+"/"+Integer.toString(year);
+        return date;
     }
 }
