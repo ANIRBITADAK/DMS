@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.tux.dms.cache.SessionCache;
+import com.tux.dms.constants.RoleConsts;
 import com.tux.dms.rest.ApiInterface;
 import com.tux.dms.dto.JWTToken;
 import com.tux.dms.dto.User;
@@ -106,9 +107,22 @@ public class Login extends AppCompatActivity {
                 if (response.code() == 200) {
                     User user = response.body();
                     sessionCache.setUser(user);
-                    System.out.println("get users ===" + user);
+                    System.out.println("get users ===" + user.toString());
                     String loginMsg = user.getName() + " " + "logged in";
                     Toast.makeText(getApplicationContext(), loginMsg, Toast.LENGTH_LONG).show();
+
+                    switch (user.getRole()){
+                        case RoleConsts.ADMIN_ROLE:
+                        case RoleConsts.OPERATOR_ROLE:
+                            System.out.println("user role "+ user.getRole());
+                            Intent ticketOperatorIntent = new Intent(Login.this, UserActivity.class);
+                            startActivity(ticketOperatorIntent);
+                        case RoleConsts.CREATOR_ROLE:
+                            Intent ticketCreatorActivity = new Intent(Login.this, TicketCreator.class);
+                            startActivity(ticketCreatorActivity);
+                        default:
+                            System.out.println("invalid user role");
+                    }
                 }
             }
 

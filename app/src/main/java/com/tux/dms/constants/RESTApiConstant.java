@@ -1,8 +1,4 @@
-package com.tux.dms.constantkeys;
-
-import com.tux.dms.dto.JWTToken;
-
-import retrofit2.Response;
+package com.tux.dms.constants;
 
 public class RESTApiConstant {
 
