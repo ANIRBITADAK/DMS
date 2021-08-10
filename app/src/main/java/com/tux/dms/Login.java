@@ -117,9 +117,11 @@ public class Login extends AppCompatActivity {
                             System.out.println("user role "+ user.getRole());
                             Intent ticketOperatorIntent = new Intent(Login.this, UserActivity.class);
                             startActivity(ticketOperatorIntent);
+                            break;
                         case RoleConsts.CREATOR_ROLE:
                             Intent ticketCreatorActivity = new Intent(Login.this, TicketCreator.class);
                             startActivity(ticketCreatorActivity);
+                            break;
                         default:
                             System.out.println("invalid user role");
                     }
