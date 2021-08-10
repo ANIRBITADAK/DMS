@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+
+        <item
+            android:id="@+id/dashboard"
+            android:icon="@drawable/ic_baseline_dashboard_24"
+            android:title="Dashboard">
+
+        </item>
+
+
+        <item
+            android:id="@+id/tickets"
+            android:icon="@drawable/ic_baseline_mail_24"
+            android:title="Tickets" >
+            <menu>
+                <item android:id="@+id/create_new"
+                    android:title="Create New"
+                    android:icon="@drawable/ic_baseline_edit_24"/>
+
+                <item android:id="@+id/assign_tickets"
+                    android:title="Assign Tickets"
+                    android:icon="@drawable/ic_baseline_person_add_alt_1_24"/>
+            </menu>
+        </item>
+
+        <item
+            android:id="@+id/report"
+            android:icon="@drawable/ic_baseline_article_24"
+            android:title="Report">
+
+            <menu>
+                <item android:id="@+id/this_month"
+                    android:title="This Month"
+                    android:icon="@drawable/ic_baseline_assignment_24"/>
+
+                <item android:id="@+id/custom_month"
+                    android:title="Custom Report"
+                    android:icon="@drawable/ic_baseline_article_24"/>
+            </menu>
+
+        </item>
+
+
+        <item
+            android:id="@+id/userList"
+            android:icon="@drawable/ic_baseline_people_24"
+            android:title="Manage Users"/>
+
+        <!---
+        <item
+            android:id="@+id/profile"
+            android:icon="@drawable/ic_baseline_person_24"
+            android:title="Profile"/>
+        -->
+    <!---
+   <item
+       android:id="@+id/logout"
+       android:icon="@drawable/ic_baseline_power_settings_new_24"
+       android:title="Logout"/>
+   -->
+
+
+
+
+
+
+
+
+
+
+</menu>
