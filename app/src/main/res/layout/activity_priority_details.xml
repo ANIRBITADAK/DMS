@@ -43,14 +43,14 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Severe"
-                        android:fontFamily="sans-serif-condensed-medium"
-                        android:textColor="#012A53"
-                        android:textAlignment="center"
-                        android:textSize="30sp"
-                        android:textStyle="bold"
                         android:layout_marginTop="5sp"
-                        android:layout_marginBottom="5sp"/>
+                        android:layout_marginBottom="5sp"
+                        android:fontFamily="sans-serif-condensed-medium"
+                        android:text="High"
+                        android:textAlignment="center"
+                        android:textColor="#012A53"
+                        android:textSize="30sp"
+                        android:textStyle="bold" />
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>
