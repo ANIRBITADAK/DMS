@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -84,10 +85,13 @@ public class DashboardFragment extends Fragment implements AdapterView.OnItemSel
 
 
         newCard.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
-                Intent i=new Intent(getActivity(),AssignTicketFragment.class);
-                getActivity().startActivity(i);
+               /* Intent i=new Intent(getActivity(),AssignTicketFragment.class);
+                getActivity().startActivity(i);*/
+                Fragment fragment = new AssignTicketFragment();
+                replaceFragment(fragment);
             }
         });
 
@@ -128,5 +132,14 @@ public class DashboardFragment extends Fragment implements AdapterView.OnItemSel
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
 
+    }
+
+    public void replaceFragment(Fragment someFragment) {
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        //transaction.replace(R.id.fragment_container, someFragment);
+        transaction.replace(R.id.dashboad_frame_layout, someFragment);
+
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 }

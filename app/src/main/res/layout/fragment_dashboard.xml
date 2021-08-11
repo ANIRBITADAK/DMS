@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/dashboad_frame_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".DashboardFragment">
@@ -8,8 +9,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_margin="8sp">
+        android:layout_margin="8sp"
+        android:orientation="vertical">
 
         <ScrollView
             android:layout_width="match_parent"
@@ -24,8 +25,8 @@
                     android:id="@+id/newTickets"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="50sp"
                     android:layout_marginLeft="40sp"
+                    android:layout_marginTop="50sp"
                     android:layout_marginRight="40sp">
 
                     <LinearLayout
@@ -37,24 +38,24 @@
                             android:id="@+id/newCount"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="32"
                             android:fontFamily="sans-serif-condensed-medium"
+                            android:text="32"
+                            android:textAlignment="center"
                             android:textColor="#03A9F4"
                             android:textSize="100sp"
-                            android:textAlignment="center"
-                            android:textStyle="bold"/>
+                            android:textStyle="bold" />
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="New"
-                            android:fontFamily="sans-serif-condensed-medium"
-                            android:textColor="#012A53"
-                            android:textAlignment="center"
-                            android:textSize="30sp"
-                            android:textStyle="bold"
                             android:layout_marginTop="5sp"
-                            android:layout_marginBottom="5sp"/>
+                            android:layout_marginBottom="5sp"
+                            android:fontFamily="sans-serif-condensed-medium"
+                            android:text="New"
+                            android:textAlignment="center"
+                            android:textColor="#012A53"
+                            android:textSize="30sp"
+                            android:textStyle="bold" />
                     </LinearLayout>
 
                 </androidx.cardview.widget.CardView>
@@ -64,8 +65,8 @@
                     android:id="@+id/assigned"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="50sp"
                     android:layout_marginLeft="40sp"
+                    android:layout_marginTop="50sp"
                     android:layout_marginRight="40sp">
 
                     <LinearLayout
@@ -77,24 +78,24 @@
                             android:id="@+id/assignedCount"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="32"
                             android:fontFamily="sans-serif-condensed-medium"
+                            android:text="32"
+                            android:textAlignment="center"
                             android:textColor="#FF1100"
                             android:textSize="100sp"
-                            android:textAlignment="center"
-                            android:textStyle="bold"/>
+                            android:textStyle="bold" />
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Assigned"
-                            android:fontFamily="sans-serif-condensed-medium"
-                            android:textColor="#012A53"
-                            android:textAlignment="center"
-                            android:textSize="30sp"
-                            android:textStyle="bold"
                             android:layout_marginTop="5sp"
-                            android:layout_marginBottom="5sp"/>
+                            android:layout_marginBottom="5sp"
+                            android:fontFamily="sans-serif-condensed-medium"
+                            android:text="Assigned"
+                            android:textAlignment="center"
+                            android:textColor="#012A53"
+                            android:textSize="30sp"
+                            android:textStyle="bold" />
                     </LinearLayout>
 
                 </androidx.cardview.widget.CardView>
@@ -104,8 +105,8 @@
                     android:id="@+id/inProgress"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="50sp"
                     android:layout_marginLeft="40sp"
+                    android:layout_marginTop="50sp"
                     android:layout_marginRight="40sp">
 
                     <LinearLayout
@@ -117,24 +118,24 @@
                             android:id="@+id/inprogressCount"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="32"
                             android:fontFamily="sans-serif-condensed-medium"
+                            android:text="32"
+                            android:textAlignment="center"
                             android:textColor="#FFC107"
                             android:textSize="100sp"
-                            android:textAlignment="center"
-                            android:textStyle="bold"/>
+                            android:textStyle="bold" />
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="In-Progress"
-                            android:fontFamily="sans-serif-condensed-medium"
-                            android:textColor="#012A53"
-                            android:textAlignment="center"
-                            android:textSize="30sp"
-                            android:textStyle="bold"
                             android:layout_marginTop="5sp"
-                            android:layout_marginBottom="5sp"/>
+                            android:layout_marginBottom="5sp"
+                            android:fontFamily="sans-serif-condensed-medium"
+                            android:text="In-Progress"
+                            android:textAlignment="center"
+                            android:textColor="#012A53"
+                            android:textSize="30sp"
+                            android:textStyle="bold" />
                     </LinearLayout>
 
                 </androidx.cardview.widget.CardView>
@@ -144,8 +145,8 @@
                     android:id="@+id/resolved"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="50sp"
                     android:layout_marginLeft="40sp"
+                    android:layout_marginTop="50sp"
                     android:layout_marginRight="40sp"
                     android:layout_marginBottom="50sp">
 
@@ -158,24 +159,24 @@
                             android:id="@+id/resolvedCount"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="32"
                             android:fontFamily="sans-serif-condensed-medium"
+                            android:text="32"
+                            android:textAlignment="center"
                             android:textColor="#4CAF50"
                             android:textSize="100sp"
-                            android:textAlignment="center"
-                            android:textStyle="bold"/>
+                            android:textStyle="bold" />
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Resolved"
-                            android:fontFamily="sans-serif-condensed-medium"
-                            android:textColor="#012A53"
-                            android:textAlignment="center"
-                            android:textSize="30sp"
-                            android:textStyle="bold"
                             android:layout_marginTop="5sp"
-                            android:layout_marginBottom="5sp"/>
+                            android:layout_marginBottom="5sp"
+                            android:fontFamily="sans-serif-condensed-medium"
+                            android:text="Resolved"
+                            android:textAlignment="center"
+                            android:textColor="#012A53"
+                            android:textSize="30sp"
+                            android:textStyle="bold" />
                     </LinearLayout>
 
                 </androidx.cardview.widget.CardView>
