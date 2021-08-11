@@ -113,9 +113,11 @@ public class Login extends AppCompatActivity {
 
                     switch (user.getRole()){
                         case RoleConsts.ADMIN_ROLE:
+
                             Intent adminIntent = new Intent(Login.this, AdminActivity.class);
                             startActivity(adminIntent);
                             break;
+
 
                         case RoleConsts.OPERATOR_ROLE:
                             System.out.println("user role "+ user.getRole());
