@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SearchFragment">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Search"
+            android:textSize="30sp"
+            android:textAlignment="center"
+            android:layout_marginTop="30sp"
+            android:fontFamily="sans-serif-condensed-medium"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Enter Subject"
+            android:textSize="20sp"
+            android:layout_marginTop="15sp"
+            android:fontFamily="sans-serif-condensed-medium"/>
+
+
+        <EditText
+            android:id="@+id/subject"
+            android:layout_marginTop="15sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Select State"
+            android:textSize="20sp"
+            android:layout_marginTop="15sp"
+            android:fontFamily="sans-serif-condensed-medium"/>
+
+        <Spinner
+            android:id="@+id/state"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15sp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Select Priority"
+            android:textSize="20sp"
+            android:layout_marginTop="15sp"
+            android:fontFamily="sans-serif-condensed-medium"/>
+
+        <Spinner
+            android:id="@+id/priority"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15sp"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/date"
+            android:hint="Select Date"
+            android:layout_marginTop="15sp"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/searchBtn"
+            android:text="search"
+            android:background="@drawable/button_layout"
+            android:layout_marginTop="70sp"/>
+
+    </LinearLayout>
+
+
+
+</FrameLayout>

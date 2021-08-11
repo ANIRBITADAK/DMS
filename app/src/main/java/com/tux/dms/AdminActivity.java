@@ -49,6 +49,11 @@ public class AdminActivity extends AppCompatActivity implements NavigationView.O
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new CreateTicketFragment()).commit();
                 break;
+
+            case R.id.search:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new SearchFragment()).commit();
+                break;
             case R.id.assign_tickets:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new AssignTicketFragment()).commit();

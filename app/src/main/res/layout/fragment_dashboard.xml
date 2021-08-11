@@ -11,60 +11,9 @@
         android:orientation="vertical"
         android:layout_margin="8sp">
 
-        <EditText
-            android:id="@+id/subject"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Enter Subject"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Select State"
-            android:textSize="20sp"
-            android:layout_marginTop="15sp"
-            android:fontFamily="sans-serif-condensed-medium"/>
-
-        <Spinner
-            android:id="@+id/state"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15sp"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Select Priority"
-            android:textSize="20sp"
-            android:layout_marginTop="15sp"
-            android:fontFamily="sans-serif-condensed-medium"/>
-
-        <Spinner
-            android:id="@+id/priority"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15sp"/>
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/date"
-            android:hint="Select Date"
-            android:layout_marginTop="15sp"/>
-
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/searchbtn"
-            android:text="search"
-            android:background="@drawable/button_layout"
-            android:layout_marginTop="15sp"/>
-
-
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="20sp">
+            android:layout_height="match_parent">
 
             <LinearLayout
                 android:layout_width="match_parent"
