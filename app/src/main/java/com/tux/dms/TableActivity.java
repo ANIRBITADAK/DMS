@@ -13,23 +13,46 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.tux.dms.cache.SessionCache;
 import com.tux.dms.dto.Ticket;
+import com.tux.dms.dto.TicketList;
+import com.tux.dms.rest.ApiClient;
+import com.tux.dms.rest.ApiInterface;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class TableActivity extends AppCompatActivity {
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.http.Query;
 
-    List<Ticket> tickets=new ArrayList<>();
+public class TableActivity extends AppCompatActivity {
+    ApiInterface apiInterface = ApiClient.getApiService();
+    SessionCache sessionCache = SessionCache.getSessionCache();
+    //List<Ticket> tickets = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_table);
+        String token = sessionCache.getToken();
+        Call<TicketList> tickList = apiInterface.getTickets(token, null,"NEW", null,
+                1, 5);
+        tickList.enqueue(new Callback<TicketList>() {
+            @Override
+            public void onResponse(Call<TicketList> call, Response<TicketList> response) {
+                System.out.println("got ticket list" + response.body());
+                TicketList ticketList = response.body();
+                addHeaders();
+                addData(ticketList.getTickets());
+            }
 
-        addHeaders();
-        addData();
+            @Override
+            public void onFailure(Call<TicketList> call, Throwable t) {
 
+            }
+        });
     }
 
     public void addHeaders() {
@@ -42,7 +65,7 @@ public class TableActivity extends AppCompatActivity {
         tl.addView(tr, getTableLayoutParams());
     }
 
-    public void addData() {
+    public void addData(List<Ticket> tickets) {
         int z=0;
         TableLayout tl = findViewById(R.id.table);
         for (int i = 0; i < tickets.size(); i++) {
