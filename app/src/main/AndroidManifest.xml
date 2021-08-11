@@ -23,12 +23,12 @@
             android:name=".UserActivity"
             android:exported="true" />
         <activity
-            android:name=".TicketCreator"
+            android:name=".TicketCreatorActivity"
             android:exported="true" />
         <activity
-            android:name=".Register"
+            android:name=".RegisterActivity"
             android:exported="true" />
-        <activity android:name=".Login" />
+        <activity android:name=".LoginActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -56,13 +56,13 @@
             android:text="Scan" />
 
         <Button
-            android:id="@+id/buttonGenerate"
+            android:id="@+id/buttonCreateTicket"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/buttonScan"
             android:layout_marginTop="40sp"
             android:background="@drawable/button_layout"
-            android:text="Generate Ticket" />
+            android:text="Create Ticket" />
 
     </RelativeLayout>
 

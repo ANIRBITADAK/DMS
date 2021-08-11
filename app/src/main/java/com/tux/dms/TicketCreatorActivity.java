@@ -12,7 +12,7 @@ import android.view.MenuItem;
 
 import com.google.android.material.navigation.NavigationView;
 
-public class TicketCreator extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class TicketCreatorActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout drawer;
     @Override

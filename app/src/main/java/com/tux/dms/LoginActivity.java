@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -24,12 +23,11 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class Login extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
 
     Button login, register;
     ApiInterface apiInterface = ApiClient.getApiService();
     SessionCache sessionCache = SessionCache.getSessionCache();
-    User usr;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +47,7 @@ public class Login extends AppCompatActivity {
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(Login.this, Register.class);
+                Intent i = new Intent(LoginActivity.this, RegisterActivity.class);
                 startActivity(i);
             }
         });
@@ -113,16 +111,16 @@ public class Login extends AppCompatActivity {
 
                     switch (user.getRole()){
                         case RoleConsts.ADMIN_ROLE:
-                            Intent admin = new Intent(Login.this, AdminActivity.class);
+                            Intent admin = new Intent(LoginActivity.this, AdminActivity.class);
                             startActivity(admin);
                             break;
                         case RoleConsts.OPERATOR_ROLE:
                             System.out.println("user role "+ user.getRole());
-                            Intent ticketOperatorIntent = new Intent(Login.this, UserActivity.class);
+                            Intent ticketOperatorIntent = new Intent(LoginActivity.this, UserActivity.class);
                             startActivity(ticketOperatorIntent);
                             break;
                         case RoleConsts.CREATOR_ROLE:
-                            Intent ticketCreatorActivity = new Intent(Login.this, TicketCreator.class);
+                            Intent ticketCreatorActivity = new Intent(LoginActivity.this, TicketCreatorActivity.class);
                             startActivity(ticketCreatorActivity);
                             break;
                         default:
