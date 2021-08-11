@@ -7,7 +7,8 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
-import android.content.Intent;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -46,6 +47,12 @@ public class AdminActivity extends AppCompatActivity implements NavigationView.O
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
         switch (item.getItemId()) {
+            case R.id.dashboard:
+
+                getSupportFragmentManager().beginTransaction().replace(R.id.dashboad_frame_layout,
+                        new DashboardFragment()).commit();
+
+                break;
             case R.id.create_new:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new CreateTicketFragment()).commit();
@@ -56,8 +63,8 @@ public class AdminActivity extends AppCompatActivity implements NavigationView.O
                         new SearchFragment()).commit();
                 break;
             case R.id.assign_tickets:
-                Intent i=new Intent(AdminActivity.this,AssignTicketActivity.class);
-                startActivity(i);
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new AssignTicketFragment()).commit();
                 break;
 
             case R.id.this_month:

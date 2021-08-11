@@ -29,4 +29,7 @@ public interface ApiInterface {
 
     @POST("api/tickets/user/{user_id}")
     Call<Ticket> createTicket(@Body Ticket ticket, @Path("user_id") String user_id);
+    assign=610d1390ce26cafd2e148af7&priority=1&state=ASSIGNED&page=1&limit=5
+    @POST("api/tickets")
+    Call<>
 }
