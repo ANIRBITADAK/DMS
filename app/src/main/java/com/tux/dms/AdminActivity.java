@@ -49,7 +49,7 @@ public class AdminActivity extends AppCompatActivity implements NavigationView.O
         switch (item.getItemId()) {
             case R.id.dashboard:
 
-                getSupportFragmentManager().beginTransaction().replace(R.id.dashboad_frame_layout,
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new DashboardFragment()).commit();
 
                 break;

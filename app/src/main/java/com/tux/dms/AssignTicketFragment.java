@@ -1,5 +1,6 @@
 package com.tux.dms;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -59,6 +60,9 @@ public class AssignTicketFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_assign_ticket, container, false);
+        View v= inflater.inflate(R.layout.fragment_assign_ticket, container, false);
+        Intent i=new Intent(getActivity(),TableActivity.class);
+        getActivity().startActivity(i);
+        return v;
     }
 }
