@@ -88,10 +88,8 @@ public class DashboardFragment extends Fragment implements AdapterView.OnItemSel
 
             @Override
             public void onClick(View view) {
-               /* Intent i=new Intent(getActivity(),AssignTicketFragment.class);
-                getActivity().startActivity(i);*/
-                Fragment fragment = new AssignTicketFragment();
-                replaceFragment(fragment);
+                Intent i=new Intent(getActivity(),AssignTicketActivity.class);
+                getActivity().startActivity(i);
             }
         });
 
@@ -134,12 +132,4 @@ public class DashboardFragment extends Fragment implements AdapterView.OnItemSel
 
     }
 
-    public void replaceFragment(Fragment someFragment) {
-        FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        //transaction.replace(R.id.fragment_container, someFragment);
-        transaction.replace(R.id.dashboad_frame_layout, someFragment);
-
-        transaction.addToBackStack(null);
-        transaction.commit();
-    }
 }

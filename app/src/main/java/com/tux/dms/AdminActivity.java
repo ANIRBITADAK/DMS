@@ -7,6 +7,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -55,8 +56,8 @@ public class AdminActivity extends AppCompatActivity implements NavigationView.O
                         new SearchFragment()).commit();
                 break;
             case R.id.assign_tickets:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new AssignTicketFragment()).commit();
+                Intent i=new Intent(AdminActivity.this,AssignTicketActivity.class);
+                startActivity(i);
                 break;
 
             case R.id.this_month:
@@ -74,7 +75,6 @@ public class AdminActivity extends AppCompatActivity implements NavigationView.O
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new ManageUserFragment()).commit();
                 break;
-
 
         }
 

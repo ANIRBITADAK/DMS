@@ -4,12 +4,16 @@
 
     <application
         android:allowBackup="true"
+        android:hardwareAccelerated="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.DMS"
         android:usesCleartextTraffic="true">
+        <activity
+            android:name=".AssignTicketActivity"
+            android:exported="true" />
         <activity
             android:name=".AdminActivity"
             android:exported="true" />
