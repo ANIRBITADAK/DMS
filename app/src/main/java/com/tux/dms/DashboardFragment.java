@@ -1,19 +1,39 @@
 package com.tux.dms;
 
+import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.DatePicker;
+import android.widget.EditText;
+import android.widget.Spinner;
+
+import java.util.Calendar;
 
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link DashboardFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class DashboardFragment extends Fragment {
+public class DashboardFragment extends Fragment implements AdapterView.OnItemSelectedListener {
+
+    String[] states = { "New","Assigned","In-Progress","Resolved" };
+    Spinner state;
+
+    String[] priorityArray = {"High","Medium","Low"};
+    Spinner priority;
+
+    CardView newCard,assignedCard,inProgressCard,resolvedCard;
+
+    EditText date;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -59,6 +79,92 @@ public class DashboardFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_dashboard, container, false);
+
+        View v= inflater.inflate(R.layout.fragment_dashboard, container, false);
+        newCard=v.findViewById(R.id.newTickets);
+        assignedCard=v.findViewById(R.id.assigned);
+        inProgressCard=v.findViewById(R.id.inProgress);
+        resolvedCard=v.findViewById(R.id.resolved);
+
+        Calendar calendar=Calendar.getInstance();
+        final int year=calendar.get(Calendar.YEAR);
+        final int month=calendar.get(Calendar.MONTH);
+        final int day=calendar.get(Calendar.DAY_OF_MONTH);
+
+        date.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DatePickerDialog datePickerDialog=new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
+                        i1+=1;
+                        String dateString=i2+"/"+i1+"/"+i;
+                        date.setText(dateString);
+                    }
+                },year,month,day);
+                datePickerDialog.show();
+            }
+        });
+
+
+        state=v.findViewById(R.id.state);
+        state.setOnItemSelectedListener(this);
+
+        ArrayAdapter ad = new ArrayAdapter(getContext(),android.R.layout.simple_spinner_item,states);
+        ad.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        state.setAdapter(ad);
+
+        priority=v.findViewById(R.id.priority);
+        priority.setOnItemSelectedListener(this);
+
+        ArrayAdapter adapter = new ArrayAdapter(getContext(),android.R.layout.simple_spinner_item,priorityArray);
+        ad.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        state.setAdapter(adapter);
+
+        newCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i=new Intent(getActivity(),AssignTicketFragment.class);
+                getActivity().startActivity(i);
+            }
+        });
+
+        assignedCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i=new Intent(getActivity(),PriorityDetails.class);
+                getActivity().startActivity(i);
+            }
+        });
+
+        inProgressCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i=new Intent(getActivity(),PriorityDetails.class);
+                getActivity().startActivity(i);
+            }
+        });
+
+        resolvedCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i=new Intent(getActivity(),PriorityDetails.class);
+                getActivity().startActivity(i);
+            }
+        });
+
+        return v;
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+
+
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
+
     }
 }

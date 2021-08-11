@@ -111,14 +111,16 @@ public class LoginActivity extends AppCompatActivity {
 
                     switch (user.getRole()){
                         case RoleConsts.ADMIN_ROLE:
-                            Intent admin = new Intent(LoginActivity.this, AdminActivity.class);
-                            startActivity(admin);
+                            Intent adminIntent = new Intent(LoginActivity.this, AdminActivity.class);
+                            startActivity(adminIntent);
                             break;
+                            
                         case RoleConsts.OPERATOR_ROLE:
                             System.out.println("user role "+ user.getRole());
                             Intent ticketOperatorIntent = new Intent(LoginActivity.this, UserActivity.class);
                             startActivity(ticketOperatorIntent);
                             break;
+
                         case RoleConsts.CREATOR_ROLE:
                             Intent ticketCreatorActivity = new Intent(LoginActivity.this, TicketCreatorActivity.class);
                             startActivity(ticketCreatorActivity);
