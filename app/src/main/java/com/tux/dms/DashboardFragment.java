@@ -90,7 +90,7 @@ public class DashboardFragment extends Fragment implements AdapterView.OnItemSel
         final int year=calendar.get(Calendar.YEAR);
         final int month=calendar.get(Calendar.MONTH);
         final int day=calendar.get(Calendar.DAY_OF_MONTH);
-
+        date = v.findViewById(R.id.date);
         date.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

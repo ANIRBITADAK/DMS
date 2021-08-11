@@ -114,7 +114,7 @@ public class LoginActivity extends AppCompatActivity {
                             Intent adminIntent = new Intent(LoginActivity.this, AdminActivity.class);
                             startActivity(adminIntent);
                             break;
-                            
+
                         case RoleConsts.OPERATOR_ROLE:
                             System.out.println("user role "+ user.getRole());
                             Intent ticketOperatorIntent = new Intent(LoginActivity.this, UserActivity.class);

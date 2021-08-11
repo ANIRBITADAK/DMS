@@ -19,6 +19,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.tux.dms.cache.SessionCache;
 import com.tux.dms.rest.ApiClient;
@@ -42,7 +43,7 @@ public class CreateTicketFragment extends Fragment implements AdapterView.OnItem
     Bitmap bmp;
     ByteArrayOutputStream baos=new ByteArrayOutputStream();
     byte[] imageData;
-    ImageView ivImage;
+    //ImageView ivImage;
 
     String[] sources = { "State", "District","Sub-Division","Gram Panchayat","Other Block Offices","Others" };
     Spinner source;
@@ -161,14 +162,14 @@ public class CreateTicketFragment extends Fragment implements AdapterView.OnItem
 
                 Bundle bundle = data.getExtras();
                 bmp = (Bitmap) bundle.get("data");
-                ivImage.setImageBitmap(bmp);
+               // ivImage.setImageBitmap(bmp);
                 bmp.compress(Bitmap.CompressFormat.PNG, 100, baos);
                 imageData = baos.toByteArray();
-
+                Toast.makeText(getContext(),imageData.toString(),Toast.LENGTH_LONG).show();
             } else if (requestCode == SELECT_FILE) {
 
                 Uri selectedImageUri = data.getData();
-                ivImage.setImageURI(selectedImageUri);
+                //ivImage.setImageURI(selectedImageUri);
                 try {
                     bmp = MediaStore.Images.Media.getBitmap(getActivity().getApplicationContext().getContentResolver(),
                             selectedImageUri);
@@ -177,6 +178,7 @@ public class CreateTicketFragment extends Fragment implements AdapterView.OnItem
                 }
                 bmp.compress(Bitmap.CompressFormat.JPEG, 10, baos);
                 imageData = baos.toByteArray();
+                Toast.makeText(getContext(),imageData.toString(),Toast.LENGTH_LONG).show();
             }
 
         }
