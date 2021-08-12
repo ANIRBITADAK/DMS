@@ -31,16 +31,17 @@
                     android:layout_marginRight="40sp">
 
                     <LinearLayout
+                        android:id="@+id/new_ticket_count_layout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
 
                         <TextView
-                            android:id="@+id/newCount"
+                            android:id="@+id/newCountTicketText"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="sans-serif-condensed-medium"
-                            android:text="32"
+                            android:text="0"
                             android:textAlignment="center"
                             android:textColor="#03A9F4"
                             android:textSize="100sp"
@@ -76,11 +77,11 @@
                         android:orientation="vertical">
 
                         <TextView
-                            android:id="@+id/assignedCount"
+                            android:id="@+id/assignedTicketCountText"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="sans-serif-condensed-medium"
-                            android:text="32"
+                            android:text="0"
                             android:textAlignment="center"
                             android:textColor="#FF1100"
                             android:textSize="100sp"
@@ -116,11 +117,11 @@
                         android:orientation="vertical">
 
                         <TextView
-                            android:id="@+id/inprogressCount"
+                            android:id="@+id/inprogressTicketCountText"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="sans-serif-condensed-medium"
-                            android:text="32"
+                            android:text="0"
                             android:textAlignment="center"
                             android:textColor="#FFC107"
                             android:textSize="100sp"
@@ -157,11 +158,11 @@
                         android:orientation="vertical">
 
                         <TextView
-                            android:id="@+id/resolvedCount"
+                            android:id="@+id/resolvedTicketCountText"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="sans-serif-condensed-medium"
-                            android:text="32"
+                            android:text="0"
                             android:textAlignment="center"
                             android:textColor="#4CAF50"
                             android:textSize="100sp"

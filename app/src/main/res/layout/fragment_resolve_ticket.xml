@@ -29,7 +29,7 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/assignedCount"
+                        android:id="@+id/assignedTicketCountText"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="32"
@@ -69,7 +69,7 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/inprogressCount"
+                        android:id="@+id/inprogressTicketCountText"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="32"
@@ -110,7 +110,7 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/resolvedCount"
+                        android:id="@+id/resolvedTicketCountText"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="32"

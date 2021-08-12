@@ -4,10 +4,9 @@ import com.tux.dms.dto.JWTToken;
 
 import com.tux.dms.dto.Ticket;
 import com.tux.dms.dto.TicketList;
+import com.tux.dms.dto.TicketCount;
 import com.tux.dms.dto.User;
 import com.tux.dms.dto.UserCredential;
-
-import java.util.HashMap;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -36,4 +35,6 @@ public interface ApiInterface {
     Call<TicketList> getTickets(@Header("x-auth-token") String authHeader, @Query("assignedTo") String assignedTo, @Query("state") String state,
                                 @Query("priority") Integer priority,
                                 @Query("page") Integer page, @Query("limit") Integer limit);
+    @GET("/api/tickets/count")
+    Call<TicketCount> getTicketCount(@Header("x-auth-token") String authHeader, @Query("state") String state);
 }
