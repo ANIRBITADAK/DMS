@@ -134,7 +134,7 @@ public class TableFragment extends Fragment {
                 @Override
                 public void onClick(View view) {
                     Intent i=new Intent(getActivity(),TicketDetailsFragment.class);
-                    startActivity(i);
+                    getActivity().startActivity(i);
 
                 }
             });

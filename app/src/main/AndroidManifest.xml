@@ -21,9 +21,6 @@
             android:name=".TableActivity"
             android:exported="true" />
         <activity
-            android:name=".PriorityDetails"
-            android:exported="true" />
-        <activity
             android:name=".UserActivity"
             android:exported="true" />
         <activity
