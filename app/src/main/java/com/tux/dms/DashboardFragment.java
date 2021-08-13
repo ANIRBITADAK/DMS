@@ -101,8 +101,9 @@ public class DashboardFragment extends Fragment implements AdapterView.OnItemSel
 
             @Override
             public void onResponse(Call<TicketCount> call, Response<TicketCount> response) {
-                Integer newTickets = response.body().getNewTicket();
+
                 if (response != null && response.body() != null) {
+                    Integer newTickets = response.body().getNewTicket();
                     if (newTickets != null) {
                         newTicketCount.setText(String.valueOf(newTickets));
                     }
