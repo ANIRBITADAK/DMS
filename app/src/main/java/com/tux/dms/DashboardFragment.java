@@ -143,24 +143,44 @@ public class DashboardFragment extends Fragment implements AdapterView.OnItemSel
         assignedCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(getActivity(), PriorityDetails.class);
-                getActivity().startActivity(i);
+                PriorityDetailsFragment priorityDetailsFragment = new PriorityDetailsFragment();
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.fragment_container, priorityDetailsFragment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+
+                //Intent i = new Intent(getActivity(), PriorityDetailsFragment.class);
+                //getActivity().startActivity(i);
             }
         });
 
         inProgressCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(getActivity(), PriorityDetails.class);
-                getActivity().startActivity(i);
+
+                PriorityDetailsFragment priorityDetailsFragment = new PriorityDetailsFragment();
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.fragment_container, priorityDetailsFragment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+                //Intent i = new Intent(getActivity(), PriorityDetailsFragment.class);
+                //getActivity().startActivity(i);
             }
         });
 
         resolvedCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(getActivity(), PriorityDetails.class);
-                getActivity().startActivity(i);
+                PriorityDetailsFragment priorityDetailsFragment = new PriorityDetailsFragment();
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.fragment_container, priorityDetailsFragment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+                // Intent i = new Intent(getActivity(), PriorityDetailsFragment.class);
+                //getActivity().startActivity(i);
             }
         });
 
@@ -169,8 +189,6 @@ public class DashboardFragment extends Fragment implements AdapterView.OnItemSel
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-
-
 
     }
 

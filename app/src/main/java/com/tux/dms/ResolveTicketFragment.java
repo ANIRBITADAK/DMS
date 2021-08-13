@@ -67,8 +67,8 @@ public class ResolveTicketFragment extends Fragment {
         assignedCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i=new Intent(getActivity(),PriorityDetails.class);
-                getActivity().startActivity(i);
+                //Intent i=new Intent(getActivity(),PriorityDetails.class);
+                //getActivity().startActivity(i);
 
             }
         });
@@ -76,8 +76,8 @@ public class ResolveTicketFragment extends Fragment {
         inProgressCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i=new Intent(getActivity(),PriorityDetails.class);
-                getActivity().startActivity(i);
+                //Intent i=new Intent(getActivity(),PriorityDetails.class);
+                //getActivity().startActivity(i);
 
             }
         });
@@ -85,8 +85,8 @@ public class ResolveTicketFragment extends Fragment {
         resolvedCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i=new Intent(getActivity(),PriorityDetails.class);
-                getActivity().startActivity(i);
+                //Intent i=new Intent(getActivity(),PriorityDetails.class);
+                //getActivity().startActivity(i);
 
             }
         });

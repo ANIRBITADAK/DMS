@@ -5,6 +5,8 @@ import android.os.Bundle;
 
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -71,24 +73,47 @@ public class PriorityDetailsFragment extends Fragment {
         highPriorityCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(getActivity(),TableFragment.class);
-                startActivity(intent);
+               // Intent intent=new Intent(getActivity(),TableFragment.class);
+                //startActivity(intent);
+
+                View v= inflater.inflate(R.layout.fragment_assign_ticket, container, false);
+                TableFragment tableFragment = new TableFragment();
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.fragment_container, tableFragment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+
             }
         });
 
         mediumPriorityCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(getActivity(),TableFragment.class);
-                startActivity(intent);
+                //Intent intent=new Intent(getActivity(),TableFragment.class);
+                //startActivity(intent);
+                View v= inflater.inflate(R.layout.fragment_assign_ticket, container, false);
+                TableFragment tableFragment = new TableFragment();
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.fragment_container, tableFragment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
             }
         });
 
         lowPriorityCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(getActivity(),TableFragment.class);
-                startActivity(intent);
+                //Intent intent=new Intent(getActivity(),TableFragment.class);
+                //startActivity(intent);
+                View v= inflater.inflate(R.layout.fragment_assign_ticket, container, false);
+                TableFragment tableFragment = new TableFragment();
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.fragment_container, tableFragment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
             }
         });
         return v;

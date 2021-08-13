@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -59,10 +61,14 @@ public class AssignTicketFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+
         View v= inflater.inflate(R.layout.fragment_assign_ticket, container, false);
-        Intent i=new Intent(getActivity(),TableActivity.class);
-        getActivity().startActivity(i);
+        TableFragment tableFragment = new TableFragment();
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.fragment_container, tableFragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
         return v;
     }
 }
