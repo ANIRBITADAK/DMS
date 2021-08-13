@@ -1,6 +1,5 @@
 package com.tux.dms;
 
-import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -13,12 +12,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.DatePicker;
-import android.widget.EditText;
-import android.widget.Spinner;
+import android.widget.TextView;
 
-import java.util.Calendar;
+import com.tux.dms.cache.SessionCache;
+import com.tux.dms.dto.TicketCount;
+import com.tux.dms.rest.ApiClient;
+import com.tux.dms.rest.ApiInterface;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -27,11 +30,13 @@ import java.util.Calendar;
  */
 public class DashboardFragment extends Fragment implements AdapterView.OnItemSelectedListener {
 
-
-
     CardView newCard,assignedCard,inProgressCard,resolvedCard;
-
-
+    TextView newTicketCount ;
+    TextView assignTicketCount ;
+    TextView inProgressTicketCount;
+    TextView resolvedTicketCount;
+    ApiInterface apiInterface = ApiClient.getApiService();
+    SessionCache sessionCache = SessionCache.getSessionCache();
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -78,12 +83,47 @@ public class DashboardFragment extends Fragment implements AdapterView.OnItemSel
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
-        View v= inflater.inflate(R.layout.fragment_dashboard, container, false);
-        newCard=v.findViewById(R.id.newTickets);
-        assignedCard=v.findViewById(R.id.assigned);
-        inProgressCard=v.findViewById(R.id.inProgress);
-        resolvedCard=v.findViewById(R.id.resolved);
+        View v = inflater.inflate(R.layout.fragment_dashboard, container, false);
+        newCard = v.findViewById(R.id.newTickets);
+        assignedCard = v.findViewById(R.id.assigned);
+        inProgressCard = v.findViewById(R.id.inProgress);
+        resolvedCard = v.findViewById(R.id.resolved);
 
+        newTicketCount = v.findViewById(R.id.newCountTicketText);
+        assignTicketCount = v.findViewById(R.id.assignedTicketCountText);
+        inProgressTicketCount = v.findViewById(R.id.inprogressTicketCountText);
+        resolvedTicketCount = v.findViewById(R.id.resolvedTicketCountText);
+
+        Call<TicketCount> call = apiInterface.getTicketCount(sessionCache.getToken(), null);
+
+
+        call.enqueue(new Callback<TicketCount>() {
+
+            @Override
+            public void onResponse(Call<TicketCount> call, Response<TicketCount> response) {
+                Integer newTickets = response.body().getNewTicket();
+                if (newTickets != null) {
+                    newTicketCount.setText(String.valueOf(newTickets));
+                }
+                Integer assignTickets = response.body().getAssignedTicket();
+                if (assignTickets != null) {
+                    assignTicketCount.setText(String.valueOf(assignTickets));
+                }
+                Integer inProgressTickets = response.body().getInprogressTicket();
+                if (inProgressTickets != null) {
+                    inProgressTicketCount.setText(String.valueOf(inProgressTickets));
+                }
+                Integer resolvedTickets = response.body().getResolvedTicket();
+                if (resolvedTickets != null) {
+                    resolvedTicketCount.setText(String.valueOf(resolvedTickets));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<TicketCount> call, Throwable t) {
+
+            }
+        });
 
         newCard.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,7 +140,7 @@ public class DashboardFragment extends Fragment implements AdapterView.OnItemSel
         assignedCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i=new Intent(getActivity(),PriorityDetails.class);
+                Intent i = new Intent(getActivity(), PriorityDetails.class);
                 getActivity().startActivity(i);
             }
         });
@@ -108,7 +148,7 @@ public class DashboardFragment extends Fragment implements AdapterView.OnItemSel
         inProgressCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i=new Intent(getActivity(),PriorityDetails.class);
+                Intent i = new Intent(getActivity(), PriorityDetails.class);
                 getActivity().startActivity(i);
             }
         });
@@ -116,7 +156,7 @@ public class DashboardFragment extends Fragment implements AdapterView.OnItemSel
         resolvedCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i=new Intent(getActivity(),PriorityDetails.class);
+                Intent i = new Intent(getActivity(), PriorityDetails.class);
                 getActivity().startActivity(i);
             }
         });
