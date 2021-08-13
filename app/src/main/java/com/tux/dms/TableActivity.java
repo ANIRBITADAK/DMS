@@ -59,9 +59,9 @@ public class TableActivity extends AppCompatActivity {
         TableLayout tl = findViewById(R.id.table);
         TableRow tr = new TableRow(this);
         tr.setLayoutParams(getLayoutParams());
-        tr.addView(getTextView(0, "Sl No.", Color.WHITE, Typeface.BOLD, Color.CYAN));
-        tr.addView(getTextView(0, "Subject", Color.WHITE, Typeface.BOLD, Color.CYAN));
-        tr.addView(getTextView(0, "Source", Color.WHITE, Typeface.BOLD, Color.CYAN));
+        tr.addView(getTextView(0, "Sl No.", Color.BLACK, Typeface.BOLD, R.color.purple_500));
+        tr.addView(getTextView(0, "Subject", Color.BLACK, Typeface.BOLD, R.color.purple_500));
+        tr.addView(getTextView(0, "Source", Color.BLACK, Typeface.BOLD, R.color.purple_500));
         tl.addView(tr, getTableLayoutParams());
     }
 
