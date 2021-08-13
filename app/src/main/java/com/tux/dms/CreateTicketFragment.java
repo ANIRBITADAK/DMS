@@ -17,16 +17,25 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ImageView;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.tux.dms.cache.SessionCache;
+import com.tux.dms.dto.ImageUploadResponse;
+import com.tux.dms.dto.Ticket;
 import com.tux.dms.rest.ApiClient;
 import com.tux.dms.rest.ApiInterface;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -43,10 +52,12 @@ public class CreateTicketFragment extends Fragment implements AdapterView.OnItem
     Bitmap bmp;
     ByteArrayOutputStream baos=new ByteArrayOutputStream();
     byte[] imageData;
-    //ImageView ivImage;
+    String imagePath;
 
     String[] sources = { "State", "District","Sub-Division","Gram Panchayat","Other Block Offices","Others" };
-    Spinner source;
+    Spinner sourceSpiner;
+    String sourceText;
+    EditText subjectText;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -92,15 +103,16 @@ public class CreateTicketFragment extends Fragment implements AdapterView.OnItem
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view= inflater.inflate(R.layout.fragment_create_ticket, container, false);
-        source=view.findViewById(R.id.source);
-        source.setOnItemSelectedListener(this);
+        View view = inflater.inflate(R.layout.fragment_create_ticket, container, false);
+        sourceSpiner = view.findViewById(R.id.source);
+        sourceSpiner.setOnItemSelectedListener(this);
 
-        ArrayAdapter ad = new ArrayAdapter(getContext(),android.R.layout.simple_spinner_item,sources);
+        ArrayAdapter ad = new ArrayAdapter(getContext(), android.R.layout.simple_spinner_item, sources);
         ad.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        source.setAdapter(ad);
+        sourceSpiner.setAdapter(ad);
 
         scanButton = view.findViewById(R.id.buttonScan);
+        subjectText = view.findViewById(R.id.subjectText);
         scanButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -109,13 +121,19 @@ public class CreateTicketFragment extends Fragment implements AdapterView.OnItem
         });
         createTicket = (Button) view.findViewById(R.id.buttonCreateTicket);
 
-
+        createTicket.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                uploadImage(imageData);
+            }
+        });
         return view;
     }
 
     @Override
-    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+    public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
 
+        sourceText = sourceSpiner.getItemAtPosition(position).toString();
     }
 
     @Override
@@ -166,6 +184,7 @@ public class CreateTicketFragment extends Fragment implements AdapterView.OnItem
                 bmp.compress(Bitmap.CompressFormat.PNG, 100, baos);
                 imageData = baos.toByteArray();
                 Toast.makeText(getContext(),imageData.toString(),Toast.LENGTH_LONG).show();
+                //uploadImage(imageData);
             } else if (requestCode == SELECT_FILE) {
 
                 Uri selectedImageUri = data.getData();
@@ -179,9 +198,55 @@ public class CreateTicketFragment extends Fragment implements AdapterView.OnItem
                 bmp.compress(Bitmap.CompressFormat.JPEG, 10, baos);
                 imageData = baos.toByteArray();
                 Toast.makeText(getContext(),imageData.toString(),Toast.LENGTH_LONG).show();
+                //uploadImage(imageData);
             }
 
         }
 
+    }
+
+    private void uploadImage(byte[] imageBytes) {
+        System.out.println("upload image");
+
+        RequestBody requestFile = RequestBody.create(MediaType.parse("image/jpeg"), imageBytes);
+        MultipartBody.Part body = MultipartBody.Part.createFormData("image", "image.jpg", requestFile);
+
+        Call<ImageUploadResponse> call = apiInterface.uploadImage(body);
+
+        call.enqueue(new Callback<ImageUploadResponse>() {
+            @Override
+            public void onResponse(Call<ImageUploadResponse> call, Response<ImageUploadResponse> response) {
+                Toast.makeText(getContext(), "image uploaded/scanned",
+                        Toast.LENGTH_LONG).show();
+                postTicket(subjectText.getText().toString(),sourceText , response.body().getPath());
+            }
+
+            @Override
+            public void onFailure(Call<ImageUploadResponse> call, Throwable t) {
+
+            }
+        });
+    }
+
+    private void postTicket(String subjectStr, String sourceStr, String imagePath) {
+
+        Ticket ticketBody = new Ticket();
+        ticketBody.setSubject(subjectStr);
+        ticketBody.setSource(sourceStr);
+        ticketBody.setFilePath(imagePath);
+        String token = sessionCache.getToken();
+        Call<Ticket> ticketCall = apiInterface.createTicket(token, ticketBody);
+
+        ticketCall.enqueue(new Callback<Ticket>() {
+            @Override
+            public void onResponse(Call<Ticket> call, Response<Ticket> response) {
+                Toast.makeText(getContext(), "Ticket created successfully",
+                        Toast.LENGTH_LONG).show();
+            }
+            @Override
+            public void onFailure(Call<Ticket> call, Throwable t) {
+
+            }
+        });
     }
 }
