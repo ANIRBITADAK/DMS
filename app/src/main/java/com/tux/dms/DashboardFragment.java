@@ -101,21 +101,24 @@ public class DashboardFragment extends Fragment implements AdapterView.OnItemSel
 
             @Override
             public void onResponse(Call<TicketCount> call, Response<TicketCount> response) {
-                Integer newTickets = response.body().getNewTicket();
-                if (newTickets != null) {
-                    newTicketCount.setText(String.valueOf(newTickets));
-                }
-                Integer assignTickets = response.body().getAssignedTicket();
-                if (assignTickets != null) {
-                    assignTicketCount.setText(String.valueOf(assignTickets));
-                }
-                Integer inProgressTickets = response.body().getInprogressTicket();
-                if (inProgressTickets != null) {
-                    inProgressTicketCount.setText(String.valueOf(inProgressTickets));
-                }
-                Integer resolvedTickets = response.body().getResolvedTicket();
-                if (resolvedTickets != null) {
-                    resolvedTicketCount.setText(String.valueOf(resolvedTickets));
+
+                if (response != null && response.body() != null) {
+                    Integer newTickets = response.body().getNewTicket();
+                    if (newTickets != null) {
+                        newTicketCount.setText(String.valueOf(newTickets));
+                    }
+                    Integer assignTickets = response.body().getAssignedTicket();
+                    if (assignTickets != null) {
+                        assignTicketCount.setText(String.valueOf(assignTickets));
+                    }
+                    Integer inProgressTickets = response.body().getInprogressTicket();
+                    if (inProgressTickets != null) {
+                        inProgressTicketCount.setText(String.valueOf(inProgressTickets));
+                    }
+                    Integer resolvedTickets = response.body().getResolvedTicket();
+                    if (resolvedTickets != null) {
+                        resolvedTicketCount.setText(String.valueOf(resolvedTickets));
+                    }
                 }
             }
 
