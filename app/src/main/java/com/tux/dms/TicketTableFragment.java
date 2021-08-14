@@ -1,6 +1,5 @@
 package com.tux.dms;
 
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -36,10 +35,10 @@ import retrofit2.Response;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link TableFragment#newInstance} factory method to
+ * Use the {@link TicketTableFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class TableFragment extends Fragment {
+public class TicketTableFragment extends Fragment {
 
     ApiInterface apiInterface = ApiClient.getApiService();
     SessionCache sessionCache = SessionCache.getSessionCache();
@@ -53,7 +52,7 @@ public class TableFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public TableFragment() {
+    public TicketTableFragment() {
         // Required empty public constructor
     }
 
@@ -66,8 +65,8 @@ public class TableFragment extends Fragment {
      * @return A new instance of fragment TableFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static TableFragment newInstance(String param1, String param2) {
-        TableFragment fragment = new TableFragment();
+    public static TicketTableFragment newInstance(String param1, String param2) {
+        TicketTableFragment fragment = new TicketTableFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);

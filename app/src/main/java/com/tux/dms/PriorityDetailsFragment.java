@@ -19,8 +19,6 @@ import com.tux.dms.dto.TicketCount;
 import com.tux.dms.rest.ApiClient;
 import com.tux.dms.rest.ApiInterface;
 
-import org.w3c.dom.Text;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -148,12 +146,12 @@ public class PriorityDetailsFragment extends Fragment {
             public void onClick(View view) {
 
                 View v = inflater.inflate(R.layout.fragment_assign_ticket, container, false);
-                TableFragment tableFragment = new TableFragment();
+                TicketTableFragment ticketTableFragment = new TicketTableFragment();
                 ticketTypeBundle.putString(TicketPriorityType.TICKET_PRIORITY_KEY, TicketPriorityType.HIGH_PRIORITY);
-                tableFragment.setArguments(ticketTypeBundle);
+                ticketTableFragment.setArguments(ticketTypeBundle);
                 FragmentManager fragmentManager = getFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.fragment_container, tableFragment);
+                fragmentTransaction.replace(R.id.fragment_container, ticketTableFragment);
                 fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
 
@@ -166,12 +164,12 @@ public class PriorityDetailsFragment extends Fragment {
                 //Intent intent=new Intent(getActivity(),TableFragment.class);
                 //startActivity(intent);
                 View v = inflater.inflate(R.layout.fragment_assign_ticket, container, false);
-                TableFragment tableFragment = new TableFragment();
+                TicketTableFragment ticketTableFragment = new TicketTableFragment();
                 ticketTypeBundle.putString(TicketPriorityType.TICKET_PRIORITY_KEY, TicketPriorityType.MED_PRIORITY);
-                tableFragment.setArguments(ticketTypeBundle);
+                ticketTableFragment.setArguments(ticketTypeBundle);
                 FragmentManager fragmentManager = getFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.fragment_container, tableFragment);
+                fragmentTransaction.replace(R.id.fragment_container, ticketTableFragment);
                 fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
             }
@@ -183,12 +181,12 @@ public class PriorityDetailsFragment extends Fragment {
                 //Intent intent=new Intent(getActivity(),TableFragment.class);
                 //startActivity(intent);
                 View v = inflater.inflate(R.layout.fragment_assign_ticket, container, false);
-                TableFragment tableFragment = new TableFragment();
+                TicketTableFragment ticketTableFragment = new TicketTableFragment();
                 ticketTypeBundle.putString(TicketPriorityType.TICKET_PRIORITY_KEY, TicketPriorityType.LOW_PRIORITY);
-                tableFragment.setArguments(ticketTypeBundle);
+                ticketTableFragment.setArguments(ticketTypeBundle);
                 FragmentManager fragmentManager = getFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.fragment_container, tableFragment);
+                fragmentTransaction.replace(R.id.fragment_container, ticketTableFragment);
                 fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
             }
