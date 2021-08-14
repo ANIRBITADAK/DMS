@@ -4,11 +4,15 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,6 +31,7 @@ import com.tux.dms.dto.User;
 import com.tux.dms.rest.ApiClient;
 import com.tux.dms.rest.ApiInterface;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -39,6 +44,18 @@ import retrofit2.Response;
  * create an instance of this fragment.
  */
 public class TicketTableFragment extends Fragment {
+
+    int MAX_PAGE=1,PAGE_COUNT=1;
+
+    RecyclerView recyclerView;
+    RecyclerAdapterView recyclerViewAdapter;
+    List<Ticket> rowsTicketList = new ArrayList<>();
+    String token;
+    String assignedUserId;
+    String ticketType = null;
+    String tickPriority = null;
+
+    boolean isLoading = false;
 
     ApiInterface apiInterface = ApiClient.getApiService();
     SessionCache sessionCache = SessionCache.getSessionCache();
@@ -88,30 +105,38 @@ public class TicketTableFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_table, container, false);
+
+        recyclerView = v.findViewById(R.id.recyclerView);
+
+
         Bundle ticketTypeBundle = this.getArguments();
-        String ticketType = null;
-        String tickPriority = null;
+
         if (ticketTypeBundle != null) {
             ticketType = (String) ticketTypeBundle.get(TicketType.TICKET_TYPE_KEY);
             tickPriority = (String) ticketTypeBundle.get(TicketPriorityType.TICKET_PRIORITY_KEY);
         }
-        String token = sessionCache.getToken();
+         token= sessionCache.getToken();
         User user = sessionCache.getUser();
-        String assignedUserId  = null;
+        assignedUserId  = null;
         // if user is admin then fetch all records - assigned id to null.
         // otherwise set user id.
         if(user!=null && !RoleConsts.ADMIN_ROLE.equalsIgnoreCase(user.getRole())){
             assignedUserId = user.get_id();
         }
         Call<TicketList> tickList = apiInterface.getTickets(token, assignedUserId, ticketType, tickPriority,
-                1, 5);
+                PAGE_COUNT, 5);
         tickList.enqueue(new Callback<TicketList>() {
             @Override
             public void onResponse(Call<TicketList> call, Response<TicketList> response) {
                 System.out.println("got ticket list" + response.body());
                 TicketList ticketList = response.body();
-                addHeaders();
-                addData(ticketList.getTickets());
+                rowsTicketList=ticketList.getTickets();
+                MAX_PAGE=ticketList.getTotalPages();
+                initAdapter();
+                initScrollListener();
+
+                /* addHeaders();
+                addData(ticketList.getTickets());*/
             }
 
             @Override
@@ -120,10 +145,94 @@ public class TicketTableFragment extends Fragment {
             }
         });
 
+
+
         return v;
+
+
     }
 
-    public void addHeaders() {
+    private void initAdapter() {
+        recyclerViewAdapter = new RecyclerAdapterView(rowsTicketList);
+        recyclerView.setAdapter(recyclerViewAdapter);
+    }
+
+    private void initScrollListener() {
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+            }
+
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+
+                LinearLayoutManager linearLayoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
+
+                if (!isLoading) {
+                    if (linearLayoutManager != null && linearLayoutManager.findLastCompletelyVisibleItemPosition() == rowsTicketList.size() - 1 &&  PAGE_COUNT<MAX_PAGE) {
+                        //bottom of list!
+                        loadMore();
+                        isLoading = true;
+                    }
+                }
+            }
+        });
+
+
+    }
+
+    private void loadMore() {
+
+        rowsTicketList.add(null);
+        recyclerViewAdapter.notifyItemInserted(rowsTicketList.size() - 1);
+
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+
+                rowsTicketList.remove(rowsTicketList.size() - 1);
+                int scrollPosition = rowsTicketList.size();
+                recyclerViewAdapter.notifyItemRemoved(scrollPosition);
+
+                Call<TicketList> tickList = apiInterface.getTickets(token, assignedUserId, ticketType, tickPriority,
+                        ++PAGE_COUNT, 5);
+
+                tickList.enqueue(new Callback<TicketList>() {
+                    @Override
+                    public void onResponse(Call<TicketList> call, Response<TicketList> response) {
+                        System.out.println("got ticket list" + response.body());
+                        TicketList ticketList = response.body();
+                        for(int i=0;i<5;i++)
+                        {
+                            rowsTicketList.add(ticketList.getTickets().get(i));
+                        }
+
+                        recyclerViewAdapter.notifyDataSetChanged();
+                        isLoading = false;
+
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<TicketList> call, Throwable t) {
+
+                    }
+                });
+
+
+
+
+            }
+        },2000);
+
+    }
+
+
+
+    /*public void addHeaders() {
         TableLayout tl = getView().findViewById(R.id.table);
         TableRow tr = new TableRow(getContext());
         tr.setLayoutParams(getLayoutParams());
@@ -221,4 +330,7 @@ public class TicketTableFragment extends Fragment {
                 TableLayout.LayoutParams.MATCH_PARENT,
                 TableLayout.LayoutParams.WRAP_CONTENT);
     }
+
+    */
+
 }
