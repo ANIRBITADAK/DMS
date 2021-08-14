@@ -18,6 +18,7 @@ import retrofit2.http.Header;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 
@@ -39,6 +40,10 @@ public interface ApiInterface {
     Call<TicketList> getTickets(@Header("x-auth-token") String authHeader, @Query("assignedTo") String assignedTo, @Query("state") String state,
                                 @Query("priority") String priority,
                                 @Query("page") Integer page, @Query("limit") Integer limit);
+
+    @GET("api/tickets/ticket_id/{ticket_id}")
+    Call<Ticket> getTicket(@Header("x-auth-token") String authHeader, @Path("ticket_id") String ticketId);
+
     @GET("/api/tickets/count")
     Call<TicketCount> getTicketCount(@Header("x-auth-token") String authHeader, @Query("state") String state);
 

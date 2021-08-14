@@ -3,7 +3,7 @@ package com.tux.dms.dto;
 import java.util.List;
 
 public class Ticket {
-
+    private String _id;
     private String creator;
     private String creatorName;
     private String assignedTo;
@@ -17,6 +17,14 @@ public class Ticket {
     private String createDate;
     private String assignDate;
     private List<Comment> comments;
+
+    public String get_id() {
+        return _id;
+    }
+
+    public void set_id(String _id) {
+        this._id = _id;
+    }
 
     public String getCreator() {
         return creator;

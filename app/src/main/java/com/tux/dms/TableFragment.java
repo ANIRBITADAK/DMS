@@ -7,6 +7,8 @@ import android.os.Bundle;
 
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +19,7 @@ import android.widget.TextView;
 
 import com.tux.dms.cache.SessionCache;
 import com.tux.dms.constants.RoleConsts;
+import com.tux.dms.constants.TicketConst;
 import com.tux.dms.constants.TicketPriorityType;
 import com.tux.dms.constants.TicketType;
 import com.tux.dms.dto.Ticket;
@@ -132,37 +135,66 @@ public class TableFragment extends Fragment {
     }
 
     public void addData(List<Ticket> tickets) {
-        int z=0;
+        int index = 0;
         TableLayout tl = getView().findViewById(R.id.table);
         for (int i = 0; i < tickets.size(); i++) {
-            TableRow tr = new TableRow(getContext());
-            tr.setLayoutParams(getLayoutParams());
+            TableRow tableRow = new TableRow(getContext());
+            tableRow.setLayoutParams(getLayoutParams());
             //id column
-            tr.addView(getTextView(i, Integer.toString(++z), Color.BLACK, Typeface.NORMAL, ContextCompat.getColor(getContext(), R.color.white)));
+            TextView idTexView = getTextView(i, Integer.toString(++index), Color.BLACK, Typeface.NORMAL, ContextCompat.getColor(getContext(), R.color.white));
+            idTexView.setOnClickListener(
+                    new View.OnClickListener(){
+                        @Override
+                        public void onClick(View view) {
+                            String rowId = (String) idTexView.getText();
+                            TicketDetailsFragment ticketDetailsFragment = new TicketDetailsFragment();
+                            Bundle tickIdBundle = new Bundle();
+                            tickets.get(-1);
+                            String ticketId = tickets.get(i).get_id();
+                            //tickIdBundle.putString(TicketConst.TICKET_ID_KEY,);
+                            //ticketDetailsFragment.setArguments(ticketTypeBundle);
+                            FragmentManager fragmentManager = getFragmentManager();
+                            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                            fragmentTransaction.replace(R.id.fragment_container, ticketDetailsFragment);
+                            fragmentTransaction.addToBackStack(null);
+                            fragmentTransaction.commit();
+                        }
+                    }
+            );
+            tableRow.addView(idTexView);
+
             //adding subject column and making it clickable
-            TextView tv = new TextView(getContext());
-            tv.setId(i);
-            tv.setText(tickets.get(i).getSubject());
-            tv.setTextColor(Color.BLACK);
-            tv.setPadding(40, 40, 40, 40);
-            tv.setTypeface(Typeface.DEFAULT, Typeface.NORMAL);
-            tv.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.white));
-            tv.setLayoutParams(getLayoutParams());
-            tv.setOnClickListener(new View.OnClickListener() {
+            TextView subjectTexView = new TextView(getContext());
+            subjectTexView.setId(i);
+            subjectTexView.setText(tickets.get(i).getSubject());
+            subjectTexView.setTextColor(Color.BLACK);
+            subjectTexView.setPadding(40, 40, 40, 40);
+            subjectTexView.setTypeface(Typeface.DEFAULT, Typeface.NORMAL);
+            subjectTexView.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.white));
+            subjectTexView.setLayoutParams(getLayoutParams());
+             subjectTexView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent i=new Intent(getActivity(),TicketDetailsFragment.class);
-                    getActivity().startActivity(i);
+                    String id = (String) idTexView.getText();
+                    TicketDetailsFragment ticketDetailsFragment = new TicketDetailsFragment();
+                    Bundle tickIdBundle = new Bundle();
+                    //String ticketId = tickets.get(i).get_id();
+                    //tickIdBundle.putString(TicketConst.TICKET_ID_KEY,);
+                    //ticketDetailsFragment.setArguments(ticketTypeBundle);
+                    FragmentManager fragmentManager = getFragmentManager();
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.fragment_container, ticketDetailsFragment);
+                    fragmentTransaction.addToBackStack(null);
+                    fragmentTransaction.commit();
 
                 }
             });
-            tr.addView(tv);
-            tr.addView(getTextView(i, tickets.get(i).getSource(), Color.BLACK, Typeface.NORMAL, ContextCompat.getColor(getContext(), R.color.white)));
+            tableRow.addView(subjectTexView);
+            tableRow.addView(getTextView(i, tickets.get(i).getSource(), Color.BLACK, Typeface.NORMAL, ContextCompat.getColor(getContext(), R.color.white)));
 
-            tl.addView(tr, getTableLayoutParams());
+            tl.addView(tableRow, getTableLayoutParams());
 
         }
-
 
 
     }

@@ -11,9 +11,13 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.google.android.material.navigation.NavigationView;
+import com.tux.dms.cache.SessionCache;
 import com.tux.dms.dto.Comment;
+import com.tux.dms.rest.ApiClient;
+import com.tux.dms.rest.ApiInterface;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +31,13 @@ public class TicketDetailsFragment extends Fragment {
 
     CommentAdapter adapter;
     RecyclerView recyclerView;
+    ApiInterface apiInterface = ApiClient.getApiService();
+    SessionCache sessionCache = SessionCache.getSessionCache();
+
+    TextView subjectTextView;
+    TextView sourceTextView;
+    TextView assignedToTextView;
+    TextView assignDateTextView;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -73,9 +84,16 @@ public class TicketDetailsFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v=inflater.inflate(R.layout.fragment_ticket_details, container, false);
+
+
+        TextView subjectTextView;
+        TextView sourceTextView;
+        TextView assignedToTextView;
+        TextView assignDateTextView;
         List<Comment> list = new ArrayList<>();
         list = getData();
-
+        String token = sessionCache.getToken();
+        //apiInterface.getTicket(token, )
         recyclerView = (RecyclerView)v.findViewById(R.id.commentRecyclerView);
 
         adapter= new CommentAdapter(list, getContext());
@@ -84,8 +102,7 @@ public class TicketDetailsFragment extends Fragment {
         return v;
     }
 
-    private List<Comment> getData()
-    {
+    private List<Comment> getData() {
         List<Comment> list = new ArrayList<>();
         list.add(new Comment("First Exam",
                 "May 23, 2015",
