@@ -1,6 +1,5 @@
 package com.tux.dms;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.cardview.widget.CardView;
@@ -15,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.TextView;
 
 import com.tux.dms.cache.SessionCache;
+import com.tux.dms.constants.TicketType;
 import com.tux.dms.dto.TicketCount;
 import com.tux.dms.rest.ApiClient;
 import com.tux.dms.rest.ApiInterface;
@@ -84,10 +84,10 @@ public class DashboardFragment extends Fragment implements AdapterView.OnItemSel
         // Inflate the layout for this fragment
 
         View v = inflater.inflate(R.layout.fragment_dashboard, container, false);
-        newCard = v.findViewById(R.id.newTickets);
+        newCard = v.findViewById(R.id.newTicketsCardView);
         assignedCard = v.findViewById(R.id.assigned);
-        inProgressCard = v.findViewById(R.id.inProgress);
-        resolvedCard = v.findViewById(R.id.resolved);
+        inProgressCard = v.findViewById(R.id.inProgressCardView);
+        resolvedCard = v.findViewById(R.id.resolvedTicketCardView);
 
         newTicketCount = v.findViewById(R.id.newCountTicketText);
         assignTicketCount = v.findViewById(R.id.assignedTicketCountText);
@@ -144,6 +144,9 @@ public class DashboardFragment extends Fragment implements AdapterView.OnItemSel
             @Override
             public void onClick(View view) {
                 PriorityDetailsFragment priorityDetailsFragment = new PriorityDetailsFragment();
+                Bundle ticketType = new Bundle();
+                ticketType.putString(TicketType.TICKET_TYPE_KEY,TicketType.ASSIGNED_TICKET); // Put anything what you want
+                priorityDetailsFragment.setArguments(ticketType);
                 FragmentManager fragmentManager = getFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.fragment_container, priorityDetailsFragment);
@@ -158,8 +161,10 @@ public class DashboardFragment extends Fragment implements AdapterView.OnItemSel
         inProgressCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 PriorityDetailsFragment priorityDetailsFragment = new PriorityDetailsFragment();
+                Bundle ticketType = new Bundle();
+                ticketType.putString(TicketType.TICKET_TYPE_KEY,TicketType.IN_PROGRESS_TICKET);
+                priorityDetailsFragment.setArguments(ticketType);
                 FragmentManager fragmentManager = getFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.fragment_container, priorityDetailsFragment);
@@ -174,6 +179,9 @@ public class DashboardFragment extends Fragment implements AdapterView.OnItemSel
             @Override
             public void onClick(View view) {
                 PriorityDetailsFragment priorityDetailsFragment = new PriorityDetailsFragment();
+                Bundle ticketType = new Bundle();
+                ticketType.putString(TicketType.TICKET_TYPE_KEY,TicketType.RESOLVED_TICKET);
+                priorityDetailsFragment.setArguments(ticketType);
                 FragmentManager fragmentManager = getFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.fragment_container, priorityDetailsFragment);

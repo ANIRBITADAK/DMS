@@ -2,28 +2,31 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
 
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/dashboad_frame_layout"
+    android:id="@+id/dashboard_frame_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".DashboardFragment">
 
     <LinearLayout
+        android:id="@+id/ticketStateCountLinearLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="8sp"
         android:orientation="vertical">
 
         <ScrollView
+            android:id="@+id/ScrollView"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <LinearLayout
+                android:id="@+id/ticketStateOuterLinearLayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/newTickets"
+                    android:id="@+id/newTicketsCardView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="40sp"
@@ -31,7 +34,7 @@
                     android:layout_marginRight="40sp">
 
                     <LinearLayout
-                        android:id="@+id/new_ticket_count_layout"
+                        android:id="@+id/newTicketCountLinearLayout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
@@ -48,6 +51,7 @@
                             android:textStyle="bold" />
 
                         <TextView
+                            android:id="@+id/newTicketTextView"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5sp"
@@ -88,6 +92,7 @@
                             android:textStyle="bold" />
 
                         <TextView
+                            android:id="@+id/assignedTicketTextView"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5sp"
@@ -104,7 +109,7 @@
 
 
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/inProgress"
+                    android:id="@+id/inProgressCardView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="40sp"
@@ -112,6 +117,7 @@
                     android:layout_marginRight="40sp">
 
                     <LinearLayout
+                        android:id="@+id/inProgressLinearLayout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
@@ -128,6 +134,7 @@
                             android:textStyle="bold" />
 
                         <TextView
+                            android:id="@+id/inProgressTextView"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5sp"
@@ -144,7 +151,7 @@
 
 
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/resolved"
+                    android:id="@+id/resolvedTicketCardView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="40sp"
@@ -153,6 +160,7 @@
                     android:layout_marginBottom="50sp">
 
                     <LinearLayout
+                        android:id="@+id/resolvedLinearLayout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
@@ -169,6 +177,7 @@
                             android:textStyle="bold" />
 
                         <TextView
+                            android:id="@+id/resolvedTicketTextView"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5sp"
