@@ -62,9 +62,17 @@ class RecyclerAdapterView extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
 
     private void populateItemRows(ItemViewHolder viewHolder, int position) {
+        if(ticketList!=null && ticketList.get(position)!=null && ticketList.get(position).getSource()!=null){
+            viewHolder.textViewSource.setText(ticketList.get(position).getSource());
+        }else{
+            viewHolder.textViewSource.setText("");
+        }
+        if(ticketList!=null && ticketList.get(position)!=null && ticketList.get(position).getSubject()!=null){
+            viewHolder.textViewSubject.setText(ticketList.get(position).getSubject());
+        }else{
+            viewHolder.textViewSubject.setText("");
+        }
 
-        viewHolder.textViewSource.setText(ticketList.get(position).getSource());
-        viewHolder.textViewSubject.setText(ticketList.get(position).getSubject());
 
     }
 
