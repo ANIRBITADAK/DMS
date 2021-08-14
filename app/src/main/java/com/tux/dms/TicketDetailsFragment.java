@@ -103,7 +103,7 @@ public class TicketDetailsFragment extends Fragment implements AdapterView.OnIte
         ArrayAdapter ad = new ArrayAdapter(getContext(), android.R.layout.simple_spinner_item, states);
         ad.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         stateSpinner.setAdapter(ad);
-        
+
 
         List<Comment> list = new ArrayList<>();
         list = getData();
