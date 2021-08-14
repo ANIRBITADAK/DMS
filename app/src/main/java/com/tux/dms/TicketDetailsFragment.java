@@ -2,11 +2,21 @@ package com.tux.dms;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.google.android.material.navigation.NavigationView;
+import com.tux.dms.dto.Comment;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -14,6 +24,9 @@ import android.view.ViewGroup;
  * create an instance of this fragment.
  */
 public class TicketDetailsFragment extends Fragment {
+
+    CommentAdapter adapter;
+    RecyclerView recyclerView;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -59,6 +72,33 @@ public class TicketDetailsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_ticket_details, container, false);
+        View v=inflater.inflate(R.layout.fragment_ticket_details, container, false);
+        List<Comment> list = new ArrayList<>();
+        list = getData();
+
+        recyclerView = (RecyclerView)v.findViewById(R.id.commentRecyclerView);
+
+        adapter= new CommentAdapter(list, getContext());
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        return v;
     }
+
+    private List<Comment> getData()
+    {
+        List<Comment> list = new ArrayList<>();
+        list.add(new Comment("First Exam",
+                "May 23, 2015",
+                "Best Of Luck"));
+        list.add(new Comment("Second Exam",
+                "June 09, 2015",
+                "b of l"));
+        list.add(new Comment("My Test Exam",
+                "April 27, 2017",
+                "This is testing exam .."));
+
+        return list;
+    }
+
+
 }

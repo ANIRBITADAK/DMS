@@ -8,6 +8,14 @@ public class Comment {
    private String avatar;
    private String date;
 
+   public Comment(String name, String date, String text)
+   {
+       this.name=name;
+       this.date=date;
+       this.text=text;
+   }
+
+
     public String getPostedBy() {
         return postedBy;
     }
