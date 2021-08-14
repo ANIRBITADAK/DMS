@@ -56,7 +56,7 @@
 
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/inProgress"
+                android:id="@+id/inProgressCardView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="50sp"
@@ -69,7 +69,7 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/inprogressTicketCountText"
+                        android:id="@+id/inProgressTicketCountText"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="32"
@@ -96,7 +96,7 @@
 
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/resolved"
+                android:id="@+id/resolvedTicketCardView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="50sp"

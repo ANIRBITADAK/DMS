@@ -1,49 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/priorityFrameLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".PriorityDetailsFragment">
 
     <LinearLayout
+        android:id="@+id/priorityOuterLinearLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+
         <ScrollView
+            android:id="@+id/priorityScrollView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="8dp">
 
             <LinearLayout
+                android:id="@+id/priorityLinearLayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/high"
+                <TextView
+                    android:id="@+id/ticketTypeTextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="50sp"
+                    android:layout_marginTop="5sp"
+                    android:layout_marginBottom="5sp"
+                    android:fontFamily="sans-serif-condensed-medium"
+                    android:text=""
+                    android:textAlignment="center"
+                    android:textColor="#012A53"
+                    android:textSize="30sp"
+                    android:textStyle="bold" />
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/highCardView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginLeft="40sp"
-                    android:layout_marginRight="40sp">
+                    android:layout_marginTop="50sp"
+                    android:layout_marginRight="40sp"
+                    app:strokeColor="@android:color/holo_red_light"
+                    app:strokeWidth="3dp">
 
                     <LinearLayout
+                        android:id="@+id/highLinearLayout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
 
                         <TextView
-                            android:id="@+id/highCount"
+                            android:id="@+id/highCountText"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="32"
                             android:fontFamily="sans-serif-condensed-medium"
-                            android:textColor="#FF1100"
-                            android:textSize="100sp"
+                            android:text="0"
                             android:textAlignment="center"
-                            android:textStyle="bold"/>
+                            android:textColor= "@android:color/holo_red_light"
+                            android:textSize="100sp"
+                            android:textStyle="bold" />
 
                         <TextView
+                            android:id="@+id/highLabel"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5sp"
@@ -51,93 +74,99 @@
                             android:fontFamily="sans-serif-condensed-medium"
                             android:text="High"
                             android:textAlignment="center"
-                            android:textColor="#012A53"
+                            android:textColor= "@android:color/holo_red_light"
                             android:textSize="30sp"
                             android:textStyle="bold" />
                     </LinearLayout>
 
-                </androidx.cardview.widget.CardView>
+                </com.google.android.material.card.MaterialCardView>
 
 
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/medium"
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/mediumCardView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="50sp"
                     android:layout_marginLeft="40sp"
-                    android:layout_marginRight="40sp">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/mediumCount"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="32"
-                            android:fontFamily="sans-serif-condensed-medium"
-                            android:textColor="#FFC107"
-                            android:textSize="100sp"
-                            android:textAlignment="center"
-                            android:textStyle="bold"/>
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Medium"
-                            android:fontFamily="sans-serif-condensed-medium"
-                            android:textColor="#012A53"
-                            android:textAlignment="center"
-                            android:textSize="30sp"
-                            android:textStyle="bold"
-                            android:layout_marginTop="5sp"
-                            android:layout_marginBottom="5sp"/>
-                    </LinearLayout>
-
-                </androidx.cardview.widget.CardView>
-
-
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/low"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
                     android:layout_marginTop="50sp"
-                    android:layout_marginLeft="40sp"
                     android:layout_marginRight="40sp"
-                    android:layout_marginBottom="50sp">
+                    app:strokeColor="@android:color/holo_orange_light"
+                    app:strokeWidth="3dp">
 
                     <LinearLayout
+                        android:id="@+id/medLinearLayout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
 
                         <TextView
-                            android:id="@+id/lowCount"
+                            android:id="@+id/mediumCountText"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="32"
                             android:fontFamily="sans-serif-condensed-medium"
-                            android:textColor="#4CAF50"
-                            android:textSize="100sp"
+                            android:text="0"
                             android:textAlignment="center"
-                            android:textStyle="bold"/>
+                            android:textColor= "@android:color/holo_orange_light"
+                            android:textSize="100sp"
+                            android:textStyle="bold" />
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Low"
-                            android:fontFamily="sans-serif-condensed-medium"
-                            android:textColor="#012A53"
-                            android:textAlignment="center"
-                            android:textSize="30sp"
-                            android:textStyle="bold"
                             android:layout_marginTop="5sp"
-                            android:layout_marginBottom="5sp"/>
+                            android:layout_marginBottom="5sp"
+                            android:fontFamily="sans-serif-condensed-medium"
+                            android:text="Medium"
+                            android:textAlignment="center"
+                            android:textColor="@android:color/holo_orange_light"
+                            android:textSize="30sp"
+                            android:textStyle="bold" />
                     </LinearLayout>
 
-                </androidx.cardview.widget.CardView>
+                </com.google.android.material.card.MaterialCardView>
+
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/lowCardView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="40sp"
+                    android:layout_marginTop="50sp"
+                    android:layout_marginRight="40sp"
+                    android:layout_marginBottom="50sp"
+                    app:strokeColor="@android:color/holo_green_dark"
+                    app:strokeWidth="3dp">
+
+                    <LinearLayout
+                        android:id="@+id/lowLinearLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/lowCountText"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="sans-serif-condensed-medium"
+                            android:text="0"
+                            android:textAlignment="center"
+                            android:textColor= "@android:color/holo_green_dark"
+                            android:textSize="100sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5sp"
+                            android:layout_marginBottom="5sp"
+                            android:fontFamily="sans-serif-condensed-medium"
+                            android:text="Low"
+                            android:textAlignment="center"
+                            android:textColor= "@android:color/holo_green_dark"
+                            android:textSize="30sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                </com.google.android.material.card.MaterialCardView>
 
             </LinearLayout>
         </ScrollView>

@@ -1,6 +1,5 @@
 package com.tux.dms;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.cardview.widget.CardView;
@@ -60,8 +59,8 @@ public class ResolveTicketFragment extends Fragment {
         // Inflate the layout for this fragment
         View v= inflater.inflate(R.layout.fragment_resolve_ticket, container, false);
         assignedCard=v.findViewById(R.id.assigned);
-        inProgressCard=v.findViewById(R.id.inProgress);
-        resolvedCard=v.findViewById(R.id.resolved);
+        inProgressCard=v.findViewById(R.id.inProgressCardView);
+        resolvedCard=v.findViewById(R.id.resolvedTicketCardView);
 
 
         assignedCard.setOnClickListener(new View.OnClickListener() {
