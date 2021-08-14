@@ -11,7 +11,13 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
+
 import android.widget.TextView;
+
 
 import com.google.android.material.navigation.NavigationView;
 import com.tux.dms.cache.SessionCache;
@@ -35,10 +41,14 @@ import retrofit2.Response;
  * Use the {@link TicketDetailsFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class TicketDetailsFragment extends Fragment {
+public class TicketDetailsFragment extends Fragment implements AdapterView.OnItemSelectedListener {
 
     CommentAdapter adapter;
     RecyclerView recyclerView;
+
+    String[] states = { "Assigned", "In-Progress","Resolved" };
+    Spinner stateSpinner;
+
     ApiInterface apiInterface = ApiClient.getApiService();
     SessionCache sessionCache = SessionCache.getSessionCache();
 
@@ -46,6 +56,7 @@ public class TicketDetailsFragment extends Fragment {
     TextView sourceTextView;
     TextView assignedToTextView;
     TextView assignDateTextView;
+
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -92,10 +103,10 @@ public class TicketDetailsFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_ticket_details, container, false);
-        subjectTextView = view.findViewById(R.id.subjectTextView);
-        sourceTextView = view.findViewById(R.id.sourceTextView);
-        assignedToTextView = view.findViewById(R.id.assignedToTextView);
-        assignDateTextView = view.findViewById(R.id.assignedDateTextView);
+        subjectTextView = view.findViewById(R.id.subjectText);
+        sourceTextView = view.findViewById(R.id.sourceText);
+        assignedToTextView = view.findViewById(R.id.assignedToText);
+        assignDateTextView = view.findViewById(R.id.assigedDateText);
 
         Bundle ticketIdBundle = this.getArguments();
         String tickId = "";
@@ -132,20 +143,16 @@ public class TicketDetailsFragment extends Fragment {
         });
 
         return view;
-    }
-   /* private List<Comment> getData() {
-        List<Comment> list = new ArrayList<>();
-        list.add(new Comment("First Exam",
-                "May 23, 2015",
-                "Best Of Luck"));
-        list.add(new Comment("Second Exam",
-                "June 09, 2015",
-                "b of l"));
-        list.add(new Comment("My Test Exam",
-                "April 27, 2017",
-                "This is testing exam .."));
 
-        return list;
     }
-*/
+
+    @Override
+    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
+
+    }
 }

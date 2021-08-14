@@ -103,7 +103,7 @@
                         android:textSize="20sp" />
 
                     <TextView
-                        android:id="@+id/assigedToText"
+                        android:id="@+id/assigedDateText"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="20sp"
@@ -158,13 +158,40 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/linearlayoutComments"
-                android:layout_alignParentBottom="true">
+                android:layout_alignParentBottom="true"
+                android:layout_marginTop="20sp">
 
                 <EditText
                     android:id="@+id/commentEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Enter Comment" />
+
+                <TextView
+                    android:id="@+id/AssignedStateTxtView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/commentEditText"
+                    android:layout_marginTop="10sp"
+                    android:fontFamily="sans-serif-condensed-medium"
+                    android:text="Change State"
+                    android:textSize="18sp" />
+
+                <Spinner
+                    android:id="@+id/spinnerState"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/AssignedStateTxtView"
+                    android:layout_marginTop="10sp" />
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Save"
+                    android:id="@+id/saveBtn"
+                    android:layout_below="@id/spinnerState"
+                    android:layout_marginTop="30sp"
+                    android:background="@drawable/button_layout"/>
 
 
             </RelativeLayout>
