@@ -11,6 +11,9 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
 import com.google.android.material.navigation.NavigationView;
 import com.tux.dms.dto.Comment;
@@ -23,10 +26,12 @@ import java.util.List;
  * Use the {@link TicketDetailsFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class TicketDetailsFragment extends Fragment {
+public class TicketDetailsFragment extends Fragment implements AdapterView.OnItemSelectedListener {
 
     CommentAdapter adapter;
     RecyclerView recyclerView;
+    String[] states = { "Assigned", "In-Progress","Resolved" };
+    Spinner stateSpinner;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -73,6 +78,14 @@ public class TicketDetailsFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v=inflater.inflate(R.layout.fragment_ticket_details, container, false);
+
+        stateSpinner = v.findViewById(R.id.spinnerState);
+        stateSpinner.setOnItemSelectedListener(this);
+
+        ArrayAdapter ad = new ArrayAdapter(getContext(), android.R.layout.simple_spinner_item, states);
+        ad.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        stateSpinner.setAdapter(ad);
+
         List<Comment> list = new ArrayList<>();
         list = getData();
 
@@ -101,4 +114,13 @@ public class TicketDetailsFragment extends Fragment {
     }
 
 
+    @Override
+    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
+
+    }
 }
