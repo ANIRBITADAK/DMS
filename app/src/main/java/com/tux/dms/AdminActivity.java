@@ -7,8 +7,6 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -55,16 +53,16 @@ public class AdminActivity extends AppCompatActivity implements NavigationView.O
                 break;
             case R.id.create_new:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new CreateTicketFragment()).commit();
+                        new TicketCreateFragment()).commit();
                 break;
 
             case R.id.search:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new SearchFragment()).commit();
+                        new TicketSearchFragment()).commit();
                 break;
             case R.id.assign_tickets:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new AssignTicketFragment()).commit();
+                        new TicketAssignFragment()).commit();
                 break;
 
             case R.id.this_month:

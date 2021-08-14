@@ -131,10 +131,10 @@ public class DashboardFragment extends Fragment implements AdapterView.OnItemSel
         newCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AssignTicketFragment assignTicketFragment = new AssignTicketFragment();
+                TicketAssignFragment ticketAssignFragment = new TicketAssignFragment();
                 FragmentManager fragmentManager = getFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.fragment_container, assignTicketFragment);
+                fragmentTransaction.replace(R.id.fragment_container, ticketAssignFragment);
                 fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
             }

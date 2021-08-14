@@ -33,7 +33,7 @@ public class TicketCreatorActivity extends AppCompatActivity implements Navigati
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                    new CreateTicketFragment()).commit();
+                    new TicketCreateFragment()).commit();
             navigationView.setCheckedItem(R.id.ticket);
         }
     }
@@ -44,7 +44,7 @@ public class TicketCreatorActivity extends AppCompatActivity implements Navigati
         switch (item.getItemId()) {
             case R.id.ticket:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new CreateTicketFragment()).commit();
+                        new TicketCreateFragment()).commit();
                 break;
             case R.id.report:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,

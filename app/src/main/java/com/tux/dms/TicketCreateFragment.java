@@ -39,10 +39,10 @@ import retrofit2.Response;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link CreateTicketFragment#newInstance} factory method to
+ * Use the {@link TicketCreateFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class CreateTicketFragment extends Fragment implements AdapterView.OnItemSelectedListener {
+public class TicketCreateFragment extends Fragment implements AdapterView.OnItemSelectedListener {
 
     Button scanButton ;
     Button createTicket ;
@@ -68,7 +68,7 @@ public class CreateTicketFragment extends Fragment implements AdapterView.OnItem
     private String mParam1;
     private String mParam2;
 
-    public CreateTicketFragment() {
+    public TicketCreateFragment() {
         // Required empty public constructor
     }
 
@@ -81,8 +81,8 @@ public class CreateTicketFragment extends Fragment implements AdapterView.OnItem
      * @return A new instance of fragment CreateTicketFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static CreateTicketFragment newInstance(String param1, String param2) {
-        CreateTicketFragment fragment = new CreateTicketFragment();
+    public static TicketCreateFragment newInstance(String param1, String param2) {
+        TicketCreateFragment fragment = new TicketCreateFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);

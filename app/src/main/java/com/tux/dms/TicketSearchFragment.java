@@ -18,10 +18,10 @@ import java.util.Calendar;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link SearchFragment#newInstance} factory method to
+ * Use the {@link TicketSearchFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class SearchFragment extends Fragment  implements AdapterView.OnItemSelectedListener{
+public class TicketSearchFragment extends Fragment  implements AdapterView.OnItemSelectedListener{
 
     String[] states = { "New","Assigned","In-Progress","Resolved" };
     Spinner state;
@@ -39,7 +39,7 @@ public class SearchFragment extends Fragment  implements AdapterView.OnItemSelec
     private String mParam1;
     private String mParam2;
 
-    public SearchFragment() {
+    public TicketSearchFragment() {
         // Required empty public constructor
     }
 
@@ -52,8 +52,8 @@ public class SearchFragment extends Fragment  implements AdapterView.OnItemSelec
      * @return A new instance of fragment SearchFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static SearchFragment newInstance(String param1, String param2) {
-        SearchFragment fragment = new SearchFragment();
+    public static TicketSearchFragment newInstance(String param1, String param2) {
+        TicketSearchFragment fragment = new TicketSearchFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
