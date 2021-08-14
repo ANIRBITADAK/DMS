@@ -37,7 +37,7 @@ public interface ApiInterface {
 
     @GET("api/tickets")
     Call<TicketList> getTickets(@Header("x-auth-token") String authHeader, @Query("assignedTo") String assignedTo, @Query("state") String state,
-                                @Query("priority") Integer priority,
+                                @Query("priority") String priority,
                                 @Query("page") Integer page, @Query("limit") Integer limit);
     @GET("/api/tickets/count")
     Call<TicketCount> getTicketCount(@Header("x-auth-token") String authHeader, @Query("state") String state);
