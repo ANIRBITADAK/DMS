@@ -91,7 +91,7 @@ public class DashboardFragment extends Fragment implements AdapterView.OnItemSel
 
         newTicketCount = v.findViewById(R.id.newCountTicketText);
         assignTicketCount = v.findViewById(R.id.assignedTicketCountText);
-        inProgressTicketCount = v.findViewById(R.id.inprogressTicketCountText);
+        inProgressTicketCount = v.findViewById(R.id.inProgressTicketCountText);
         resolvedTicketCount = v.findViewById(R.id.resolvedTicketCountText);
 
         Call<TicketCount> call = apiInterface.getTicketCount(sessionCache.getToken(), null);

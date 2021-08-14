@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.tux.dms.cache.SessionCache;
+import com.tux.dms.constants.TicketPriorityType;
 import com.tux.dms.constants.TicketType;
 import com.tux.dms.dto.TicketCount;
 import com.tux.dms.rest.ApiClient;
@@ -37,6 +38,7 @@ public class PriorityDetailsFragment extends Fragment {
     TextView lowCountText;
     TextView ticketTypeTexView;
     String ticketType;
+    Bundle ticketTypeBundle;
     ApiInterface apiInterface = ApiClient.getApiService();
     SessionCache sessionCache = SessionCache.getSessionCache();
     // TODO: Rename parameter arguments, choose names that match
@@ -92,9 +94,9 @@ public class PriorityDetailsFragment extends Fragment {
         medCountText = v.findViewById(R.id.mediumCountText);
         lowCountText = v.findViewById(R.id.lowCountText);
 
-        Bundle bundle = this.getArguments();
-        if (bundle != null) {
-            ticketType = (String) bundle.get(TicketType.TICKET_TYPE_KEY);
+         ticketTypeBundle = this.getArguments();
+        if (ticketTypeBundle != null) {
+            ticketType = (String) ticketTypeBundle.get(TicketType.TICKET_TYPE_KEY);
         }
         ticketTypeTexView = v.findViewById(R.id.ticketTypeTextView);
         switch (ticketType) {
@@ -144,11 +146,11 @@ public class PriorityDetailsFragment extends Fragment {
 
             @Override
             public void onClick(View view) {
-                // Intent intent=new Intent(getActivity(),TableFragment.class);
-                //startActivity(intent);
 
                 View v = inflater.inflate(R.layout.fragment_assign_ticket, container, false);
                 TableFragment tableFragment = new TableFragment();
+                ticketTypeBundle.putString(TicketPriorityType.TICKET_PRIORITY_KEY,TicketPriorityType.HIGH_PRIORITY);
+                tableFragment.setArguments(ticketTypeBundle);
                 FragmentManager fragmentManager = getFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.fragment_container, tableFragment);
@@ -165,6 +167,8 @@ public class PriorityDetailsFragment extends Fragment {
                 //startActivity(intent);
                 View v = inflater.inflate(R.layout.fragment_assign_ticket, container, false);
                 TableFragment tableFragment = new TableFragment();
+                ticketTypeBundle.putString(TicketPriorityType.TICKET_PRIORITY_KEY,TicketPriorityType.MED_PRIORITY);
+                tableFragment.setArguments(ticketTypeBundle);
                 FragmentManager fragmentManager = getFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.fragment_container, tableFragment);
@@ -180,6 +184,8 @@ public class PriorityDetailsFragment extends Fragment {
                 //startActivity(intent);
                 View v = inflater.inflate(R.layout.fragment_assign_ticket, container, false);
                 TableFragment tableFragment = new TableFragment();
+                ticketTypeBundle.putString(TicketPriorityType.TICKET_PRIORITY_KEY,TicketPriorityType.LOW_PRIORITY);
+                tableFragment.setArguments(ticketTypeBundle);
                 FragmentManager fragmentManager = getFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.fragment_container, tableFragment);

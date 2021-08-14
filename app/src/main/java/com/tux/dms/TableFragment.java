@@ -16,6 +16,8 @@ import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.tux.dms.cache.SessionCache;
+import com.tux.dms.constants.TicketPriorityType;
+import com.tux.dms.constants.TicketType;
 import com.tux.dms.dto.Ticket;
 import com.tux.dms.dto.TicketList;
 import com.tux.dms.rest.ApiClient;
@@ -82,8 +84,15 @@ public class TableFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v= inflater.inflate(R.layout.fragment_table, container, false);
+        Bundle ticketTypeBundle = this.getArguments();
+        String ticketType = TicketType.NEW_TICKET;
+        String tickPriority = "1";
+        if (ticketTypeBundle != null) {
+            ticketType = (String) ticketTypeBundle.get(TicketType.TICKET_TYPE_KEY);
+            tickPriority =(String) ticketTypeBundle.get(TicketPriorityType.TICKET_PRIORITY_KEY);
+        }
         String token = sessionCache.getToken();
-        Call<TicketList> tickList = apiInterface.getTickets(token, null,"NEW", null,
+        Call<TicketList> tickList = apiInterface.getTickets(token, null,ticketType, Integer.getInteger(tickPriority),
                 1, 5);
         tickList.enqueue(new Callback<TicketList>() {
             @Override
