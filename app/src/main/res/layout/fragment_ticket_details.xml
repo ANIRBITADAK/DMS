@@ -1,155 +1,173 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".TicketDetailsFragment">
-
-    <LinearLayout
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_margin="10sp">
+        tools:context=".TicketDetailsFragment">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:id="@+id/subjectTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="sans-serif-condensed-medium"
-                android:text="Subject"
-                android:textSize="20sp" />
-
-            <TextView
-                android:id="@+id/subjectText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20sp"
-                android:layout_toRightOf="@id/subjectTextView"
-                android:fontFamily="sans-serif-condensed-medium"
-                android:textSize="20sp" />
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_marginTop="20sp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:id="@+id/sourceTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Source"
-                android:textSize="20sp"
-                android:fontFamily="sans-serif-condensed-medium"/>
-
-            <TextView
-                android:id="@+id/sourceText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20sp"
-                android:layout_toRightOf="@id/sourceTextView"
-                android:fontFamily="sans-serif-condensed-medium"
-                android:textSize="20sp" />
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_marginTop="20sp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:id="@+id/assignedToTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Assigned To"
-                android:textSize="20sp"
-                android:fontFamily="sans-serif-condensed-medium"/>
-
-            <TextView
-                android:id="@+id/assignedToText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20sp"
-                android:layout_toRightOf="@id/assignedToTextView"
-                android:fontFamily="sans-serif-condensed-medium"
-                android:textSize="20sp" />
-
-        </RelativeLayout>
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_margin="10sp">
 
             <RelativeLayout
-                android:layout_marginTop="20sp"
+                android:id="@+id/relativeLayoutSubject"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
                 <TextView
-                    android:id="@+id/assignedDateTextView"
+                    android:id="@+id/subjectTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Assigned Date"
-                    android:textSize="20sp"
-                    android:fontFamily="sans-serif-condensed-medium"/>
+                    android:fontFamily="sans-serif-condensed-medium"
+                    android:text="Subject"
+                    android:textSize="20sp" />
 
                 <TextView
-                    android:id="@+id/assigedToText"
+                    android:id="@+id/subjectText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20sp"
-                    android:layout_toRightOf="@id/assignedDateTextView"
+                    android:layout_toRightOf="@id/subjectTextView"
                     android:fontFamily="sans-serif-condensed-medium"
                     android:textSize="20sp" />
 
             </RelativeLayout>
 
-        <Button
-            android:layout_marginTop="20sp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/showImageBtn"
-            android:text="Show Image"
-            android:background="@drawable/button_layout"/>
-
-        <LinearLayout
-            android:layout_marginTop="20sp"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <ScrollView
+            <RelativeLayout
+                android:id="@+id/relativeLayoutSrc"
+                android:layout_below="@id/relativeLayoutSubject"
+                android:layout_marginTop="20sp"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content">
 
-                <LinearLayout
-                    android:layout_margin="8sp"
+                <TextView
+                    android:id="@+id/sourceTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Source"
+                    android:textSize="20sp"
+                    android:fontFamily="sans-serif-condensed-medium"/>
+
+                <TextView
+                    android:id="@+id/sourceText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical" >
+                    android:layout_marginLeft="20sp"
+                    android:layout_toRightOf="@id/sourceTextView"
+                    android:fontFamily="sans-serif-condensed-medium"
+                    android:textSize="20sp" />
 
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:nestedScrollingEnabled="false"
-                        android:id="@+id/commentRecyclerView"
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/relativeLayoutAssignedTo"
+                android:layout_below="@id/relativeLayoutSrc"
+                android:layout_marginTop="20sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/assignedToTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Assigned To"
+                    android:textSize="20sp"
+                    android:fontFamily="sans-serif-condensed-medium"/>
+
+                <TextView
+                    android:id="@+id/assignedToText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20sp"
+                    android:layout_toRightOf="@id/assignedToTextView"
+                    android:fontFamily="sans-serif-condensed-medium"
+                    android:textSize="20sp" />
+
+            </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/relativeLayoutAssignedDate"
+                    android:layout_below="@id/relativeLayoutAssignedTo"
+                    android:layout_marginTop="20sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/assignedDateTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Assigned Date"
+                        android:textSize="20sp"
+                        android:fontFamily="sans-serif-condensed-medium"/>
+
+                    <TextView
+                        android:id="@+id/assigedToText"
                         android:layout_width="match_parent"
-                        android:overScrollMode="never"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20sp"
+                        android:layout_toRightOf="@id/assignedDateTextView"
+                        android:fontFamily="sans-serif-condensed-medium"
+                        android:textSize="20sp" />
 
-                </LinearLayout>
+                </RelativeLayout>
 
-            </ScrollView>
+            <Button
+                android:layout_below="@id/relativeLayoutAssignedDate"
+                android:layout_marginTop="20sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/showImageBtn"
+                android:text="Show Image"
+                android:background="@drawable/button_layout"/>
 
-        </LinearLayout>
+            <LinearLayout
+                android:id="@+id/linearlayoutComments"
+                android:layout_below="@id/showImageBtn"
+                android:layout_marginTop="20sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8sp"
+                        android:orientation="vertical">
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/commentRecyclerView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:nestedScrollingEnabled="false"
+                            android:overScrollMode="never" />
+
+                    </LinearLayout>
+
+                </ScrollView>
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:id="@+id/commentContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/linearlayoutComments"
+                android:layout_alignParentBottom="true">
+
+                <EditText
+                    android:id="@+id/commentEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Enter Comment" />
 
 
+            </RelativeLayout>
+        </RelativeLayout>
 
-
-
-
-
-
-    </LinearLayout>
-
-</FrameLayout>
+    </FrameLayout>

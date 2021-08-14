@@ -129,11 +129,9 @@ public class TableFragment extends Fragment {
             TableRow tr = new TableRow(getContext());
             tr.setLayoutParams(getLayoutParams());
             //id column
-            tr.addView(getTextView(i, Integer.toString(++z), Color.BLACK, Typeface.NORMAL, ContextCompat.getColor(getContext(), R.color.white)));
-            //adding subject column and making it clickable
             TextView tv = new TextView(getContext());
             tv.setId(i);
-            tv.setText(tickets.get(i).getSubject());
+            tv.setText(Integer.toString(++z));
             tv.setTextColor(Color.BLACK);
             tv.setPadding(40, 40, 40, 40);
             tv.setTypeface(Typeface.DEFAULT, Typeface.NORMAL);
@@ -143,11 +141,36 @@ public class TableFragment extends Fragment {
                 @Override
                 public void onClick(View view) {
                     Intent i=new Intent(getActivity(),TicketDetailsFragment.class);
+                    i.putExtra("index",tv.getText());
                     getActivity().startActivity(i);
+
 
                 }
             });
             tr.addView(tv);
+
+            //subject column and making it clickable
+            TextView textViewSubject = new TextView(getContext());
+            textViewSubject.setId(i);
+            textViewSubject.setText(tickets.get(i).getSubject());
+            textViewSubject.setTextColor(Color.BLACK);
+            textViewSubject.setPadding(40, 40, 40, 40);
+            textViewSubject.setTypeface(Typeface.DEFAULT, Typeface.NORMAL);
+            textViewSubject.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.white));
+            textViewSubject.setLayoutParams(getLayoutParams());
+            textViewSubject.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent i=new Intent(getActivity(),TicketDetailsFragment.class);
+                    i.putExtra("index",textViewSubject.getText());
+                    getActivity().startActivity(i);
+
+
+                }
+            });
+            tr.addView(textViewSubject);
+            //adding source column 
+
             tr.addView(getTextView(i, tickets.get(i).getSource(), Color.BLACK, Typeface.NORMAL, ContextCompat.getColor(getContext(), R.color.white)));
 
             tl.addView(tr, getTableLayoutParams());
