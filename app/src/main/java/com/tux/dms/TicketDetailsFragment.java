@@ -109,7 +109,7 @@ public class TicketDetailsFragment extends Fragment implements AdapterView.OnIte
         assignDateTextView = view.findViewById(R.id.assigedDateText);
 
         Bundle ticketIdBundle = this.getArguments();
-        String tickId = "";
+        String tickId = null;
         if (ticketIdBundle != null) {
             tickId = (String) ticketIdBundle.get(TicketConst.TICKET_ID_KEY);
         }
