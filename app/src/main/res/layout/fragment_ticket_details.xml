@@ -132,7 +132,7 @@
 
                 <ScrollView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="match_parent">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -143,7 +143,7 @@
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/commentRecyclerView"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="100sp"
                             android:nestedScrollingEnabled="false"
                             android:overScrollMode="never"
                             android:layout_marginTop="5sp"/>
@@ -162,11 +162,27 @@
                 android:layout_alignParentBottom="true"
                 android:layout_marginTop="20sp">
 
+                <Button
+                    android:id="@+id/saveBtn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/spinnerState"
+                    android:layout_marginTop="30sp"
+                    android:background="@drawable/button_layout"
+                    android:text="Save" />
+
                 <EditText
                     android:id="@+id/commentEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Enter Comment" />
+
+                <Spinner
+                    android:id="@+id/spinnerState"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/AssignedStateTxtView"
+                    android:layout_marginTop="10sp" />
 
                 <TextView
                     android:id="@+id/AssignedStateTxtView"
@@ -177,22 +193,6 @@
                     android:fontFamily="sans-serif-condensed-medium"
                     android:text="Change State"
                     android:textSize="18sp" />
-
-                <Spinner
-                    android:id="@+id/spinnerState"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/AssignedStateTxtView"
-                    android:layout_marginTop="10sp" />
-
-                <Button
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Save"
-                    android:id="@+id/saveBtn"
-                    android:layout_below="@id/spinnerState"
-                    android:layout_marginTop="30sp"
-                    android:background="@drawable/button_layout"/>
 
 
             </RelativeLayout>
