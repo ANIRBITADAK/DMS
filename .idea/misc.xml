@@ -29,7 +29,9 @@
         <entry key="app/src/main/res/layout/fragment_scan.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_table.xml" value="0.23385416666666667" />
         <entry key="app/src/main/res/layout/fragment_ticket_details.xml" value="0.17" />
+        <entry key="app/src/main/res/layout/item_row.xml" value="0.24791666666666667" />
         <entry key="app/src/main/res/layout/nav_header.xml" value="0.24791666666666667" />
+        <entry key="app/src/main/res/layout/ticket_loading.xml" value="0.24791666666666667" />
         <entry key="app/src/main/res/menu/drawer_menu.xml" value="0.24791666666666667" />
         <entry key="app/src/main/res/menu/drawer_menu_admin.xml" value="0.24791666666666667" />
         <entry key="app/src/main/res/menu/drawer_menu_ticketgenerator.xml" value="0.24614404369447146" />
