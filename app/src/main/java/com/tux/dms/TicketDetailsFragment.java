@@ -15,12 +15,20 @@ import android.widget.TextView;
 
 import com.google.android.material.navigation.NavigationView;
 import com.tux.dms.cache.SessionCache;
+import com.tux.dms.constants.TicketConst;
+import com.tux.dms.constants.TicketType;
 import com.tux.dms.dto.Comment;
+import com.tux.dms.dto.Ticket;
+import com.tux.dms.dto.TicketCount;
 import com.tux.dms.rest.ApiClient;
 import com.tux.dms.rest.ApiInterface;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -83,26 +91,49 @@ public class TicketDetailsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v=inflater.inflate(R.layout.fragment_ticket_details, container, false);
+        View view = inflater.inflate(R.layout.fragment_ticket_details, container, false);
+        subjectTextView = view.findViewById(R.id.subjectTextView);
+        sourceTextView = view.findViewById(R.id.sourceTextView);
+        assignedToTextView = view.findViewById(R.id.assignedToTextView);
+        assignDateTextView = view.findViewById(R.id.assignedDateTextView);
 
+        Bundle ticketIdBundle = this.getArguments();
+        String tickId = "";
+        if (ticketIdBundle != null) {
+            tickId = (String) ticketIdBundle.get(TicketConst.TICKET_ID_KEY);
+        }
+        Call<Ticket> ticketCall = apiInterface.getTicket(sessionCache.getToken(), tickId);
 
-        TextView subjectTextView;
-        TextView sourceTextView;
-        TextView assignedToTextView;
-        TextView assignDateTextView;
-        List<Comment> list = new ArrayList<>();
-        list = getData();
-        String token = sessionCache.getToken();
-        //apiInterface.getTicket(token, )
-        recyclerView = (RecyclerView)v.findViewById(R.id.commentRecyclerView);
+        ticketCall.enqueue(new Callback<Ticket>() {
+            @Override
+            public void onResponse(Call<Ticket> call, Response<Ticket> response) {
+                if (response.code() == 200) {
+                    Ticket ticket = response.body();
+                    if (ticket != null) {
+                        subjectTextView.setText(ticket.getSubject());
+                        sourceTextView.setText(ticket.getSource());
+                        assignedToTextView.setText(ticket.getAssignedToName());
+                        if (ticket.getComments() != null && ticket.getComments().size() > 0) {
+                            recyclerView = (RecyclerView) view.findViewById(R.id.commentRecyclerView);
 
-        adapter= new CommentAdapter(list, getContext());
-        recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        return v;
+                            adapter = new CommentAdapter(ticket.getComments(), getContext());
+                            recyclerView.setAdapter(adapter);
+                            recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+                        }
+                    }
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<Ticket> call, Throwable t) {
+
+            }
+        });
+
+        return view;
     }
-
-    private List<Comment> getData() {
+   /* private List<Comment> getData() {
         List<Comment> list = new ArrayList<>();
         list.add(new Comment("First Exam",
                 "May 23, 2015",
@@ -116,6 +147,5 @@ public class TicketDetailsFragment extends Fragment {
 
         return list;
     }
-
-
+*/
 }

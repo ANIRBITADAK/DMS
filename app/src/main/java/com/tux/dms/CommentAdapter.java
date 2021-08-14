@@ -15,14 +15,12 @@ import java.util.List;
 
 class CommentAdapter extends RecyclerView.Adapter<CommentViewHolder> {
 
-    List<Comment> list
-            = Collections.emptyList();
+    List<Comment> list = Collections.emptyList();
 
     Context context;
 
     public CommentAdapter(List<Comment> list,
-                                Context context)
-    {
+                          Context context) {
         this.list = list;
         this.context = context;
     }
@@ -63,8 +61,7 @@ class CommentAdapter extends RecyclerView.Adapter<CommentViewHolder> {
 
     @Override
     public void onAttachedToRecyclerView(
-            RecyclerView recyclerView)
-    {
+            RecyclerView recyclerView) {
         super.onAttachedToRecyclerView(recyclerView);
     }
 

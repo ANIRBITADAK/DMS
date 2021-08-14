@@ -94,7 +94,7 @@ public class PriorityDetailsFragment extends Fragment {
         medCountText = v.findViewById(R.id.mediumCountText);
         lowCountText = v.findViewById(R.id.lowCountText);
 
-         ticketTypeBundle = this.getArguments();
+        ticketTypeBundle = this.getArguments();
         if (ticketTypeBundle != null) {
             ticketType = (String) ticketTypeBundle.get(TicketType.TICKET_TYPE_KEY);
         }
@@ -149,7 +149,7 @@ public class PriorityDetailsFragment extends Fragment {
 
                 View v = inflater.inflate(R.layout.fragment_assign_ticket, container, false);
                 TableFragment tableFragment = new TableFragment();
-                ticketTypeBundle.putString(TicketPriorityType.TICKET_PRIORITY_KEY,TicketPriorityType.HIGH_PRIORITY);
+                ticketTypeBundle.putString(TicketPriorityType.TICKET_PRIORITY_KEY, TicketPriorityType.HIGH_PRIORITY);
                 tableFragment.setArguments(ticketTypeBundle);
                 FragmentManager fragmentManager = getFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -167,7 +167,7 @@ public class PriorityDetailsFragment extends Fragment {
                 //startActivity(intent);
                 View v = inflater.inflate(R.layout.fragment_assign_ticket, container, false);
                 TableFragment tableFragment = new TableFragment();
-                ticketTypeBundle.putString(TicketPriorityType.TICKET_PRIORITY_KEY,TicketPriorityType.MED_PRIORITY);
+                ticketTypeBundle.putString(TicketPriorityType.TICKET_PRIORITY_KEY, TicketPriorityType.MED_PRIORITY);
                 tableFragment.setArguments(ticketTypeBundle);
                 FragmentManager fragmentManager = getFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -184,7 +184,7 @@ public class PriorityDetailsFragment extends Fragment {
                 //startActivity(intent);
                 View v = inflater.inflate(R.layout.fragment_assign_ticket, container, false);
                 TableFragment tableFragment = new TableFragment();
-                ticketTypeBundle.putString(TicketPriorityType.TICKET_PRIORITY_KEY,TicketPriorityType.LOW_PRIORITY);
+                ticketTypeBundle.putString(TicketPriorityType.TICKET_PRIORITY_KEY, TicketPriorityType.LOW_PRIORITY);
                 tableFragment.setArguments(ticketTypeBundle);
                 FragmentManager fragmentManager = getFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
