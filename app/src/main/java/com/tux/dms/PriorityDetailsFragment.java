@@ -140,8 +140,6 @@ public class PriorityDetailsFragment extends Fragment {
 
         highPriorityCard.setOnClickListener(new View.OnClickListener() {
 
-            Call<TicketCount> call = apiInterface.getTicketCount(sessionCache.getToken(), null);
-
             @Override
             public void onClick(View view) {
 

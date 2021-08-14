@@ -89,8 +89,8 @@ public class TicketTableFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_table, container, false);
         Bundle ticketTypeBundle = this.getArguments();
-        String ticketType = TicketType.NEW_TICKET;
-        String tickPriority = "1";
+        String ticketType = null;
+        String tickPriority = null;
         if (ticketTypeBundle != null) {
             ticketType = (String) ticketTypeBundle.get(TicketType.TICKET_TYPE_KEY);
             tickPriority = (String) ticketTypeBundle.get(TicketPriorityType.TICKET_PRIORITY_KEY);
@@ -178,9 +178,6 @@ public class TicketTableFragment extends Fragment {
             textViewSubject.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                  /*  Intent i=new Intent(getActivity(),TicketDetailsFragment.class);
-                    i.putExtra("index",textViewSubject.getText());
-                    getActivity().startActivity(i);*/
                     TicketDetailsFragment tableFragment = new TicketDetailsFragment();
                     Bundle ticketIdBundle = new Bundle();
                     //ticketIdBundle.putString(TicketConst.TICKET_ID_KEY,)
@@ -189,24 +186,16 @@ public class TicketTableFragment extends Fragment {
                     fragmentTransaction.replace(R.id.fragment_container, tableFragment);
                     fragmentTransaction.addToBackStack(null);
                     fragmentTransaction.commit();
-
-
                 }
             });
             tr.addView(textViewSubject);
-            //adding source column 
-
+            //adding source column
             tr.addView(getTextView(i, tickets.get(i).getSource(), Color.BLACK, Typeface.NORMAL, ContextCompat.getColor(getContext(), R.color.white)));
-
             tl.addView(tr, getTableLayoutParams());
 
         }
 
-
-
     }
-
-
 
     private TextView getTextView(int id, String title, int color, int typeface, int bgColor) {
         TextView tv = new TextView(getContext());

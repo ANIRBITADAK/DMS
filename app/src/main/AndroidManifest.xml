@@ -12,13 +12,7 @@
         android:theme="@style/Theme.DMS"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".AssignTicketActivity"
-            android:exported="true" />
-        <activity
             android:name=".AdminActivity"
-            android:exported="true" />
-        <activity
-            android:name=".TableActivity"
             android:exported="true" />
         <activity
             android:name=".UserActivity"

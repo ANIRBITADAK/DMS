@@ -143,7 +143,6 @@ public class TicketDetailsFragment extends Fragment implements AdapterView.OnIte
         });
 
         return view;
-
     }
 
     @Override
