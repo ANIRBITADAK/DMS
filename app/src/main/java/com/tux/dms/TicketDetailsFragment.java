@@ -153,7 +153,6 @@ public class TicketDetailsFragment extends Fragment implements AdapterView.OnIte
         stateSpinner.setAdapter(ad);
 
         return view;
-
     }
 
     @Override

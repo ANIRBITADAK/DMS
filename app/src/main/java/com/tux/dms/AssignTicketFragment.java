@@ -10,6 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.tux.dms.constants.TicketType;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link AssignTicketFragment#newInstance} factory method to
@@ -63,6 +65,9 @@ public class AssignTicketFragment extends Fragment {
 
         View v= inflater.inflate(R.layout.fragment_assign_ticket, container, false);
         TicketTableFragment ticketTableFragment = new TicketTableFragment();
+        Bundle ticketTypeBundle = new Bundle();
+        ticketTypeBundle.putString(TicketType.TICKET_TYPE_KEY, TicketType.NEW_TICKET);
+        ticketTableFragment.setArguments(ticketTypeBundle);
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.fragment_container, ticketTableFragment);
