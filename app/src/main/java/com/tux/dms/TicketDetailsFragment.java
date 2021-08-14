@@ -134,13 +134,23 @@ public class TicketDetailsFragment extends Fragment implements AdapterView.OnIte
                     }
                 }
 
+
+
+
+
             }
+
 
             @Override
             public void onFailure(Call<Ticket> call, Throwable t) {
 
             }
         });
+        stateSpinner = view.findViewById(R.id.spinnerState);
+        stateSpinner.setOnItemSelectedListener(this);
+        ArrayAdapter ad = new ArrayAdapter(getContext(), android.R.layout.simple_spinner_item, states);
+        ad.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        stateSpinner.setAdapter(ad);
 
         return view;
     }
