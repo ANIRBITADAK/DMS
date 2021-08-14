@@ -21,12 +21,20 @@ import android.widget.TextView;
 
 import com.google.android.material.navigation.NavigationView;
 import com.tux.dms.cache.SessionCache;
+import com.tux.dms.constants.TicketConst;
+import com.tux.dms.constants.TicketType;
 import com.tux.dms.dto.Comment;
+import com.tux.dms.dto.Ticket;
+import com.tux.dms.dto.TicketCount;
 import com.tux.dms.rest.ApiClient;
 import com.tux.dms.rest.ApiInterface;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -94,44 +102,59 @@ public class TicketDetailsFragment extends Fragment implements AdapterView.OnIte
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v=inflater.inflate(R.layout.fragment_ticket_details, container, false);
+        View view = inflater.inflate(R.layout.fragment_ticket_details, container, false);
+        subjectTextView = view.findViewById(R.id.subjectText);
+        sourceTextView = view.findViewById(R.id.sourceText);
+        assignedToTextView = view.findViewById(R.id.assignedToText);
+        assignDateTextView = view.findViewById(R.id.assigedDateText);
+
+        Bundle ticketIdBundle = this.getArguments();
+        String tickId = "";
+        if (ticketIdBundle != null) {
+            tickId = (String) ticketIdBundle.get(TicketConst.TICKET_ID_KEY);
+        }
+        Call<Ticket> ticketCall = apiInterface.getTicket(sessionCache.getToken(), tickId);
+
+        ticketCall.enqueue(new Callback<Ticket>() {
+            @Override
+            public void onResponse(Call<Ticket> call, Response<Ticket> response) {
+                if (response.code() == 200) {
+                    Ticket ticket = response.body();
+                    if (ticket != null) {
+                        subjectTextView.setText(ticket.getSubject());
+                        sourceTextView.setText(ticket.getSource());
+                        assignedToTextView.setText(ticket.getAssignedToName());
+                        if (ticket.getComments() != null && ticket.getComments().size() > 0) {
+                            recyclerView = (RecyclerView) view.findViewById(R.id.commentRecyclerView);
+
+                            adapter = new CommentAdapter(ticket.getComments(), getContext());
+                            recyclerView.setAdapter(adapter);
+                            recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+                        }
+                    }
+                }
 
 
-        stateSpinner = v.findViewById(R.id.spinnerState);
+
+
+
+            }
+
+
+            @Override
+            public void onFailure(Call<Ticket> call, Throwable t) {
+
+            }
+        });
+        stateSpinner = view.findViewById(R.id.spinnerState);
         stateSpinner.setOnItemSelectedListener(this);
-
         ArrayAdapter ad = new ArrayAdapter(getContext(), android.R.layout.simple_spinner_item, states);
         ad.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         stateSpinner.setAdapter(ad);
 
+        return view;
 
-        List<Comment> list = new ArrayList<>();
-        list = getData();
-        String token = sessionCache.getToken();
-        //apiInterface.getTicket(token, )
-        recyclerView = (RecyclerView)v.findViewById(R.id.commentRecyclerView);
-
-        adapter= new CommentAdapter(list, getContext());
-        recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        return v;
     }
-
-    private List<Comment> getData() {
-        List<Comment> list = new ArrayList<>();
-        list.add(new Comment("First Exam",
-                "May 23, 2015",
-                "Best Of Luck"));
-        list.add(new Comment("Second Exam",
-                "June 09, 2015",
-                "b of l"));
-        list.add(new Comment("My Test Exam",
-                "April 27, 2017",
-                "This is testing exam .."));
-
-        return list;
-    }
-
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {

@@ -1,6 +1,5 @@
 package com.tux.dms;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -63,10 +62,10 @@ public class AssignTicketFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View v= inflater.inflate(R.layout.fragment_assign_ticket, container, false);
-        TableFragment tableFragment = new TableFragment();
+        TicketTableFragment ticketTableFragment = new TicketTableFragment();
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.fragment_container, tableFragment);
+        fragmentTransaction.replace(R.id.fragment_container, ticketTableFragment);
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
         return v;

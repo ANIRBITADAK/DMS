@@ -1,12 +1,13 @@
 package com.tux.dms;
 
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +18,7 @@ import android.widget.TextView;
 
 import com.tux.dms.cache.SessionCache;
 import com.tux.dms.constants.RoleConsts;
+import com.tux.dms.constants.TicketConst;
 import com.tux.dms.constants.TicketPriorityType;
 import com.tux.dms.constants.TicketType;
 import com.tux.dms.dto.Ticket;
@@ -33,10 +35,10 @@ import retrofit2.Response;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link TableFragment#newInstance} factory method to
+ * Use the {@link TicketTableFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class TableFragment extends Fragment {
+public class TicketTableFragment extends Fragment {
 
     ApiInterface apiInterface = ApiClient.getApiService();
     SessionCache sessionCache = SessionCache.getSessionCache();
@@ -50,7 +52,7 @@ public class TableFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public TableFragment() {
+    public TicketTableFragment() {
         // Required empty public constructor
     }
 
@@ -63,8 +65,8 @@ public class TableFragment extends Fragment {
      * @return A new instance of fragment TableFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static TableFragment newInstance(String param1, String param2) {
-        TableFragment fragment = new TableFragment();
+    public static TicketTableFragment newInstance(String param1, String param2) {
+        TicketTableFragment fragment = new TicketTableFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -138,25 +140,31 @@ public class TableFragment extends Fragment {
             TableRow tr = new TableRow(getContext());
             tr.setLayoutParams(getLayoutParams());
             //id column
-            TextView tv = new TextView(getContext());
-            tv.setId(i);
-            tv.setText(Integer.toString(++z));
-            tv.setTextColor(Color.BLACK);
-            tv.setPadding(40, 40, 40, 40);
-            tv.setTypeface(Typeface.DEFAULT, Typeface.NORMAL);
-            tv.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.white));
-            tv.setLayoutParams(getLayoutParams());
-            tv.setOnClickListener(new View.OnClickListener() {
+            TextView idTextView = new TextView(getContext());
+            idTextView.setId(i);
+            idTextView.setText(Integer.toString(++z));
+            idTextView.setTextColor(Color.BLACK);
+            idTextView.setPadding(40, 40, 40, 40);
+            idTextView.setTypeface(Typeface.DEFAULT, Typeface.NORMAL);
+            idTextView.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.white));
+            idTextView.setLayoutParams(getLayoutParams());
+            idTextView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent i=new Intent(getActivity(),TicketDetailsFragment.class);
-                    i.putExtra("index",tv.getText());
-                    getActivity().startActivity(i);
-
-
+                    Integer rowIndex = Integer.valueOf((String) idTextView.getText()) -1;
+                    Ticket ticket = tickets.get(rowIndex);
+                    TicketDetailsFragment ticketDetailsFragment = new TicketDetailsFragment();
+                    Bundle ticketIdBundle = new Bundle();
+                    ticketIdBundle.putString(TicketConst.TICKET_ID_KEY, ticket.get_id());
+                    ticketDetailsFragment.setArguments(ticketIdBundle);
+                    FragmentManager fragmentManager = getFragmentManager();
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.fragment_container, ticketDetailsFragment);
+                    fragmentTransaction.addToBackStack(null);
+                    fragmentTransaction.commit();
                 }
             });
-            tr.addView(tv);
+            tr.addView(idTextView);
 
             //subject column and making it clickable
             TextView textViewSubject = new TextView(getContext());
@@ -170,9 +178,17 @@ public class TableFragment extends Fragment {
             textViewSubject.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent i=new Intent(getActivity(),TicketDetailsFragment.class);
+                  /*  Intent i=new Intent(getActivity(),TicketDetailsFragment.class);
                     i.putExtra("index",textViewSubject.getText());
-                    getActivity().startActivity(i);
+                    getActivity().startActivity(i);*/
+                    TicketDetailsFragment tableFragment = new TicketDetailsFragment();
+                    Bundle ticketIdBundle = new Bundle();
+                    //ticketIdBundle.putString(TicketConst.TICKET_ID_KEY,)
+                    FragmentManager fragmentManager = getFragmentManager();
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.fragment_container, tableFragment);
+                    fragmentTransaction.addToBackStack(null);
+                    fragmentTransaction.commit();
 
 
                 }

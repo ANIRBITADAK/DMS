@@ -46,9 +46,9 @@
                     android:id="@+id/sourceTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-condensed-medium"
                     android:text="Source"
-                    android:textSize="20sp"
-                    android:fontFamily="sans-serif-condensed-medium"/>
+                    android:textSize="20sp" />
 
                 <TextView
                     android:id="@+id/sourceText"
@@ -72,9 +72,9 @@
                     android:id="@+id/assignedToTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-condensed-medium"
                     android:text="Assigned To"
-                    android:textSize="20sp"
-                    android:fontFamily="sans-serif-condensed-medium"/>
+                    android:textSize="20sp" />
 
                 <TextView
                     android:id="@+id/assignedToText"
@@ -98,9 +98,9 @@
                         android:id="@+id/assignedDateTextView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-condensed-medium"
                         android:text="Assigned Date"
-                        android:textSize="20sp"
-                        android:fontFamily="sans-serif-condensed-medium"/>
+                        android:textSize="20sp" />
 
                     <TextView
                         android:id="@+id/assigedDateText"
@@ -145,7 +145,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:nestedScrollingEnabled="false"
-                            android:overScrollMode="never" />
+                            android:overScrollMode="never"
+                            android:layout_marginTop="5sp"/>
 
                     </LinearLayout>
 
