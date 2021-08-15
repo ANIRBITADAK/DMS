@@ -137,7 +137,6 @@ public class TicketTableFragment extends Fragment {
                 initAdapter();
                 initScrollListener();
 
-
                 /* addHeaders();
                 addData(ticketList.getTickets());*/
             }
@@ -148,11 +147,7 @@ public class TicketTableFragment extends Fragment {
             }
         });
 
-
-
         return v;
-
-
     }
 
     private void initAdapter() {
@@ -183,7 +178,6 @@ public class TicketTableFragment extends Fragment {
             }
         });
 
-
     }
 
     private void loadMore() {
@@ -208,15 +202,11 @@ public class TicketTableFragment extends Fragment {
                     public void onResponse(Call<TicketList> call, Response<TicketList> response) {
                         System.out.println("got ticket list" + response.body());
                         TicketList ticketList = response.body();
-                        for(int i=0;i<5;i++)
-                        {
+                        for(int i=0;i<5;i++) {
                             rowsTicketList.add(ticketList.getTickets().get(i));
                         }
-
                         recyclerViewAdapter.notifyDataSetChanged();
                         isLoading = false;
-
-
                     }
 
                     @Override
@@ -224,10 +214,6 @@ public class TicketTableFragment extends Fragment {
 
                     }
                 });
-
-
-
-
             }
         },2000);
 

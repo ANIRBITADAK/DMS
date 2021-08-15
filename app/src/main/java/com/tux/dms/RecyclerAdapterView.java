@@ -86,36 +86,33 @@ class RecyclerAdapterView extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         //ProgressBar would be displayed
 
     }
-
-
-
+    
     private void populateItemRows(ItemViewHolder viewHolder, int position) {
-        if(ticketList!=null && ticketList.get(position)!=null && ticketList.get(position).getSource()!=null){
+        if (ticketList != null && ticketList.get(position) != null && ticketList.get(position).getSource() != null) {
             viewHolder.textViewSource.setText(ticketList.get(position).getSource());
             viewHolder.textViewSource.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
 //                    Fragment activity = (Fragment) view.getContext();
                     Toast.makeText(view.getContext(), "Position:" + Integer.toString(position), Toast.LENGTH_SHORT).show();
-                    TicketDetailsFragment ticketDetailsFragment=new TicketDetailsFragment();
-                    context=view.getContext();
-                    FragmentManager manager = ((AppCompatActivity)context).getSupportFragmentManager();
+                    TicketDetailsFragment ticketDetailsFragment = new TicketDetailsFragment();
+                    context = view.getContext();
+                    FragmentManager manager = ((AppCompatActivity) context).getSupportFragmentManager();
                     FragmentTransaction fragmentTransaction = manager.beginTransaction();
-                    fragmentTransaction.replace(R.id.fragment_container,ticketDetailsFragment );
+                    fragmentTransaction.replace(R.id.fragment_container, ticketDetailsFragment);
                     fragmentTransaction.addToBackStack(null);
                     fragmentTransaction.commit();
-
 
 
                 }
             });
 
-        }else{
+        } else {
             viewHolder.textViewSource.setText("");
         }
-        if(ticketList!=null && ticketList.get(position)!=null && ticketList.get(position).getSubject()!=null){
+        if (ticketList != null && ticketList.get(position) != null && ticketList.get(position).getSubject() != null) {
             viewHolder.textViewSubject.setText(ticketList.get(position).getSubject());
-        }else{
+        } else {
             viewHolder.textViewSubject.setText("");
         }
 
@@ -130,7 +127,6 @@ class RecyclerAdapterView extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
         public ItemViewHolder(@NonNull View itemView) {
             super(itemView);
-
             textViewSubject = itemView.findViewById(R.id.subjectText);
             textViewSource = itemView.findViewById(R.id.sourceText);
         }
