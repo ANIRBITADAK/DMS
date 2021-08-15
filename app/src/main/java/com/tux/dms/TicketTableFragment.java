@@ -1,5 +1,6 @@
 package com.tux.dms;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -31,6 +32,7 @@ import com.tux.dms.dto.User;
 import com.tux.dms.rest.ApiClient;
 import com.tux.dms.rest.ApiInterface;
 
+import java.io.Console;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -135,6 +137,7 @@ public class TicketTableFragment extends Fragment {
                 initAdapter();
                 initScrollListener();
 
+
                 /* addHeaders();
                 addData(ticketList.getTickets());*/
             }
@@ -229,6 +232,8 @@ public class TicketTableFragment extends Fragment {
         },2000);
 
     }
+
+
 
 
 
