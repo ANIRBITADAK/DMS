@@ -145,7 +145,7 @@ public class PriorityDetailsFragment extends Fragment {
 
                 View v = inflater.inflate(R.layout.fragment_assign_ticket, container, false);
                 TicketTableFragment ticketTableFragment = new TicketTableFragment();
-                ticketTypeBundle.putString(TicketPriorityType.TICKET_PRIORITY_KEY, TicketPriorityType.HIGH_PRIORITY);
+                ticketTypeBundle.putString(TicketPriorityType.TICKET_PRIORITY_KEY, TicketPriorityType.HIGH_PRIORITY_INT);
                 ticketTableFragment.setArguments(ticketTypeBundle);
                 FragmentManager fragmentManager = getFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -163,7 +163,7 @@ public class PriorityDetailsFragment extends Fragment {
                 //startActivity(intent);
                 View v = inflater.inflate(R.layout.fragment_assign_ticket, container, false);
                 TicketTableFragment ticketTableFragment = new TicketTableFragment();
-                ticketTypeBundle.putString(TicketPriorityType.TICKET_PRIORITY_KEY, TicketPriorityType.MED_PRIORITY);
+                ticketTypeBundle.putString(TicketPriorityType.TICKET_PRIORITY_KEY, TicketPriorityType.MED_PRIORITY_INT);
                 ticketTableFragment.setArguments(ticketTypeBundle);
                 FragmentManager fragmentManager = getFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -180,7 +180,7 @@ public class PriorityDetailsFragment extends Fragment {
                 //startActivity(intent);
                 View v = inflater.inflate(R.layout.fragment_assign_ticket, container, false);
                 TicketTableFragment ticketTableFragment = new TicketTableFragment();
-                ticketTypeBundle.putString(TicketPriorityType.TICKET_PRIORITY_KEY, TicketPriorityType.LOW_PRIORITY);
+                ticketTypeBundle.putString(TicketPriorityType.TICKET_PRIORITY_KEY, TicketPriorityType.LOW_PRIORITY_INT);
                 ticketTableFragment.setArguments(ticketTypeBundle);
                 FragmentManager fragmentManager = getFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();

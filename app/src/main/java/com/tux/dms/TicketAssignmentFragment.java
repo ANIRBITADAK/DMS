@@ -12,7 +12,10 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.tux.dms.cache.SessionCache;
 import com.tux.dms.constants.TicketConst;
@@ -40,11 +43,12 @@ import retrofit2.Response;
 public class TicketAssignmentFragment extends Fragment implements AdapterView.OnItemSelectedListener {
 
     Spinner userSpinner;
-    List<String> priorityList = new ArrayList();
     Integer priority;
+    List<String> priorityList;
     Spinner prioritySpinner;
     Map<String, String> nameToIdMap = new HashMap<>();
-    String assignedId;
+    String assignedToId;
+    String assignedToName;
     String ticketId;
     ApiInterface apiInterface = ApiClient.getApiService();
     SessionCache sessionCache = SessionCache.getSessionCache();
@@ -99,6 +103,7 @@ public class TicketAssignmentFragment extends Fragment implements AdapterView.On
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_assign_ticket, container, false);
+        priorityList = TicketPriorityType.getTicketPriorityList();
         Call<List<User>> allUserCall = apiInterface.getAllUser(sessionCache.getToken());
         assignSubjectTextView = view.findViewById(R.id.assignSubjectText);
         assignSourceTextView = view.findViewById(R.id.assignSourceText);
@@ -113,10 +118,6 @@ public class TicketAssignmentFragment extends Fragment implements AdapterView.On
             assignSourceTextView.setText(source);
         }
 
-
-        priorityList.add(TicketPriorityType.HIGH);
-        priorityList.add(TicketPriorityType.MED);
-        priorityList.add(TicketPriorityType.LOW);
         prioritySpinner = view.findViewById(R.id.assignPrioritySpinner);
         prioritySpinner.setOnItemSelectedListener(this);
         ArrayAdapter priorityAdapter = new ArrayAdapter(getContext(), android.R.layout.simple_spinner_item, priorityList);
@@ -158,7 +159,7 @@ public class TicketAssignmentFragment extends Fragment implements AdapterView.On
 
                 AssignTicket assignTicket = new AssignTicket();
                 assignTicket.setPriority(priority);
-                assignTicket.setAssigneeId(assignedId);
+                assignTicket.setAssigneeId(assignedToId);
                 assignTicket.setCommentText(commentText.getText().toString());
                 Call<Ticket> ticketCall = apiInterface.assignTicket(sessionCache.getToken(), ticketId, assignTicket);
 
@@ -166,7 +167,14 @@ public class TicketAssignmentFragment extends Fragment implements AdapterView.On
                     @Override
                     public void onResponse(Call<Ticket> call, Response<Ticket> response) {
                         if (response.code() == 200) {
-                            Toast.makeText(getContext(), "Ticket assigned", Toast.LENGTH_LONG).show();
+                            String msg = "Ticket assigned to " + assignedToName;
+                            Toast.makeText(getContext(), msg, Toast.LENGTH_LONG).show();
+                            TicketTableFragment ticketTableFragment = new TicketTableFragment();
+                            FragmentManager manager = ((AppCompatActivity) view.getContext()).getSupportFragmentManager();
+                            FragmentTransaction fragmentTransaction = manager.beginTransaction();
+                            fragmentTransaction.replace(R.id.fragment_container, ticketTableFragment);
+                            fragmentTransaction.addToBackStack(null);
+                            fragmentTransaction.commit();
                         }
                     }
 
@@ -185,20 +193,10 @@ public class TicketAssignmentFragment extends Fragment implements AdapterView.On
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
         String selectedItem = (String) adapterView.getSelectedItem();
         if (selectedItem != null && (priorityList.contains(selectedItem))) {
-            switch (selectedItem) {
-                case TicketPriorityType.HIGH:
-                    priority = 1;
-                    break;
-                case TicketPriorityType.MED:
-                    priority = 2;
-                    break;
-                case TicketPriorityType.LOW:
-                    priority = 3;
-                    break;
-            }
-
+            priority = TicketPriorityType.ticketPriorityAdapter(selectedItem);
         } else {
-            assignedId = nameToIdMap.get(selectedItem);
+            assignedToId = nameToIdMap.get(selectedItem);
+            assignedToName = selectedItem;
         }
     }
 
