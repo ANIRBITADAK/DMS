@@ -5,7 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:strokeColor="@color/purple_500"
     android:layout_marginTop="5sp"
-    android:id="@+id/cardView"
+    android:id="@+id/ticketCardView"
     app:strokeWidth="3dp">
 
     <LinearLayout
@@ -28,7 +28,7 @@
                 android:textSize="20sp" />
 
             <TextView
-                android:id="@+id/subjectText"
+                android:id="@+id/assignSubjectText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20sp"
@@ -53,7 +53,7 @@
                 android:textSize="20sp" />
 
             <TextView
-                android:id="@+id/sourceText"
+                android:id="@+id/assignSourceText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20sp"
@@ -64,9 +64,5 @@
         </RelativeLayout>
 
     </LinearLayout>
-
-
-
-
 
 </com.google.android.material.card.MaterialCardView>

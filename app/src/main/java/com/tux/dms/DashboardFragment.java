@@ -14,7 +14,7 @@ import android.widget.AdapterView;
 import android.widget.TextView;
 
 import com.tux.dms.cache.SessionCache;
-import com.tux.dms.constants.TicketType;
+import com.tux.dms.constants.TicketStateType;
 import com.tux.dms.dto.TicketCount;
 import com.tux.dms.rest.ApiClient;
 import com.tux.dms.rest.ApiInterface;
@@ -131,10 +131,10 @@ public class DashboardFragment extends Fragment implements AdapterView.OnItemSel
         newCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                TicketAssignFragment ticketAssignFragment = new TicketAssignFragment();
+                TicketAssignDrawerFragment ticketAssignDrawerFragment = new TicketAssignDrawerFragment();
                 FragmentManager fragmentManager = getFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.fragment_container, ticketAssignFragment);
+                fragmentTransaction.replace(R.id.fragment_container, ticketAssignDrawerFragment);
                 fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
             }
@@ -145,7 +145,7 @@ public class DashboardFragment extends Fragment implements AdapterView.OnItemSel
             public void onClick(View view) {
                 PriorityDetailsFragment priorityDetailsFragment = new PriorityDetailsFragment();
                 Bundle ticketType = new Bundle();
-                ticketType.putString(TicketType.TICKET_TYPE_KEY,TicketType.ASSIGNED_TICKET); // Put anything what you want
+                ticketType.putString(TicketStateType.TICKET_TYPE_KEY, TicketStateType.ASSIGNED_TICKET); // Put anything what you want
                 priorityDetailsFragment.setArguments(ticketType);
                 FragmentManager fragmentManager = getFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -163,7 +163,7 @@ public class DashboardFragment extends Fragment implements AdapterView.OnItemSel
             public void onClick(View view) {
                 PriorityDetailsFragment priorityDetailsFragment = new PriorityDetailsFragment();
                 Bundle ticketType = new Bundle();
-                ticketType.putString(TicketType.TICKET_TYPE_KEY,TicketType.IN_PROGRESS_TICKET);
+                ticketType.putString(TicketStateType.TICKET_TYPE_KEY, TicketStateType.IN_PROGRESS_TICKET);
                 priorityDetailsFragment.setArguments(ticketType);
                 FragmentManager fragmentManager = getFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -180,7 +180,7 @@ public class DashboardFragment extends Fragment implements AdapterView.OnItemSel
             public void onClick(View view) {
                 PriorityDetailsFragment priorityDetailsFragment = new PriorityDetailsFragment();
                 Bundle ticketType = new Bundle();
-                ticketType.putString(TicketType.TICKET_TYPE_KEY,TicketType.RESOLVED_TICKET);
+                ticketType.putString(TicketStateType.TICKET_TYPE_KEY, TicketStateType.RESOLVED_TICKET);
                 priorityDetailsFragment.setArguments(ticketType);
                 FragmentManager fragmentManager = getFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();

@@ -6,17 +6,20 @@ import com.tux.dms.dto.ImageUploadResponse;
 import com.tux.dms.dto.Ticket;
 import com.tux.dms.dto.TicketList;
 import com.tux.dms.dto.TicketCount;
+import com.tux.dms.dto.AssignTicket;
 import com.tux.dms.dto.User;
 import com.tux.dms.dto.UserCredential;
 
+import java.util.List;
+
 import okhttp3.MultipartBody;
-import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Part;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
@@ -30,12 +33,18 @@ public interface ApiInterface {
     @POST("/api/users")
     Call<JWTToken> executeSignup(@Body User user);
 
+    @GET("/api/users")
+    Call<List<User>> getAllUser(@Header("x-auth-token") String authHeader);
+
     @GET("/api/auth")
     Call<User> getUser(@Header("x-auth-token") String authHeader);
 
     @POST("api/tickets")
     Call<Ticket> createTicket(@Header("x-auth-token") String authHeader, @Body Ticket ticket);
 
+    @PUT("api/tickets/assign/{ticket_id}")
+    Call<Ticket> assignTicket(@Header("x-auth-token") String authHeader, @Path("ticket_id") String ticketId,
+                              @Body AssignTicket assignTicket);
     @GET("api/tickets")
     Call<TicketList> getTickets(@Header("x-auth-token") String authHeader, @Query("assignedTo") String assignedTo, @Query("state") String state,
                                 @Query("priority") String priority,

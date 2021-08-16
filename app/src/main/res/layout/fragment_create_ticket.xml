@@ -22,7 +22,7 @@
             android:textStyle="bold" />
 
         <EditText
-            android:id="@+id/subjectText"
+            android:id="@+id/assignSubjectText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/textViewheading"
@@ -33,7 +33,7 @@
             android:id="@+id/textSource"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/subjectText"
+            android:layout_below="@+id/assignSubjectText"
             android:layout_marginTop="15sp"
             android:fontFamily="sans-serif-condensed-medium"
             android:text="Enter Source"

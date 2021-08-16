@@ -10,14 +10,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.tux.dms.constants.TicketType;
+import com.tux.dms.constants.TicketStateType;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link TicketAssignFragment#newInstance} factory method to
+ * Use the {@link TicketAssignDrawerFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class TicketAssignFragment extends Fragment {
+public class TicketAssignDrawerFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -28,7 +28,7 @@ public class TicketAssignFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public TicketAssignFragment() {
+    public TicketAssignDrawerFragment() {
         // Required empty public constructor
     }
 
@@ -41,8 +41,8 @@ public class TicketAssignFragment extends Fragment {
      * @return A new instance of fragment AssignTicketFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static TicketAssignFragment newInstance(String param1, String param2) {
-        TicketAssignFragment fragment = new TicketAssignFragment();
+    public static TicketAssignDrawerFragment newInstance(String param1, String param2) {
+        TicketAssignDrawerFragment fragment = new TicketAssignDrawerFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -66,7 +66,7 @@ public class TicketAssignFragment extends Fragment {
         View v= inflater.inflate(R.layout.fragment_assign_ticket, container, false);
         TicketTableFragment ticketTableFragment = new TicketTableFragment();
         Bundle ticketTypeBundle = new Bundle();
-        ticketTypeBundle.putString(TicketType.TICKET_TYPE_KEY, TicketType.NEW_TICKET);
+        ticketTypeBundle.putString(TicketStateType.TICKET_TYPE_KEY, TicketStateType.NEW_TICKET);
         ticketTableFragment.setArguments(ticketTypeBundle);
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();

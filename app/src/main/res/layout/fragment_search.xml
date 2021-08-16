@@ -31,7 +31,7 @@
 
 
         <EditText
-            android:id="@+id/subjectText"
+            android:id="@+id/assignSubjectText"
             android:layout_marginTop="15sp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>

@@ -8,4 +8,9 @@ public class TicketPriorityType {
     public static final String MED_PRIORITY = "2";
     public static final String LOW_PRIORITY = "3";
 
+
+    public static final String HIGH= "High";
+    public static final String MED = "Medium";
+    public static final String LOW = "Low";
+
 }

@@ -1,8 +1,7 @@
 package com.tux.dms;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +16,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.tux.dms.constants.TicketConst;
+import com.tux.dms.constants.TicketStateType;
 import com.tux.dms.dto.Ticket;
 
 import java.util.List;
@@ -36,26 +37,11 @@ class RecyclerAdapterView extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     }
 
 
-
-
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         if (viewType == VIEW_TYPE_ITEM) {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.ticket_details_row, parent, false);
-//            cardView = view.findViewById(R.id.cardView);
-//            view.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-////                    TicketAssignFragment ticketAssignFragment = new TicketAssignFragment();
-////                    FragmentManager fragmentManager = ticketAssignFragment.getFragmentManager();
-////                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-////                    fragmentTransaction.replace(R.id.fragment_container, ticketAssignFragment);
-////                    fragmentTransaction.addToBackStack(null);
-////                    fragmentTransaction.commit();
-//                    Intent i=new Intent(view.getContext(),TicketDetailsFragment.class);
-//                }
-//            });
             return new ItemViewHolder(view);
         } else {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.ticket_loading, parent, false);
@@ -67,7 +53,6 @@ class RecyclerAdapterView extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
 
         if (holder instanceof ItemViewHolder) {
-
             populateItemRows((ItemViewHolder) holder, position);
         } else if (holder instanceof LoadingViewHolder) {
             showLoadingView((LoadingViewHolder) holder, position);
@@ -86,9 +71,51 @@ class RecyclerAdapterView extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         //ProgressBar would be displayed
 
     }
-    
+
     private void populateItemRows(ItemViewHolder viewHolder, int position) {
-        if (ticketList != null && ticketList.get(position) != null && ticketList.get(position).getSource() != null) {
+        if (ticketList != null) {
+            Ticket ticket = ticketList.get(position);
+            if (ticket != null) {
+                if (ticket.getSubject() != null) {
+                    viewHolder.textViewSubject.setText(ticket.getSubject());
+                }
+                if (ticket.getSource() != null) {
+                    viewHolder.textViewSource.setText(ticket.getSource());
+                }
+
+                viewHolder.cardViewTicket.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Toast.makeText(view.getContext(), "Position:" + Integer.toString(position), Toast.LENGTH_SHORT).show();
+                        context = view.getContext();
+                        if (TicketStateType.NEW_TICKET.equalsIgnoreCase(ticket.getState())) {
+                            TicketAssignmentFragment ticketAssignmentFragment = new TicketAssignmentFragment();
+                            Bundle ticketDetailsBundle = new Bundle();
+                            ticketDetailsBundle.putString(TicketConst.TICKET_ID_KEY, ticket.get_id());
+                            ticketDetailsBundle.putString(TicketConst.TICKET_SUBJECT_KEY,ticket.getSubject());
+                            ticketDetailsBundle.putString(TicketConst.TICKET_SOURCE_KEY,ticket.getSource());
+                            ticketAssignmentFragment.setArguments(ticketDetailsBundle);
+                            FragmentManager manager = ((AppCompatActivity) context).getSupportFragmentManager();
+                            FragmentTransaction fragmentTransaction = manager.beginTransaction();
+                            fragmentTransaction.replace(R.id.fragment_container, ticketAssignmentFragment);
+                            fragmentTransaction.addToBackStack(null);
+                            fragmentTransaction.commit();
+                        } else {
+                            Bundle ticketIdBundle = new Bundle();
+                            ticketIdBundle.putString(TicketConst.TICKET_ID_KEY, ticket.get_id());
+                            TicketDetailsFragment ticketDetailsFragment = new TicketDetailsFragment();
+                            ticketDetailsFragment.setArguments(ticketIdBundle);
+                            FragmentManager manager = ((AppCompatActivity) context).getSupportFragmentManager();
+                            FragmentTransaction fragmentTransaction = manager.beginTransaction();
+                            fragmentTransaction.replace(R.id.fragment_container, ticketDetailsFragment);
+                            fragmentTransaction.addToBackStack(null);
+                            fragmentTransaction.commit();
+                        }
+                    }
+                });
+            }
+        }
+       /* if (ticketList != null && ticketList.get(position) != null && ticketList.get(position).getSource() != null) {
             viewHolder.textViewSource.setText(ticketList.get(position).getSource());
             viewHolder.textViewSource.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -102,8 +129,6 @@ class RecyclerAdapterView extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                     fragmentTransaction.replace(R.id.fragment_container, ticketDetailsFragment);
                     fragmentTransaction.addToBackStack(null);
                     fragmentTransaction.commit();
-
-
                 }
             });
 
@@ -114,21 +139,20 @@ class RecyclerAdapterView extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             viewHolder.textViewSubject.setText(ticketList.get(position).getSubject());
         } else {
             viewHolder.textViewSubject.setText("");
-        }
-
-
+        }*/
     }
-
 
     private class ItemViewHolder extends RecyclerView.ViewHolder {
 
         TextView textViewSource;
         TextView textViewSubject;
+        CardView cardViewTicket;
 
         public ItemViewHolder(@NonNull View itemView) {
             super(itemView);
-            textViewSubject = itemView.findViewById(R.id.subjectText);
-            textViewSource = itemView.findViewById(R.id.sourceText);
+            textViewSubject = itemView.findViewById(R.id.assignSubjectText);
+            textViewSource = itemView.findViewById(R.id.assignSourceText);
+            cardViewTicket = itemView.findViewById(R.id.ticketCardView);
         }
     }
 

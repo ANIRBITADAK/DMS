@@ -62,7 +62,7 @@ public class AdminActivity extends AppCompatActivity implements NavigationView.O
                 break;
             case R.id.assign_tickets:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new TicketAssignFragment()).commit();
+                        new TicketAssignDrawerFragment()).commit();
                 break;
 
             case R.id.this_month:

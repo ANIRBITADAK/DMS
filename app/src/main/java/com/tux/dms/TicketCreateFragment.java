@@ -112,7 +112,7 @@ public class TicketCreateFragment extends Fragment implements AdapterView.OnItem
         sourceSpiner.setAdapter(ad);
 
         scanButton = view.findViewById(R.id.buttonScan);
-        subjectText = view.findViewById(R.id.subjectText);
+        subjectText = view.findViewById(R.id.assignSubjectText);
         scanButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

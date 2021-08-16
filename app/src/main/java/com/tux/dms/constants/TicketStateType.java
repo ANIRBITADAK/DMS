@@ -1,6 +1,6 @@
 package com.tux.dms.constants;
 
-public class TicketType {
+public class TicketStateType {
     public static final String TICKET_TYPE_KEY = "TICKET_TYPE";
 
     public static final String NEW_TICKET = "NEW";

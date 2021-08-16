@@ -14,7 +14,7 @@ import android.widget.TextView;
 
 import com.tux.dms.cache.SessionCache;
 import com.tux.dms.constants.TicketPriorityType;
-import com.tux.dms.constants.TicketType;
+import com.tux.dms.constants.TicketStateType;
 import com.tux.dms.dto.TicketCount;
 import com.tux.dms.rest.ApiClient;
 import com.tux.dms.rest.ApiInterface;
@@ -94,17 +94,17 @@ public class PriorityDetailsFragment extends Fragment {
 
         ticketTypeBundle = this.getArguments();
         if (ticketTypeBundle != null) {
-            ticketType = (String) ticketTypeBundle.get(TicketType.TICKET_TYPE_KEY);
+            ticketType = (String) ticketTypeBundle.get(TicketStateType.TICKET_TYPE_KEY);
         }
         ticketTypeTexView = v.findViewById(R.id.ticketTypeTextView);
         switch (ticketType) {
-            case TicketType.ASSIGNED_TICKET:
+            case TicketStateType.ASSIGNED_TICKET:
                 ticketTypeTexView.setText("Assigned Ticket");
                 break;
-            case TicketType.IN_PROGRESS_TICKET:
+            case TicketStateType.IN_PROGRESS_TICKET:
                 ticketTypeTexView.setText("In Progress Ticket");
                 break;
-            case TicketType.RESOLVED_TICKET:
+            case TicketStateType.RESOLVED_TICKET:
                 ticketTypeTexView.setText("Resolved Ticket");
                 break;
         }

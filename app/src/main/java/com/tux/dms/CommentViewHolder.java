@@ -12,16 +12,12 @@ class CommentViewHolder extends RecyclerView.ViewHolder {
     TextView date;
     View view;
 
-    CommentViewHolder(View itemView)
-    {
+    CommentViewHolder(View itemView) {
         super(itemView);
-        name = (TextView)itemView.findViewById(R.id.nameTextView);
-        date = (TextView)itemView.findViewById(R.id.dateTextView);
-        comment = (TextView)itemView.findViewById(R.id.commentTextView);
-        view  = itemView;
+        name = (TextView) itemView.findViewById(R.id.nameTextView);
+        date = (TextView) itemView.findViewById(R.id.dateTextView);
+        comment = (TextView) itemView.findViewById(R.id.commentTextView);
+        view = itemView;
     }
-
-
-
 
 }

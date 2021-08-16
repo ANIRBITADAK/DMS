@@ -1,15 +1,9 @@
 package com.tux.dms;
 
-import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.Typeface;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -17,22 +11,17 @@ import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TableLayout;
-import android.widget.TableRow;
-import android.widget.TextView;
 
 import com.tux.dms.cache.SessionCache;
 import com.tux.dms.constants.RoleConsts;
-import com.tux.dms.constants.TicketConst;
 import com.tux.dms.constants.TicketPriorityType;
-import com.tux.dms.constants.TicketType;
+import com.tux.dms.constants.TicketStateType;
 import com.tux.dms.dto.Ticket;
 import com.tux.dms.dto.TicketList;
 import com.tux.dms.dto.User;
 import com.tux.dms.rest.ApiClient;
 import com.tux.dms.rest.ApiInterface;
 
-import java.io.Console;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -114,7 +103,7 @@ public class TicketTableFragment extends Fragment {
         Bundle ticketTypeBundle = this.getArguments();
 
         if (ticketTypeBundle != null) {
-            ticketType = (String) ticketTypeBundle.get(TicketType.TICKET_TYPE_KEY);
+            ticketType = (String) ticketTypeBundle.get(TicketStateType.TICKET_TYPE_KEY);
             tickPriority = (String) ticketTypeBundle.get(TicketPriorityType.TICKET_PRIORITY_KEY);
         }
          token= sessionCache.getToken();
@@ -136,7 +125,6 @@ public class TicketTableFragment extends Fragment {
                 MAX_PAGE=ticketList.getTotalPages();
                 initAdapter();
                 initScrollListener();
-
                 /* addHeaders();
                 addData(ticketList.getTickets());*/
             }

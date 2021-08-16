@@ -2,13 +2,11 @@ package com.tux.dms;
 
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -19,18 +17,11 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 
-import com.google.android.material.navigation.NavigationView;
 import com.tux.dms.cache.SessionCache;
 import com.tux.dms.constants.TicketConst;
-import com.tux.dms.constants.TicketType;
-import com.tux.dms.dto.Comment;
 import com.tux.dms.dto.Ticket;
-import com.tux.dms.dto.TicketCount;
 import com.tux.dms.rest.ApiClient;
 import com.tux.dms.rest.ApiInterface;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -46,7 +37,7 @@ public class TicketDetailsFragment extends Fragment implements AdapterView.OnIte
     CommentAdapter adapter;
     RecyclerView recyclerView;
 
-    String[] states = { "Assigned", "In-Progress","Resolved" };
+    String[] states = {"Assigned", "In-Progress", "Resolved"};
     Spinner stateSpinner;
 
     ApiInterface apiInterface = ApiClient.getApiService();
@@ -103,8 +94,8 @@ public class TicketDetailsFragment extends Fragment implements AdapterView.OnIte
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_ticket_details, container, false);
-        subjectTextView = view.findViewById(R.id.subjectText);
-        sourceTextView = view.findViewById(R.id.sourceText);
+        subjectTextView = view.findViewById(R.id.assignSubjectText);
+        sourceTextView = view.findViewById(R.id.assignSourceText);
         assignedToTextView = view.findViewById(R.id.assignedToText);
         assignDateTextView = view.findViewById(R.id.assigedDateText);
 
@@ -133,9 +124,6 @@ public class TicketDetailsFragment extends Fragment implements AdapterView.OnIte
                         }
                     }
                 }
-
-
-
 
 
             }
