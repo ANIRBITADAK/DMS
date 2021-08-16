@@ -16,6 +16,7 @@
         <entry key="app/src/main/res/layout/activity_table.xml" value="0.171875" />
         <entry key="app/src/main/res/layout/activity_ticket_creator.xml" value="0.23385416666666667" />
         <entry key="app/src/main/res/layout/activity_user.xml" value="0.171875" />
+        <entry key="app/src/main/res/layout/comment_card.xml" value="0.31614583333333335" />
         <entry key="app/src/main/res/layout/fragment_assign_ticket.xml" value="0.24791666666666667" />
         <entry key="app/src/main/res/layout/fragment_create_ticket.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_dashboard.xml" value="0.23385416666666667" />
@@ -28,7 +29,7 @@
         <entry key="app/src/main/res/layout/fragment_scan.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_search.xml" value="0.31614583333333335" />
         <entry key="app/src/main/res/layout/fragment_table.xml" value="0.171875" />
-        <entry key="app/src/main/res/layout/fragment_ticket_details.xml" value="0.31614583333333335" />
+        <entry key="app/src/main/res/layout/fragment_ticket_details.xml" value="0.45" />
         <entry key="app/src/main/res/layout/nav_header.xml" value="0.24791666666666667" />
         <entry key="app/src/main/res/layout/ticket_details_row.xml" value="0.31614583333333335" />
         <entry key="app/src/main/res/menu/drawer_menu.xml" value="0.24791666666666667" />

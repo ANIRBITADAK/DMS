@@ -114,14 +114,23 @@
                 </RelativeLayout>
 
             <Button
-                android:layout_below="@id/relativeLayoutAssignedDate"
-                android:layout_marginTop="20sp"
+                android:id="@+id/showImageBtn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/showImageBtn"
-                android:text="Show Image"
-                android:background="@drawable/button_layout"/>
+                android:layout_below="@id/relativeLayoutAssignedDate"
+                android:layout_marginTop="20sp"
+                android:background="@drawable/button_layout"
+                android:text="Show Image" />
 
+            <TextView
+                android:id="@+id/commentsTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/showImageBtn"
+                android:layout_marginTop="10sp"
+                android:fontFamily="sans-serif-condensed-medium"
+                android:text="Comments"
+                android:textSize="18sp" />
             <LinearLayout
                 android:id="@+id/linearlayoutComments"
                 android:layout_below="@id/showImageBtn"
@@ -146,8 +155,8 @@
                             android:layout_height="100sp"
                             android:nestedScrollingEnabled="false"
                             android:overScrollMode="never"
-                            android:layout_marginTop="5sp"/>
-
+                            android:layout_marginTop="5sp"
+                            tools:listitem= "@layout/comment_card"/>
                     </LinearLayout>
 
                 </ScrollView>

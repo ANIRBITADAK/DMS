@@ -34,7 +34,7 @@ import retrofit2.Response;
  */
 public class TicketDetailsFragment extends Fragment implements AdapterView.OnItemSelectedListener {
 
-    CommentAdapter adapter;
+    CommentRecycleAdapter adapter;
     RecyclerView recyclerView;
 
     String[] states = {"Assigned", "In-Progress", "Resolved"};
@@ -115,16 +115,15 @@ public class TicketDetailsFragment extends Fragment implements AdapterView.OnIte
                         subjectTextView.setText(ticket.getSubject());
                         sourceTextView.setText(ticket.getSource());
                         assignedToTextView.setText(ticket.getAssignedToName());
+                        assignDateTextView.setText(ticket.getAssignDate());
                         if (ticket.getComments() != null && ticket.getComments().size() > 0) {
                             recyclerView = (RecyclerView) view.findViewById(R.id.commentRecyclerView);
-
-                            adapter = new CommentAdapter(ticket.getComments(), getContext());
+                            adapter = new CommentRecycleAdapter(ticket.getComments(), getContext());
                             recyclerView.setAdapter(adapter);
                             recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
                         }
                     }
                 }
-
 
             }
 

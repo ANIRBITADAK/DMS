@@ -1,6 +1,10 @@
 package com.tux.dms.dto;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 
 public class Ticket {
     private String _id;
@@ -115,7 +119,17 @@ public class Ticket {
     }
 
     public String getAssignDate() {
-        return assignDate;
+        TimeZone utc = TimeZone.getTimeZone("UTC");
+        SimpleDateFormat sourceFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+        SimpleDateFormat destFormat = new SimpleDateFormat("dd-MMM-yyyy");
+        sourceFormat.setTimeZone(utc);
+        Date convertedDate = null;
+        try {
+            convertedDate = sourceFormat.parse(assignDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return destFormat.format(convertedDate);
     }
 
     public void setAssignDate(String assignDate) {
