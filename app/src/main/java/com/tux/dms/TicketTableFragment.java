@@ -36,7 +36,7 @@ import retrofit2.Response;
  */
 public class TicketTableFragment extends Fragment {
 
-    int MAX_PAGE=1,PAGE_COUNT=1;
+    int MAX_PAGE = 1, PAGE_COUNT = 1;
 
     RecyclerView recyclerView;
     RecyclerAdapterView recyclerViewAdapter;
@@ -106,12 +106,12 @@ public class TicketTableFragment extends Fragment {
             ticketType = (String) ticketTypeBundle.get(TicketStateType.TICKET_TYPE_KEY);
             tickPriority = (String) ticketTypeBundle.get(TicketPriorityType.TICKET_PRIORITY_KEY);
         }
-         token= sessionCache.getToken();
+        token = sessionCache.getToken();
         User user = sessionCache.getUser();
-        assignedUserId  = null;
+        assignedUserId = null;
         // if user is admin then fetch all records - assigned id to null.
         // otherwise set user id.
-        if(user!=null && !RoleConsts.ADMIN_ROLE.equalsIgnoreCase(user.getRole())){
+        if (user != null && !RoleConsts.ADMIN_ROLE.equalsIgnoreCase(user.getRole())) {
             assignedUserId = user.get_id();
         }
         Call<TicketList> tickList = apiInterface.getTickets(token, assignedUserId, ticketType, tickPriority,
@@ -121,8 +121,8 @@ public class TicketTableFragment extends Fragment {
             public void onResponse(Call<TicketList> call, Response<TicketList> response) {
                 System.out.println("got ticket list" + response.body());
                 TicketList ticketList = response.body();
-                rowsTicketList=ticketList.getTickets();
-                MAX_PAGE=ticketList.getTotalPages();
+                rowsTicketList = ticketList.getTickets();
+                MAX_PAGE = ticketList.getTotalPages();
                 initAdapter();
                 initScrollListener();
                 /* addHeaders();
@@ -157,7 +157,7 @@ public class TicketTableFragment extends Fragment {
                 LinearLayoutManager linearLayoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
 
                 if (!isLoading) {
-                    if (linearLayoutManager != null && linearLayoutManager.findLastCompletelyVisibleItemPosition() == rowsTicketList.size() - 1 &&  PAGE_COUNT<MAX_PAGE) {
+                    if (linearLayoutManager != null && linearLayoutManager.findLastCompletelyVisibleItemPosition() == rowsTicketList.size() - 1 && PAGE_COUNT < MAX_PAGE) {
                         //bottom of list!
                         loadMore();
                         isLoading = true;
@@ -190,7 +190,7 @@ public class TicketTableFragment extends Fragment {
                     public void onResponse(Call<TicketList> call, Response<TicketList> response) {
                         System.out.println("got ticket list" + response.body());
                         TicketList ticketList = response.body();
-                        for(int i=0;i<5;i++) {
+                        for (int i = 0; i < 5; i++) {
                             rowsTicketList.add(ticketList.getTickets().get(i));
                         }
                         recyclerViewAdapter.notifyDataSetChanged();
@@ -203,7 +203,7 @@ public class TicketTableFragment extends Fragment {
                     }
                 });
             }
-        },2000);
+        }, 2000);
 
     }
 

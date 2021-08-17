@@ -2,7 +2,10 @@ package com.tux.dms;
 
 import android.os.Bundle;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -12,6 +15,8 @@ import android.view.ViewGroup;
 
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 
 import android.widget.TextView;
@@ -19,6 +24,7 @@ import android.widget.TextView;
 
 import com.tux.dms.cache.SessionCache;
 import com.tux.dms.constants.TicketConst;
+import com.tux.dms.dto.AssignTicket;
 import com.tux.dms.dto.Ticket;
 import com.tux.dms.rest.ApiClient;
 import com.tux.dms.rest.ApiInterface;
@@ -37,7 +43,7 @@ public class TicketDetailsFragment extends Fragment implements AdapterView.OnIte
     CommentRecycleAdapter adapter;
     RecyclerView recyclerView;
 
-    String[] states = {"Assigned", "In-Progress", "Resolved"};
+    String[] states = {"", "ASSIGNED", "IN-PROGRESS", "RESOLVED", "CLOSED"};
     Spinner stateSpinner;
 
     ApiInterface apiInterface = ApiClient.getApiService();
@@ -47,7 +53,12 @@ public class TicketDetailsFragment extends Fragment implements AdapterView.OnIte
     TextView sourceTextView;
     TextView assignedToTextView;
     TextView assignDateTextView;
-
+    TextView assignedStateTxtView;
+    EditText commentText;
+    String ticketState;
+    String tickId;
+    Button saveTicketButton;
+    Bundle ticketPropertyBundle;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -97,12 +108,13 @@ public class TicketDetailsFragment extends Fragment implements AdapterView.OnIte
         subjectTextView = view.findViewById(R.id.assignSubjectText);
         sourceTextView = view.findViewById(R.id.assignSourceText);
         assignedToTextView = view.findViewById(R.id.assignedToText);
-        assignDateTextView = view.findViewById(R.id.assigedDateText);
+        assignDateTextView = view.findViewById(R.id.assignedDateText);
+        saveTicketButton = view.findViewById(R.id.ticketDetailsSaveButton);
+        commentText = view.findViewById(R.id.assignCommentEditText);
 
-        Bundle ticketIdBundle = this.getArguments();
-        String tickId = null;
-        if (ticketIdBundle != null) {
-            tickId = (String) ticketIdBundle.get(TicketConst.TICKET_ID_KEY);
+        ticketPropertyBundle = this.getArguments();
+        if (ticketPropertyBundle != null) {
+            tickId = (String) ticketPropertyBundle.get(TicketConst.TICKET_ID_KEY);
         }
         Call<Ticket> ticketCall = apiInterface.getTicket(sessionCache.getToken(), tickId);
 
@@ -127,24 +139,67 @@ public class TicketDetailsFragment extends Fragment implements AdapterView.OnIte
 
             }
 
-
             @Override
             public void onFailure(Call<Ticket> call, Throwable t) {
 
             }
         });
-        stateSpinner = view.findViewById(R.id.spinnerState);
+        stateSpinner = view.findViewById(R.id.ticketStateSpinner);
         stateSpinner.setOnItemSelectedListener(this);
         ArrayAdapter ad = new ArrayAdapter(getContext(), android.R.layout.simple_spinner_item, states);
         ad.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         stateSpinner.setAdapter(ad);
 
+        saveTicketButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if ((commentText.getText() != null && !commentText.getText().equals("")) && (ticketState != null && !ticketState.equals(""))) {
+                    AssignTicket comment = new AssignTicket();
+                    if (commentText.getText() != null) {
+                        comment.setCommentText(commentText.getText().toString());
+                    }
+                    if (ticketState != null) {
+                        comment.setState(ticketState);
+                    }
+                    Call<Ticket> commentTicketCall = apiInterface.commentTicket(sessionCache.getToken(),
+                            tickId, comment);
+
+                    commentTicketCall.enqueue(new Callback<Ticket>() {
+                        @Override
+                        public void onResponse(Call<Ticket> call, Response<Ticket> response) {
+                            if (response.code() == 200) {
+
+                                moveTheFragment(view);
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<Ticket> call, Throwable t) {
+
+                        }
+                    });
+
+                } else {
+                    moveTheFragment(view);
+                }
+            }
+        });
         return view;
+    }
+
+    private void moveTheFragment(View view) {
+        TicketTableFragment ticketTableFragment = new TicketTableFragment();
+        ticketTableFragment.setArguments(ticketPropertyBundle);
+        FragmentManager manager = ((AppCompatActivity) view.getContext()).getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = manager.beginTransaction();
+        fragmentTransaction.replace(R.id.fragment_container, ticketTableFragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
     }
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-
+        ticketState = (String) adapterView.getSelectedItem();
     }
 
     @Override

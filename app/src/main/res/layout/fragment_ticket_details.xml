@@ -103,7 +103,7 @@
                         android:textSize="20sp" />
 
                     <TextView
-                        android:id="@+id/assigedDateText"
+                        android:id="@+id/assignedDateText"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="20sp"
@@ -172,10 +172,10 @@
                 android:layout_marginTop="20sp">
 
                 <Button
-                    android:id="@+id/assignSaveBtn"
+                    android:id="@+id/ticketDetailsSaveButton"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/spinnerState"
+                    android:layout_below="@id/ticketStateSpinner"
                     android:layout_marginTop="30sp"
                     android:background="@drawable/button_layout"
                     android:text="Save" />
@@ -187,14 +187,14 @@
                     android:hint="Enter Comment" />
 
                 <Spinner
-                    android:id="@+id/spinnerState"
+                    android:id="@+id/ticketStateSpinner"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/AssignedStateTxtView"
+                    android:layout_below="@+id/assignedStateTxtView"
                     android:layout_marginTop="10sp" />
 
                 <TextView
-                    android:id="@+id/AssignedStateTxtView"
+                    android:id="@+id/assignedStateTxtView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/assignCommentEditText"

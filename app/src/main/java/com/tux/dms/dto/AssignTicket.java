@@ -2,6 +2,7 @@ package com.tux.dms.dto;
 
 public class AssignTicket {
     private String assigneeId;
+    private String state;
     private Integer priority;
     private String commentText;
 
@@ -28,4 +29,13 @@ public class AssignTicket {
     public void setPriority(Integer priority) {
         this.priority = priority;
     }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
 }

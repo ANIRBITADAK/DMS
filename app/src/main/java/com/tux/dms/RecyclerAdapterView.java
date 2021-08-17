@@ -17,6 +17,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.tux.dms.constants.TicketConst;
+import com.tux.dms.constants.TicketPriorityType;
 import com.tux.dms.constants.TicketStateType;
 import com.tux.dms.dto.Ticket;
 
@@ -101,10 +102,12 @@ class RecyclerAdapterView extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                             fragmentTransaction.addToBackStack(null);
                             fragmentTransaction.commit();
                         } else {
-                            Bundle ticketIdBundle = new Bundle();
-                            ticketIdBundle.putString(TicketConst.TICKET_ID_KEY, ticket.get_id());
+                            Bundle ticketBundle = new Bundle();
+                            ticketBundle.putString(TicketConst.TICKET_ID_KEY, ticket.get_id());
+                            ticketBundle.putString(TicketStateType.TICKET_TYPE_KEY,ticket.getState());
+                            ticketBundle.putString(TicketPriorityType.TICKET_PRIORITY_KEY,ticket.getPriority());
                             TicketDetailsFragment ticketDetailsFragment = new TicketDetailsFragment();
-                            ticketDetailsFragment.setArguments(ticketIdBundle);
+                            ticketDetailsFragment.setArguments(ticketBundle);
                             FragmentManager manager = ((AppCompatActivity) context).getSupportFragmentManager();
                             FragmentTransaction fragmentTransaction = manager.beginTransaction();
                             fragmentTransaction.replace(R.id.fragment_container, ticketDetailsFragment);

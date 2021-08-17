@@ -152,7 +152,7 @@ public class TicketAssignmentFragment extends Fragment implements AdapterView.On
             }
         });
 
-        saveButton = view.findViewById(R.id.assignSaveBtn);
+        saveButton = view.findViewById(R.id.ticketDetailsSaveButton);
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

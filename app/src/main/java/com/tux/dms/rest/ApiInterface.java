@@ -45,6 +45,11 @@ public interface ApiInterface {
     @PUT("api/tickets/assign/{ticket_id}")
     Call<Ticket> assignTicket(@Header("x-auth-token") String authHeader, @Path("ticket_id") String ticketId,
                               @Body AssignTicket assignTicket);
+
+    @POST("api/tickets/comment/{ticket_id}")
+    Call<Ticket> commentTicket(@Header("x-auth-token") String authHeader, @Path("ticket_id") String ticketId,
+                               @Body AssignTicket assignTicket);
+
     @GET("api/tickets")
     Call<TicketList> getTickets(@Header("x-auth-token") String authHeader, @Query("assignedTo") String assignedTo, @Query("state") String state,
                                 @Query("priority") String priority,
