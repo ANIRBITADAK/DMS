@@ -94,7 +94,7 @@ public class PriorityDetailsFragment extends Fragment {
 
         ticketTypeBundle = this.getArguments();
         if (ticketTypeBundle != null) {
-            ticketType = (String) ticketTypeBundle.get(TicketStateType.TICKET_TYPE_KEY);
+            ticketType = (String) ticketTypeBundle.get(TicketStateType.TICKET_STATE_TYPE_KEY);
         }
         ticketTypeTexView = v.findViewById(R.id.ticketTypeTextView);
         switch (ticketType) {

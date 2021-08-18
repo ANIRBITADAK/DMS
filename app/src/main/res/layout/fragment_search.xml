@@ -45,7 +45,7 @@
             android:fontFamily="sans-serif-condensed-medium"/>
 
         <Spinner
-            android:id="@+id/state"
+            android:id="@+id/stateSpinner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15sp"/>
@@ -59,7 +59,7 @@
             android:fontFamily="sans-serif-condensed-medium"/>
 
         <Spinner
-            android:id="@+id/priority"
+            android:id="@+id/prioritySpinner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15sp"/>
@@ -74,7 +74,7 @@
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/searchBtn"
+            android:id="@+id/ticketSearchButton"
             android:text="search"
             android:background="@drawable/button_layout"
             android:layout_marginTop="70sp"/>
