@@ -64,12 +64,40 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="15sp"/>
 
-        <EditText
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/date"
-            android:hint="Select Date"
-            android:layout_marginTop="15sp"/>
+            android:text="Select Date"
+            android:textSize="20sp"
+            android:layout_marginTop="15sp"
+            android:fontFamily="sans-serif-condensed-medium" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15sp"
+            android:orientation="horizontal">
+
+
+            <ImageButton
+                android:layout_marginLeft="5sp"
+                android:id="@+id/calendarImgButton"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_baseline_calendar_today_24"/>
+
+            <EditText
+                android:id="@+id/date"
+                android:layout_marginLeft="20sp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="Select Date" />
+
+
+
+        </LinearLayout>
+
+
 
         <Button
             android:layout_width="match_parent"

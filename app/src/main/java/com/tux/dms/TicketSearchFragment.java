@@ -12,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 
 import java.util.Calendar;
@@ -30,6 +31,7 @@ public class TicketSearchFragment extends Fragment  implements AdapterView.OnIte
     Spinner priority;
     EditText date;
 
+    ImageButton imageButton;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -75,12 +77,13 @@ public class TicketSearchFragment extends Fragment  implements AdapterView.OnIte
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v=inflater.inflate(R.layout.fragment_search, container, false);
+        imageButton=v.findViewById(R.id.calendarImgButton);
         Calendar calendar=Calendar.getInstance();
         final int year=calendar.get(Calendar.YEAR);
         final int month=calendar.get(Calendar.MONTH);
         final int day=calendar.get(Calendar.DAY_OF_MONTH);
         date = v.findViewById(R.id.date);
-        date.setOnClickListener(new View.OnClickListener() {
+        imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 DatePickerDialog datePickerDialog=new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {

@@ -1,9 +1,12 @@
 package com.tux.dms;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -58,16 +61,23 @@ public class ResolveTicketFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v= inflater.inflate(R.layout.fragment_resolve_ticket, container, false);
-        assignedCard=v.findViewById(R.id.assigned);
+        assignedCard=v.findViewById(R.id.assignedTicketsCardView);
         inProgressCard=v.findViewById(R.id.inProgressCardView);
-        resolvedCard=v.findViewById(R.id.resolvedTicketCardView);
+        resolvedCard=v.findViewById(R.id.resolvedTicketsCardView);
 
 
         assignedCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Intent i=new Intent(getActivity(),PriorityDetails.class);
-                //getActivity().startActivity(i);
+//
+//                Intent i = new Intent(getActivity(), PriorityDetailsFragment.class);
+//                getActivity().startActivity(i);
+                PriorityDetailsFragment priorityDetailsFragment = new PriorityDetailsFragment();
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.fragment_container, priorityDetailsFragment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
 
             }
         });
@@ -75,8 +85,15 @@ public class ResolveTicketFragment extends Fragment {
         inProgressCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Intent i=new Intent(getActivity(),PriorityDetails.class);
-                //getActivity().startActivity(i);
+
+//                Intent i = new Intent(getActivity(), PriorityDetailsFragment.class);
+//                getActivity().startActivity(i);
+                PriorityDetailsFragment priorityDetailsFragment = new PriorityDetailsFragment();
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.fragment_container, priorityDetailsFragment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
 
             }
         });
@@ -84,8 +101,15 @@ public class ResolveTicketFragment extends Fragment {
         resolvedCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Intent i=new Intent(getActivity(),PriorityDetails.class);
-                //getActivity().startActivity(i);
+//                Intent i = new Intent(getActivity(), PriorityDetailsFragment.class);
+//                getActivity().startActivity(i);
+                PriorityDetailsFragment priorityDetailsFragment = new PriorityDetailsFragment();
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.fragment_container, priorityDetailsFragment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+
 
             }
         });
