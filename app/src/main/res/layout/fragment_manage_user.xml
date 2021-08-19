@@ -33,7 +33,7 @@
         <Spinner
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/userList"
+            android:id="@+id/userListSpinner"
             android:layout_marginTop="20sp"/>
 
 
@@ -49,7 +49,7 @@
         <Spinner
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/roles"
+            android:id="@+id/userRoleSpinner"
             android:layout_marginTop="20sp"/>
 
 

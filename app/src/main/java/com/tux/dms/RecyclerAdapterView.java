@@ -104,7 +104,7 @@ class RecyclerAdapterView extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                         } else {
                             Bundle ticketBundle = new Bundle();
                             ticketBundle.putString(TicketConst.TICKET_ID_KEY, ticket.get_id());
-                            ticketBundle.putString(TicketStateType.TICKET_TYPE_KEY,ticket.getState());
+                            ticketBundle.putString(TicketStateType.TICKET_STATE_TYPE_KEY,ticket.getState());
                             ticketBundle.putString(TicketPriorityType.TICKET_PRIORITY_KEY,ticket.getPriority());
                             TicketDetailsFragment ticketDetailsFragment = new TicketDetailsFragment();
                             ticketDetailsFragment.setArguments(ticketBundle);

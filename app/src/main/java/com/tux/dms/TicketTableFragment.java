@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 
 import com.tux.dms.cache.SessionCache;
 import com.tux.dms.constants.RoleConsts;
+import com.tux.dms.constants.TicketConst;
 import com.tux.dms.constants.TicketPriorityType;
 import com.tux.dms.constants.TicketStateType;
 import com.tux.dms.dto.Ticket;
@@ -41,15 +42,20 @@ public class TicketTableFragment extends Fragment {
     RecyclerView recyclerView;
     RecyclerAdapterView recyclerViewAdapter;
     List<Ticket> rowsTicketList = new ArrayList<>();
-    String token;
-    String assignedUserId;
-    String ticketType = null;
-    String tickPriority = null;
 
     boolean isLoading = false;
 
     ApiInterface apiInterface = ApiClient.getApiService();
     SessionCache sessionCache = SessionCache.getSessionCache();
+
+    String token;
+    String assignedUserId;
+    String ticketSubject = null;
+    String ticketState = null;
+    String tickPriority = null;
+    String startDate = null;
+    String endDate = null;
+    boolean isSearch = false;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -99,12 +105,18 @@ public class TicketTableFragment extends Fragment {
 
         recyclerView = v.findViewById(R.id.recyclerView);
 
-
         Bundle ticketTypeBundle = this.getArguments();
 
         if (ticketTypeBundle != null) {
-            ticketType = (String) ticketTypeBundle.get(TicketStateType.TICKET_TYPE_KEY);
+            ticketSubject = (String) ticketTypeBundle.get(TicketStateType.TICKET_STATE_TYPE_KEY);
+            ticketState = (String) ticketTypeBundle.get(TicketStateType.TICKET_STATE_TYPE_KEY);
             tickPriority = (String) ticketTypeBundle.get(TicketPriorityType.TICKET_PRIORITY_KEY);
+            startDate = (String) ticketTypeBundle.get(TicketConst.TICKET_START_DATE);
+            endDate = (String) ticketTypeBundle.get(TicketConst.TICKET_END_DATE);
+            String ticketSearchFlow = (String) ticketTypeBundle.get(TicketConst.TICKET_SEARCH_FLOW_KEY);
+            if (ticketSearchFlow != null) {
+                isSearch = true;
+            }
         }
         token = sessionCache.getToken();
         User user = sessionCache.getUser();
@@ -114,26 +126,49 @@ public class TicketTableFragment extends Fragment {
         if (user != null && !RoleConsts.ADMIN_ROLE.equalsIgnoreCase(user.getRole())) {
             assignedUserId = user.get_id();
         }
-        Call<TicketList> tickList = apiInterface.getTickets(token, assignedUserId, ticketType, tickPriority,
-                PAGE_COUNT, 5);
-        tickList.enqueue(new Callback<TicketList>() {
-            @Override
-            public void onResponse(Call<TicketList> call, Response<TicketList> response) {
-                System.out.println("got ticket list" + response.body());
-                TicketList ticketList = response.body();
-                rowsTicketList = ticketList.getTickets();
-                MAX_PAGE = ticketList.getTotalPages();
-                initAdapter();
-                initScrollListener();
-                /* addHeaders();
-                addData(ticketList.getTickets());*/
-            }
 
-            @Override
-            public void onFailure(Call<TicketList> call, Throwable t) {
+        if (isSearch) {
 
-            }
-        });
+            Call<TicketList> tickList = apiInterface.searchTicket(token, ticketSubject, ticketState,
+                    tickPriority, startDate, endDate, PAGE_COUNT, 5);
+
+            tickList.enqueue(new Callback<TicketList>() {
+                @Override
+                public void onResponse(Call<TicketList> call, Response<TicketList> response) {
+                    System.out.println("got ticket list" + response.body());
+                    TicketList ticketList = response.body();
+                    rowsTicketList = ticketList.getTickets();
+                    MAX_PAGE = ticketList.getTotalPages();
+                    initAdapter();
+                    initScrollListener();
+                }
+
+                @Override
+                public void onFailure(Call<TicketList> call, Throwable t) {
+
+                }
+            });
+
+        } else {
+            Call<TicketList> tickList = apiInterface.getTickets(token, assignedUserId, ticketState, tickPriority,
+                    PAGE_COUNT, 5);
+            tickList.enqueue(new Callback<TicketList>() {
+                @Override
+                public void onResponse(Call<TicketList> call, Response<TicketList> response) {
+                    System.out.println("got ticket list" + response.body());
+                    TicketList ticketList = response.body();
+                    rowsTicketList = ticketList.getTickets();
+                    MAX_PAGE = ticketList.getTotalPages();
+                    initAdapter();
+                    initScrollListener();
+                }
+
+                @Override
+                public void onFailure(Call<TicketList> call, Throwable t) {
+
+                }
+            });
+        }
 
         return v;
     }
@@ -182,26 +217,54 @@ public class TicketTableFragment extends Fragment {
                 int scrollPosition = rowsTicketList.size();
                 recyclerViewAdapter.notifyItemRemoved(scrollPosition);
 
-                Call<TicketList> tickList = apiInterface.getTickets(token, assignedUserId, ticketType, tickPriority,
-                        ++PAGE_COUNT, 5);
+                if (isSearch) {
 
-                tickList.enqueue(new Callback<TicketList>() {
-                    @Override
-                    public void onResponse(Call<TicketList> call, Response<TicketList> response) {
-                        System.out.println("got ticket list" + response.body());
-                        TicketList ticketList = response.body();
-                        for (int i = 0; i < 5; i++) {
-                            rowsTicketList.add(ticketList.getTickets().get(i));
+                    Call<TicketList> tickList = apiInterface.searchTicket(token, ticketSubject, ticketState, tickPriority,
+                            startDate, endDate, ++PAGE_COUNT, 5);
+
+                    tickList.enqueue(new Callback<TicketList>() {
+                        @Override
+                        public void onResponse(Call<TicketList> call, Response<TicketList> response) {
+                            System.out.println("got ticket list" + response.body());
+                            TicketList ticketList = response.body();
+                            for (int i = 0; i < 5; i++) {
+                                if (i < ticketList.getTickets().size() && ticketList.getTickets().get(i) != null) {
+                                    rowsTicketList.add(ticketList.getTickets().get(i));
+                                }
+                            }
+                            recyclerViewAdapter.notifyDataSetChanged();
+                            isLoading = false;
                         }
-                        recyclerViewAdapter.notifyDataSetChanged();
-                        isLoading = false;
-                    }
 
-                    @Override
-                    public void onFailure(Call<TicketList> call, Throwable t) {
+                        @Override
+                        public void onFailure(Call<TicketList> call, Throwable t) {
 
-                    }
-                });
+                        }
+                    });
+                } else {
+                    Call<TicketList> tickList = apiInterface.getTickets(token, assignedUserId, ticketState, tickPriority,
+                            ++PAGE_COUNT, 5);
+
+                    tickList.enqueue(new Callback<TicketList>() {
+                        @Override
+                        public void onResponse(Call<TicketList> call, Response<TicketList> response) {
+                            System.out.println("got ticket list" + response.body());
+                            TicketList ticketList = response.body();
+                            for (int i = 0; i < 5; i++) {
+                                if (i < ticketList.getTickets().size() && ticketList.getTickets().get(i) != null) {
+                                    rowsTicketList.add(ticketList.getTickets().get(i));
+                                }
+                            }
+                            recyclerViewAdapter.notifyDataSetChanged();
+                            isLoading = false;
+                        }
+
+                        @Override
+                        public void onFailure(Call<TicketList> call, Throwable t) {
+
+                        }
+                    });
+                }
             }
         }, 2000);
 

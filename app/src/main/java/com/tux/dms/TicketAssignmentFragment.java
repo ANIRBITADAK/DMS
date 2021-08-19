@@ -40,13 +40,13 @@ import retrofit2.Response;
  * Use the {@link TicketAssignmentFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class TicketAssignmentFragment extends Fragment implements AdapterView.OnItemSelectedListener {
+public class TicketAssignmentFragment extends Fragment {
 
     Spinner userSpinner;
     Integer priority;
     List<String> priorityList;
     Spinner prioritySpinner;
-    Map<String, String> nameToIdMap = new HashMap<>();
+    Map<String, String> userNameToIdMap = new HashMap<>();
     String assignedToId;
     String assignedToName;
     String ticketId;
@@ -104,7 +104,6 @@ public class TicketAssignmentFragment extends Fragment implements AdapterView.On
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_assign_ticket, container, false);
         priorityList = TicketPriorityType.getTicketPriorityList();
-        Call<List<User>> allUserCall = apiInterface.getAllUser(sessionCache.getToken());
         assignSubjectTextView = view.findViewById(R.id.assignSubjectText);
         assignSourceTextView = view.findViewById(R.id.assignSourceText);
         commentText = view.findViewById(R.id.assignCommentEditText);
@@ -119,26 +118,52 @@ public class TicketAssignmentFragment extends Fragment implements AdapterView.On
         }
 
         prioritySpinner = view.findViewById(R.id.assignPrioritySpinner);
-        prioritySpinner.setOnItemSelectedListener(this);
         ArrayAdapter priorityAdapter = new ArrayAdapter(getContext(), android.R.layout.simple_spinner_item, priorityList);
         priorityAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         prioritySpinner.setAdapter(priorityAdapter);
+        prioritySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+                String selectedItem = (String) adapterView.getSelectedItem();
+                if (selectedItem != null && (priorityList.contains(selectedItem))) {
+                    priority = TicketPriorityType.ticketPriorityAdapter(selectedItem);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
 
 
         userSpinner = view.findViewById(R.id.assignUserSpinner);
-        userSpinner.setOnItemSelectedListener(this);
+        userSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                String selectedItem = (String) adapterView.getSelectedItem();
+                assignedToId = userNameToIdMap.get(selectedItem);
+                assignedToName = selectedItem;
+            }
 
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
 
+            }
+        });
+
+        Call<List<User>> allUserCall = apiInterface.getAllUser(sessionCache.getToken());
         allUserCall.enqueue(new Callback<List<User>>() {
             @Override
             public void onResponse(Call<List<User>> call, Response<List<User>> response) {
                 if (response.code() == 200) {
                     List<User> userList = response.body();
                     for (User user : userList) {
-                        nameToIdMap.put(user.getName(), user.get_id());
+                        userNameToIdMap.put(user.getName(), user.get_id());
                     }
 
-                    List<String> nameList = new ArrayList<>(nameToIdMap.keySet());
+                    List<String> nameList = new ArrayList<>(userNameToIdMap.keySet());
 
                     ArrayAdapter userAdapter = new ArrayAdapter(getContext(), android.R.layout.simple_spinner_item, nameList);
                     userAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -189,19 +214,4 @@ public class TicketAssignmentFragment extends Fragment implements AdapterView.On
         return view;
     }
 
-    @Override
-    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-        String selectedItem = (String) adapterView.getSelectedItem();
-        if (selectedItem != null && (priorityList.contains(selectedItem))) {
-            priority = TicketPriorityType.ticketPriorityAdapter(selectedItem);
-        } else {
-            assignedToId = nameToIdMap.get(selectedItem);
-            assignedToName = selectedItem;
-        }
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> adapterView) {
-
-    }
 }

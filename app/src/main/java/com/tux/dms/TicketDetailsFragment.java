@@ -38,7 +38,7 @@ import retrofit2.Response;
  * Use the {@link TicketDetailsFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class TicketDetailsFragment extends Fragment implements AdapterView.OnItemSelectedListener {
+public class TicketDetailsFragment extends Fragment {
 
     CommentRecycleAdapter adapter;
     RecyclerView recyclerView;
@@ -145,10 +145,20 @@ public class TicketDetailsFragment extends Fragment implements AdapterView.OnIte
             }
         });
         stateSpinner = view.findViewById(R.id.ticketStateSpinner);
-        stateSpinner.setOnItemSelectedListener(this);
         ArrayAdapter ad = new ArrayAdapter(getContext(), android.R.layout.simple_spinner_item, states);
         ad.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         stateSpinner.setAdapter(ad);
+        stateSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                ticketState = (String) adapterView.getSelectedItem();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
 
         saveTicketButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -195,15 +205,5 @@ public class TicketDetailsFragment extends Fragment implements AdapterView.OnIte
         fragmentTransaction.replace(R.id.fragment_container, ticketTableFragment);
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
-    }
-
-    @Override
-    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-        ticketState = (String) adapterView.getSelectedItem();
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> adapterView) {
-
     }
 }

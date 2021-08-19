@@ -66,7 +66,7 @@ public class TicketAssignDrawerFragment extends Fragment {
         View v= inflater.inflate(R.layout.fragment_assign_ticket, container, false);
         TicketTableFragment ticketTableFragment = new TicketTableFragment();
         Bundle ticketTypeBundle = new Bundle();
-        ticketTypeBundle.putString(TicketStateType.TICKET_TYPE_KEY, TicketStateType.NEW_TICKET);
+        ticketTypeBundle.putString(TicketStateType.TICKET_STATE_TYPE_KEY, TicketStateType.NEW_TICKET);
         ticketTableFragment.setArguments(ticketTypeBundle);
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();

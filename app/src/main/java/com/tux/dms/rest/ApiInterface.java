@@ -32,7 +32,8 @@ public interface ApiInterface {
 
     @POST("/api/users")
     Call<JWTToken> executeSignup(@Body User user);
-
+    @PUT("api/users/")
+    Call<User> updateUser(@Header("x-auth-token") String authHeader, @Body User user);
     @GET("/api/users")
     Call<List<User>> getAllUser(@Header("x-auth-token") String authHeader);
 
@@ -51,7 +52,8 @@ public interface ApiInterface {
                                @Body AssignTicket assignTicket);
 
     @GET("api/tickets")
-    Call<TicketList> getTickets(@Header("x-auth-token") String authHeader, @Query("assignedTo") String assignedTo, @Query("state") String state,
+    Call<TicketList> getTickets(@Header("x-auth-token") String authHeader,
+                                @Query("assignedTo") String assignedTo, @Query("state") String state,
                                 @Query("priority") String priority,
                                 @Query("page") Integer page, @Query("limit") Integer limit);
 
@@ -60,6 +62,15 @@ public interface ApiInterface {
 
     @GET("/api/tickets/count")
     Call<TicketCount> getTicketCount(@Header("x-auth-token") String authHeader, @Query("state") String state);
+    @GET("/api/tickets/search")
+    Call<TicketList> searchTicket(@Header("x-auth-token") String authHeader,
+                                   @Query("subject") String subject,
+                                   @Query("state") String state,
+                                   @Query("priority") String priority,
+                                   @Query("startDate") String startDate,
+                                   @Query("endDate") String endDate,
+                                   @Query("page") Integer page,
+                                   @Query("limit") Integer limit);
 
     @Multipart
     @POST("/api/images/upload")

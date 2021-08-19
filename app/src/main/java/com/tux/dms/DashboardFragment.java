@@ -145,7 +145,7 @@ public class DashboardFragment extends Fragment implements AdapterView.OnItemSel
             public void onClick(View view) {
                 PriorityDetailsFragment priorityDetailsFragment = new PriorityDetailsFragment();
                 Bundle ticketType = new Bundle();
-                ticketType.putString(TicketStateType.TICKET_TYPE_KEY, TicketStateType.ASSIGNED_TICKET); // Put anything what you want
+                ticketType.putString(TicketStateType.TICKET_STATE_TYPE_KEY, TicketStateType.ASSIGNED_TICKET); // Put anything what you want
                 priorityDetailsFragment.setArguments(ticketType);
                 FragmentManager fragmentManager = getFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -163,7 +163,7 @@ public class DashboardFragment extends Fragment implements AdapterView.OnItemSel
             public void onClick(View view) {
                 PriorityDetailsFragment priorityDetailsFragment = new PriorityDetailsFragment();
                 Bundle ticketType = new Bundle();
-                ticketType.putString(TicketStateType.TICKET_TYPE_KEY, TicketStateType.IN_PROGRESS_TICKET);
+                ticketType.putString(TicketStateType.TICKET_STATE_TYPE_KEY, TicketStateType.IN_PROGRESS_TICKET);
                 priorityDetailsFragment.setArguments(ticketType);
                 FragmentManager fragmentManager = getFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -180,7 +180,7 @@ public class DashboardFragment extends Fragment implements AdapterView.OnItemSel
             public void onClick(View view) {
                 PriorityDetailsFragment priorityDetailsFragment = new PriorityDetailsFragment();
                 Bundle ticketType = new Bundle();
-                ticketType.putString(TicketStateType.TICKET_TYPE_KEY, TicketStateType.RESOLVED_TICKET);
+                ticketType.putString(TicketStateType.TICKET_STATE_TYPE_KEY, TicketStateType.RESOLVED_TICKET);
                 priorityDetailsFragment.setArguments(ticketType);
                 FragmentManager fragmentManager = getFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
