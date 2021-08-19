@@ -76,7 +76,7 @@ public class AdminActivity extends AppCompatActivity implements NavigationView.O
                         new ReportFragment()).commit();
                 break;
 
-            case R.id.userList:
+            case R.id.userListSpinner:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new ManageUserFragment()).commit();
                 break;
