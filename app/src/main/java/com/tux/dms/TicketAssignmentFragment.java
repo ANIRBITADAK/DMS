@@ -50,6 +50,7 @@ public class TicketAssignmentFragment extends Fragment {
     String assignedToId;
     String assignedToName;
     String ticketId;
+    String ticketImagePath;
     ApiInterface apiInterface = ApiClient.getApiService();
     SessionCache sessionCache = SessionCache.getSessionCache();
 
@@ -57,6 +58,7 @@ public class TicketAssignmentFragment extends Fragment {
     TextView assignSourceTextView;
     EditText commentText;
     Button saveButton;
+    Button showImageButton;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -107,10 +109,12 @@ public class TicketAssignmentFragment extends Fragment {
         assignSubjectTextView = view.findViewById(R.id.assignSubjectText);
         assignSourceTextView = view.findViewById(R.id.assignSourceText);
         commentText = view.findViewById(R.id.assignCommentEditText);
+        showImageButton = view.findViewById(R.id.showImageBtn);
 
         Bundle ticketDetailsBundle = this.getArguments();
         if (ticketDetailsBundle != null) {
             ticketId = (String) ticketDetailsBundle.get(TicketConst.TICKET_ID_KEY);
+            ticketImagePath = (String) ticketDetailsBundle.get(TicketConst.TICKET_IMG_PATH);
             String subject = (String) ticketDetailsBundle.get(TicketConst.TICKET_SUBJECT_KEY);
             String source = (String) ticketDetailsBundle.get(TicketConst.TICKET_SOURCE_KEY);
             assignSubjectTextView.setText(subject);
@@ -164,7 +168,6 @@ public class TicketAssignmentFragment extends Fragment {
                     }
 
                     List<String> nameList = new ArrayList<>(userNameToIdMap.keySet());
-
                     ArrayAdapter userAdapter = new ArrayAdapter(getContext(), android.R.layout.simple_spinner_item, nameList);
                     userAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     userSpinner.setAdapter(userAdapter);
@@ -211,6 +214,20 @@ public class TicketAssignmentFragment extends Fragment {
             }
         });
 
+        showImageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ShowImageFragment showImageFragment = new ShowImageFragment();
+                Bundle ticketImagePathBundle = new Bundle();
+                ticketImagePathBundle.putString(TicketConst.TICKET_IMG_PATH, ticketImagePath);
+                showImageFragment.setArguments(ticketImagePathBundle);
+                FragmentManager manager = ((AppCompatActivity) view.getContext()).getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = manager.beginTransaction();
+                fragmentTransaction.replace(R.id.fragment_container, showImageFragment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+            }
+        });
         return view;
     }
 

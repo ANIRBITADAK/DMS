@@ -1,5 +1,7 @@
 package com.tux.dms;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -8,6 +10,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+
+import com.tux.dms.constants.TicketConst;
+import com.tux.dms.rest.ApiClient;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -62,8 +72,21 @@ public class ShowImageFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v=inflater.inflate(R.layout.fragment_show_image, container, false);
-        imageView=v.findViewById(R.id.showImgView);
-        return v;
+        View view = inflater.inflate(R.layout.fragment_show_image, container, false);
+        imageView = view.findViewById(R.id.showImgView);
+        Bundle ticketImageBundle = getArguments();
+        String imagePath = (String) ticketImageBundle.get(TicketConst.TICKET_IMG_PATH);
+        if(imagePath!=null) {
+            String imageUrl = "http://" + ApiClient.getIpAddress() + imagePath;
+            try {
+                Bitmap bitmap = BitmapFactory.decodeStream((InputStream) new URL(imageUrl).getContent());
+                imageView.setImageBitmap(bitmap);
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return view;
     }
 }
