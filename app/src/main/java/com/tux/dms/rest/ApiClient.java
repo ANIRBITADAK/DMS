@@ -18,7 +18,6 @@ public class ApiClient {
     private static final String IP_ADDRESS = "143.244.131.27";
     //private final String IP_ADDRESS = "10.0.2.2";
     private static String BASE_URL = "http://" + IP_ADDRESS + ":5000";
-    //private static String BASE_URL = "http://10.0.2.2:5000";
     //private static SessionCache sessionCache = SessionCache.getSessionCache();
 
 

@@ -17,7 +17,7 @@
         android:layout_centerInParent="true"
         android:orientation="vertical"
         android:paddingBottom="10sp"
-        android:background="@drawable/button_layout">
+        android:background="@drawable/transparent_layout_blue">
 
         <EditText
             android:id="@+id/editTextEmail"

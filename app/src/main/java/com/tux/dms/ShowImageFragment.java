@@ -76,15 +76,16 @@ public class ShowImageFragment extends Fragment {
         imageView = view.findViewById(R.id.showImgView);
         Bundle ticketImageBundle = getArguments();
         String imagePath = (String) ticketImageBundle.get(TicketConst.TICKET_IMG_PATH);
-
-        String imageUrl = "http://"+ ApiClient.getIpAddress()+ imagePath;
-        try {
-            Bitmap bitmap = BitmapFactory.decodeStream((InputStream) new URL(imageUrl).getContent());
-            imageView.setImageBitmap(bitmap);
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+        if(imagePath!=null) {
+            String imageUrl = "http://" + ApiClient.getIpAddress() + imagePath;
+            try {
+                Bitmap bitmap = BitmapFactory.decodeStream((InputStream) new URL(imageUrl).getContent());
+                imageView.setImageBitmap(bitmap);
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
         return view;
     }

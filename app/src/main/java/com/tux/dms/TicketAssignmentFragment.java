@@ -220,6 +220,7 @@ public class TicketAssignmentFragment extends Fragment {
                 ShowImageFragment showImageFragment = new ShowImageFragment();
                 Bundle ticketImagePathBundle = new Bundle();
                 ticketImagePathBundle.putString(TicketConst.TICKET_IMG_PATH, ticketImagePath);
+                showImageFragment.setArguments(ticketImagePathBundle);
                 FragmentManager manager = ((AppCompatActivity) view.getContext()).getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = manager.beginTransaction();
                 fragmentTransaction.replace(R.id.fragment_container, showImageFragment);
