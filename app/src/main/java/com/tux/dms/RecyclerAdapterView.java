@@ -95,6 +95,7 @@ class RecyclerAdapterView extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                             ticketDetailsBundle.putString(TicketConst.TICKET_ID_KEY, ticket.get_id());
                             ticketDetailsBundle.putString(TicketConst.TICKET_SUBJECT_KEY,ticket.getSubject());
                             ticketDetailsBundle.putString(TicketConst.TICKET_SOURCE_KEY,ticket.getSource());
+                            ticketDetailsBundle.putString(TicketConst.TICKET_IMG_PATH, ticket.getFilePath());
                             ticketAssignmentFragment.setArguments(ticketDetailsBundle);
                             FragmentManager manager = ((AppCompatActivity) context).getSupportFragmentManager();
                             FragmentTransaction fragmentTransaction = manager.beginTransaction();

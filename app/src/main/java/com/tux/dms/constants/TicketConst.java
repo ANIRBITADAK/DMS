@@ -8,4 +8,5 @@ public class TicketConst {
     public  static final String TICKET_END_DATE = "ticket_end_date";
     public static final String TICKET_SEARCH_FLOW_KEY = "ticket_search_flow_key";
     public static final String TICKET_SEARCH_FLOW_VALUE = "ticket_search_flow_value";
+    public static final String TICKET_IMG_PATH = "ticket_image_path";
 }

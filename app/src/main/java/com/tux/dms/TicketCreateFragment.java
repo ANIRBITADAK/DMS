@@ -44,17 +44,16 @@ import retrofit2.Response;
  */
 public class TicketCreateFragment extends Fragment implements AdapterView.OnItemSelectedListener {
 
-    Button scanButton ;
-    Button createTicket ;
+    Button scanButton;
+    Button createTicket;
     ApiInterface apiInterface = ApiClient.getApiService();
     SessionCache sessionCache = SessionCache.getSessionCache();
     Integer REQUEST_CAMERA = 1, SELECT_FILE = 0;
     Bitmap bmp;
-    ByteArrayOutputStream baos=new ByteArrayOutputStream();
+    ByteArrayOutputStream baos = new ByteArrayOutputStream();
     byte[] imageData;
-    String imagePath;
 
-    String[] sources = { "State", "District","Sub-Division","Gram Panchayat","Other Block Offices","Others" };
+    String[] sources = {"State", "District", "Sub-Division", "Gram Panchayat", "Other Block Offices", "Others"};
     Spinner sourceSpiner;
     String sourceText;
     EditText subjectText;
@@ -171,6 +170,7 @@ public class TicketCreateFragment extends Fragment implements AdapterView.OnItem
         });
         builder.show();
     }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
@@ -180,10 +180,10 @@ public class TicketCreateFragment extends Fragment implements AdapterView.OnItem
 
                 Bundle bundle = data.getExtras();
                 bmp = (Bitmap) bundle.get("data");
-               // ivImage.setImageBitmap(bmp);
+                // ivImage.setImageBitmap(bmp);
                 bmp.compress(Bitmap.CompressFormat.PNG, 100, baos);
                 imageData = baos.toByteArray();
-                Toast.makeText(getContext(),imageData.toString(),Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), imageData.toString(), Toast.LENGTH_LONG).show();
                 //uploadImage(imageData);
             } else if (requestCode == SELECT_FILE) {
 
@@ -197,7 +197,7 @@ public class TicketCreateFragment extends Fragment implements AdapterView.OnItem
                 }
                 bmp.compress(Bitmap.CompressFormat.JPEG, 10, baos);
                 imageData = baos.toByteArray();
-                Toast.makeText(getContext(),imageData.toString(),Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), imageData.toString(), Toast.LENGTH_LONG).show();
                 //uploadImage(imageData);
             }
 
@@ -218,7 +218,7 @@ public class TicketCreateFragment extends Fragment implements AdapterView.OnItem
             public void onResponse(Call<ImageUploadResponse> call, Response<ImageUploadResponse> response) {
                 Toast.makeText(getContext(), "image uploaded/scanned",
                         Toast.LENGTH_LONG).show();
-                postTicket(subjectText.getText().toString(),sourceText , response.body().getPath());
+                postTicket(subjectText.getText().toString(), sourceText, response.body().getPath());
             }
 
             @Override
@@ -244,6 +244,7 @@ public class TicketCreateFragment extends Fragment implements AdapterView.OnItem
                         Toast.LENGTH_LONG).show();
 
             }
+
             @Override
             public void onFailure(Call<Ticket> call, Throwable t) {
 
