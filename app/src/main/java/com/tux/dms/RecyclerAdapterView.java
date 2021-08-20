@@ -93,8 +93,8 @@ class RecyclerAdapterView extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                             TicketAssignmentFragment ticketAssignmentFragment = new TicketAssignmentFragment();
                             Bundle ticketDetailsBundle = new Bundle();
                             ticketDetailsBundle.putString(TicketConst.TICKET_ID_KEY, ticket.get_id());
-                            ticketDetailsBundle.putString(TicketConst.TICKET_SUBJECT_KEY,ticket.getSubject());
-                            ticketDetailsBundle.putString(TicketConst.TICKET_SOURCE_KEY,ticket.getSource());
+                            ticketDetailsBundle.putString(TicketConst.TICKET_SUBJECT_KEY, ticket.getSubject());
+                            ticketDetailsBundle.putString(TicketConst.TICKET_SOURCE_KEY, ticket.getSource());
                             ticketDetailsBundle.putString(TicketConst.TICKET_IMG_PATH, ticket.getFilePath());
                             ticketAssignmentFragment.setArguments(ticketDetailsBundle);
                             FragmentManager manager = ((AppCompatActivity) context).getSupportFragmentManager();
@@ -107,6 +107,7 @@ class RecyclerAdapterView extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                             ticketBundle.putString(TicketConst.TICKET_ID_KEY, ticket.get_id());
                             ticketBundle.putString(TicketStateType.TICKET_STATE_TYPE_KEY,ticket.getState());
                             ticketBundle.putString(TicketPriorityType.TICKET_PRIORITY_KEY,ticket.getPriority());
+                            ticketBundle.putString(TicketConst.TICKET_IMG_PATH, ticket.getFilePath());
                             TicketDetailsFragment ticketDetailsFragment = new TicketDetailsFragment();
                             ticketDetailsFragment.setArguments(ticketBundle);
                             FragmentManager manager = ((AppCompatActivity) context).getSupportFragmentManager();

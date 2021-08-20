@@ -58,6 +58,7 @@ public class TicketDetailsFragment extends Fragment {
     String ticketState;
     String tickId;
     Button saveTicketButton;
+    Button showImageButton;
     Bundle ticketPropertyBundle;
 
     // TODO: Rename parameter arguments, choose names that match
@@ -110,6 +111,7 @@ public class TicketDetailsFragment extends Fragment {
         assignedToTextView = view.findViewById(R.id.assignedToText);
         assignDateTextView = view.findViewById(R.id.assignedDateText);
         saveTicketButton = view.findViewById(R.id.ticketDetailsSaveButton);
+        showImageButton = view.findViewById(R.id.showImageBtn);
         commentText = view.findViewById(R.id.assignCommentEditText);
 
         ticketPropertyBundle = this.getArguments();
@@ -178,11 +180,9 @@ public class TicketDetailsFragment extends Fragment {
                         @Override
                         public void onResponse(Call<Ticket> call, Response<Ticket> response) {
                             if (response.code() == 200) {
-
                                 moveTheFragment(view);
                             }
                         }
-
                         @Override
                         public void onFailure(Call<Ticket> call, Throwable t) {
 
@@ -192,6 +192,19 @@ public class TicketDetailsFragment extends Fragment {
                 } else {
                     moveTheFragment(view);
                 }
+            }
+        });
+        showImageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ShowImageFragment showImageFragment = new ShowImageFragment();
+                Bundle ticketImagePathBundle = new Bundle();
+                showImageFragment.setArguments(ticketPropertyBundle);
+                FragmentManager manager = ((AppCompatActivity) view.getContext()).getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = manager.beginTransaction();
+                fragmentTransaction.replace(R.id.fragment_container, showImageFragment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
             }
         });
         return view;
