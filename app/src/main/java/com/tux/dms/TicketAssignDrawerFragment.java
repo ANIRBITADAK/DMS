@@ -19,6 +19,8 @@ import com.tux.dms.constants.TicketStateType;
  */
 public class TicketAssignDrawerFragment extends Fragment {
 
+    boolean backTrace =false;
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -64,15 +66,25 @@ public class TicketAssignDrawerFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View v= inflater.inflate(R.layout.fragment_assign_ticket, container, false);
+
         TicketTableFragment ticketTableFragment = new TicketTableFragment();
+        DashboardFragment dashboardFragment= new DashboardFragment();
+
         Bundle ticketTypeBundle = new Bundle();
         ticketTypeBundle.putString(TicketStateType.TICKET_STATE_TYPE_KEY, TicketStateType.NEW_TICKET);
         ticketTableFragment.setArguments(ticketTypeBundle);
+
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.fragment_container, ticketTableFragment);
-        fragmentTransaction.addToBackStack(null);
-        fragmentTransaction.commit();
+        if(!backTrace) {
+            fragmentTransaction.replace(R.id.fragment_container, ticketTableFragment);
+            fragmentTransaction.addToBackStack(null);
+            fragmentTransaction.commit();
+            backTrace =true;
+        }else{
+            fragmentTransaction.replace(R.id.fragment_container, dashboardFragment);
+            fragmentTransaction.commit();
+        }
         return v;
     }
 }

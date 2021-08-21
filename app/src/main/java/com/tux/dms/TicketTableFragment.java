@@ -157,7 +157,9 @@ public class TicketTableFragment extends Fragment {
                 public void onResponse(Call<TicketList> call, Response<TicketList> response) {
                     System.out.println("got ticket list" + response.body());
                     TicketList ticketList = response.body();
-                    rowsTicketList = ticketList.getTickets();
+                    if(rowsTicketList.size()<ticketList.getTickets().size()) {
+                        rowsTicketList = ticketList.getTickets();
+                    }
                     MAX_PAGE = ticketList.getTotalPages();
                     initAdapter();
                     initScrollListener();
