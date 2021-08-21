@@ -22,19 +22,35 @@
             android:textStyle="bold"/>
 
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="User List"
-            android:textSize="20sp"
-            android:fontFamily="sans-serif-condensed-medium"
-            android:layout_marginTop="40sp"/>
+<!--        <TextView-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="User List"-->
+<!--            android:textSize="20sp"-->
+<!--            android:fontFamily="sans-serif-condensed-medium"-->
+<!--            android:layout_marginTop="40sp"/>-->
 
-        <Spinner
+<!--        <Spinner-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:id="@+id/userListSpinner"-->
+<!--            android:layout_marginTop="20sp"/>-->
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/userListSpinnerLayout"
+            style="@style/spinnerTheme"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/userListSpinner"
-            android:layout_marginTop="20sp"/>
+            android:layout_marginTop="15sp"
+            android:hint="User List">
+
+            <androidx.appcompat.widget.AppCompatAutoCompleteTextView
+                android:id="@+id/userListSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clickable="true"
+                tools:ignore="KeyboardInaccessibleWidget" />
+        </com.google.android.material.textfield.TextInputLayout>
 
 
         <TextView

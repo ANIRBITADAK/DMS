@@ -50,4 +50,8 @@
         <item name="android:textStyle">bold</item>
     </style>
 
+    <style name="spinnerTheme" parent= "Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu">
+        <item name="strokeColor">@color/primaryTextColor</item>
+    </style>
+
 </resources>

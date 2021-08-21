@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -41,7 +42,7 @@ public class ManageUserFragment extends Fragment {
     Button assignRoleButton;
     Spinner userRoleSpinner;
     String userRole;
-    Spinner userNameSpinner;
+    AutoCompleteTextView userNameSpinner;
     String userName;
     Map<String, String> userNameToIdMap = new HashMap<>();
 
