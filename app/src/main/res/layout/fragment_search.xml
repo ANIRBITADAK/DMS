@@ -35,7 +35,8 @@
             android:id="@+id/assignSubjectText"
             android:layout_marginTop="15sp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            style="@style/modifiedEditText"/>
 
         <TextView
             android:layout_width="match_parent"
@@ -92,6 +93,7 @@
                 android:layout_marginLeft="20sp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                style="@style/modifiedEditText"
                 android:hint="Select Date" />
 
 
@@ -105,7 +107,8 @@
             android:layout_height="wrap_content"
             android:id="@+id/ticketSearchButton"
             android:text="search"
-            android:background="@drawable/button_layout"
+            android:textColor="@color/white"
+            android:background="@drawable/login_button_bk"
             android:layout_marginTop="70sp"/>
 
     </LinearLayout>

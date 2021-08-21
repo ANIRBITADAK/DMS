@@ -58,7 +58,8 @@
             android:layout_height="wrap_content"
             android:text="Assign Role"
             android:id="@+id/assignRoleButton"
-            android:background="@drawable/button_layout"
+            android:textColor="@color/white"
+            android:background="@drawable/login_button_bk"
             android:layout_marginTop="100sp"/>
 
     </LinearLayout>
