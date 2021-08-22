@@ -50,7 +50,7 @@ public class TicketCreateFragment extends Fragment implements AdapterView.OnItem
     AlertDialog.Builder mBuilder;
     View mView;
     ProgressDialog progressDialog;
-    Button btnYes,btnNo;
+    Button btnYes, btnNo;
     Button scanButton;
     Button createTicket;
     ApiInterface apiInterface = ApiClient.getApiService();
@@ -110,9 +110,9 @@ public class TicketCreateFragment extends Fragment implements AdapterView.OnItem
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_create_ticket, container, false);
-        mBuilder= new AlertDialog.Builder(getContext());
+        mBuilder = new AlertDialog.Builder(getContext());
         mView = getLayoutInflater().inflate(R.layout.dialog_layout, null);
-        btnYes= (Button) mView.findViewById(R.id.btnYes);
+        btnYes = (Button) mView.findViewById(R.id.btnYes);
         btnNo = (Button) mView.findViewById(R.id.btnNo);
         sourceSpiner = view.findViewById(R.id.source);
         sourceSpiner.setOnItemSelectedListener(this);
@@ -138,7 +138,12 @@ public class TicketCreateFragment extends Fragment implements AdapterView.OnItem
                 progressDialog.setMessage("Creating Ticket");
                 progressDialog.setCanceledOnTouchOutside(false);
                 progressDialog.show();
-                uploadImage(imageData);
+                if (imageData != null) {
+                    uploadImage(imageData);
+                } else {
+                    // create ticket without image
+                    postTicket(subjectText.getText().toString(), sourceText, null);
+                }
             }
         });
 
@@ -234,10 +239,30 @@ public class TicketCreateFragment extends Fragment implements AdapterView.OnItem
             public void onResponse(Call<ImageUploadResponse> call, Response<ImageUploadResponse> response) {
                 Toast.makeText(getContext(), "image uploaded/scanned",
                         Toast.LENGTH_LONG).show();
-
                 postTicket(subjectText.getText().toString(), sourceText, response.body().getPath());
-                progressDialog.dismiss();
+            }
 
+            @Override
+            public void onFailure(Call<ImageUploadResponse> call, Throwable t) {
+
+            }
+        });
+    }
+
+    private void postTicket(String subjectStr, String sourceStr, String imagePath) {
+
+
+        Ticket ticketBody = new Ticket();
+        ticketBody.setSubject(subjectStr);
+        ticketBody.setSource(sourceStr);
+        ticketBody.setFilePath(imagePath);
+        String token = sessionCache.getToken();
+        Call<Ticket> ticketCall = apiInterface.createTicket(token, ticketBody);
+
+        ticketCall.enqueue(new Callback<Ticket>() {
+            @Override
+            public void onResponse(Call<Ticket> call, Response<Ticket> response) {
+                progressDialog.dismiss();
                 mBuilder.setView(mView);
                 final AlertDialog dialog = mBuilder.create();
                 dialog.show();
@@ -253,10 +278,10 @@ public class TicketCreateFragment extends Fragment implements AdapterView.OnItem
                 btnNo.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        DashboardFragment dashboardFragment= new DashboardFragment();
+                        DashboardFragment dashboardFragment = new DashboardFragment();
                         FragmentManager fragmentManager = getFragmentManager();
                         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                        fragmentTransaction.replace(R.id.fragment_container,dashboardFragment );
+                        fragmentTransaction.replace(R.id.fragment_container, dashboardFragment);
                         fragmentTransaction.commit();
                         dialog.dismiss();
 
@@ -266,31 +291,7 @@ public class TicketCreateFragment extends Fragment implements AdapterView.OnItem
             }
 
             @Override
-            public void onFailure(Call<ImageUploadResponse> call, Throwable t) {
-
-            }
-        });
-    }
-
-    private void postTicket(String subjectStr, String sourceStr, String imagePath) {
-    
-        
-        Ticket ticketBody = new Ticket();
-        ticketBody.setSubject(subjectStr);
-        ticketBody.setSource(sourceStr);
-        ticketBody.setFilePath(imagePath);
-        String token = sessionCache.getToken();
-        Call<Ticket> ticketCall = apiInterface.createTicket(token, ticketBody);
-
-        ticketCall.enqueue(new Callback<Ticket>() {
-            @Override
-            public void onResponse(Call<Ticket> call, Response<Ticket> response) {
-
-
-            }
-            @Override
             public void onFailure(Call<Ticket> call, Throwable t) {
-                
 
 
             }
