@@ -10,6 +10,8 @@ import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.provider.MediaStore;
 import android.view.LayoutInflater;
@@ -45,7 +47,10 @@ import retrofit2.Response;
  */
 public class TicketCreateFragment extends Fragment implements AdapterView.OnItemSelectedListener {
 
-    ProgressDialog dialog;
+    AlertDialog.Builder mBuilder;
+    View mView;
+    ProgressDialog progressDialog;
+    Button btnYes,btnNo;
     Button scanButton;
     Button createTicket;
     ApiInterface apiInterface = ApiClient.getApiService();
@@ -105,6 +110,10 @@ public class TicketCreateFragment extends Fragment implements AdapterView.OnItem
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_create_ticket, container, false);
+        mBuilder= new AlertDialog.Builder(getContext());
+        mView = getLayoutInflater().inflate(R.layout.dialog_layout, null);
+        btnYes= (Button) mView.findViewById(R.id.btnYes);
+        btnNo = (Button) mView.findViewById(R.id.btnNo);
         sourceSpiner = view.findViewById(R.id.source);
         sourceSpiner.setOnItemSelectedListener(this);
 
@@ -125,13 +134,14 @@ public class TicketCreateFragment extends Fragment implements AdapterView.OnItem
         createTicket.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                dialog = new ProgressDialog(getContext());
-                dialog.setMessage("Creating Ticket");
-                dialog.setCanceledOnTouchOutside(false);
-                dialog.show();
+                progressDialog = new ProgressDialog(getContext());
+                progressDialog.setMessage("Creating Ticket");
+                progressDialog.setCanceledOnTouchOutside(false);
+                progressDialog.show();
                 uploadImage(imageData);
             }
         });
+
         return view;
     }
 
@@ -189,7 +199,7 @@ public class TicketCreateFragment extends Fragment implements AdapterView.OnItem
                 // ivImage.setImageBitmap(bmp);
                 bmp.compress(Bitmap.CompressFormat.PNG, 100, baos);
                 imageData = baos.toByteArray();
-                Toast.makeText(getContext(), imageData.toString(), Toast.LENGTH_LONG).show();
+                //Toast.makeText(getContext(), imageData.toString(), Toast.LENGTH_LONG).show();
                 //uploadImage(imageData);
             } else if (requestCode == SELECT_FILE) {
 
@@ -226,7 +236,32 @@ public class TicketCreateFragment extends Fragment implements AdapterView.OnItem
                         Toast.LENGTH_LONG).show();
 
                 postTicket(subjectText.getText().toString(), sourceText, response.body().getPath());
-                dialog.dismiss();
+                progressDialog.dismiss();
+
+                mBuilder.setView(mView);
+                final AlertDialog dialog = mBuilder.create();
+                dialog.show();
+                btnYes.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        subjectText.setText("");
+                        sourceSpiner.setSelection(0);
+                        dialog.dismiss();
+
+                    }
+                });
+                btnNo.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        DashboardFragment dashboardFragment= new DashboardFragment();
+                        FragmentManager fragmentManager = getFragmentManager();
+                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                        fragmentTransaction.replace(R.id.fragment_container,dashboardFragment );
+                        fragmentTransaction.commit();
+                        dialog.dismiss();
+
+                    }
+                });
 
             }
 
