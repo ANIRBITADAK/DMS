@@ -10,20 +10,21 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="5dp"
-        android:text="Create Ticket Again?"
-        android:textSize="25sp"
+        android:text="Ticket Created Successfully"
+        android:textSize="20sp"
         android:textStyle="bold" />
 
     <TextView
         android:layout_marginTop="15sp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Want to create more tickets?"
+        android:text="Want to create another ticket?"
         android:layout_marginLeft="8sp"
         android:textSize="20sp"/>
 
     <RelativeLayout
         android:layout_marginTop="15sp"
+        android:layout_marginBottom="15sp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
