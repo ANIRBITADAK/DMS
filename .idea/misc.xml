@@ -28,6 +28,7 @@
         <entry key="app/src/main/res/layout/activity_user.xml" value="0.171875" />
         <entry key="app/src/main/res/layout/comment_card.xml" value="0.31614583333333335" />
         <entry key="app/src/main/res/layout/dialog_layout.xml" value="0.17" />
+        <entry key="app/src/main/res/layout/fragment_admin_dashboard.xml" value="0.19" />
         <entry key="app/src/main/res/layout/fragment_assign_ticket.xml" value="0.24791666666666667" />
         <entry key="app/src/main/res/layout/fragment_create_ticket.xml" value="0.2" />
         <entry key="app/src/main/res/layout/fragment_dashboard.xml" value="0.23385416666666667" />
@@ -42,6 +43,7 @@
         <entry key="app/src/main/res/layout/fragment_show_image.xml" value="0.24166666666666667" />
         <entry key="app/src/main/res/layout/fragment_table.xml" value="0.171875" />
         <entry key="app/src/main/res/layout/fragment_ticket_details.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/fragment_user_dashboard.xml" value="0.24166666666666667" />
         <entry key="app/src/main/res/layout/layout_login.xml" value="0.24166666666666667" />
         <entry key="app/src/main/res/layout/layout_register.xml" value="0.24166666666666667" />
         <entry key="app/src/main/res/layout/nav_header.xml" value="0.19" />

@@ -37,6 +37,15 @@ class RecyclerAdapterView extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         ticketList = itemList;
     }
 
+    @Override
+    public int getItemViewType(int position) {
+        if(ticketList.get(position)==null){
+            return 1;
+        }else {
+            return 0;
+        }
+    }
+
 
     @NonNull
     @Override
@@ -52,13 +61,11 @@ class RecyclerAdapterView extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-
         if (holder instanceof ItemViewHolder) {
             populateItemRows((ItemViewHolder) holder, position);
         } else if (holder instanceof LoadingViewHolder) {
             showLoadingView((LoadingViewHolder) holder, position);
         }
-
     }
 
 
@@ -70,7 +77,7 @@ class RecyclerAdapterView extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
     private void showLoadingView(LoadingViewHolder viewHolder, int position) {
         //ProgressBar would be displayed
-
+        viewHolder.progressBar.setVisibility(viewHolder.progressBar.VISIBLE);
     }
 
     private void populateItemRows(ItemViewHolder viewHolder, int position) {
