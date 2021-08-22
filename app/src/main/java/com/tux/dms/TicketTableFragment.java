@@ -109,7 +109,7 @@ public class TicketTableFragment extends Fragment {
         Bundle ticketTypeBundle = this.getArguments();
 
         if (ticketTypeBundle != null) {
-            ticketSubject = (String) ticketTypeBundle.get(TicketStateType.TICKET_STATE_TYPE_KEY);
+            ticketSubject = (String) ticketTypeBundle.get(TicketConst.TICKET_SUBJECT_KEY);
             ticketState = (String) ticketTypeBundle.get(TicketStateType.TICKET_STATE_TYPE_KEY);
             tickPriority = (String) ticketTypeBundle.get(TicketPriorityType.TICKET_PRIORITY_KEY);
             startDate = (String) ticketTypeBundle.get(TicketConst.TICKET_START_DATE);
