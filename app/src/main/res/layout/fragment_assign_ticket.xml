@@ -73,7 +73,8 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/showImageBtn"
                 android:text="Show Image"
-                android:background="@drawable/button_layout"/>
+                android:textColor="@color/white"
+                android:background="@drawable/login_button_bk"/>
 
 
 
@@ -86,10 +87,11 @@
                 android:textSize="20sp" />
 
             <EditText
-                android:layout_marginTop="20sp"
+                    android:layout_marginTop="20sp"
                     android:id="@+id/assignCommentEditText"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    style="@style/modifiedEditText"/>
 
             <TextView
                     android:layout_width="match_parent"
@@ -125,7 +127,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="50sp"
-                android:background="@drawable/button_layout"
+                android:textColor="@color/white"
+                android:background="@drawable/login_button_bk"
                 android:text="Save" />
 
 

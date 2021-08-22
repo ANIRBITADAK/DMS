@@ -10,6 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:indeterminate="true"
+        android:indeterminateTint="@color/primaryTextColor"
         android:paddingLeft="8dp"
         android:paddingRight="8dp"/>
 

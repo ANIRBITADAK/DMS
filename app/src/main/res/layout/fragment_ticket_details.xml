@@ -4,7 +4,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".TicketDetailsFragment">
-
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="8dp">
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -119,7 +122,8 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/relativeLayoutAssignedDate"
                 android:layout_marginTop="20sp"
-                android:background="@drawable/button_layout"
+                android:textColor="@color/white"
+                android:background="@drawable/login_button_bk"
                 android:text="Show Image" />
 
             <TextView
@@ -178,11 +182,13 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/ticketStateSpinner"
                     android:layout_marginTop="30sp"
-                    android:background="@drawable/button_layout"
+                    android:textColor="@color/white"
+                    android:background="@drawable/login_button_bk"
                     android:text="Save" />
 
                 <EditText
                     android:id="@+id/assignCommentEditText"
+                    style="@style/modifiedEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Enter Comment" />
@@ -207,5 +213,6 @@
 
             </RelativeLayout>
         </RelativeLayout>
+    </ScrollView>
 
     </FrameLayout>

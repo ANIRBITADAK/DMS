@@ -32,7 +32,7 @@ public interface ApiInterface {
 
     @POST("/api/users")
     Call<JWTToken> executeSignup(@Body User user);
-    @PUT("api/users/")
+    @PUT("api/users")
     Call<User> updateUser(@Header("x-auth-token") String authHeader, @Body User user);
     @GET("/api/users")
     Call<List<User>> getAllUser(@Header("x-auth-token") String authHeader);

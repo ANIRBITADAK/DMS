@@ -36,6 +36,22 @@
             android:id="@+id/userListSpinner"
             android:layout_marginTop="20sp"/>
 
+<!--        <com.google.android.material.textfield.TextInputLayout-->
+<!--            android:id="@+id/userListSpinnerLayout"-->
+<!--            style="@style/spinnerTheme"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="15sp"-->
+<!--            android:hint="User List">-->
+
+<!--            <androidx.appcompat.widget.AppCompatAutoCompleteTextView-->
+<!--                android:id="@+id/userListSpinner"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:clickable="true"-->
+<!--                tools:ignore="KeyboardInaccessibleWidget" />-->
+<!--        </com.google.android.material.textfield.TextInputLayout>-->
+
 
         <TextView
             android:layout_width="match_parent"
@@ -58,7 +74,8 @@
             android:layout_height="wrap_content"
             android:text="Assign Role"
             android:id="@+id/assignRoleButton"
-            android:background="@drawable/button_layout"
+            android:textColor="@color/white"
+            android:background="@drawable/login_button_bk"
             android:layout_marginTop="100sp"/>
 
     </LinearLayout>

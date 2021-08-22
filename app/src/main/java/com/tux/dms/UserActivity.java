@@ -9,8 +9,11 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 import com.google.android.material.navigation.NavigationView;
+import com.tux.dms.cache.SessionCache;
 
 public class UserActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -21,11 +24,16 @@ public class UserActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user);
 
+        SessionCache sessionCache = SessionCache.getSessionCache();
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
+        View header = navigationView.getHeaderView(0);
+        TextView userName = (TextView) header.findViewById(R.id.userName);
+        userName.setText("Hello " + sessionCache.getUser().getName());
         navigationView.setNavigationItemSelectedListener(this);
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar,
@@ -35,7 +43,7 @@ public class UserActivity extends AppCompatActivity implements NavigationView.On
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                    new ResolveTicketFragment()).commit();
+                    new UserDashboardFragment()).commit();
             navigationView.setCheckedItem(R.id.ticket);
         }
     }
@@ -46,7 +54,7 @@ public class UserActivity extends AppCompatActivity implements NavigationView.On
         switch (item.getItemId()) {
             case R.id.tickets:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new ResolveTicketFragment()).commit();
+                        new UserDashboardFragment()).commit();
                 break;
             case R.id.profile:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,

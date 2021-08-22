@@ -2,10 +2,13 @@ package com.tux.dms;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.tux.dms.cache.SessionCache;
@@ -22,6 +25,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     Button register;
     EditText name, password,email,phone;
+    TextView signInRedirect;
     private ApiInterface retrofitInterface = ApiClient.getApiService();
     private SessionCache sessionCache = SessionCache.getSessionCache();
 
@@ -29,11 +33,12 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-        register=(Button) findViewById(R.id.buttonRegister);
-        name=(EditText) findViewById(R.id.editTextName);
-        password=(EditText) findViewById(R.id.editTextPass);
-        email=(EditText) findViewById(R.id.editTextEmail);
-        phone=(EditText) findViewById(R.id.editTextPhone);
+        register=(Button) findViewById(R.id.registerButton);
+        name=(EditText) findViewById(R.id.nameEditText);
+        password=(EditText) findViewById(R.id.passwordEditText);
+        email=(EditText) findViewById(R.id.emailEditText);
+        phone=(EditText) findViewById(R.id.mobileNumberEditText);
+        signInRedirect=(TextView)findViewById(R.id.signInRedirect);
 
     /*    Retrofit retrofitClient= RetroRestClient.getClient();
         retrofitInterface = retrofitClient.create(RetroInterface.class);*/
@@ -44,6 +49,16 @@ public class RegisterActivity extends AppCompatActivity {
                handleSignup();
             }
         });
+
+        signInRedirect.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(RegisterActivity.this,LoginActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
     }
 
     private void handleSignup() {
@@ -65,6 +80,8 @@ public class RegisterActivity extends AppCompatActivity {
                     JWTToken token = response.body();
                     sessionCache.setToken(token.getToken());
                     Toast.makeText(getApplicationContext(), token.getToken(), Toast.LENGTH_LONG).show();
+                    Intent intent=new Intent(RegisterActivity.this, LoginActivity.class);
+                    startActivity(intent);
 
                 } else if (response.code() == 400) {
                     Toast.makeText(getApplicationContext(), "User Already Exists",

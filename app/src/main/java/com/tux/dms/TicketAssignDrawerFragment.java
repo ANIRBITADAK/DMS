@@ -68,7 +68,7 @@ public class TicketAssignDrawerFragment extends Fragment {
         View v= inflater.inflate(R.layout.fragment_assign_ticket, container, false);
 
         TicketTableFragment ticketTableFragment = new TicketTableFragment();
-        DashboardFragment dashboardFragment= new DashboardFragment();
+        AdminDashboardFragment adminDashboardFragment = new AdminDashboardFragment();
 
         Bundle ticketTypeBundle = new Bundle();
         ticketTypeBundle.putString(TicketStateType.TICKET_STATE_TYPE_KEY, TicketStateType.NEW_TICKET);
@@ -82,7 +82,7 @@ public class TicketAssignDrawerFragment extends Fragment {
             fragmentTransaction.commit();
             backTrace =true;
         }else{
-            fragmentTransaction.replace(R.id.fragment_container, dashboardFragment);
+            fragmentTransaction.replace(R.id.fragment_container, adminDashboardFragment);
             fragmentTransaction.commit();
         }
         return v;

@@ -9,8 +9,11 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 import com.google.android.material.navigation.NavigationView;
+import com.tux.dms.cache.SessionCache;
 
 public class AdminActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -21,12 +24,18 @@ public class AdminActivity extends AppCompatActivity implements NavigationView.O
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin);
 
+        SessionCache sessionCache = SessionCache.getSessionCache();
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
+        View header = navigationView.getHeaderView(0);
+        TextView userName = (TextView) header.findViewById(R.id.userName);
+        userName.setText("Hello " + sessionCache.getUser().getName());
         navigationView.setNavigationItemSelectedListener(this);
+
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar,
                 R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -35,7 +44,7 @@ public class AdminActivity extends AppCompatActivity implements NavigationView.O
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                    new DashboardFragment()).commit();
+                    new AdminDashboardFragment()).commit();
             navigationView.setCheckedItem(R.id.ticket);
         }
 
@@ -48,21 +57,21 @@ public class AdminActivity extends AppCompatActivity implements NavigationView.O
             case R.id.dashboard:
 
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new DashboardFragment()).commit();
+                        new AdminDashboardFragment()).addToBackStack(null).commit();
 
                 break;
             case R.id.create_new:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new TicketCreateFragment()).commit();
+                        new TicketCreateFragment()).addToBackStack(null).commit();
                 break;
 
             case R.id.search:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new TicketSearchFragment()).commit();
+                        new TicketSearchFragment()).addToBackStack(null).commit();
                 break;
             case R.id.assign_tickets:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new TicketAssignDrawerFragment()).commit();
+                        new TicketAssignDrawerFragment()).addToBackStack(null).commit();
                 break;
 
             case R.id.this_month:
@@ -73,12 +82,12 @@ public class AdminActivity extends AppCompatActivity implements NavigationView.O
 
             case R.id.custom_month:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new ReportFragment()).commit();
+                        new ReportFragment()).addToBackStack(null).commit();
                 break;
 
             case R.id.userListSpinner:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new ManageUserFragment()).commit();
+                        new ManageUserFragment()).addToBackStack(null).commit();
                 break;
 
         }

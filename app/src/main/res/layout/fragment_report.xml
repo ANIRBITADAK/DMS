@@ -21,15 +21,16 @@
             android:textSize="30sp"
             android:fontFamily="sans-serif-condensed-medium"/>
 
-       <Button
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:id="@+id/fromdate"
-           android:layout_below="@id/textViewheading"
-           android:layout_marginTop="100sp"
-           android:text="Select From Date"
-           android:layout_centerInParent="true"
-           android:background="@drawable/button_layout"/>
+        <Button
+            android:id="@+id/fromdate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textViewheading"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="100sp"
+            android:textColor="@color/white"
+            android:background="@drawable/login_button_bk"
+            android:text="Select From Date" />
 
 
         <Button
@@ -39,7 +40,8 @@
             android:layout_below="@id/fromdate"
             android:layout_centerInParent="true"
             android:layout_marginTop="50sp"
-            android:background="@drawable/button_layout"
+            android:textColor="@color/white"
+            android:background="@drawable/login_button_bk"
             android:text="Select To Date" />
 
         <Button
@@ -49,7 +51,8 @@
             android:id="@+id/buttonGenerateReport"
             android:layout_below="@id/todate"
             android:layout_marginTop="100sp"
-            android:background="@drawable/button_layout"
+            android:textColor="@color/white"
+            android:background="@drawable/login_button_bk"
             android:layout_marginLeft="20sp"
             android:layout_marginRight="20sp"/>
         

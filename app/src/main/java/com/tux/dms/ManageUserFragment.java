@@ -9,11 +9,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.tux.dms.cache.SessionCache;
+import com.tux.dms.constants.RoleConsts;
 import com.tux.dms.dto.User;
 import com.tux.dms.rest.ApiClient;
 import com.tux.dms.rest.ApiInterface;
@@ -42,6 +44,7 @@ public class ManageUserFragment extends Fragment {
     Spinner userRoleSpinner;
     String userRole;
     Spinner userNameSpinner;
+    //AutoCompleteTextView userNameSpinner;
     String userName;
     Map<String, String> userNameToIdMap = new HashMap<>();
 
@@ -90,9 +93,7 @@ public class ManageUserFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_manage_user, container, false);
-
         assignRoleButton = view.findViewById(R.id.assignRoleButton);
-
         userNameSpinner = view.findViewById(R.id.userListSpinner);
 
         Call<List<User>> allUserCall = apiInterface.getAllUser(sessionCache.getToken());
@@ -102,7 +103,9 @@ public class ManageUserFragment extends Fragment {
                 if (response.code() == 200) {
                     List<User> userList = response.body();
                     for (User user : userList) {
-                        userNameToIdMap.put(user.getName(), user.get_id());
+                        if(user.getRole()!= RoleConsts.ADMIN_ROLE) {
+                            userNameToIdMap.put(user.getName(), user.get_id());
+                        }
                     }
                     List<String> nameList = new ArrayList<>(userNameToIdMap.keySet());
                     ArrayAdapter userAdapter = new ArrayAdapter(getContext(), android.R.layout.simple_spinner_item, nameList);

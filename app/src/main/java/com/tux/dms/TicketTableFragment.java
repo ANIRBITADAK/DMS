@@ -1,5 +1,6 @@
 package com.tux.dms;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -108,7 +109,7 @@ public class TicketTableFragment extends Fragment {
         Bundle ticketTypeBundle = this.getArguments();
 
         if (ticketTypeBundle != null) {
-            ticketSubject = (String) ticketTypeBundle.get(TicketStateType.TICKET_STATE_TYPE_KEY);
+            ticketSubject = (String) ticketTypeBundle.get(TicketConst.TICKET_SUBJECT_KEY);
             ticketState = (String) ticketTypeBundle.get(TicketStateType.TICKET_STATE_TYPE_KEY);
             tickPriority = (String) ticketTypeBundle.get(TicketPriorityType.TICKET_PRIORITY_KEY);
             startDate = (String) ticketTypeBundle.get(TicketConst.TICKET_START_DATE);
@@ -209,16 +210,13 @@ public class TicketTableFragment extends Fragment {
 
         rowsTicketList.add(null);
         recyclerViewAdapter.notifyItemInserted(rowsTicketList.size() - 1);
-
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-
                 rowsTicketList.remove(rowsTicketList.size() - 1);
                 int scrollPosition = rowsTicketList.size();
                 recyclerViewAdapter.notifyItemRemoved(scrollPosition);
-
                 if (isSearch) {
 
                     Call<TicketList> tickList = apiInterface.searchTicket(token, ticketSubject, ticketState, tickPriority,

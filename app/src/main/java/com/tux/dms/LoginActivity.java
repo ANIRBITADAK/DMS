@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.tux.dms.cache.SessionCache;
@@ -25,7 +26,8 @@ import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity {
 
-    Button login, register;
+    Button login;
+    TextView register;
     ApiInterface apiInterface = ApiClient.getApiService();
     SessionCache sessionCache = SessionCache.getSessionCache();
 
@@ -33,8 +35,8 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        login = (Button) findViewById(R.id.buttonLogin);
-        register = (Button) findViewById(R.id.buttonRegister);
+        login = (Button) findViewById(R.id.LoginButton);
+        register = (TextView) findViewById(R.id.signupRedirect);
 
 
         login.setOnClickListener(new View.OnClickListener() {
@@ -61,7 +63,7 @@ public class LoginActivity extends AppCompatActivity {
     private void getToken() {
 
         EditText email = (EditText) findViewById(R.id.editTextEmail);
-        EditText password = (EditText) findViewById(R.id.editTextPass);
+        EditText password = (EditText) findViewById(R.id.editTextPassword);
         UserCredential user = new UserCredential();
         user.setPassword(password.getText().toString());
         user.setEmail(email.getText().toString());

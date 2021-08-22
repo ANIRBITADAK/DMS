@@ -40,12 +40,11 @@ public class TicketSearchFragment extends Fragment {
 
     String[] states = {"", "New", "Assigned", "In-Progress", "Resolved"};
     Spinner stateSpinner;
-
+    EditText subjectEditText ;
     String[] priorities = {"", "High", "Medium", "Low"};
     Spinner prioritySpinner;
     Button ticketSearchButton;
     EditText date;
-    String subject;
     String state;
     String priority;
 
@@ -94,8 +93,8 @@ public class TicketSearchFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-
         View view=inflater.inflate(R.layout.fragment_search, container, false);
+        subjectEditText = view.findViewById(R.id.assignSubjectText);
         imageButton=view.findViewById(R.id.calendarImgButton);
         Calendar calendar=Calendar.getInstance();
         final int year=calendar.get(Calendar.YEAR);
@@ -154,11 +153,14 @@ public class TicketSearchFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
-                // View v = inflater.inflate(R.layout.fragment_assign_ticket, container, false);
                 TicketTableFragment ticketTableFragment = new TicketTableFragment();
-                String startDate = formatDate(date.getText().toString());
-                String endDate = addDays(startDate, 5);
-                Bundle ticketSearchBundle = getTicketSearchBundle(subject, state, priority, startDate, endDate);
+                String startDate = null;
+                String endDate = null;
+                if (date.getText() != null && !date.getText().toString().equals("")) {
+                    startDate = formatDate(date.getText().toString());
+                    endDate = addDays(startDate, 5);
+                }
+                Bundle ticketSearchBundle = getTicketSearchBundle(subjectEditText.getText().toString(), state, priority, startDate, endDate);
                 ticketTableFragment.setArguments(ticketSearchBundle);
                 FragmentManager fragmentManager = getFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -175,7 +177,7 @@ public class TicketSearchFragment extends Fragment {
                                          String startDate, String endDate) {
         Bundle ticketSearchBundle = new Bundle();
         ticketSearchBundle.putString(TicketConst.TICKET_SEARCH_FLOW_KEY, TicketConst.TICKET_SEARCH_FLOW_VALUE);
-        if (subject != null) {
+        if (subject != null && !subject.equals("")) {
             ticketSearchBundle.putString(TicketConst.TICKET_SUBJECT_KEY, subject);
         }
         if (state != null && !state.equals("")) {
