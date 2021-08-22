@@ -42,7 +42,8 @@ public class ManageUserFragment extends Fragment {
     Button assignRoleButton;
     Spinner userRoleSpinner;
     String userRole;
-    AutoCompleteTextView userNameSpinner;
+    Spinner userNameSpinner;
+    //AutoCompleteTextView userNameSpinner;
     String userName;
     Map<String, String> userNameToIdMap = new HashMap<>();
 
