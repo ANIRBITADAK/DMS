@@ -278,10 +278,10 @@ public class TicketCreateFragment extends Fragment implements AdapterView.OnItem
                 btnNo.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        DashboardFragment dashboardFragment = new DashboardFragment();
+                        AdminDashboardFragment adminDashboardFragment = new AdminDashboardFragment();
                         FragmentManager fragmentManager = getFragmentManager();
                         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                        fragmentTransaction.replace(R.id.fragment_container, dashboardFragment);
+                        fragmentTransaction.replace(R.id.fragment_container, adminDashboardFragment);
                         fragmentTransaction.commit();
                         dialog.dismiss();
 

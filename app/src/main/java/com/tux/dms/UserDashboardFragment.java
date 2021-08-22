@@ -1,6 +1,5 @@
 package com.tux.dms;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.cardview.widget.CardView;
@@ -12,7 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class ResolveTicketFragment extends Fragment {
+public class UserDashboardFragment extends Fragment {
 
     CardView assignedCard,inProgressCard,resolvedCard;
 
@@ -25,7 +24,7 @@ public class ResolveTicketFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public ResolveTicketFragment() {
+    public UserDashboardFragment() {
         // Required empty public constructor
     }
 
@@ -38,8 +37,8 @@ public class ResolveTicketFragment extends Fragment {
      * @return A new instance of fragment ResolveTicketFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static ResolveTicketFragment newInstance(String param1, String param2) {
-        ResolveTicketFragment fragment = new ResolveTicketFragment();
+    public static UserDashboardFragment newInstance(String param1, String param2) {
+        UserDashboardFragment fragment = new UserDashboardFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -60,7 +59,7 @@ public class ResolveTicketFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v= inflater.inflate(R.layout.fragment_resolve_ticket, container, false);
+        View v= inflater.inflate(R.layout.fragment_user_dashboard, container, false);
         assignedCard=v.findViewById(R.id.assignedTicketsCardView);
         inProgressCard=v.findViewById(R.id.inProgressCardView);
         resolvedCard=v.findViewById(R.id.resolvedTicketsCardView);
@@ -69,9 +68,6 @@ public class ResolveTicketFragment extends Fragment {
         assignedCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//
-//                Intent i = new Intent(getActivity(), PriorityDetailsFragment.class);
-//                getActivity().startActivity(i);
                 PriorityDetailsFragment priorityDetailsFragment = new PriorityDetailsFragment();
                 FragmentManager fragmentManager = getFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();

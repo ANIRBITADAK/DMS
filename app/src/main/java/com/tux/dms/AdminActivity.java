@@ -44,7 +44,7 @@ public class AdminActivity extends AppCompatActivity implements NavigationView.O
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                    new DashboardFragment()).commit();
+                    new AdminDashboardFragment()).commit();
             navigationView.setCheckedItem(R.id.ticket);
         }
 
@@ -57,7 +57,7 @@ public class AdminActivity extends AppCompatActivity implements NavigationView.O
             case R.id.dashboard:
 
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new DashboardFragment()).commit();
+                        new AdminDashboardFragment()).commit();
 
                 break;
             case R.id.create_new:

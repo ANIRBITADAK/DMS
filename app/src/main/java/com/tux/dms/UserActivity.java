@@ -43,7 +43,7 @@ public class UserActivity extends AppCompatActivity implements NavigationView.On
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                    new ResolveTicketFragment()).commit();
+                    new UserDashboardFragment()).commit();
             navigationView.setCheckedItem(R.id.ticket);
         }
     }
@@ -54,7 +54,7 @@ public class UserActivity extends AppCompatActivity implements NavigationView.On
         switch (item.getItemId()) {
             case R.id.tickets:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new ResolveTicketFragment()).commit();
+                        new UserDashboardFragment()).commit();
                 break;
             case R.id.profile:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,

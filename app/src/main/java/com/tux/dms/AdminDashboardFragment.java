@@ -25,10 +25,10 @@ import retrofit2.Response;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link DashboardFragment#newInstance} factory method to
+ * Use the {@link AdminDashboardFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class DashboardFragment extends Fragment implements AdapterView.OnItemSelectedListener {
+public class AdminDashboardFragment extends Fragment implements AdapterView.OnItemSelectedListener {
 
     CardView newCard,assignedCard,inProgressCard,resolvedCard;
     TextView newTicketCount ;
@@ -47,7 +47,7 @@ public class DashboardFragment extends Fragment implements AdapterView.OnItemSel
     private String mParam1;
     private String mParam2;
 
-    public DashboardFragment() {
+    public AdminDashboardFragment() {
         // Required empty public constructor
     }
 
@@ -60,8 +60,8 @@ public class DashboardFragment extends Fragment implements AdapterView.OnItemSel
      * @return A new instance of fragment DashboardFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static DashboardFragment newInstance(String param1, String param2) {
-        DashboardFragment fragment = new DashboardFragment();
+    public static AdminDashboardFragment newInstance(String param1, String param2) {
+        AdminDashboardFragment fragment = new AdminDashboardFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -83,7 +83,7 @@ public class DashboardFragment extends Fragment implements AdapterView.OnItemSel
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
-        View v = inflater.inflate(R.layout.fragment_dashboard, container, false);
+        View v = inflater.inflate(R.layout.fragment_admin_dashboard, container, false);
         newCard = v.findViewById(R.id.newTicketsCardView);
         assignedCard = v.findViewById(R.id.assigned);
         inProgressCard = v.findViewById(R.id.inProgressCardView);
