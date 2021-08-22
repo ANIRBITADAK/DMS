@@ -2,6 +2,7 @@ package com.tux.dms;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -44,6 +45,7 @@ import retrofit2.Response;
  */
 public class TicketCreateFragment extends Fragment implements AdapterView.OnItemSelectedListener {
 
+    ProgressDialog dialog;
     Button scanButton;
     Button createTicket;
     ApiInterface apiInterface = ApiClient.getApiService();
@@ -123,6 +125,10 @@ public class TicketCreateFragment extends Fragment implements AdapterView.OnItem
         createTicket.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                dialog = new ProgressDialog(getContext());
+                dialog.setMessage("Creating Ticket");
+                dialog.setCanceledOnTouchOutside(false);
+                dialog.show();
                 uploadImage(imageData);
             }
         });
@@ -218,7 +224,10 @@ public class TicketCreateFragment extends Fragment implements AdapterView.OnItem
             public void onResponse(Call<ImageUploadResponse> call, Response<ImageUploadResponse> response) {
                 Toast.makeText(getContext(), "image uploaded/scanned",
                         Toast.LENGTH_LONG).show();
+
                 postTicket(subjectText.getText().toString(), sourceText, response.body().getPath());
+                dialog.dismiss();
+
             }
 
             @Override
@@ -229,7 +238,8 @@ public class TicketCreateFragment extends Fragment implements AdapterView.OnItem
     }
 
     private void postTicket(String subjectStr, String sourceStr, String imagePath) {
-
+    
+        
         Ticket ticketBody = new Ticket();
         ticketBody.setSubject(subjectStr);
         ticketBody.setSource(sourceStr);
@@ -240,13 +250,13 @@ public class TicketCreateFragment extends Fragment implements AdapterView.OnItem
         ticketCall.enqueue(new Callback<Ticket>() {
             @Override
             public void onResponse(Call<Ticket> call, Response<Ticket> response) {
-                Toast.makeText(getContext(), "Ticket created successfully",
-                        Toast.LENGTH_LONG).show();
+
 
             }
-
             @Override
             public void onFailure(Call<Ticket> call, Throwable t) {
+                
+
 
             }
         });

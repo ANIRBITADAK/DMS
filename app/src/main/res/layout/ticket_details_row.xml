@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:strokeColor="@color/purple_500"
+    app:strokeColor="@color/primaryTextColor"
     android:layout_marginTop="5sp"
     android:id="@+id/ticketCardView"
     app:strokeWidth="3dp">
