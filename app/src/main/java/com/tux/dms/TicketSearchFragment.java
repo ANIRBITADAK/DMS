@@ -154,10 +154,13 @@ public class TicketSearchFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
-                // View v = inflater.inflate(R.layout.fragment_assign_ticket, container, false);
                 TicketTableFragment ticketTableFragment = new TicketTableFragment();
-                String startDate = formatDate(date.getText().toString());
-                String endDate = addDays(startDate, 5);
+                String startDate = null;
+                String endDate = null;
+                if (date.getText() != null && !date.getText().toString().equals("")) {
+                    startDate = formatDate(date.getText().toString());
+                    endDate = addDays(startDate, 5);
+                }
                 Bundle ticketSearchBundle = getTicketSearchBundle(subject, state, priority, startDate, endDate);
                 ticketTableFragment.setArguments(ticketSearchBundle);
                 FragmentManager fragmentManager = getFragmentManager();
