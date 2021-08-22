@@ -152,9 +152,6 @@ public class AdminDashboardFragment extends Fragment implements AdapterView.OnIt
                 fragmentTransaction.replace(R.id.fragment_container, priorityDetailsFragment);
                 fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
-
-                //Intent i = new Intent(getActivity(), PriorityDetailsFragment.class);
-                //getActivity().startActivity(i);
             }
         });
 
@@ -170,8 +167,6 @@ public class AdminDashboardFragment extends Fragment implements AdapterView.OnIt
                 fragmentTransaction.replace(R.id.fragment_container, priorityDetailsFragment);
                 fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
-                //Intent i = new Intent(getActivity(), PriorityDetailsFragment.class);
-                //getActivity().startActivity(i);
             }
         });
 
@@ -187,8 +182,6 @@ public class AdminDashboardFragment extends Fragment implements AdapterView.OnIt
                 fragmentTransaction.replace(R.id.fragment_container, priorityDetailsFragment);
                 fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
-                // Intent i = new Intent(getActivity(), PriorityDetailsFragment.class);
-                //getActivity().startActivity(i);
             }
         });
 
