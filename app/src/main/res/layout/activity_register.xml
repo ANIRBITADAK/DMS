@@ -58,7 +58,7 @@
                 style="@style/parent"
                 android:layout_below="@id/linearlayoutCard"
                 android:layout_alignParentBottom="true"
-                android:layout_marginTop="100sp"
+                android:layout_marginTop="60sp"
                 android:text="©Copyright Tux Technologies"
                 android:textAlignment="center"
                 android:textColor="@color/primaryTextColor"
