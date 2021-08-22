@@ -57,21 +57,21 @@ public class AdminActivity extends AppCompatActivity implements NavigationView.O
             case R.id.dashboard:
 
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new AdminDashboardFragment()).commit();
+                        new AdminDashboardFragment()).addToBackStack(null).commit();
 
                 break;
             case R.id.create_new:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new TicketCreateFragment()).commit();
+                        new TicketCreateFragment()).addToBackStack(null).commit();
                 break;
 
             case R.id.search:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new TicketSearchFragment()).commit();
+                        new TicketSearchFragment()).addToBackStack(null).commit();
                 break;
             case R.id.assign_tickets:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new TicketAssignDrawerFragment()).commit();
+                        new TicketAssignDrawerFragment()).addToBackStack(null).commit();
                 break;
 
             case R.id.this_month:
@@ -82,12 +82,12 @@ public class AdminActivity extends AppCompatActivity implements NavigationView.O
 
             case R.id.custom_month:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new ReportFragment()).commit();
+                        new ReportFragment()).addToBackStack(null).commit();
                 break;
 
             case R.id.userListSpinner:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new ManageUserFragment()).commit();
+                        new ManageUserFragment()).addToBackStack(null).commit();
                 break;
 
         }
