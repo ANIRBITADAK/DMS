@@ -4,7 +4,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".TicketDetailsFragment">
-
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="8dp">
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -210,5 +213,6 @@
 
             </RelativeLayout>
         </RelativeLayout>
+    </ScrollView>
 
     </FrameLayout>

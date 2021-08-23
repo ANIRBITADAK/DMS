@@ -159,8 +159,6 @@ public class UserDashboardFragment extends Fragment {
                 fragmentTransaction.replace(R.id.fragment_container, priorityDetailsFragment);
                 fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
-
-
             }
         });
 

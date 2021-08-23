@@ -251,7 +251,6 @@ public class TicketCreateFragment extends Fragment implements AdapterView.OnItem
 
     private void postTicket(String subjectStr, String sourceStr, String imagePath) {
 
-
         Ticket ticketBody = new Ticket();
         ticketBody.setSubject(subjectStr);
         ticketBody.setSource(sourceStr);
