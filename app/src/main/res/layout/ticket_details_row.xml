@@ -23,7 +23,7 @@
                 android:id="@+id/subjectTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="sans-serif-condensed-medium"
+                android:fontFamily="@font/roboto_regular"
                 android:text="Subject"
                 android:textSize="20sp" />
 
@@ -33,7 +33,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20sp"
                 android:layout_toRightOf="@id/subjectTextView"
-                android:fontFamily="sans-serif-condensed-medium"
+                android:fontFamily="@font/roboto_regular"
                 android:textSize="20sp" />
 
         </RelativeLayout>
@@ -48,7 +48,7 @@
                 android:id="@+id/sourceTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="sans-serif-condensed-medium"
+                android:fontFamily="@font/roboto_regular"
                 android:text="Source"
                 android:textSize="20sp" />
 
@@ -58,7 +58,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20sp"
                 android:layout_toRightOf="@id/sourceTextView"
-                android:fontFamily="sans-serif-condensed-medium"
+                android:fontFamily="@font/roboto_regular"
                 android:textSize="20sp" />
 
         </RelativeLayout>

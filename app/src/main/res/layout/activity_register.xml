@@ -47,6 +47,7 @@
                 <TextView
                     style="@style/headerText"
                     android:layout_gravity="center"
+                    android:fontFamily="@font/roboto_regular"
                     android:text="Dak Management System"
                     android:layout_marginTop="40dp"/>
                 <include
@@ -60,6 +61,7 @@
                 android:layout_alignParentBottom="true"
                 android:layout_marginTop="60sp"
                 android:text="©Copyright Tux Technologies"
+                android:fontFamily="@font/roboto_regular"
                 android:textAlignment="center"
                 android:textColor="@color/primaryTextColor"
                 android:textStyle="bold" />

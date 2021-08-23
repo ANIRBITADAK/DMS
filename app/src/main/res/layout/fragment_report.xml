@@ -5,21 +5,25 @@
     android:layout_height="match_parent"
     tools:context=".ReportFragment">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="10sp">
 
         <TextView
-            android:layout_marginTop="40sp"
             android:id="@+id/textViewheading"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="40sp"
+            android:fontFamily="@font/roboto_regular"
             android:text="Generate Report"
-            android:textStyle="bold"
             android:textAlignment="center"
             android:textSize="30sp"
-            android:fontFamily="sans-serif-condensed-medium"/>
+            android:textStyle="bold" />
 
         <Button
             android:id="@+id/fromdate"
@@ -28,9 +32,11 @@
             android:layout_below="@id/textViewheading"
             android:layout_centerInParent="true"
             android:layout_marginTop="100sp"
-            android:textColor="@color/white"
             android:background="@drawable/login_button_bk"
-            android:text="Select From Date" />
+            android:padding="10sp"
+            android:text="Select From Date"
+            android:fontFamily="@font/roboto_regular"
+            android:textColor="@color/white" />
 
 
         <Button
@@ -42,12 +48,15 @@
             android:layout_marginTop="50sp"
             android:textColor="@color/white"
             android:background="@drawable/login_button_bk"
-            android:text="Select To Date" />
+            android:text="Select To Date"
+            android:fontFamily="@font/roboto_regular"
+            android:padding="10sp"/>
 
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Generate Report"
+            android:fontFamily="@font/roboto_regular"
             android:id="@+id/buttonGenerateReport"
             android:layout_below="@id/todate"
             android:layout_marginTop="100sp"
@@ -58,6 +67,8 @@
         
 
     </RelativeLayout>
+
+    </ScrollView>
 
 
 </FrameLayout>

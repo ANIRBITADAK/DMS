@@ -4,215 +4,219 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".TicketDetailsFragment">
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="8dp">
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_margin="8sp">
+
+<!--        <ScrollView-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_margin="8dp">-->
 
             <RelativeLayout
-                android:id="@+id/relativeLayoutSubject"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:id="@+id/subjectTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="sans-serif-condensed-medium"
-                    android:text="Subject"
-                    android:textSize="20sp" />
-
-                <TextView
-                    android:id="@+id/assignSubjectText"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20sp"
-                    android:layout_toRightOf="@id/subjectTextView"
-                    android:fontFamily="sans-serif-condensed-medium"
-                    android:textSize="20sp" />
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/relativeLayoutSrc"
-                android:layout_below="@id/relativeLayoutSubject"
-                android:layout_marginTop="20sp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:id="@+id/sourceTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="sans-serif-condensed-medium"
-                    android:text="Source"
-                    android:textSize="20sp" />
-
-                <TextView
-                    android:id="@+id/assignSourceText"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20sp"
-                    android:layout_toRightOf="@id/sourceTextView"
-                    android:fontFamily="sans-serif-condensed-medium"
-                    android:textSize="20sp" />
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/relativeLayoutAssignedTo"
-                android:layout_below="@id/relativeLayoutSrc"
-                android:layout_marginTop="20sp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:id="@+id/assignedToTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="sans-serif-condensed-medium"
-                    android:text="Assigned To"
-                    android:textSize="20sp" />
-
-                <TextView
-                    android:id="@+id/assignedToText"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20sp"
-                    android:layout_toRightOf="@id/assignedToTextView"
-                    android:fontFamily="sans-serif-condensed-medium"
-                    android:textSize="20sp" />
-
-            </RelativeLayout>
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_margin="8sp">
 
                 <RelativeLayout
-                    android:id="@+id/relativeLayoutAssignedDate"
-                    android:layout_below="@id/relativeLayoutAssignedTo"
+                    android:id="@+id/relativeLayoutSubject"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/subjectTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_regular"
+                        android:text="Subject"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/assignSubjectText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20sp"
+                        android:layout_toRightOf="@id/subjectTextView"
+                        android:fontFamily="@font/roboto_regular"
+                        android:textSize="20sp" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/relativeLayoutSrc"
+                    android:layout_below="@id/relativeLayoutSubject"
                     android:layout_marginTop="20sp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
                     <TextView
-                        android:id="@+id/assignedDateTextView"
+                        android:id="@+id/sourceTextView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="sans-serif-condensed-medium"
-                        android:text="Assigned Date"
+                        android:fontFamily="@font/roboto_regular"
+                        android:text="Source"
                         android:textSize="20sp" />
 
                     <TextView
-                        android:id="@+id/assignedDateText"
+                        android:id="@+id/assignSourceText"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="20sp"
-                        android:layout_toRightOf="@id/assignedDateTextView"
-                        android:fontFamily="sans-serif-condensed-medium"
+                        android:layout_toRightOf="@id/sourceTextView"
+                        android:fontFamily="@font/roboto_regular"
                         android:textSize="20sp" />
 
                 </RelativeLayout>
 
-            <Button
-                android:id="@+id/showImageBtn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/relativeLayoutAssignedDate"
-                android:layout_marginTop="20sp"
-                android:textColor="@color/white"
-                android:background="@drawable/login_button_bk"
-                android:text="Show Image" />
-
-            <TextView
-                android:id="@+id/commentsTextView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/showImageBtn"
-                android:layout_marginTop="10sp"
-                android:fontFamily="sans-serif-condensed-medium"
-                android:text="Comments"
-                android:textSize="18sp" />
-            <LinearLayout
-
-                android:id="@+id/linearlayoutComments"
-                android:layout_below="@id/commentsTextView"
-                android:layout_marginTop="20sp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <ScrollView
+                <RelativeLayout
+                    android:id="@+id/relativeLayoutAssignedTo"
+                    android:layout_below="@id/relativeLayoutSrc"
+                    android:layout_marginTop="20sp"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="wrap_content">
 
-                    <LinearLayout
+                    <TextView
+                        android:id="@+id/assignedToTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_regular"
+                        android:text="Assigned To"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/assignedToText"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="8sp"
-                        android:orientation="vertical">
+                        android:layout_marginLeft="20sp"
+                        android:layout_toRightOf="@id/assignedToTextView"
+                        android:fontFamily="@font/roboto_regular"
+                        android:textSize="20sp" />
 
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/commentRecyclerView"
+                </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/relativeLayoutAssignedDate"
+                        android:layout_below="@id/relativeLayoutAssignedTo"
+                        android:layout_marginTop="20sp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/assignedDateTextView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_regular"
+                            android:text="Assigned Date"
+                            android:textSize="20sp" />
+
+                        <TextView
+                            android:id="@+id/assignedDateText"
                             android:layout_width="match_parent"
-                            android:layout_height="100sp"
-                            android:nestedScrollingEnabled="false"
-                            android:overScrollMode="never"
-                            android:layout_marginTop="5sp"
-                            tools:listitem= "@layout/comment_card"/>
-                    </LinearLayout>
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="20sp"
+                            android:layout_toRightOf="@id/assignedDateTextView"
+                            android:fontFamily="@font/roboto_regular"
+                            android:textSize="20sp" />
 
-                </ScrollView>
-
-            </LinearLayout>
-
-            <RelativeLayout
-                android:id="@+id/commentContainer"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/linearlayoutComments"
-                android:layout_alignParentBottom="true"
-                android:layout_marginTop="20sp">
-
-                <Button
-                    android:id="@+id/ticketDetailsSaveButton"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/ticketStateSpinner"
-                    android:layout_marginTop="30sp"
-                    android:textColor="@color/white"
-                    android:background="@drawable/login_button_bk"
-                    android:text="Save" />
+                    </RelativeLayout>
 
                 <EditText
                     android:id="@+id/assignCommentEditText"
                     style="@style/modifiedEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_below="@+id/relativeLayoutAssignedDate"
+                    android:layout_marginTop="20sp"
                     android:hint="Enter Comment" />
 
-                <Spinner
-                    android:id="@+id/ticketStateSpinner"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/assignedStateTxtView"
-                    android:layout_marginTop="10sp" />
-
-                <TextView
-                    android:id="@+id/assignedStateTxtView"
+                <Button
+                    android:id="@+id/showImageBtn"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/assignCommentEditText"
+                    android:layout_marginTop="20sp"
+                    android:background="@drawable/login_button_bk"
+                    android:text="Show Image"
+                    android:textColor="@color/white" />
+
+                <TextView
+                    android:id="@+id/commentsTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/showImageBtn"
                     android:layout_marginTop="10sp"
-                    android:fontFamily="sans-serif-condensed-medium"
-                    android:text="Change State"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="Comments"
                     android:textSize="18sp" />
+                <LinearLayout
+
+                    android:id="@+id/linearlayoutComments"
+                    android:layout_below="@id/commentsTextView"
+                    android:layout_marginTop="20sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <ScrollView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="8sp"
+                            android:orientation="vertical">
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/commentRecyclerView"
+                                android:layout_width="match_parent"
+                                android:layout_height="100sp"
+                                android:nestedScrollingEnabled="false"
+                                android:overScrollMode="never"
+                                android:layout_marginTop="5sp"
+                                tools:listitem= "@layout/comment_card"/>
+                        </LinearLayout>
+
+                    </ScrollView>
+
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:id="@+id/commentContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/linearlayoutComments"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginTop="20sp">
+
+                    <Button
+                        android:id="@+id/ticketDetailsSaveButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/ticketStateSpinner"
+                        android:layout_marginTop="30sp"
+                        android:background="@drawable/login_button_bk"
+                        android:text="Save"
+                        android:textColor="@color/white" />
 
 
+                    <Spinner
+                        android:id="@+id/ticketStateSpinner"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/assignedStateTxtView"
+                        android:layout_marginTop="10sp" />
+
+                    <TextView
+                        android:id="@+id/assignedStateTxtView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10sp"
+                        android:fontFamily="sans-serif-condensed-medium"
+                        android:text="Change State"
+                        android:textSize="18sp" />
+
+
+                </RelativeLayout>
             </RelativeLayout>
-        </RelativeLayout>
-    </ScrollView>
+<!--        </ScrollView>-->
 
-    </FrameLayout>
+</FrameLayout>
