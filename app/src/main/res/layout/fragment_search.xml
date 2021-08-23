@@ -23,7 +23,7 @@
                 android:textSize="30sp"
                 android:textAlignment="center"
                 android:layout_marginTop="30sp"
-                android:fontFamily="sans-serif-condensed-medium"/>
+                android:fontFamily="@font/roboto_regular"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -31,7 +31,7 @@
                 android:text="Enter Subject"
                 android:textSize="20sp"
                 android:layout_marginTop="15sp"
-                android:fontFamily="sans-serif-condensed-medium"/>
+                android:fontFamily="@font/roboto_regular"/>
 
 
             <EditText
@@ -45,9 +45,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Select State"
+                android:fontFamily="@font/roboto_regular"
                 android:textSize="20sp"
-                android:layout_marginTop="15sp"
-                android:fontFamily="sans-serif-condensed-medium"/>
+                android:layout_marginTop="15sp" />
 
             <Spinner
                 android:id="@+id/stateSpinner"
@@ -61,7 +61,7 @@
                 android:text="Select Priority"
                 android:textSize="20sp"
                 android:layout_marginTop="15sp"
-                android:fontFamily="sans-serif-condensed-medium"/>
+                android:fontFamily="@font/roboto_regular"/>
 
             <Spinner
                 android:id="@+id/prioritySpinner"
@@ -75,7 +75,7 @@
                 android:text="Select Date"
                 android:textSize="20sp"
                 android:layout_marginTop="15sp"
-                android:fontFamily="sans-serif-condensed-medium" />
+                android:fontFamily="@font/roboto_regular" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -110,6 +110,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/ticketSearchButton"
                 android:text="search"
+                android:fontFamily="@font/roboto_regular"
                 android:textColor="@color/white"
                 android:background="@drawable/login_button_bk"
                 android:layout_marginTop="70sp"/>

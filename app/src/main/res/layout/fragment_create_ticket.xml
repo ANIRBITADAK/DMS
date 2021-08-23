@@ -5,6 +5,10 @@
     android:layout_height="match_parent"
     tools:context=".TicketCreateFragment">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -15,7 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="40sp"
-            android:fontFamily="sans-serif-condensed-medium"
+            android:fontFamily="@font/roboto_regular"
             android:text="Generate Ticket"
             android:textAlignment="center"
             android:textSize="25sp"
@@ -36,7 +40,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/assignSubjectText"
             android:layout_marginTop="15sp"
-            android:fontFamily="sans-serif-condensed-medium"
+            android:fontFamily="@font/roboto_regular"
             android:text="Enter Source"
             android:textSize="20sp" />
 
@@ -53,9 +57,10 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/source"
             android:layout_marginTop="90sp"
-            android:textColor="@color/white"
             android:background="@drawable/login_button_bk"
-            android:text="Scan" />
+            android:text="Scan"
+            android:fontFamily="@font/roboto_regular"
+            android:textColor="@color/white" />
 
         <Button
             android:id="@+id/buttonCreateTicket"
@@ -65,8 +70,11 @@
             android:layout_marginTop="40sp"
             android:textColor="@color/white"
             android:background="@drawable/login_button_bk"
-            android:text="Create Ticket" />
+            android:text="Create Ticket"
+            android:fontFamily="@font/roboto_regular"/>
 
     </RelativeLayout>
+
+    </ScrollView>
 
 </FrameLayout>

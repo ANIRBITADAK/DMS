@@ -45,6 +45,7 @@
 
 
                 <TextView
+                    android:fontFamily="@font/roboto_regular"
                     style="@style/headerText"
                     android:layout_gravity="center"
                     android:text="Dak Management System"
