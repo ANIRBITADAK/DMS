@@ -127,31 +127,6 @@ class RecyclerAdapterView extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                 });
             }
         }
-       /* if (ticketList != null && ticketList.get(position) != null && ticketList.get(position).getSource() != null) {
-            viewHolder.textViewSource.setText(ticketList.get(position).getSource());
-            viewHolder.textViewSource.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-//                    Fragment activity = (Fragment) view.getContext();
-                    Toast.makeText(view.getContext(), "Position:" + Integer.toString(position), Toast.LENGTH_SHORT).show();
-                    TicketDetailsFragment ticketDetailsFragment = new TicketDetailsFragment();
-                    context = view.getContext();
-                    FragmentManager manager = ((AppCompatActivity) context).getSupportFragmentManager();
-                    FragmentTransaction fragmentTransaction = manager.beginTransaction();
-                    fragmentTransaction.replace(R.id.fragment_container, ticketDetailsFragment);
-                    fragmentTransaction.addToBackStack(null);
-                    fragmentTransaction.commit();
-                }
-            });
-
-        } else {
-            viewHolder.textViewSource.setText("");
-        }
-        if (ticketList != null && ticketList.get(position) != null && ticketList.get(position).getSubject() != null) {
-            viewHolder.textViewSubject.setText(ticketList.get(position).getSubject());
-        } else {
-            viewHolder.textViewSubject.setText("");
-        }*/
     }
 
     private class ItemViewHolder extends RecyclerView.ViewHolder {

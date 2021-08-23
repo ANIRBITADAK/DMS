@@ -64,6 +64,7 @@ public class TicketCreateFragment extends Fragment implements AdapterView.OnItem
     Spinner sourceSpiner;
     String sourceText;
     EditText subjectText;
+    AlertDialog dialog;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -111,7 +112,10 @@ public class TicketCreateFragment extends Fragment implements AdapterView.OnItem
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_create_ticket, container, false);
         mBuilder = new AlertDialog.Builder(getContext());
-        mView = getLayoutInflater().inflate(R.layout.dialog_layout, null);
+        mView = getLayoutInflater().inflate(R.layout.dialog_layout, container,false);
+        mBuilder.setView(mView);
+        dialog = mBuilder.create();
+
         btnYes = (Button) mView.findViewById(R.id.btnYes);
         btnNo = (Button) mView.findViewById(R.id.btnNo);
         sourceSpiner = view.findViewById(R.id.source);
@@ -201,15 +205,11 @@ public class TicketCreateFragment extends Fragment implements AdapterView.OnItem
 
                 Bundle bundle = data.getExtras();
                 bmp = (Bitmap) bundle.get("data");
-                // ivImage.setImageBitmap(bmp);
                 bmp.compress(Bitmap.CompressFormat.PNG, 100, baos);
                 imageData = baos.toByteArray();
-                //Toast.makeText(getContext(), imageData.toString(), Toast.LENGTH_LONG).show();
-                //uploadImage(imageData);
             } else if (requestCode == SELECT_FILE) {
 
                 Uri selectedImageUri = data.getData();
-                //ivImage.setImageURI(selectedImageUri);
                 try {
                     bmp = MediaStore.Images.Media.getBitmap(getActivity().getApplicationContext().getContentResolver(),
                             selectedImageUri);
@@ -219,7 +219,6 @@ public class TicketCreateFragment extends Fragment implements AdapterView.OnItem
                 bmp.compress(Bitmap.CompressFormat.JPEG, 10, baos);
                 imageData = baos.toByteArray();
                 Toast.makeText(getContext(), imageData.toString(), Toast.LENGTH_LONG).show();
-                //uploadImage(imageData);
             }
 
         }
@@ -262,8 +261,6 @@ public class TicketCreateFragment extends Fragment implements AdapterView.OnItem
             @Override
             public void onResponse(Call<Ticket> call, Response<Ticket> response) {
                 progressDialog.dismiss();
-                mBuilder.setView(mView);
-                final AlertDialog dialog = mBuilder.create();
                 dialog.show();
                 btnYes.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -291,7 +288,6 @@ public class TicketCreateFragment extends Fragment implements AdapterView.OnItem
 
             @Override
             public void onFailure(Call<Ticket> call, Throwable t) {
-
 
             }
         });
