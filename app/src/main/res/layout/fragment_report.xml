@@ -28,9 +28,10 @@
             android:layout_below="@id/textViewheading"
             android:layout_centerInParent="true"
             android:layout_marginTop="100sp"
-            android:textColor="@color/white"
             android:background="@drawable/login_button_bk"
-            android:text="Select From Date" />
+            android:text="Select From Date"
+            android:padding="10sp"
+            android:textColor="@color/white" />
 
 
         <Button
@@ -42,7 +43,8 @@
             android:layout_marginTop="50sp"
             android:textColor="@color/white"
             android:background="@drawable/login_button_bk"
-            android:text="Select To Date" />
+            android:text="Select To Date"
+            android:padding="10sp"/>
 
         <Button
             android:layout_width="match_parent"
