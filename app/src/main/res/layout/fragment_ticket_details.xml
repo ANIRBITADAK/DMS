@@ -118,20 +118,13 @@
 
                     </RelativeLayout>
 
-                <EditText
-                    android:id="@+id/assignCommentEditText"
-                    style="@style/modifiedEditText"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/relativeLayoutAssignedDate"
-                    android:layout_marginTop="20sp"
-                    android:hint="Enter Comment" />
+
 
                 <Button
                     android:id="@+id/showImageBtn"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/assignCommentEditText"
+                    android:layout_below="@id/relativeLayoutAssignedDate"
                     android:layout_marginTop="20sp"
                     android:background="@drawable/login_button_bk"
                     android:text="Show Image"
@@ -146,10 +139,20 @@
                     android:fontFamily="@font/roboto_regular"
                     android:text="Comments"
                     android:textSize="18sp" />
+
+                <EditText
+                    android:id="@+id/assignCommentEditText"
+                    style="@style/modifiedEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/commentsTextView"
+                    android:layout_marginTop="20sp"
+                    android:hint="Enter Comment" />
+
                 <LinearLayout
 
                     android:id="@+id/linearlayoutComments"
-                    android:layout_below="@id/commentsTextView"
+                    android:layout_below="@id/assignCommentEditText"
                     android:layout_marginTop="20sp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
