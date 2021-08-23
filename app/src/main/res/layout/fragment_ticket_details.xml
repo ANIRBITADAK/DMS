@@ -179,9 +179,9 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/ticketStateSpinner"
                     android:layout_marginTop="30sp"
-                    android:textColor="@color/white"
                     android:background="@drawable/login_button_bk"
-                    android:text="Save" />
+                    android:text="Save"
+                    android:textColor="@color/white" />
 
                 <EditText
                     android:id="@+id/assignCommentEditText"
