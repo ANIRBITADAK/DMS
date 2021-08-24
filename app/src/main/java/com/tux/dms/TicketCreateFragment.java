@@ -59,6 +59,7 @@ public class TicketCreateFragment extends Fragment implements AdapterView.OnItem
     Bitmap bmp;
     ByteArrayOutputStream baos = new ByteArrayOutputStream();
     byte[] imageData;
+    String imagePath;
 
     String[] sources = {"State", "District", "Sub-Division", "Gram Panchayat", "Other Block Offices", "Others"};
     Spinner sourceSpiner;
@@ -142,12 +143,7 @@ public class TicketCreateFragment extends Fragment implements AdapterView.OnItem
                 progressDialog.setMessage("Creating Ticket");
                 progressDialog.setCanceledOnTouchOutside(false);
                 progressDialog.show();
-                if (imageData != null) {
-                    uploadImage(imageData);
-                } else {
-                    // create ticket without image
-                    postTicket(subjectText.getText().toString(), sourceText, null);
-                }
+                postTicket(subjectText.getText().toString(), sourceText, imagePath);
             }
         });
 
@@ -218,9 +214,8 @@ public class TicketCreateFragment extends Fragment implements AdapterView.OnItem
                 }
                 bmp.compress(Bitmap.CompressFormat.JPEG, 10, baos);
                 imageData = baos.toByteArray();
-                Toast.makeText(getContext(), imageData.toString(), Toast.LENGTH_LONG).show();
             }
-
+            uploadImage(imageData);
         }
 
     }
@@ -236,9 +231,9 @@ public class TicketCreateFragment extends Fragment implements AdapterView.OnItem
         call.enqueue(new Callback<ImageUploadResponse>() {
             @Override
             public void onResponse(Call<ImageUploadResponse> call, Response<ImageUploadResponse> response) {
-                Toast.makeText(getContext(), "image uploaded/scanned",
+                imagePath =  response.body().getPath();
+                Toast.makeText(getContext(), "image scanned/attached",
                         Toast.LENGTH_LONG).show();
-                postTicket(subjectText.getText().toString(), sourceText, response.body().getPath());
             }
 
             @Override
@@ -248,12 +243,12 @@ public class TicketCreateFragment extends Fragment implements AdapterView.OnItem
         });
     }
 
-    private void postTicket(String subjectStr, String sourceStr, String imagePath) {
+    private void postTicket(String subjectStr, String sourceStr, String imageSrcPath) {
 
         Ticket ticketBody = new Ticket();
         ticketBody.setSubject(subjectStr);
         ticketBody.setSource(sourceStr);
-        ticketBody.setFilePath(imagePath);
+        ticketBody.setFilePath(imageSrcPath);
         String token = sessionCache.getToken();
         Call<Ticket> ticketCall = apiInterface.createTicket(token, ticketBody);
 
@@ -268,7 +263,7 @@ public class TicketCreateFragment extends Fragment implements AdapterView.OnItem
                         subjectText.setText("");
                         sourceSpiner.setSelection(0);
                         dialog.dismiss();
-
+                        imagePath = null;
                     }
                 });
                 btnNo.setOnClickListener(new View.OnClickListener() {

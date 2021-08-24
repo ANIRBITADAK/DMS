@@ -20,6 +20,7 @@ import androidx.fragment.app.FragmentTransaction;
 import com.tux.dms.cache.SessionCache;
 import com.tux.dms.constants.TicketConst;
 import com.tux.dms.constants.TicketPriorityType;
+import com.tux.dms.constants.TicketStateType;
 import com.tux.dms.dto.Ticket;
 import com.tux.dms.dto.AssignTicket;
 import com.tux.dms.dto.User;
@@ -198,6 +199,9 @@ public class TicketAssignmentFragment extends Fragment {
                             String msg = "Ticket assigned to " + assignedToName;
                             Toast.makeText(getContext(), msg, Toast.LENGTH_LONG).show();
                             TicketTableFragment ticketTableFragment = new TicketTableFragment();
+                            Bundle ticketType = new Bundle();
+                            ticketType.putString(TicketStateType.TICKET_STATE_TYPE_KEY, TicketStateType.NEW_TICKET);
+                            ticketTableFragment.setArguments(ticketType);
                             FragmentManager manager = ((AppCompatActivity) view.getContext()).getSupportFragmentManager();
                             FragmentTransaction fragmentTransaction = manager.beginTransaction();
                             fragmentTransaction.replace(R.id.fragment_container, ticketTableFragment);
