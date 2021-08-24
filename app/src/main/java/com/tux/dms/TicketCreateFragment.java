@@ -59,11 +59,13 @@ public class TicketCreateFragment extends Fragment implements AdapterView.OnItem
     Bitmap bmp;
     ByteArrayOutputStream baos = new ByteArrayOutputStream();
     byte[] imageData;
+    String imagePath;
 
     String[] sources = {"State", "District", "Sub-Division", "Gram Panchayat", "Other Block Offices", "Others"};
     Spinner sourceSpiner;
     String sourceText;
     EditText subjectText;
+    AlertDialog dialog;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -111,7 +113,10 @@ public class TicketCreateFragment extends Fragment implements AdapterView.OnItem
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_create_ticket, container, false);
         mBuilder = new AlertDialog.Builder(getContext());
-        mView = getLayoutInflater().inflate(R.layout.dialog_layout, null);
+        mView = getLayoutInflater().inflate(R.layout.dialog_layout, container,false);
+        mBuilder.setView(mView);
+        dialog = mBuilder.create();
+
         btnYes = (Button) mView.findViewById(R.id.btnYes);
         btnNo = (Button) mView.findViewById(R.id.btnNo);
         sourceSpiner = view.findViewById(R.id.source);
@@ -138,12 +143,7 @@ public class TicketCreateFragment extends Fragment implements AdapterView.OnItem
                 progressDialog.setMessage("Creating Ticket");
                 progressDialog.setCanceledOnTouchOutside(false);
                 progressDialog.show();
-                if (imageData != null) {
-                    uploadImage(imageData);
-                } else {
-                    // create ticket without image
-                    postTicket(subjectText.getText().toString(), sourceText, null);
-                }
+                postTicket(subjectText.getText().toString(), sourceText, imagePath);
             }
         });
 
@@ -201,15 +201,11 @@ public class TicketCreateFragment extends Fragment implements AdapterView.OnItem
 
                 Bundle bundle = data.getExtras();
                 bmp = (Bitmap) bundle.get("data");
-                // ivImage.setImageBitmap(bmp);
                 bmp.compress(Bitmap.CompressFormat.PNG, 100, baos);
                 imageData = baos.toByteArray();
-                //Toast.makeText(getContext(), imageData.toString(), Toast.LENGTH_LONG).show();
-                //uploadImage(imageData);
             } else if (requestCode == SELECT_FILE) {
 
                 Uri selectedImageUri = data.getData();
-                //ivImage.setImageURI(selectedImageUri);
                 try {
                     bmp = MediaStore.Images.Media.getBitmap(getActivity().getApplicationContext().getContentResolver(),
                             selectedImageUri);
@@ -218,10 +214,8 @@ public class TicketCreateFragment extends Fragment implements AdapterView.OnItem
                 }
                 bmp.compress(Bitmap.CompressFormat.JPEG, 10, baos);
                 imageData = baos.toByteArray();
-                Toast.makeText(getContext(), imageData.toString(), Toast.LENGTH_LONG).show();
-                //uploadImage(imageData);
             }
-
+            uploadImage(imageData);
         }
 
     }
@@ -237,9 +231,9 @@ public class TicketCreateFragment extends Fragment implements AdapterView.OnItem
         call.enqueue(new Callback<ImageUploadResponse>() {
             @Override
             public void onResponse(Call<ImageUploadResponse> call, Response<ImageUploadResponse> response) {
-                Toast.makeText(getContext(), "image uploaded/scanned",
+                imagePath =  response.body().getPath();
+                Toast.makeText(getContext(), "image scanned/attached",
                         Toast.LENGTH_LONG).show();
-                postTicket(subjectText.getText().toString(), sourceText, response.body().getPath());
             }
 
             @Override
@@ -249,12 +243,12 @@ public class TicketCreateFragment extends Fragment implements AdapterView.OnItem
         });
     }
 
-    private void postTicket(String subjectStr, String sourceStr, String imagePath) {
+    private void postTicket(String subjectStr, String sourceStr, String imageSrcPath) {
 
         Ticket ticketBody = new Ticket();
         ticketBody.setSubject(subjectStr);
         ticketBody.setSource(sourceStr);
-        ticketBody.setFilePath(imagePath);
+        ticketBody.setFilePath(imageSrcPath);
         String token = sessionCache.getToken();
         Call<Ticket> ticketCall = apiInterface.createTicket(token, ticketBody);
 
@@ -262,8 +256,6 @@ public class TicketCreateFragment extends Fragment implements AdapterView.OnItem
             @Override
             public void onResponse(Call<Ticket> call, Response<Ticket> response) {
                 progressDialog.dismiss();
-                mBuilder.setView(mView);
-                final AlertDialog dialog = mBuilder.create();
                 dialog.show();
                 btnYes.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -271,7 +263,7 @@ public class TicketCreateFragment extends Fragment implements AdapterView.OnItem
                         subjectText.setText("");
                         sourceSpiner.setSelection(0);
                         dialog.dismiss();
-
+                        imagePath = null;
                     }
                 });
                 btnNo.setOnClickListener(new View.OnClickListener() {
@@ -291,7 +283,6 @@ public class TicketCreateFragment extends Fragment implements AdapterView.OnItem
 
             @Override
             public void onFailure(Call<Ticket> call, Throwable t) {
-
 
             }
         });

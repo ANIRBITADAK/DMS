@@ -79,7 +79,7 @@ public class RegisterActivity extends AppCompatActivity {
 
                     JWTToken token = response.body();
                     sessionCache.setToken(token.getToken());
-                    Toast.makeText(getApplicationContext(), token.getToken(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "successfully registered", Toast.LENGTH_LONG).show();
                     Intent intent=new Intent(RegisterActivity.this, LoginActivity.class);
                     startActivity(intent);
 
