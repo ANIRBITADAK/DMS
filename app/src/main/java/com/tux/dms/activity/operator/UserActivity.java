@@ -1,4 +1,4 @@
-package com.tux.dms;
+package com.tux.dms.activity.operator;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -13,6 +13,9 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.google.android.material.navigation.NavigationView;
+import com.tux.dms.R;
+import com.tux.dms.ReportFragment;
+import com.tux.dms.fragment.dashboard.UserDashboardFragment;
 import com.tux.dms.cache.SessionCache;
 
 public class UserActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {

@@ -1,4 +1,4 @@
-package com.tux.dms;
+package com.tux.dms.activity.creator;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -13,6 +13,9 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.google.android.material.navigation.NavigationView;
+import com.tux.dms.R;
+import com.tux.dms.ReportFragment;
+import com.tux.dms.fragment.tickets.TicketCreateFragment;
 import com.tux.dms.cache.SessionCache;
 
 public class TicketCreatorActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {

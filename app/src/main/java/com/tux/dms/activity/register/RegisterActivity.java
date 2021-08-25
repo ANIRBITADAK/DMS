@@ -1,16 +1,17 @@
-package com.tux.dms;
+package com.tux.dms.activity.register;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.tux.dms.R;
+import com.tux.dms.activity.login.LoginActivity;
 import com.tux.dms.cache.SessionCache;
 import com.tux.dms.rest.ApiClient;
 import com.tux.dms.rest.ApiInterface;
@@ -53,7 +54,7 @@ public class RegisterActivity extends AppCompatActivity {
         signInRedirect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(RegisterActivity.this,LoginActivity.class);
+                Intent intent=new Intent(RegisterActivity.this, LoginActivity.class);
                 startActivity(intent);
             }
         });

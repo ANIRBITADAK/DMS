@@ -8,6 +8,7 @@ import android.os.Handler;
 import android.view.WindowManager;
 
 import com.airbnb.lottie.LottieAnimationView;
+import com.tux.dms.activity.login.LoginActivity;
 
 public class MainActivity extends AppCompatActivity {
 

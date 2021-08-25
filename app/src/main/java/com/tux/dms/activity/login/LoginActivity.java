@@ -1,4 +1,4 @@
-package com.tux.dms;
+package com.tux.dms.activity.login;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -10,6 +10,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.tux.dms.activity.admin.AdminActivity;
+import com.tux.dms.R;
+import com.tux.dms.activity.register.RegisterActivity;
+import com.tux.dms.activity.creator.TicketCreatorActivity;
+import com.tux.dms.activity.operator.UserActivity;
 import com.tux.dms.cache.SessionCache;
 import com.tux.dms.constants.RoleConsts;
 import com.tux.dms.rest.ApiInterface;

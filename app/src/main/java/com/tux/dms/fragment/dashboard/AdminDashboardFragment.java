@@ -1,4 +1,4 @@
-package com.tux.dms;
+package com.tux.dms.fragment.dashboard;
 
 import android.os.Bundle;
 
@@ -10,8 +10,11 @@ import androidx.fragment.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.TextView;
 
+import com.tux.dms.R;
+import com.tux.dms.TicketAssignDrawerFragment;
 import com.tux.dms.cache.SessionCache;
 import com.tux.dms.constants.TicketStateType;
 import com.tux.dms.dto.TicketCount;
@@ -22,14 +25,21 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class UserDashboardFragment extends Fragment {
+/**
+ * A simple {@link Fragment} subclass.
+ * Use the {@link AdminDashboardFragment#newInstance} factory method to
+ * create an instance of this fragment.
+ */
+public class AdminDashboardFragment extends Fragment implements AdapterView.OnItemSelectedListener {
 
-    ApiInterface apiInterface = ApiClient.getApiService();
-    SessionCache sessionCache = SessionCache.getSessionCache();
-    CardView assignedCard, inProgressCard, resolvedCard;
-    TextView assignedTicketCount;
+    CardView newCard,assignedCard,inProgressCard,resolvedCard;
+    TextView newTicketCount ;
+    TextView assignTicketCount ;
     TextView inProgressTicketCount;
     TextView resolvedTicketCount;
+    ApiInterface apiInterface = ApiClient.getApiService();
+    SessionCache sessionCache = SessionCache.getSessionCache();
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -39,7 +49,7 @@ public class UserDashboardFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public UserDashboardFragment() {
+    public AdminDashboardFragment() {
         // Required empty public constructor
     }
 
@@ -49,11 +59,11 @@ public class UserDashboardFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment ResolveTicketFragment.
+     * @return A new instance of fragment DashboardFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static UserDashboardFragment newInstance(String param1, String param2) {
-        UserDashboardFragment fragment = new UserDashboardFragment();
+    public static AdminDashboardFragment newInstance(String param1, String param2) {
+        AdminDashboardFragment fragment = new AdminDashboardFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -74,15 +84,17 @@ public class UserDashboardFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.fragment_user_dashboard, container, false);
-        assignedCard = v.findViewById(R.id.assignedTicketsCardView);
+
+        View v = inflater.inflate(R.layout.fragment_admin_dashboard, container, false);
+        newCard = v.findViewById(R.id.newTicketsCardView);
+        assignedCard = v.findViewById(R.id.assigned);
         inProgressCard = v.findViewById(R.id.inProgressCardView);
-        resolvedCard = v.findViewById(R.id.resolvedTicketsCardView);
+        resolvedCard = v.findViewById(R.id.resolvedTicketCardView);
 
-        assignedTicketCount = v.findViewById(R.id.assignedCountTicketText);
-        inProgressTicketCount = v.findViewById(R.id.inProgressCountTicketText);
-        resolvedTicketCount = v.findViewById(R.id.resolvedCountTicketText);
-
+        newTicketCount = v.findViewById(R.id.newCountTicketText);
+        assignTicketCount = v.findViewById(R.id.assignedTicketCountText);
+        inProgressTicketCount = v.findViewById(R.id.inProgressTicketCountText);
+        resolvedTicketCount = v.findViewById(R.id.resolvedTicketCountText);
 
         Call<TicketCount> call = apiInterface.getTicketCount(sessionCache.getToken(), null);
 
@@ -93,10 +105,13 @@ public class UserDashboardFragment extends Fragment {
             public void onResponse(Call<TicketCount> call, Response<TicketCount> response) {
 
                 if (response != null && response.body() != null) {
-
+                    Integer newTickets = response.body().getNewTicket();
+                    if (newTickets != null) {
+                        newTicketCount.setText(String.valueOf(newTickets));
+                    }
                     Integer assignTickets = response.body().getAssignedTicket();
                     if (assignTickets != null) {
-                        assignedTicketCount.setText(String.valueOf(assignTickets));
+                        assignTicketCount.setText(String.valueOf(assignTickets));
                     }
                     Integer inProgressTickets = response.body().getInprogressTicket();
                     if (inProgressTickets != null) {
@@ -115,6 +130,18 @@ public class UserDashboardFragment extends Fragment {
             }
         });
 
+        newCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                TicketAssignDrawerFragment ticketAssignDrawerFragment = new TicketAssignDrawerFragment();
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.fragment_container, ticketAssignDrawerFragment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+            }
+        });
+
         assignedCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -127,7 +154,6 @@ public class UserDashboardFragment extends Fragment {
                 fragmentTransaction.replace(R.id.fragment_container, priorityDetailsFragment);
                 fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
-
             }
         });
 
@@ -143,7 +169,6 @@ public class UserDashboardFragment extends Fragment {
                 fragmentTransaction.replace(R.id.fragment_container, priorityDetailsFragment);
                 fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
-
             }
         });
 
@@ -164,4 +189,15 @@ public class UserDashboardFragment extends Fragment {
 
         return v;
     }
+
+    @Override
+    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
+
+    }
+
 }

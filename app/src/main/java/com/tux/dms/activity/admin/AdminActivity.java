@@ -1,4 +1,4 @@
-package com.tux.dms;
+package com.tux.dms.activity.admin;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -13,6 +13,13 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.google.android.material.navigation.NavigationView;
+import com.tux.dms.fragment.dashboard.AdminDashboardFragment;
+import com.tux.dms.ManageUserFragment;
+import com.tux.dms.R;
+import com.tux.dms.ReportFragment;
+import com.tux.dms.TicketAssignDrawerFragment;
+import com.tux.dms.fragment.tickets.TicketCreateFragment;
+import com.tux.dms.TicketSearchFragment;
 import com.tux.dms.cache.SessionCache;
 
 public class AdminActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
