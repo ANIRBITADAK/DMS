@@ -53,7 +53,6 @@ public class TicketDetailsFragment extends Fragment {
     TextView sourceTextView;
     TextView assignedToTextView;
     TextView assignDateTextView;
-    TextView assignedStateTxtView;
     EditText commentText;
     String ticketState;
     String tickId;
@@ -165,7 +164,8 @@ public class TicketDetailsFragment extends Fragment {
         saveTicketButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if ((commentText.getText() != null && !commentText.getText().equals("")) && (ticketState != null && !ticketState.equals(""))) {
+                if ((commentText.getText() != null && !commentText.getText().equals(""))
+                        && (ticketState != null && !ticketState.equals(""))) {
                     AssignTicket comment = new AssignTicket();
                     if (commentText.getText() != null) {
                         comment.setCommentText(commentText.getText().toString());
@@ -183,6 +183,7 @@ public class TicketDetailsFragment extends Fragment {
                                 moveTheFragment(view);
                             }
                         }
+
                         @Override
                         public void onFailure(Call<Ticket> call, Throwable t) {
 
@@ -198,7 +199,6 @@ public class TicketDetailsFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 ShowImageFragment showImageFragment = new ShowImageFragment();
-                Bundle ticketImagePathBundle = new Bundle();
                 showImageFragment.setArguments(ticketPropertyBundle);
                 FragmentManager manager = ((AppCompatActivity) view.getContext()).getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = manager.beginTransaction();
