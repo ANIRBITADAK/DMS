@@ -16,7 +16,7 @@ import com.tux.dms.activity.register.RegisterActivity;
 import com.tux.dms.activity.creator.TicketCreatorActivity;
 import com.tux.dms.activity.operator.UserActivity;
 import com.tux.dms.cache.SessionCache;
-import com.tux.dms.constants.RoleConsts;
+import com.tux.dms.constants.RoleConstants;
 import com.tux.dms.rest.ApiInterface;
 import com.tux.dms.dto.JWTToken;
 import com.tux.dms.dto.User;
@@ -117,18 +117,18 @@ public class LoginActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), loginMsg, Toast.LENGTH_LONG).show();
 
                     switch (user.getRole()){
-                        case RoleConsts.ADMIN_ROLE:
+                        case RoleConstants.ADMIN_ROLE:
                             Intent adminIntent = new Intent(LoginActivity.this, AdminActivity.class);
                             startActivity(adminIntent);
                             break;
 
-                        case RoleConsts.OPERATOR_ROLE:
+                        case RoleConstants.OPERATOR_ROLE:
                             System.out.println("user role "+ user.getRole());
                             Intent ticketOperatorIntent = new Intent(LoginActivity.this, UserActivity.class);
                             startActivity(ticketOperatorIntent);
                             break;
 
-                        case RoleConsts.CREATOR_ROLE:
+                        case RoleConstants.CREATOR_ROLE:
                             Intent ticketCreatorActivity = new Intent(LoginActivity.this, TicketCreatorActivity.class);
                             startActivity(ticketCreatorActivity);
                             break;

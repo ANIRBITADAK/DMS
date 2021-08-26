@@ -51,7 +51,7 @@ public class AdminActivity extends AppCompatActivity implements NavigationView.O
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                    new AdminDashboardFragment()).commit();
+                    new AdminDashboardFragment()).addToBackStack(null).commit();
             navigationView.setCheckedItem(R.id.ticket);
         }
 

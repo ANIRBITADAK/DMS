@@ -15,6 +15,8 @@ import android.widget.TextView;
 import com.google.android.material.navigation.NavigationView;
 import com.tux.dms.R;
 import com.tux.dms.ReportFragment;
+import com.tux.dms.fragment.dashboard.AdminDashboardFragment;
+import com.tux.dms.fragment.dashboard.TicketCreatorDashboardFragment;
 import com.tux.dms.fragment.tickets.TicketCreateFragment;
 import com.tux.dms.cache.SessionCache;
 
@@ -44,7 +46,7 @@ public class TicketCreatorActivity extends AppCompatActivity implements Navigati
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                    new TicketCreateFragment()).commit();
+                    new TicketCreatorDashboardFragment()).addToBackStack(null).commit();
             navigationView.setCheckedItem(R.id.ticket);
         }
     }
@@ -55,11 +57,11 @@ public class TicketCreatorActivity extends AppCompatActivity implements Navigati
         switch (item.getItemId()) {
             case R.id.ticket:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new TicketCreateFragment()).commit();
+                        new TicketCreateFragment()).addToBackStack(null).commit();
                 break;
             case R.id.report:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new ReportFragment()).commit();
+                        new ReportFragment()).addToBackStack(null).commit();
                 break;
             case R.id.logout:
                 finishAndRemoveTask();

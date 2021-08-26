@@ -1,6 +1,5 @@
 package com.tux.dms;
 
-import android.app.ProgressDialog;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -14,7 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.tux.dms.cache.SessionCache;
-import com.tux.dms.constants.RoleConsts;
+import com.tux.dms.constants.RoleConstants;
 import com.tux.dms.constants.TicketConst;
 import com.tux.dms.constants.TicketPriorityType;
 import com.tux.dms.constants.TicketStateType;
@@ -45,7 +44,7 @@ public class TicketTableFragment extends Fragment {
     List<Ticket> rowsTicketList = new ArrayList<>();
 
     boolean isLoading = false;
-
+    boolean isEditable = false;
     ApiInterface apiInterface = ApiClient.getApiService();
     SessionCache sessionCache = SessionCache.getSessionCache();
 
@@ -103,9 +102,7 @@ public class TicketTableFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_table, container, false);
-
         recyclerView = v.findViewById(R.id.recyclerView);
-
         Bundle ticketTypeBundle = this.getArguments();
 
         if (ticketTypeBundle != null) {
@@ -118,16 +115,19 @@ public class TicketTableFragment extends Fragment {
             if (ticketSearchFlow != null) {
                 isSearch = true;
             }
+           String userRole = (String) ticketTypeBundle.get(RoleConstants.ROLE_TYPE_KEY);
+            if(userRole!= null && userRole.equals(RoleConstants.CREATOR_ROLE)){
+                isEditable = true;
+            }
         }
         token = sessionCache.getToken();
         User user = sessionCache.getUser();
         assignedUserId = null;
         // if user is admin then fetch all records - assigned id to null.
         // otherwise set user id.
-        if (user != null && !RoleConsts.ADMIN_ROLE.equalsIgnoreCase(user.getRole())) {
+        if (user != null && !RoleConstants.ADMIN_ROLE.equalsIgnoreCase(user.getRole())) {
             assignedUserId = user.get_id();
         }
-
         if (isSearch) {
 
             Call<TicketList> tickList = apiInterface.searchTicket(token, ticketSubject, ticketState,
@@ -177,7 +177,7 @@ public class TicketTableFragment extends Fragment {
     }
 
     private void initAdapter() {
-        recyclerViewAdapter = new RecyclerAdapterView(rowsTicketList);
+        recyclerViewAdapter = new RecyclerAdapterView(rowsTicketList, isEditable);
         recyclerView.setAdapter(recyclerViewAdapter);
     }
 
