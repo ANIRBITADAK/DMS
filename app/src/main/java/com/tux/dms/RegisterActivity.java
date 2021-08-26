@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,6 +27,7 @@ public class RegisterActivity extends AppCompatActivity {
     Button register;
     EditText name, password,email,phone;
     TextView signInRedirect;
+    Spinner officeSpinner;
     private ApiInterface retrofitInterface = ApiClient.getApiService();
     private SessionCache sessionCache = SessionCache.getSessionCache();
 
@@ -39,6 +41,7 @@ public class RegisterActivity extends AppCompatActivity {
         email=(EditText) findViewById(R.id.emailEditText);
         phone=(EditText) findViewById(R.id.mobileNumberEditText);
         signInRedirect=(TextView)findViewById(R.id.signInRedirect);
+        officeSpinner=(Spinner) findViewById(R.id.officeSpinner);
 
     /*    Retrofit retrofitClient= RetroRestClient.getClient();
         retrofitInterface = retrofitClient.create(RetroInterface.class);*/
