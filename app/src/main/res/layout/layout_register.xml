@@ -65,6 +65,20 @@
                 android:inputType="textPassword"/>
         </com.google.android.material.textfield.TextInputLayout>
 
+        <TextView
+            style="@style/headerTextPrimary"
+            android:text="Select Office"
+            android:textAlignment="textStart"
+            android:fontFamily="@font/roboto_regular"
+            android:layout_marginTop="@dimen/loginViewsMargin"/>
+
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/officeSpinner"
+            android:layout_marginTop="15sp" />
+
+
         <Button
             android:layout_marginTop="15sp"
             style="@style/loginButton"
