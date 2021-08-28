@@ -68,10 +68,11 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/buttonScan"
             android:layout_marginTop="40sp"
-            android:textColor="@color/white"
             android:background="@drawable/login_button_bk"
+            android:fontFamily="@font/roboto_regular"
             android:text="Create Ticket"
-            android:fontFamily="@font/roboto_regular"/>
+            android:textColor="@color/white"
+            android:layout_marginBottom="20sp"/>
 
     </RelativeLayout>
 
