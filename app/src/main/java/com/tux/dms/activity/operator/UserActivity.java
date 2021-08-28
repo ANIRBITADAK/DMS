@@ -1,4 +1,4 @@
-package com.tux.dms;
+package com.tux.dms.activity.operator;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -13,6 +13,9 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.google.android.material.navigation.NavigationView;
+import com.tux.dms.R;
+import com.tux.dms.ReportFragment;
+import com.tux.dms.fragment.dashboard.TicketOperatorDashboardFragment;
 import com.tux.dms.cache.SessionCache;
 
 public class UserActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -43,7 +46,7 @@ public class UserActivity extends AppCompatActivity implements NavigationView.On
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                    new UserDashboardFragment()).commit();
+                    new TicketOperatorDashboardFragment()).commit();
             navigationView.setCheckedItem(R.id.ticket);
         }
     }
@@ -54,7 +57,7 @@ public class UserActivity extends AppCompatActivity implements NavigationView.On
         switch (item.getItemId()) {
             case R.id.tickets:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new UserDashboardFragment()).commit();
+                        new TicketOperatorDashboardFragment()).commit();
                 break;
             case R.id.profile:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,

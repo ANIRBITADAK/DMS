@@ -1,4 +1,4 @@
-package com.tux.dms;
+package com.tux.dms.fragment.dashboard;
 
 import android.os.Bundle;
 
@@ -12,6 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.tux.dms.R;
+import com.tux.dms.TicketTableFragment;
 import com.tux.dms.cache.SessionCache;
 import com.tux.dms.constants.TicketPriorityType;
 import com.tux.dms.constants.TicketStateType;

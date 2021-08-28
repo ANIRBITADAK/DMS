@@ -5,7 +5,7 @@
     android:id="@+id/priorityFrameLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PriorityDetailsFragment">
+    tools:context=".fragment.dashboard.PriorityDetailsFragment">
 
     <LinearLayout
         android:id="@+id/priorityOuterLinearLayout"

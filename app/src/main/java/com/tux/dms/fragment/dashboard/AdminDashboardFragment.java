@@ -1,4 +1,4 @@
-package com.tux.dms;
+package com.tux.dms.fragment.dashboard;
 
 import android.os.Bundle;
 
@@ -13,6 +13,8 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.TextView;
 
+import com.tux.dms.R;
+import com.tux.dms.TicketAssignDrawerFragment;
 import com.tux.dms.cache.SessionCache;
 import com.tux.dms.constants.TicketStateType;
 import com.tux.dms.dto.TicketCount;

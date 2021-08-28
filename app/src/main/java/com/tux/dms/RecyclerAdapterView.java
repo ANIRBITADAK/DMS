@@ -23,14 +23,21 @@ import com.tux.dms.dto.Ticket;
 
 import java.util.List;
 
-class RecyclerAdapterView extends RecyclerView.Adapter<RecyclerView.ViewHolder>  {
+class RecyclerAdapterView extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private final int VIEW_TYPE_ITEM = 0;
     private final int VIEW_TYPE_LOADING = 1;
 
     public List<Ticket> ticketList;
+    private boolean isEdit;
     private Context context;
 
+
+    public RecyclerAdapterView(List<Ticket> itemList, boolean editable) {
+
+        ticketList = itemList;
+        isEdit = editable;
+    }
 
     public RecyclerAdapterView(List<Ticket> itemList) {
 
@@ -39,9 +46,9 @@ class RecyclerAdapterView extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
     @Override
     public int getItemViewType(int position) {
-        if(ticketList.get(position)==null){
+        if (ticketList.get(position) == null) {
             return 1;
-        }else {
+        } else {
             return 0;
         }
     }
@@ -69,8 +76,7 @@ class RecyclerAdapterView extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     }
 
 
-
-        @Override
+    @Override
     public int getItemCount() {
         return ticketList == null ? 0 : ticketList.size();
     }
@@ -94,11 +100,11 @@ class RecyclerAdapterView extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                 viewHolder.cardViewTicket.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Toast.makeText(view.getContext(), "Position:" + Integer.toString(position), Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(view.getContext(), "Position:" + Integer.toString(position), Toast.LENGTH_SHORT).show();
                         context = view.getContext();
-                        if (TicketStateType.NEW_TICKET.equalsIgnoreCase(ticket.getState())) {
-                            TicketAssignmentFragment ticketAssignmentFragment = new TicketAssignmentFragment();
+                        if (TicketStateType.NEW_TICKET.equalsIgnoreCase(ticket.getState()) && !isEdit) {
                             Bundle ticketDetailsBundle = new Bundle();
+                            TicketAssignmentFragment ticketAssignmentFragment = new TicketAssignmentFragment();
                             ticketDetailsBundle.putString(TicketConst.TICKET_ID_KEY, ticket.get_id());
                             ticketDetailsBundle.putString(TicketConst.TICKET_SUBJECT_KEY, ticket.getSubject());
                             ticketDetailsBundle.putString(TicketConst.TICKET_SOURCE_KEY, ticket.getSource());
@@ -109,11 +115,13 @@ class RecyclerAdapterView extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                             fragmentTransaction.replace(R.id.fragment_container, ticketAssignmentFragment);
                             fragmentTransaction.addToBackStack(null);
                             fragmentTransaction.commit();
+                        } else if (TicketStateType.NEW_TICKET.equalsIgnoreCase(ticket.getState()) && isEdit) {
+                            // show a fragment for show edit of tickets
                         } else {
                             Bundle ticketBundle = new Bundle();
                             ticketBundle.putString(TicketConst.TICKET_ID_KEY, ticket.get_id());
-                            ticketBundle.putString(TicketStateType.TICKET_STATE_TYPE_KEY,ticket.getState());
-                            ticketBundle.putString(TicketPriorityType.TICKET_PRIORITY_KEY,ticket.getPriority());
+                            ticketBundle.putString(TicketStateType.TICKET_STATE_TYPE_KEY, ticket.getState());
+                            ticketBundle.putString(TicketPriorityType.TICKET_PRIORITY_KEY, ticket.getPriority());
                             ticketBundle.putString(TicketConst.TICKET_IMG_PATH, ticket.getFilePath());
                             TicketDetailsFragment ticketDetailsFragment = new TicketDetailsFragment();
                             ticketDetailsFragment.setArguments(ticketBundle);

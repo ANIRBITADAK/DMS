@@ -1,4 +1,4 @@
-package com.tux.dms;
+package com.tux.dms.fragment.dashboard;
 
 import android.os.Bundle;
 
@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.tux.dms.R;
 import com.tux.dms.cache.SessionCache;
 import com.tux.dms.constants.TicketStateType;
 import com.tux.dms.dto.TicketCount;
@@ -22,7 +23,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class UserDashboardFragment extends Fragment {
+public class TicketOperatorDashboardFragment extends Fragment {
 
     ApiInterface apiInterface = ApiClient.getApiService();
     SessionCache sessionCache = SessionCache.getSessionCache();
@@ -39,7 +40,7 @@ public class UserDashboardFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public UserDashboardFragment() {
+    public TicketOperatorDashboardFragment() {
         // Required empty public constructor
     }
 
@@ -52,8 +53,8 @@ public class UserDashboardFragment extends Fragment {
      * @return A new instance of fragment ResolveTicketFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static UserDashboardFragment newInstance(String param1, String param2) {
-        UserDashboardFragment fragment = new UserDashboardFragment();
+    public static TicketOperatorDashboardFragment newInstance(String param1, String param2) {
+        TicketOperatorDashboardFragment fragment = new TicketOperatorDashboardFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -75,11 +76,11 @@ public class UserDashboardFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_user_dashboard, container, false);
-        assignedCard = v.findViewById(R.id.assignedTicketsCardView);
+        assignedCard = v.findViewById(R.id.ticketCreatorNewTicketsCardView);
         inProgressCard = v.findViewById(R.id.inProgressCardView);
         resolvedCard = v.findViewById(R.id.resolvedTicketsCardView);
 
-        assignedTicketCount = v.findViewById(R.id.assignedCountTicketText);
+        assignedTicketCount = v.findViewById(R.id.ticketCreatorNewTicketCount);
         inProgressTicketCount = v.findViewById(R.id.inProgressCountTicketText);
         resolvedTicketCount = v.findViewById(R.id.resolvedCountTicketText);
 

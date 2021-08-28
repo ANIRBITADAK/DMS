@@ -123,7 +123,7 @@ public class TicketSearchFragment extends Fragment {
         stateSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                state = parent.getItemAtPosition(position).toString();
+                state = parent.getItemAtPosition(position).toString().toUpperCase();
             }
 
             @Override

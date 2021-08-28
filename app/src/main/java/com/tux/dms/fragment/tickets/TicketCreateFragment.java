@@ -1,4 +1,4 @@
-package com.tux.dms;
+package com.tux.dms.fragment.tickets;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -24,9 +24,11 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.tux.dms.R;
 import com.tux.dms.cache.SessionCache;
 import com.tux.dms.dto.ImageUploadResponse;
 import com.tux.dms.dto.Ticket;
+import com.tux.dms.fragment.dashboard.AdminDashboardFragment;
 import com.tux.dms.rest.ApiClient;
 import com.tux.dms.rest.ApiInterface;
 
