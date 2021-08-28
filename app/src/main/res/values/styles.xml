@@ -31,6 +31,7 @@
     </style>
 
     <style name="headerTextPrimary" parent="headerText">
+        <item name="android:autoSizeTextType">uniform</item>
         <item name="android:textColor">@color/primaryTextColor</item>
     </style>
 

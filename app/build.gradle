@@ -7,7 +7,7 @@ android {
 
     defaultConfig {
         applicationId "com.tux.dms"
-        minSdkVersion 22
+        minSdkVersion 26
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
@@ -41,6 +41,7 @@ dependencies {
     implementation 'com.google.guava:guava:19.0'
     implementation 'com.squareup.picasso:picasso:2.71828'
     implementation 'com.airbnb.android:lottie:3.4.1'
+    implementation 'androidx.core:core:1.3.2'
 
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
