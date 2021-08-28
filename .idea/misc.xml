@@ -42,6 +42,7 @@
         <entry key="app/src/main/res/layout/fragment_search.xml" value="0.2" />
         <entry key="app/src/main/res/layout/fragment_show_image.xml" value="0.24166666666666667" />
         <entry key="app/src/main/res/layout/fragment_table.xml" value="0.171875" />
+        <entry key="app/src/main/res/layout/fragment_ticket_creator_dashboard.xml" value="0.171875" />
         <entry key="app/src/main/res/layout/fragment_ticket_details.xml" value="0.17334369857956552" />
         <entry key="app/src/main/res/layout/fragment_user_dashboard.xml" value="0.24166666666666667" />
         <entry key="app/src/main/res/layout/layout_login.xml" value="0.24166666666666667" />

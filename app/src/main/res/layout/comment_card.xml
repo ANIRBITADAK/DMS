@@ -8,9 +8,6 @@
     android:background="@color/white"
     android:backgroundTint="@color/white">
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/commentCardView"
@@ -67,6 +64,5 @@
                 </RelativeLayout>
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
-    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
