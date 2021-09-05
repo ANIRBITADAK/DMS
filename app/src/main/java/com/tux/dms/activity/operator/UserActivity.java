@@ -60,7 +60,7 @@ public class UserActivity extends AppCompatActivity implements NavigationView.On
 
             case R.id.dashboard:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new TicketCreatorDashboardFragment()).addToBackStack(null).commit();
+                        new TicketOperatorDashboardFragment()).addToBackStack(null).commit();
                 break;
             case R.id.tickets:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
