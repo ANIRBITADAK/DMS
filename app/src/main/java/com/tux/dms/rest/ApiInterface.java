@@ -3,6 +3,7 @@ package com.tux.dms.rest;
 import com.tux.dms.dto.JWTToken;
 
 import com.tux.dms.dto.ImageUploadResponse;
+import com.tux.dms.dto.Office;
 import com.tux.dms.dto.Ticket;
 import com.tux.dms.dto.TicketList;
 import com.tux.dms.dto.TicketCount;
@@ -75,4 +76,7 @@ public interface ApiInterface {
     @Multipart
     @POST("/api/images/upload")
     Call<ImageUploadResponse> uploadImage(@Part MultipartBody.Part image);
+
+    @GET("/api/offices/")
+    Call<List<Office>> getOffices();
 }
