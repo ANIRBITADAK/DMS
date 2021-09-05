@@ -97,6 +97,10 @@ public class AdminActivity extends AppCompatActivity implements NavigationView.O
                         new ManageUserFragment()).addToBackStack(null).commit();
                 break;
 
+            case R.id.logout:
+                finishAndRemoveTask();
+                break;
+
         }
 
         drawer.closeDrawer(GravityCompat.START);
