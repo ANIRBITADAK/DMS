@@ -13,6 +13,8 @@
         android:text="Ticket Created Successfully"
         android:fontFamily="@font/roboto_regular"
         android:autoSizeTextType="uniform"
+        android:autoSizeMaxTextSize="40sp"
+        android:autoSizeMinTextSize="15sp"
         android:textStyle="bold" />
 
     <TextView
@@ -22,7 +24,9 @@
         android:text="Want to create another ticket?"
         android:fontFamily="@font/roboto_regular"
         android:layout_marginLeft="8sp"
-        android:autoSizeTextType="uniform"/>
+        android:autoSizeTextType="uniform"
+        android:autoSizeMaxTextSize="40sp"
+        android:autoSizeMinTextSize="15sp"/>
 
     <RelativeLayout
         android:layout_marginTop="15sp"

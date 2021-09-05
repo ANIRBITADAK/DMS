@@ -42,7 +42,9 @@
             android:layout_marginTop="15sp"
             android:fontFamily="@font/roboto_regular"
             android:text="Enter Source"
-            android:textSize="20sp" />
+            android:autoSizeTextType="uniform"
+            android:autoSizeMaxTextSize="40sp"
+            android:autoSizeMinTextSize="20sp"/>
 
         <Spinner
             android:id="@+id/source"

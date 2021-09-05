@@ -19,6 +19,8 @@
 
     <style name="headerText" parent="parent">
         <item name="android:autoSizeTextType">uniform</item>
+        <item name="android:autoSizeMinTextSize">15sp</item>
+        <item name="android:autoSizeMaxTextSize">30sp</item>
         <item name="android:textAlignment">center</item>
         <item name="android:textColor">@color/whiteTextColor</item>
         <item name="android:textStyle">bold</item>
@@ -32,11 +34,15 @@
 
     <style name="headerTextPrimary" parent="headerText">
         <item name="android:autoSizeTextType">uniform</item>
+        <item name="android:autoSizeMinTextSize">15sp</item>
+        <item name="android:autoSizeMaxTextSize">30sp</item>
         <item name="android:textColor">@color/primaryTextColor</item>
     </style>
 
     <style name="modifiedEditText" parent="parent">
         <item name="android:autoSizeTextType">uniform</item>
+        <item name="android:autoSizeMinTextSize">15sp</item>
+        <item name="android:autoSizeMaxTextSize">25sp</item>
         <item name="android:backgroundTint">@color/primaryTextColor</item>
     </style>
 

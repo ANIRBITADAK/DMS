@@ -29,7 +29,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Enter Subject"
-                android:textSize="20sp"
+                android:autoSizeTextType="uniform"
+                android:autoSizeMaxTextSize="40sp"
+                android:autoSizeMinTextSize="20sp"
                 android:layout_marginTop="15sp"
                 android:fontFamily="@font/roboto_regular"/>
 
@@ -46,7 +48,9 @@
                 android:layout_height="wrap_content"
                 android:text="Select State"
                 android:fontFamily="@font/roboto_regular"
-                android:textSize="20sp"
+                android:autoSizeTextType="uniform"
+                android:autoSizeMaxTextSize="40sp"
+                android:autoSizeMinTextSize="20sp"
                 android:layout_marginTop="15sp" />
 
             <Spinner
@@ -59,7 +63,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Select Priority"
-                android:textSize="20sp"
+                android:autoSizeTextType="uniform"
+                android:autoSizeMaxTextSize="40sp"
+                android:autoSizeMinTextSize="20sp"
                 android:layout_marginTop="15sp"
                 android:fontFamily="@font/roboto_regular"/>
 
@@ -73,7 +79,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Select Date"
-                android:textSize="20sp"
+                android:autoSizeTextType="uniform"
+                android:autoSizeMaxTextSize="40sp"
+                android:autoSizeMinTextSize="20sp"
                 android:layout_marginTop="15sp"
                 android:fontFamily="@font/roboto_regular" />
 

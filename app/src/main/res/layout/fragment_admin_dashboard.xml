@@ -62,7 +62,9 @@
                             android:text="New"
                             android:textAlignment="center"
                             android:textColor="@android:color/holo_blue_light"
-                            android:textSize="30sp"
+                            android:autoSizeTextType="uniform"
+                            android:autoSizeMaxTextSize="40sp"
+                            android:autoSizeMinTextSize="20sp"
                             android:textStyle="bold" />
                     </LinearLayout>
 
@@ -105,7 +107,9 @@
                             android:text="Assigned"
                             android:textAlignment="center"
                             android:textColor="@android:color/holo_red_light"
-                            android:textSize="30sp"
+                            android:autoSizeTextType="uniform"
+                            android:autoSizeMaxTextSize="40sp"
+                            android:autoSizeMinTextSize="20sp"
                             android:textStyle="bold" />
                     </LinearLayout>
 
@@ -149,7 +153,9 @@
                             android:text="In-Progress"
                             android:textAlignment="center"
                             android:textColor= "@android:color/holo_orange_dark"
-                            android:textSize="30sp"
+                            android:autoSizeTextType="uniform"
+                            android:autoSizeMaxTextSize="40sp"
+                            android:autoSizeMinTextSize="20sp"
                             android:textStyle="bold" />
                     </LinearLayout>
 
@@ -194,7 +200,9 @@
                             android:text="Resolved"
                             android:textAlignment="center"
                             android:textColor="@android:color/holo_green_dark"
-                            android:textSize="30sp"
+                            android:autoSizeTextType="uniform"
+                            android:autoSizeMaxTextSize="40sp"
+                            android:autoSizeMinTextSize="20sp"
                             android:textStyle="bold" />
                     </LinearLayout>
 

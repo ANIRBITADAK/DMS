@@ -75,7 +75,9 @@
                             android:text="High"
                             android:textAlignment="center"
                             android:textColor= "@android:color/holo_red_light"
-                            android:textSize="30sp"
+                            android:autoSizeTextType="uniform"
+                            android:autoSizeMaxTextSize="40sp"
+                            android:autoSizeMinTextSize="20sp"
                             android:textStyle="bold" />
                     </LinearLayout>
 
@@ -118,7 +120,9 @@
                             android:text="Medium"
                             android:textAlignment="center"
                             android:textColor="@android:color/holo_orange_light"
-                            android:textSize="30sp"
+                            android:autoSizeTextType="uniform"
+                            android:autoSizeMaxTextSize="40sp"
+                            android:autoSizeMinTextSize="20sp"
                             android:textStyle="bold" />
                     </LinearLayout>
 
@@ -162,7 +166,9 @@
                             android:text="Low"
                             android:textAlignment="center"
                             android:textColor= "@android:color/holo_green_dark"
-                            android:textSize="30sp"
+                            android:autoSizeTextType="uniform"
+                            android:autoSizeMaxTextSize="40sp"
+                            android:autoSizeMinTextSize="20sp"
                             android:textStyle="bold" />
                     </LinearLayout>
 

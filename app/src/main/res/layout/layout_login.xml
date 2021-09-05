@@ -67,6 +67,8 @@
             android:id="@+id/signupRedirect"
             android:textAlignment="center"
             android:autoSizeTextType="uniform"
+            android:autoSizeMinTextSize="15sp"
+            android:autoSizeMaxTextSize="40sp"
             android:textStyle="bold"
             android:textColor="@color/primaryTextColor"
             android:text="@string/login_signup_hint"

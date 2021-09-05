@@ -62,6 +62,8 @@
                 android:layout_alignParentBottom="true"
                 android:layout_marginTop="60sp"
                 android:autoSizeTextType="uniform"
+                android:autoSizeMinTextSize="15sp"
+                android:autoSizeMaxTextSize="40sp"
                 android:text="©Copyright Tux Technologies"
                 android:textAlignment="center"
                 android:textColor="@color/primaryTextColor"

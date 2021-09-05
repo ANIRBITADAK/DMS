@@ -30,7 +30,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="User List"
-            android:textSize="20sp"
+            android:autoSizeTextType="uniform"
+            android:autoSizeMaxTextSize="40sp"
+            android:autoSizeMinTextSize="20sp"
             android:fontFamily="@font/roboto_regular"
             android:layout_marginTop="40sp"/>
 
@@ -61,7 +63,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Select Role"
-            android:textSize="20sp"
+            android:autoSizeTextType="uniform"
+            android:autoSizeMaxTextSize="40sp"
+            android:autoSizeMinTextSize="20sp"
             android:fontFamily="@font/roboto_regular"
             android:layout_marginTop="40sp"/>
 

@@ -60,6 +60,8 @@
                 android:layout_below="@id/linearlayoutCard"
                 android:layout_alignParentBottom="true"
                 android:layout_marginTop="60sp"
+                android:autoSizeMaxTextSize="40sp"
+                android:autoSizeMinTextSize="15sp"
                 android:autoSizeTextType="uniform"
                 android:fontFamily="@font/roboto_regular"
                 android:text="©Copyright Tux Technologies"

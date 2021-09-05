@@ -27,7 +27,9 @@
                 android:textStyle="bold"
                 android:textColor="@color/white"
                 android:fontFamily="@font/roboto_regular"
-                android:textSize="20sp"
+                android:autoSizeTextType="uniform"
+                android:autoSizeMaxTextSize="40sp"
+                android:autoSizeMinTextSize="20sp"
                 android:layout_marginTop="20sp"
                 android:layout_centerHorizontal="true"/>
 
