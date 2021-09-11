@@ -63,12 +63,12 @@
             android:icon="@drawable/ic_baseline_person_24"
             android:title="Profile"/>
         -->
-    <!---
+
    <item
        android:id="@+id/logout"
        android:icon="@drawable/ic_baseline_power_settings_new_24"
        android:title="Logout"/>
-   -->
+   
 
 
 

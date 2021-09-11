@@ -25,7 +25,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto_regular"
                 android:text="Subject"
-                android:textSize="20sp" />
+                android:autoSizeTextType="uniform" />
 
             <TextView
                 android:id="@+id/assignSubjectText"
@@ -34,7 +34,7 @@
                 android:layout_marginLeft="20sp"
                 android:layout_toRightOf="@id/subjectTextView"
                 android:fontFamily="@font/roboto_regular"
-                android:textSize="20sp" />
+                android:autoSizeTextType="uniform" />
 
         </RelativeLayout>
 
@@ -50,7 +50,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto_regular"
                 android:text="Source"
-                android:textSize="20sp" />
+                android:autoSizeTextType="uniform" />
 
             <TextView
                 android:id="@+id/assignSourceText"
@@ -59,7 +59,7 @@
                 android:layout_marginLeft="20sp"
                 android:layout_toRightOf="@id/sourceTextView"
                 android:fontFamily="@font/roboto_regular"
-                android:textSize="20sp" />
+                android:autoSizeTextType="uniform" />
 
         </RelativeLayout>
 

@@ -55,6 +55,12 @@ public class TicketCreatorActivity extends AppCompatActivity implements Navigati
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
         switch (item.getItemId()) {
+
+            case R.id.dashboard:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new TicketCreatorDashboardFragment()).addToBackStack(null).commit();
+                break;
+
             case R.id.ticket:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new TicketCreateFragment()).addToBackStack(null).commit();

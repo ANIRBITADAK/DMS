@@ -15,6 +15,8 @@ import android.widget.TextView;
 import com.google.android.material.navigation.NavigationView;
 import com.tux.dms.R;
 import com.tux.dms.ReportFragment;
+import com.tux.dms.fragment.dashboard.AdminDashboardFragment;
+import com.tux.dms.fragment.dashboard.TicketCreatorDashboardFragment;
 import com.tux.dms.fragment.dashboard.TicketOperatorDashboardFragment;
 import com.tux.dms.cache.SessionCache;
 
@@ -55,6 +57,11 @@ public class UserActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
         switch (item.getItemId()) {
+
+            case R.id.dashboard:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new TicketOperatorDashboardFragment()).addToBackStack(null).commit();
+                break;
             case R.id.tickets:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new TicketOperatorDashboardFragment()).commit();
@@ -62,6 +69,10 @@ public class UserActivity extends AppCompatActivity implements NavigationView.On
             case R.id.profile:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new ReportFragment()).commit();
+                break;
+
+            case R.id.logout:
+                finishAndRemoveTask();
                 break;
         }
 

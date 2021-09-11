@@ -60,8 +60,9 @@
                 android:layout_below="@id/linearlayoutCard"
                 android:layout_alignParentBottom="true"
                 android:layout_marginTop="60sp"
-                android:text="©Copyright Tux Technologies"
+                android:autoSizeTextType="uniform"
                 android:fontFamily="@font/roboto_regular"
+                android:text="©Copyright Tux Technologies"
                 android:textAlignment="center"
                 android:textColor="@color/primaryTextColor"
                 android:textStyle="bold" />

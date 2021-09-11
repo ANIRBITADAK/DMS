@@ -17,6 +17,7 @@ public class User {
     private String phone;
     private String role;
     private String avatar;
+    private String officeId;
 
     public String getRole() {
         return role;
@@ -64,6 +65,13 @@ public class User {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+    public String getOfficeId() {
+        return officeId;
+    }
+
+    public void setOfficeId(String officeId) {
+        this.officeId = officeId;
     }
 
     @Override

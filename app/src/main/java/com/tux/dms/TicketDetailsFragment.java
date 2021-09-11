@@ -9,7 +9,9 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -17,6 +19,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ScrollView;
 import android.widget.Spinner;
 
 import android.widget.TextView;
@@ -59,6 +62,8 @@ public class TicketDetailsFragment extends Fragment {
     Button saveTicketButton;
     Button showImageButton;
     Bundle ticketPropertyBundle;
+    androidx.core.widget.NestedScrollView parentScroll;
+    androidx.core.widget.NestedScrollView childScroll;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -112,6 +117,30 @@ public class TicketDetailsFragment extends Fragment {
         saveTicketButton = view.findViewById(R.id.ticketDetailsSaveButton);
         showImageButton = view.findViewById(R.id.showImageBtn);
         commentText = view.findViewById(R.id.assignCommentEditText);
+        parentScroll=view.findViewById(R.id.parentScroll);
+        childScroll=view.findViewById(R.id.childScroll);
+
+        parentScroll.setOnTouchListener(new View.OnTouchListener() {
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+
+                childScroll.getParent()
+                        .requestDisallowInterceptTouchEvent(false);
+                return false;
+            }
+        });
+
+        childScroll.setOnTouchListener(new View.OnTouchListener() {
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+
+                v.getParent()
+                        .requestDisallowInterceptTouchEvent(true);
+                return false;
+            }
+        });
 
         ticketPropertyBundle = this.getArguments();
         if (ticketPropertyBundle != null) {

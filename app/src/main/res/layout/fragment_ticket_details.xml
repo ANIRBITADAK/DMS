@@ -5,10 +5,11 @@
         android:layout_height="match_parent"
         tools:context=".TicketDetailsFragment">
 
-<!--        <ScrollView-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:layout_margin="8dp">-->
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/parentScroll"
+            android:layout_margin="8dp">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -25,9 +26,9 @@
                         android:id="@+id/subjectTextView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:autoSizeTextType="uniform"
                         android:fontFamily="@font/roboto_regular"
-                        android:text="Subject"
-                        android:textSize="20sp" />
+                        android:text="Subject" />
 
                     <TextView
                         android:id="@+id/assignSubjectText"
@@ -36,7 +37,7 @@
                         android:layout_marginLeft="20sp"
                         android:layout_toRightOf="@id/subjectTextView"
                         android:fontFamily="@font/roboto_regular"
-                        android:textSize="20sp" />
+                        android:autoSizeTextType="uniform" />
 
                 </RelativeLayout>
 
@@ -53,7 +54,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/roboto_regular"
                         android:text="Source"
-                        android:textSize="20sp" />
+                        android:autoSizeTextType="uniform" />
 
                     <TextView
                         android:id="@+id/assignSourceText"
@@ -62,7 +63,7 @@
                         android:layout_marginLeft="20sp"
                         android:layout_toRightOf="@id/sourceTextView"
                         android:fontFamily="@font/roboto_regular"
-                        android:textSize="20sp" />
+                        android:autoSizeTextType="uniform" />
 
                 </RelativeLayout>
 
@@ -79,7 +80,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/roboto_regular"
                         android:text="Assigned To"
-                        android:textSize="20sp" />
+                        android:autoSizeTextType="uniform" />
 
                     <TextView
                         android:id="@+id/assignedToText"
@@ -88,7 +89,7 @@
                         android:layout_marginLeft="20sp"
                         android:layout_toRightOf="@id/assignedToTextView"
                         android:fontFamily="@font/roboto_regular"
-                        android:textSize="20sp" />
+                        android:autoSizeTextType="uniform" />
 
                 </RelativeLayout>
 
@@ -105,7 +106,7 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/roboto_regular"
                             android:text="Assigned Date"
-                            android:textSize="20sp" />
+                            android:autoSizeTextType="uniform" />
 
                         <TextView
                             android:id="@+id/assignedDateText"
@@ -114,7 +115,7 @@
                             android:layout_marginLeft="20sp"
                             android:layout_toRightOf="@id/assignedDateTextView"
                             android:fontFamily="@font/roboto_regular"
-                            android:textSize="20sp" />
+                            android:autoSizeTextType="uniform" />
 
                     </RelativeLayout>
 
@@ -138,7 +139,7 @@
                     android:layout_marginTop="10sp"
                     android:fontFamily="@font/roboto_regular"
                     android:text="Comments"
-                    android:textSize="18sp" />
+                    android:autoSizeTextType="uniform" />
 
                 <EditText
                     android:id="@+id/assignCommentEditText"
@@ -158,9 +159,10 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                    <ScrollView
+                    <androidx.core.widget.NestedScrollView
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        android:layout_height="match_parent"
+                        android:id="@+id/childScroll">
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -172,13 +174,11 @@
                                 android:id="@+id/commentRecyclerView"
                                 android:layout_width="match_parent"
                                 android:layout_height="100sp"
-                                android:nestedScrollingEnabled="false"
-                                android:overScrollMode="never"
                                 android:layout_marginTop="5sp"
                                 tools:listitem= "@layout/comment_card"/>
                         </LinearLayout>
 
-                    </ScrollView>
+                    </androidx.core.widget.NestedScrollView>
 
                 </LinearLayout>
 
@@ -213,13 +213,13 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10sp"
+                        android:autoSizeTextType="uniform"
                         android:fontFamily="sans-serif-condensed-medium"
-                        android:text="Change State"
-                        android:textSize="18sp" />
+                        android:text="Change State" />
 
 
                 </RelativeLayout>
             </RelativeLayout>
-<!--        </ScrollView>-->
+        </androidx.core.widget.NestedScrollView>
 
 </FrameLayout>
