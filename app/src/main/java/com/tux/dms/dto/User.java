@@ -2,6 +2,13 @@ package com.tux.dms.dto;
 
 public class User {
     private String _id;
+    private String name;
+    private String email;
+    private String password;
+    private String phone;
+    private String role;
+    private String avatar;
+    private String officeId;
 
     public String get_id() {
         return _id;
@@ -10,14 +17,6 @@ public class User {
     public void set_id(String _id) {
         this._id = _id;
     }
-
-    private String name;
-    private String email;
-    private String password;
-    private String phone;
-    private String role;
-    private String avatar;
-    private String officeId;
 
     public String getRole() {
         return role;

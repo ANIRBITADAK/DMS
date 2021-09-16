@@ -52,6 +52,7 @@ public class TicketDetailsFragment extends Fragment {
     ApiInterface apiInterface = ApiClient.getApiService();
     SessionCache sessionCache = SessionCache.getSessionCache();
 
+    TextView docketIdTextView;
     TextView subjectTextView;
     TextView sourceTextView;
     TextView assignedToTextView;
@@ -110,6 +111,7 @@ public class TicketDetailsFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_ticket_details, container, false);
+        docketIdTextView = view.findViewById(R.id.assignDocketIdText);
         subjectTextView = view.findViewById(R.id.assignSubjectText);
         sourceTextView = view.findViewById(R.id.assignSourceText);
         assignedToTextView = view.findViewById(R.id.assignedToText);
@@ -154,9 +156,10 @@ public class TicketDetailsFragment extends Fragment {
                 if (response.code() == 200) {
                     Ticket ticket = response.body();
                     if (ticket != null) {
+                        docketIdTextView.setText(ticket.getDocketId());
                         subjectTextView.setText(ticket.getSubject());
                         sourceTextView.setText(ticket.getSource());
-                        assignedToTextView.setText(ticket.getAssignedToName());
+                        assignedToTextView.setText(ticket.getAssignedTo().getName());
                         assignDateTextView.setText(ticket.getAssignDate());
                         if (ticket.getComments() != null && ticket.getComments().size() > 0) {
                             recyclerView = (RecyclerView) view.findViewById(R.id.commentRecyclerView);

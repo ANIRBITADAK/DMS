@@ -90,6 +90,9 @@ class RecyclerAdapterView extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         if (ticketList != null) {
             Ticket ticket = ticketList.get(position);
             if (ticket != null) {
+                if (ticket.getDocketId() != null) {
+                    viewHolder.textViewDocketId.setText(ticket.getDocketId());
+                }
                 if (ticket.getSubject() != null) {
                     viewHolder.textViewSubject.setText(ticket.getSubject());
                 }
@@ -106,6 +109,7 @@ class RecyclerAdapterView extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                             Bundle ticketDetailsBundle = new Bundle();
                             TicketAssignmentFragment ticketAssignmentFragment = new TicketAssignmentFragment();
                             ticketDetailsBundle.putString(TicketConst.TICKET_ID_KEY, ticket.get_id());
+                            ticketDetailsBundle.putString(TicketConst.TICKET_DOCKET_ID_KEY, ticket.getDocketId());
                             ticketDetailsBundle.putString(TicketConst.TICKET_SUBJECT_KEY, ticket.getSubject());
                             ticketDetailsBundle.putString(TicketConst.TICKET_SOURCE_KEY, ticket.getSource());
                             ticketDetailsBundle.putString(TicketConst.TICKET_IMG_PATH, ticket.getFilePath());
@@ -120,6 +124,8 @@ class RecyclerAdapterView extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                         } else {
                             Bundle ticketBundle = new Bundle();
                             ticketBundle.putString(TicketConst.TICKET_ID_KEY, ticket.get_id());
+                            ticketBundle.putString(TicketConst.TICKET_DOCKET_ID_KEY, ticket.getDocketId());
+                            ticketBundle.putString(TicketConst.TICKET_SUBJECT_KEY, ticket.getSubject());
                             ticketBundle.putString(TicketStateType.TICKET_STATE_TYPE_KEY, ticket.getState());
                             ticketBundle.putString(TicketPriorityType.TICKET_PRIORITY_KEY, ticket.getPriority());
                             ticketBundle.putString(TicketConst.TICKET_IMG_PATH, ticket.getFilePath());
@@ -138,13 +144,14 @@ class RecyclerAdapterView extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     }
 
     private class ItemViewHolder extends RecyclerView.ViewHolder {
-
+        TextView textViewDocketId;
         TextView textViewSource;
         TextView textViewSubject;
         CardView cardViewTicket;
 
         public ItemViewHolder(@NonNull View itemView) {
             super(itemView);
+            textViewDocketId = itemView.findViewById(R.id.assignDocketIdTextView);
             textViewSubject = itemView.findViewById(R.id.assignSubjectText);
             textViewSource = itemView.findViewById(R.id.assignSourceText);
             cardViewTicket = itemView.findViewById(R.id.ticketCardView);

@@ -22,6 +22,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.tux.dms.R;
@@ -67,6 +68,7 @@ public class TicketCreateFragment extends Fragment implements AdapterView.OnItem
     Spinner sourceSpiner;
     String sourceText;
     EditText subjectText;
+    TextView ticketSuccess;
     AlertDialog dialog;
 
     // TODO: Rename parameter arguments, choose names that match
@@ -121,6 +123,8 @@ public class TicketCreateFragment extends Fragment implements AdapterView.OnItem
 
         btnYes = (Button) mView.findViewById(R.id.btnYes);
         btnNo = (Button) mView.findViewById(R.id.btnNo);
+        ticketSuccess = (TextView) mView.findViewById(R.id.ticketSuccessTextView);
+
         sourceSpiner = view.findViewById(R.id.source);
         sourceSpiner.setOnItemSelectedListener(this);
 
@@ -257,6 +261,7 @@ public class TicketCreateFragment extends Fragment implements AdapterView.OnItem
         ticketCall.enqueue(new Callback<Ticket>() {
             @Override
             public void onResponse(Call<Ticket> call, Response<Ticket> response) {
+                ticketSuccess.setText("Ticket Created Successfully" + " " + response.body().getDocketId());
                 progressDialog.dismiss();
                 dialog.show();
                 btnYes.setOnClickListener(new View.OnClickListener() {

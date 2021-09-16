@@ -28,6 +28,22 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:text="Enter Docket No."
+                android:textSize="20sp"
+                android:layout_marginTop="15sp"
+                android:fontFamily="@font/roboto_regular"/>
+
+
+            <EditText
+                android:id="@+id/searchDocketIdText"
+                android:layout_marginTop="15sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/modifiedEditText"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:text="Enter Subject"
                 android:textSize="20sp"
                 android:layout_marginTop="15sp"
