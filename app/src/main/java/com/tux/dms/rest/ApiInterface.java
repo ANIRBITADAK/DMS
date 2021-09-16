@@ -65,6 +65,7 @@ public interface ApiInterface {
     Call<TicketCount> getTicketCount(@Header("x-auth-token") String authHeader, @Query("state") String state);
     @GET("/api/tickets/search")
     Call<TicketList> searchTicket(@Header("x-auth-token") String authHeader,
+                                   @Query("docketId") String docketId,
                                    @Query("subject") String subject,
                                    @Query("state") String state,
                                    @Query("priority") String priority,

@@ -50,6 +50,7 @@ public class TicketTableFragment extends Fragment {
 
     String token;
     String assignedUserId;
+    String ticketDocketId = null;
     String ticketSubject = null;
     String ticketState = null;
     String tickPriority = null;
@@ -106,6 +107,7 @@ public class TicketTableFragment extends Fragment {
         Bundle ticketTypeBundle = this.getArguments();
 
         if (ticketTypeBundle != null) {
+            ticketDocketId = (String) ticketTypeBundle.get(TicketConst.TICKET_DOCKET_ID_KEY);
             ticketSubject = (String) ticketTypeBundle.get(TicketConst.TICKET_SUBJECT_KEY);
             ticketState = (String) ticketTypeBundle.get(TicketStateType.TICKET_STATE_TYPE_KEY);
             tickPriority = (String) ticketTypeBundle.get(TicketPriorityType.TICKET_PRIORITY_KEY);
@@ -130,7 +132,7 @@ public class TicketTableFragment extends Fragment {
         }
         if (isSearch) {
 
-            Call<TicketList> tickList = apiInterface.searchTicket(token, ticketSubject, ticketState,
+            Call<TicketList> tickList = apiInterface.searchTicket(token, ticketDocketId,ticketSubject, ticketState,
                     tickPriority, startDate, endDate, PAGE_COUNT, 5);
 
             tickList.enqueue(new Callback<TicketList>() {
@@ -219,7 +221,7 @@ public class TicketTableFragment extends Fragment {
                 recyclerViewAdapter.notifyItemRemoved(scrollPosition);
                 if (isSearch) {
 
-                    Call<TicketList> tickList = apiInterface.searchTicket(token, ticketSubject, ticketState, tickPriority,
+                    Call<TicketList> tickList = apiInterface.searchTicket(token, ticketDocketId, ticketSubject, ticketState, tickPriority,
                             startDate, endDate, ++PAGE_COUNT, 5);
 
                     tickList.enqueue(new Callback<TicketList>() {

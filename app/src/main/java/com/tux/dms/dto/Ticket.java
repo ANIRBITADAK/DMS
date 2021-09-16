@@ -8,10 +8,11 @@ import java.util.TimeZone;
 
 public class Ticket {
     private String _id;
-    private String creator;
-    private String creatorName;
-    private String assignedTo;
-    private String assignedToName;
+    private String docketId;
+    private User creator;
+    //private String creatorName;
+    private User assignedTo;
+    //private String assignedToName;
     private String subject;
     private String description;
     private String source;
@@ -30,36 +31,28 @@ public class Ticket {
         this._id = _id;
     }
 
-    public String getCreator() {
+    public String getDocketId() {
+        return docketId;
+    }
+
+    public void setDocketId(String docketId) {
+        this.docketId = docketId;
+    }
+
+    public User getCreator() {
         return creator;
     }
 
-    public void setCreator(String creator) {
+    public void setCreator(User creator) {
         this.creator = creator;
     }
 
-    public String getCreatorName() {
-        return creatorName;
-    }
-
-    public void setCreatorName(String creatorName) {
-        this.creatorName = creatorName;
-    }
-
-    public String getAssignedTo() {
+    public User getAssignedTo() {
         return assignedTo;
     }
 
-    public void setAssignedTo(String assignedTo) {
+    public void setAssignedTo(User assignedTo) {
         this.assignedTo = assignedTo;
-    }
-
-    public String getAssignedToName() {
-        return assignedToName;
-    }
-
-    public void setAssignedToName(String assignedToName) {
-        this.assignedToName = assignedToName;
     }
 
     public String getSubject() {
