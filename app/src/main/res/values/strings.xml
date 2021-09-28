@@ -17,4 +17,5 @@
         <item>Admin</item>
         <item>User</item>
     </string-array>
+    <string name="mobile_no_hint">Mobile No.</string>
 </resources>
