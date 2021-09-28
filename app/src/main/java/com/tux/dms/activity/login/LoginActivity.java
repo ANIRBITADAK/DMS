@@ -67,11 +67,11 @@ public class LoginActivity extends AppCompatActivity {
 
     private void getToken() {
 
-        EditText email = (EditText) findViewById(R.id.editTextEmail);
+        EditText phoneNo = (EditText) findViewById(R.id.editTextPhone);
         EditText password = (EditText) findViewById(R.id.editTextPassword);
         UserCredential user = new UserCredential();
         user.setPassword(password.getText().toString());
-        user.setEmail(email.getText().toString());
+        user.setPhone(phoneNo.getText().toString());
 
         Call<JWTToken> call = apiInterface.executeLogin(user);
 

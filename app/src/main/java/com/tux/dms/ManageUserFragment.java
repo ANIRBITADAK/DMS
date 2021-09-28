@@ -38,7 +38,7 @@ public class ManageUserFragment extends Fragment {
     ApiInterface apiInterface = ApiClient.getApiService();
     SessionCache sessionCache = SessionCache.getSessionCache();
 
-    String[] userRoles = {"", "TICKET_CREATOR", "TICKET_OPERATOR"};
+    String[] userRoles = {"", RoleConstants.CREATOR_ROLE, RoleConstants.OPERATOR_ROLE};
     Button assignRoleButton;
     Spinner userRoleSpinner;
     String userRole;

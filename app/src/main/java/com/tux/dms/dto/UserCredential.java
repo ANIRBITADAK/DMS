@@ -2,15 +2,15 @@ package com.tux.dms.dto;
 
 public class UserCredential {
 
-    private String email;
+    private String phone;
     private String password;
 
-    public String getEmail() {
-        return email;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public String getPassword() {
