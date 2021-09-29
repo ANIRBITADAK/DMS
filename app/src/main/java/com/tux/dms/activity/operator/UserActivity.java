@@ -66,7 +66,12 @@ public class UserActivity extends AppCompatActivity implements NavigationView.On
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new TicketOperatorDashboardFragment()).commit();
                 break;
+
             case R.id.profile:
+                //TODO:  profile fragment
+                break;
+
+            case R.id.report:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new ReportFragment()).commit();
                 break;

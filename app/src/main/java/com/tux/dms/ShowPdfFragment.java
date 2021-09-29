@@ -1,5 +1,6 @@
 package com.tux.dms;
 
+import android.graphics.Bitmap;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,6 +8,9 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
+import android.widget.ProgressBar;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -14,6 +18,9 @@ import android.view.ViewGroup;
  * create an instance of this fragment.
  */
 public class ShowPdfFragment extends Fragment {
+
+    WebView webView;
+    ProgressBar progressBar;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -59,6 +66,27 @@ public class ShowPdfFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_showpdf, container, false);
+        View view= inflater.inflate(R.layout.fragment_showpdf, container, false);
+        webView=view.findViewById(R.id.webView);
+        progressBar=view.findViewById(R.id.progressBar);
+
+        webView.getSettings().setBuiltInZoomControls(true);
+        webView.getSettings().setJavaScriptEnabled(true);
+        webView.setWebViewClient(new WebViewClient(){
+            @Override
+            public void onPageStarted(WebView view, String url, Bitmap favicon) {
+                super.onPageStarted(view, url, favicon);
+                progressBar.setVisibility(View.VISIBLE);
+
+            }
+            @Override public void onPageFinished(WebView view, String url) {
+                super.onPageFinished(view, url);
+                progressBar.setVisibility(View.GONE);
+
+            }
+        });
+        webView.loadUrl("");
+
+        return  view;
     }
 }

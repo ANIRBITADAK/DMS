@@ -76,7 +76,7 @@ public interface ApiInterface {
 
     @Multipart
     @POST("/api/images/upload")
-    Call<ImageUploadResponse> uploadImage(@Part MultipartBody.Part image);
+    Call<ImageUploadResponse> uploadImage(@Part List<MultipartBody.Part> image);
 
     @GET("/api/offices/")
     Call<List<Office>> getOffices();

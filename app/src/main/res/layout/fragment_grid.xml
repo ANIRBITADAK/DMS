@@ -6,26 +6,23 @@
     tools:context=".GridFragment"
     android:orientation="vertical">
 
-    <androidx.core.widget.NestedScrollView
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/parentScroll"
-        android:layout_margin="8dp">
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp">
 
-        <LinearLayout
+        <GridView
+            android:id="@+id/gridview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:columnWidth="100dp"
+            android:horizontalSpacing="10dp"
+            android:numColumns="auto_fit"
+            android:verticalSpacing="10dp" />
 
-            <GridView
-                android:id="@+id/images"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:horizontalSpacing="6dp"
-                android:numColumns="2"
-                android:verticalSpacing="6dp" />
-
-        </LinearLayout>
-    </androidx.core.widget.NestedScrollView>
+    </ScrollView>
 
 </LinearLayout>
