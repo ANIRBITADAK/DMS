@@ -76,7 +76,7 @@ public interface ApiInterface {
 
     @Multipart
     @POST("/api/images/upload")
-    Call<ImageUploadResponse> uploadImage(@Part List<MultipartBody.Part> image);
+    Call<ImageUploadResponse> uploadImage(@Header("x-auth-token") String authHeader, @Part MultipartBody.Part[] image);
 
     @GET("/api/offices/")
     Call<List<Office>> getOffices();

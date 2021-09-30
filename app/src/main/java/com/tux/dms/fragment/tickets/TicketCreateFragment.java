@@ -69,7 +69,6 @@ public class TicketCreateFragment extends Fragment implements AdapterView.OnItem
     Integer REQUEST_CAMERA = 1, SELECT_FILE = 0;
     Bitmap bmp;
     ByteArrayOutputStream baos = new ByteArrayOutputStream();
-    byte[] imageData;
     String imagePath;
 
     String[] sources = {"State", "District", "Sub-Division", "Gram Panchayat", "Other Block Offices", "Others"};
@@ -223,7 +222,7 @@ public class TicketCreateFragment extends Fragment implements AdapterView.OnItem
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
             if (requestCode == REQUEST_CAMERA) {
-
+                List<byte[]> imageDataList = new ArrayList<>();
                 Bundle bundle = data.getExtras();
                 bmp = (Bitmap) bundle.get("data");
                 try {
@@ -231,109 +230,61 @@ public class TicketCreateFragment extends Fragment implements AdapterView.OnItem
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                imageData = baos.toByteArray();
-                //uploadImage(imageData);
+                imageDataList.add(baos.toByteArray());
+                uploadImage(imageDataList);
             } else if (requestCode == SELECT_FILE) {
 
                 if (data.getClipData() != null) {
+                    List<byte[]> imageDataList = new ArrayList<>();
                     int count = data.getClipData().getItemCount(); //evaluate the count before the for loop --- otherwise, the count is evaluated every loop.
                     for (int i = 0; i < count; i++) {
                         Uri imageUri = data.getClipData().getItemAt(i).getUri();
-                        uploadImage(imageUri);
-                        //do something with the image (save it to some directory or whatever you need to do with it here)
+                        try {
+                            bmp = MediaStore.Images.Media.getBitmap(getActivity().getApplicationContext().getContentResolver(),
+                                    imageUri);
+
+                            bmp.compress(Bitmap.CompressFormat.JPEG, 10, baos);
+                            imageDataList.add(baos.toByteArray());
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+
                     }
+                    uploadImage(imageDataList);
+                } else if (data.getData() != null) {
+                    String imagePath = data.getData().getPath();
+                    //do something with the image (save it to some directory or whatever you need to do with it here)
                 }
-             else if (data.getData() != null) {
-                String imagePath = data.getData().getPath();
-                //do something with the image (save it to some directory or whatever you need to do with it here)
-            }
             }
 
-//                Uri selectedImageUri = data.getData();
-//                try {
-//                    bmp = MediaStore.Images.Media.getBitmap(getActivity().getApplicationContext().getContentResolver(),
-//                            selectedImageUri);
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
-//                bmp.compress(Bitmap.CompressFormat.JPEG, 10, baos);
-//                imageData = baos.toByteArray();
+
         }
 
     }
 
-//        try {
-//            // When an Image is picked
-//            if (requestCode == 1 && resultCode == RESULT_OK
-//                    && data != null) {
-//                // Get the Image from data
-//
-//                String[] filePathColumn = { MediaStore.Images.Media.DATA };
-//                imagesEncodedList = new ArrayList<String>();
-//                if(data.getData()!=null){
-//
-//                    Uri mImageUri=data.getData();
-//
-//                    // Get the cursor
-//                    Cursor cursor = getActivity().getApplicationContext().getContentResolver().query(mImageUri,
-//                            filePathColumn, null, null, null);
-//                    // Move to first row
-//                    cursor.moveToFirst();
-//
-//                    int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-//                    imageEncoded  = cursor.getString(columnIndex);
-//                    cursor.close();
-//
-//                } else {
-//                    if (data.getClipData() != null) {
-//                        ClipData mClipData = data.getClipData();
-//                        ArrayList<Uri> mArrayUri = new ArrayList<Uri>();
-//                        for (int i = 0; i < mClipData.getItemCount(); i++) {
-//
-//                            ClipData.Item item = mClipData.getItemAt(i);
-//                            Uri uri = item.getUri();
-//                            mArrayUri.add(uri);
-//                            // Get the cursor
-//                            Cursor cursor = getActivity().getApplicationContext().getContentResolver().query(uri, filePathColumn, null, null, null);
-//                            // Move to first row
-//                            cursor.moveToFirst();
-//
-//                            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-//                            imageEncoded  = cursor.getString(columnIndex);
-//                            imagesEncodedList.add(imageEncoded);
-//                            cursor.close();
-//
-//                        }
-//                        Log.v("LOG_TAG", "Selected Images" + mArrayUri.size());
-//                    }
-//                }
-//            } else {
-//                Toast.makeText(getContext(), "You haven't picked Image",
-//                        Toast.LENGTH_SHORT).show();
-//            }
-//        } catch (Exception e) {
-//            Toast.makeText(getContext(), "Something went wrong", Toast.LENGTH_SHORT)
-//                    .show();
-//        }
-//
-//        super.onActivityResult(requestCode, resultCode, data);
 
 
-    private void uploadImage(Uri uri) {
+    private void uploadImage( List<byte[]> imageDataList) {
         System.out.println("upload image");
 
-        List<MultipartBody.Part> parts = new ArrayList<>();
-//        parts.add(prepareFilePart("file", uri));
-
-//        RequestBody requestFile = RequestBody.create(MediaType.parse("image/jpeg"), imageBytes);
-//        MultipartBody.Part body = MultipartBody.Part.createFormData("image", "image.jpg", requestFile);
-
-        Call<ImageUploadResponse> call = apiInterface.uploadImage(parts);
+       MultipartBody.Part[]  parts =  new MultipartBody.Part[imageDataList.size()];
+        for (int i = 0; i < imageDataList.size(); i++) {
+            RequestBody requestFile = RequestBody.create(MediaType.parse("image/jpeg"), imageDataList.get(i));
+            String name = "image" + i;
+            String fileName = name + ".jpg";
+            MultipartBody.Part body = MultipartBody.Part.createFormData(name, fileName, requestFile);
+            parts[i] = body;
+            //parts[i] = body;
+            //parts.add(body);
+        }
+        String token = sessionCache.getToken();
+        Call<ImageUploadResponse> call = apiInterface.uploadImage(token,parts);
 
         call.enqueue(new Callback<ImageUploadResponse>() {
             @Override
             public void onResponse(Call<ImageUploadResponse> call, Response<ImageUploadResponse> response) {
-                imagePath =  response.body().getPath();
+                List<String> pdfPaths = response.body().getPdf();
+                List<String> imagePaths = response.body().getImg();
                 Toast.makeText(getContext(), "image scanned/attached",
                         Toast.LENGTH_LONG).show();
             }
@@ -345,14 +296,6 @@ public class TicketCreateFragment extends Fragment implements AdapterView.OnItem
         });
     }
 
-//    private MultipartBody.Part prepareFilePart(String partName, Uri fileUri){
-//
-//        File file = new File(getPath(fileUri));
-//
-//        RequestBody requestBody = RequestBody.create(MediaType.parse(getActivity().getContentResolver().getType(fileUri)), file);
-//
-//        return MultipartBody.Part.createFormData(partName, file.getName(),requestBody);
-//    }
 
     private void postTicket(String subjectStr, String sourceStr, String imageSrcPath) {
 
