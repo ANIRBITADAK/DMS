@@ -289,7 +289,7 @@ public class TicketCreateFragment extends Fragment implements AdapterView.OnItem
 
     private void handleAttachment(List<byte[]> imageDataList, String mimeType) {
 
-        MultipartBody.Part[] parts = new MultipartBody.Part[imageDataList.size()];
+        List<MultipartBody.Part> parts = new ArrayList<>();
         for (int i = 0; i < imageDataList.size(); i++) {
             MultipartBody.Part body = null;
             switch (mimeType) {
@@ -306,12 +306,12 @@ public class TicketCreateFragment extends Fragment implements AdapterView.OnItem
                     body = MultipartBody.Part.createFormData("image", fileName, requestFile);
                     break;
             }
-            parts[i] = body;
+            parts.add(body);
         }
         uploadAttachment(parts);
     }
 
-    private void uploadAttachment( MultipartBody.Part[]  parts) {
+    private void uploadAttachment(List<MultipartBody.Part> parts) {
 
         String token = sessionCache.getToken();
         Call<ImageUploadResponse> call = apiInterface.uploadImage(token, parts);
