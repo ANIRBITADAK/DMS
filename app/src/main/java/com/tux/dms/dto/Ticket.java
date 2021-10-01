@@ -18,7 +18,8 @@ public class Ticket {
     private String source;
     private String priority;
     private String state;
-    private String filePath;
+    private List<String> pdfFilePath;
+    private List<String > imageFilePath;
     private String createDate;
     private String assignDate;
     private List<Comment> comments;
@@ -95,14 +96,6 @@ public class Ticket {
         this.state = state;
     }
 
-    public String getFilePath() {
-        return filePath;
-    }
-
-    public void setFilePath(String filePath) {
-        this.filePath = filePath;
-    }
-
     public String getCreateDate() {
         return createDate;
     }
@@ -111,6 +104,21 @@ public class Ticket {
         this.createDate = createDate;
     }
 
+    public List<String> getPdfFilePath() {
+        return pdfFilePath;
+    }
+
+    public void setPdfFilePath(List<String> pdfFilePath) {
+        this.pdfFilePath = pdfFilePath;
+    }
+
+    public List<String> getImageFilePath() {
+        return imageFilePath;
+    }
+
+    public void setImageFilePath(List<String> imageFilePath) {
+        this.imageFilePath = imageFilePath;
+    }
     public String getAssignDate() {
         TimeZone utc = TimeZone.getTimeZone("UTC");
         SimpleDateFormat sourceFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");

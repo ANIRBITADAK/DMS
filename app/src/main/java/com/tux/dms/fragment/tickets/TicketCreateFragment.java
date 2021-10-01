@@ -67,7 +67,8 @@ public class TicketCreateFragment extends Fragment implements AdapterView.OnItem
     Integer REQUEST_CAMERA = 1, SELECT_FILE = 0;
     Bitmap bmp;
     ByteArrayOutputStream baos = new ByteArrayOutputStream();
-    String imagePath;
+    List<String> imagePaths = new ArrayList<>();
+    List<String> pdfPaths = new ArrayList<>();
 
     String[] sources = {"State", "District", "Sub-Division", "Gram Panchayat", "Other Block Offices", "Others"};
     Spinner sourceSpiner;
@@ -75,8 +76,6 @@ public class TicketCreateFragment extends Fragment implements AdapterView.OnItem
     EditText subjectText;
     TextView ticketSuccess;
     AlertDialog dialog;
-    List<String> imagesEncodedList;
-    String imageEncoded;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -156,7 +155,7 @@ public class TicketCreateFragment extends Fragment implements AdapterView.OnItem
                 progressDialog.setMessage("Creating Ticket");
                 progressDialog.setCanceledOnTouchOutside(false);
                 progressDialog.show();
-                postTicket(subjectText.getText().toString(), sourceText, imagePath);
+                postTicket(subjectText.getText().toString(), sourceText, imagePaths , pdfPaths);
             }
         });
 
@@ -320,8 +319,8 @@ public class TicketCreateFragment extends Fragment implements AdapterView.OnItem
         call.enqueue(new Callback<ImageUploadResponse>() {
             @Override
             public void onResponse(Call<ImageUploadResponse> call, Response<ImageUploadResponse> response) {
-                List<String> pdfPaths = response.body().getPdf();
-                List<String> imagePaths = response.body().getImg();
+                imagePaths.addAll(response.body().getImg());
+                pdfPaths.addAll(response.body().getPdf());
                 Toast.makeText(getContext(), "image scanned/attached",
                         Toast.LENGTH_LONG).show();
             }
@@ -333,12 +332,13 @@ public class TicketCreateFragment extends Fragment implements AdapterView.OnItem
         });
     }
 
-    private void postTicket(String subjectStr, String sourceStr, String imageSrcPath) {
+    private void postTicket(String subjectStr, String sourceStr, List<String> imagePaths, List<String> pdfPaths) {
 
         Ticket ticketBody = new Ticket();
         ticketBody.setSubject(subjectStr);
         ticketBody.setSource(sourceStr);
-        ticketBody.setFilePath(imageSrcPath);
+        ticketBody.setImageFilePath(imagePaths);
+        ticketBody.setPdfFilePath(pdfPaths);
         String token = sessionCache.getToken();
         Call<Ticket> ticketCall = apiInterface.createTicket(token, ticketBody);
 
@@ -354,7 +354,8 @@ public class TicketCreateFragment extends Fragment implements AdapterView.OnItem
                         subjectText.setText("");
                         sourceSpiner.setSelection(0);
                         dialog.dismiss();
-                        imagePath = null;
+                        imagePaths.clear();
+                        pdfPaths.clear();
                     }
                 });
                 btnNo.setOnClickListener(new View.OnClickListener() {
