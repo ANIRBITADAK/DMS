@@ -2,14 +2,10 @@ package com.tux.dms.fragment.tickets;
 
 import static android.app.Activity.RESULT_OK;
 
-import org.apache.commons.io.FileUtils;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
-import android.content.ClipData;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
@@ -18,9 +14,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.os.Environment;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,6 +28,7 @@ import android.widget.Toast;
 
 import com.tux.dms.R;
 import com.tux.dms.cache.SessionCache;
+import com.tux.dms.constants.MimeTypeConst;
 import com.tux.dms.dto.ImageUploadResponse;
 import com.tux.dms.dto.Ticket;
 import com.tux.dms.fragment.dashboard.AdminDashboardFragment;
@@ -41,13 +36,10 @@ import com.tux.dms.rest.ApiClient;
 import com.tux.dms.rest.ApiInterface;
 
 import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
-import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import okhttp3.MediaType;
@@ -228,173 +220,102 @@ public class TicketCreateFragment extends Fragment implements AdapterView.OnItem
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
             if (requestCode == REQUEST_CAMERA) {
-                List<byte[]> imageDataList = new ArrayList<>();
                 Bundle bundle = data.getExtras();
                 bmp = (Bitmap) bundle.get("data");
                 try {
                     bmp.compress(Bitmap.CompressFormat.PNG, 100, baos);
-                    handleUploadOfCameraImage(baos.toByteArray());
+                    handleAttachment(Arrays.asList(baos.toByteArray()), MimeTypeConst.imageMimeTypeInRequest);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             } else if (requestCode == SELECT_FILE) {
-
                 if (data.getClipData() != null) {
                     List<byte[]> imageDataList = new ArrayList<>();
                     int count = data.getClipData().getItemCount(); //evaluate the count before the for loop --- otherwise, the count is evaluated every loop.
-                    List<Uri> fileUriList = new ArrayList<>();
+                    String mimeType = data.getClipData().getDescription().getMimeType(0);
                     for (int i = 0; i < count; i++) {
-                        Uri uri = data.getClipData().getItemAt(i).getUri();
-                        fileUriList.add(uri);
-                        //getRealPathFromURI(uri);
-                        //fileUriList.add(getImageFilePath(data.getClipData().getItemAt(i).getUri()));
-                        /* tring filePath = data.getClipData().getItemAt(i).getUri().getPath();
-                        try {
-                            bmp = MediaStore.Images.Media.getBitmap(getActivity().getApplicationContext().getContentResolver(),
-                                    imageUri);
-
-                            bmp.compress(Bitmap.CompressFormat.JPEG, 10, baos);
-                            imageDataList.add(baos.toByteArray());
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }*/
-
+                        Uri imageUri = data.getClipData().getItemAt(i).getUri();
+                        imageDataList.add(getBytes(imageUri));
                     }
-                    handleImage(fileUriList);
-                    //uploadImage(imageDataList);
+                    handleAttachment(imageDataList, mimeType);
                 } else if (data.getData() != null) {
                     String imagePath = data.getData().getPath();
                     //do something with the image (save it to some directory or whatever you need to do with it here)
                 }
             }
-
-
         }
 
     }
 
+    /**
+     * get array of byte from uri of file (image/pdf)
+     * @param uri
+     * @return
+     */
+    private byte[] getBytes(Uri uri) {
+        try {
+            InputStream inputStream = getActivity()
+                    .getApplicationContext().getContentResolver().openInputStream(uri);
+            return readBytes(inputStream);
 
-   private void handleUploadOfCameraImage(byte[] imageData){
-       MultipartBody.Part[]  parts =  new MultipartBody.Part[1];
-
-       RequestBody requestFile = RequestBody.create(MediaType.parse("image/jpeg"), imageData);
-       MultipartBody.Part body = MultipartBody.Part.createFormData("image", "image.jpg", requestFile);
-       parts[0] = body;
-       uploadAttachment(parts);
-   }
-   private void handlePdf(List<Uri> fileUriList){
-       MultipartBody.Part[]  parts =  new MultipartBody.Part[1];
-
-
-       for(int i=0; i<fileUriList.size();i++){
-            try {
-                String fileNme = "pdf"+i;
-                File file = new File(fileNme);
-                InputStream  inputStream =  getActivity().getApplicationContext().getContentResolver().openInputStream(fileUriList.get(i));
-                FileUtils.copyToFile(inputStream,file);
-                RequestBody requestFile = RequestBody.create(MediaType.parse("image/jpeg"), file);
-                MultipartBody.Part body = MultipartBody.Part.createFormData("image", file.getName(), requestFile);
-                parts[i] = body;
-                i++;
-
-            }catch (Exception ex){
-
-            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
-       uploadAttachment(parts);
+        return null;
+    }
 
-   }
-    private void handleImage(List<Uri> fileUrlList){
-        MultipartBody.Part[]  parts =  new MultipartBody.Part[fileUrlList.size()];
+    /**
+     * get array of bytes from input stream
+     * @param inputStream
+     * @return
+     * @throws IOException
+     */
+    private byte[] readBytes(InputStream inputStream) throws IOException {
+        // this dynamically extends to take the bytes you read
+        ByteArrayOutputStream byteBuffer = new ByteArrayOutputStream();
 
+        // this is storage overwritten on each iteration with bytes
+        int bufferSize = 1024;
+        byte[] buffer = new byte[bufferSize];
 
-        for(int i=0; i<fileUrlList.size();i++){
-            try {
+        // we need to know how may bytes were read to write them to the byteBuffer
+        int len = 0;
+        while ((len = inputStream.read(buffer)) != -1) {
+            byteBuffer.write(buffer, 0, len);
+        }
 
-                String fileNme = "image"+i;
-                //File file = new File(fileNme);
-                File file = new File(Environment.getExternalStorageDirectory() + "/" + File.separator + fileNme);
-                file.createNewFile();
-                InputStream  inputStream =  getActivity().getApplicationContext().getContentResolver().openInputStream(fileUrlList.get(i));
-                //FileUtils.copyToFile(inputStream,file);
-                copyInputStreamToFile(inputStream,file);
-                RequestBody requestFile = RequestBody.create(MediaType.parse("image/jpeg"), file);
-                MultipartBody.Part body = MultipartBody.Part.createFormData("image", file.getName(), requestFile);
-                parts[i] = body;
+        // and then we can return your byte array.
+        return byteBuffer.toByteArray();
+    }
 
-            }catch (Exception ex){
-                ex.printStackTrace();
+    private void handleAttachment(List<byte[]> imageDataList, String mimeType) {
+
+        MultipartBody.Part[] parts = new MultipartBody.Part[imageDataList.size()];
+        for (int i = 0; i < imageDataList.size(); i++) {
+            MultipartBody.Part body = null;
+            switch (mimeType) {
+                case MimeTypeConst.imageMimeTypeInRequest:
+                    RequestBody requestFile = RequestBody.create(MediaType.parse(MimeTypeConst.imageMimeType),
+                            imageDataList.get(i));
+                    String fileName = "attachment" + i + ".jpg";
+                    body = MultipartBody.Part.createFormData("image", fileName, requestFile);
+                    break;
+                case MimeTypeConst.pdfMimeType:
+                     requestFile = RequestBody.create(MediaType.parse(MimeTypeConst.pdfMimeType),
+                            imageDataList.get(i));
+                    fileName = "attachment" + i + ".pdf";
+                    body = MultipartBody.Part.createFormData("image", fileName, requestFile);
+                    break;
             }
+            parts[i] = body;
         }
         uploadAttachment(parts);
-
     }
-    private void copyInputStreamToFile(InputStream in, File file) {
-        OutputStream out = null;
 
-        try {
-            out = new FileOutputStream(file);
-            byte[] buf = new byte[1024];
-            int len;
-            while((len=in.read(buf))>0){
-                out.write(buf,0,len);
-            }
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
-        finally {
-            // Ensure that the InputStreams are closed even if there's an exception.
-            try {
-                if ( out != null ) {
-                    out.close();
-                }
+    private void uploadAttachment( MultipartBody.Part[]  parts) {
 
-                // If you want to close the "in" InputStream yourself then remove this
-                // from here but ensure that you close it yourself eventually.
-                in.close();
-            }
-            catch ( IOException e ) {
-                e.printStackTrace();
-            }
-        }
-    }
-   private void uploadAttachment( MultipartBody.Part[]  parts){
-
-       String token = sessionCache.getToken();
-       Call<ImageUploadResponse> call = apiInterface.uploadImage(token,parts);
-
-       call.enqueue(new Callback<ImageUploadResponse>() {
-           @Override
-           public void onResponse(Call<ImageUploadResponse> call, Response<ImageUploadResponse> response) {
-               List<String> pdfPaths = response.body().getPdf();
-               List<String> imagePaths = response.body().getImg();
-               Toast.makeText(getContext(), "image scanned/attached",
-                       Toast.LENGTH_LONG).show();
-           }
-
-           @Override
-           public void onFailure(Call<ImageUploadResponse> call, Throwable t) {
-
-           }
-       });
-   }
-    private void uploadImage( List<byte[]> imageDataList) {
-        System.out.println("upload image");
-
-       MultipartBody.Part[]  parts =  new MultipartBody.Part[imageDataList.size()];
-        for (int i = 0; i < imageDataList.size(); i++) {
-            //RequestBody.create(MediaType.parse("application/pdf")
-            RequestBody requestFile = RequestBody.create(MediaType.parse("image/jpeg"), imageDataList.get(i));
-            //String name = "image" + i;
-            String fileName = "image" + i + ".jpg";
-            MultipartBody.Part body = MultipartBody.Part.createFormData("image", fileName, requestFile);
-            parts[i] = body;
-            //parts[i] = body;
-            //parts.add(body);
-        }
         String token = sessionCache.getToken();
-        Call<ImageUploadResponse> call = apiInterface.uploadImage(token,parts);
+        Call<ImageUploadResponse> call = apiInterface.uploadImage(token, parts);
 
         call.enqueue(new Callback<ImageUploadResponse>() {
             @Override
@@ -411,7 +332,6 @@ public class TicketCreateFragment extends Fragment implements AdapterView.OnItem
             }
         });
     }
-
 
     private void postTicket(String subjectStr, String sourceStr, String imageSrcPath) {
 
