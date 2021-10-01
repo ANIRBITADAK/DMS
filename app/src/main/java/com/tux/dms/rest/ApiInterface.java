@@ -65,6 +65,7 @@ public interface ApiInterface {
     Call<TicketCount> getTicketCount(@Header("x-auth-token") String authHeader, @Query("state") String state);
     @GET("/api/tickets/search")
     Call<TicketList> searchTicket(@Header("x-auth-token") String authHeader,
+                                   @Query("docketId") String docketId,
                                    @Query("subject") String subject,
                                    @Query("state") String state,
                                    @Query("priority") String priority,
@@ -75,7 +76,7 @@ public interface ApiInterface {
 
     @Multipart
     @POST("/api/images/upload")
-    Call<ImageUploadResponse> uploadImage(@Part MultipartBody.Part image);
+    Call<ImageUploadResponse> uploadImage(@Header("x-auth-token") String authHeader, @Part List<MultipartBody.Part> image);
 
     @GET("/api/offices/")
     Call<List<Office>> getOffices();

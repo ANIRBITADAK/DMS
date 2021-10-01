@@ -30,7 +30,8 @@
                 android:id="@+id/editTextPhone"
                 style="@style/modifiedEditText"
                 android:hint="@string/mobile_no_hint"
-                android:maxLines="1" />
+                android:maxLines="1"
+                android:inputType="phone|number"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout

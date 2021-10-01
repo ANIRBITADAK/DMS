@@ -6,7 +6,10 @@ public class Office {
 
     private String _id;
     private String name;
-    private List<String> emails;
+
+
+
+    private String emails;
     private String address;
 
     public String getName() {
@@ -17,11 +20,11 @@ public class Office {
         this.name = name;
     }
 
-    public List<String> getEmails() {
+    public String getEmails() {
         return emails;
     }
 
-    public void setEmails(List<String> emails) {
+    public void setEmails(String emails) {
         this.emails = emails;
     }
 

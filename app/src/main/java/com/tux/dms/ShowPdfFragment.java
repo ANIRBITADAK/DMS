@@ -1,7 +1,6 @@
 package com.tux.dms;
 
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -9,26 +8,19 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-
-import com.squareup.picasso.Picasso;
-import com.tux.dms.constants.TicketConst;
-import com.tux.dms.rest.ApiClient;
-import com.tux.dms.rest.DownloadImageTask;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.MalformedURLException;
-import java.net.URL;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
+import android.widget.ProgressBar;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link ShowImageFragment#newInstance} factory method to
+ * Use the {@link ShowPdfFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ShowImageFragment extends Fragment {
+public class ShowPdfFragment extends Fragment {
 
-    ImageView imageView;
+    WebView webView;
+    ProgressBar progressBar;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -39,7 +31,7 @@ public class ShowImageFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public ShowImageFragment() {
+    public ShowPdfFragment() {
         // Required empty public constructor
     }
 
@@ -49,11 +41,11 @@ public class ShowImageFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment ShowImageFragment.
+     * @return A new instance of fragment ShowPdfFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static ShowImageFragment newInstance(String param1, String param2) {
-        ShowImageFragment fragment = new ShowImageFragment();
+    public static ShowPdfFragment newInstance(String param1, String param2) {
+        ShowPdfFragment fragment = new ShowPdfFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -73,19 +65,28 @@ public class ShowImageFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_show_image, container, false);
-        imageView = view.findViewById(R.id.showImgView);
+        // Inflate the layout for this fragment
+        View view= inflater.inflate(R.layout.fragment_showpdf, container, false);
+        webView=view.findViewById(R.id.webView);
+        progressBar=view.findViewById(R.id.progressBar);
 
+        webView.getSettings().setBuiltInZoomControls(true);
+        webView.getSettings().setJavaScriptEnabled(true);
+        webView.setWebViewClient(new WebViewClient(){
+            @Override
+            public void onPageStarted(WebView view, String url, Bitmap favicon) {
+                super.onPageStarted(view, url, favicon);
+                progressBar.setVisibility(View.VISIBLE);
 
-        Bundle ticketImageBundle = getArguments();
-        String imagePath = (String) ticketImageBundle.get(TicketConst.TICKET_IMG_PATH);
-        if (imagePath != null) {
-            String imageUrl = "http://" + ApiClient.getIpAddress() + ":" + ApiClient.getPORT() + imagePath;
-            new DownloadImageTask(imageView)
-                    .execute(imageUrl);
-        }
+            }
+            @Override public void onPageFinished(WebView view, String url) {
+                super.onPageFinished(view, url);
+                progressBar.setVisibility(View.GONE);
 
+            }
+        });
+        webView.loadUrl("");
 
-        return view;
+        return  view;
     }
 }

@@ -1,17 +1,33 @@
 package com.tux.dms;
 
+import android.Manifest;
 import android.app.DatePickerDialog;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
+import android.os.Environment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.Toast;
 
+import com.tux.dms.dto.Ticket;
+
+
+import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -22,6 +38,8 @@ public class ReportFragment extends Fragment implements DatePickerDialog.OnDateS
 
     Button fromDate,toDate, generateReport;
     String fromdate,todate;
+    //private static final int STORAGE_PERMISSION_CODE = 101;
+ //   private static final String TAG = "TAG";
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -71,6 +89,7 @@ public class ReportFragment extends Fragment implements DatePickerDialog.OnDateS
         fromDate=v.findViewById(R.id.fromdate);
         toDate=v.findViewById(R.id.todate);
         generateReport=v.findViewById(R.id.buttonGenerateReport);
+        //checkPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE, STORAGE_PERMISSION_CODE);
 
         fromDate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -88,8 +107,22 @@ public class ReportFragment extends Fragment implements DatePickerDialog.OnDateS
                 todate=showDatePickerDialog();
             }
         });
+
+        generateReport.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
+
+
         return  v;
     }
+
+
+
+
 
     @Override
     public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
@@ -114,4 +147,9 @@ public class ReportFragment extends Fragment implements DatePickerDialog.OnDateS
         String date=Integer.toString(day)+"/"+Integer.toString(month)+"/"+Integer.toString(year);
         return date;
     }
+
+
+
+
+
 }

@@ -6,23 +6,25 @@
     android:layout_margin="8sp">
 
     <TextView
+        android:id="@+id/ticketSuccessTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="5dp"
-        android:text="Ticket Created Successfully"
-        android:fontFamily="@font/roboto_regular"
         android:autoSizeTextType="uniform"
+        android:fontFamily="@font/roboto_regular"
+        android:text="Ticket Created Successfully"
         android:textStyle="bold" />
 
     <TextView
-        android:layout_marginTop="15sp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Want to create another ticket?"
-        android:fontFamily="@font/roboto_regular"
         android:layout_marginLeft="8sp"
-        android:autoSizeTextType="uniform"/>
+        android:layout_marginTop="15sp"
+        android:autoSizeTextType="uniform"
+        android:fontFamily="@font/roboto_regular"
+        android:text="Want to create another ticket?"
+        android:textAlignment="center" />
 
     <RelativeLayout
         android:layout_marginTop="15sp"
@@ -45,14 +47,14 @@
 
         <Button
             android:id="@+id/btnYes"
-            android:layout_marginRight="8sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="Yes"
-            android:fontFamily="@font/roboto_regular"
             android:layout_alignParentRight="true"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="8sp"
             android:background="@drawable/login_button_bk"
+            android:fontFamily="@font/roboto_regular"
+            android:text="Yes"
             android:textColor="@android:color/white" />
 
     </RelativeLayout>

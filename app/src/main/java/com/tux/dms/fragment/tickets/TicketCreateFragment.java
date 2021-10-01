@@ -1,6 +1,7 @@
 package com.tux.dms.fragment.tickets;
 
-import android.app.Activity;
+import static android.app.Activity.RESULT_OK;
+
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -22,10 +23,12 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.tux.dms.R;
 import com.tux.dms.cache.SessionCache;
+import com.tux.dms.constants.MimeTypeConst;
 import com.tux.dms.dto.ImageUploadResponse;
 import com.tux.dms.dto.Ticket;
 import com.tux.dms.fragment.dashboard.AdminDashboardFragment;
@@ -34,6 +37,10 @@ import com.tux.dms.rest.ApiInterface;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -60,13 +67,14 @@ public class TicketCreateFragment extends Fragment implements AdapterView.OnItem
     Integer REQUEST_CAMERA = 1, SELECT_FILE = 0;
     Bitmap bmp;
     ByteArrayOutputStream baos = new ByteArrayOutputStream();
-    byte[] imageData;
-    String imagePath;
+    List<String> imagePaths = new ArrayList<>();
+    List<String> pdfPaths = new ArrayList<>();
 
     String[] sources = {"State", "District", "Sub-Division", "Gram Panchayat", "Other Block Offices", "Others"};
     Spinner sourceSpiner;
     String sourceText;
     EditText subjectText;
+    TextView ticketSuccess;
     AlertDialog dialog;
 
     // TODO: Rename parameter arguments, choose names that match
@@ -121,6 +129,8 @@ public class TicketCreateFragment extends Fragment implements AdapterView.OnItem
 
         btnYes = (Button) mView.findViewById(R.id.btnYes);
         btnNo = (Button) mView.findViewById(R.id.btnNo);
+        ticketSuccess = (TextView) mView.findViewById(R.id.ticketSuccessTextView);
+
         sourceSpiner = view.findViewById(R.id.source);
         sourceSpiner.setOnItemSelectedListener(this);
 
@@ -145,7 +155,7 @@ public class TicketCreateFragment extends Fragment implements AdapterView.OnItem
                 progressDialog.setMessage("Creating Ticket");
                 progressDialog.setCanceledOnTouchOutside(false);
                 progressDialog.show();
-                postTicket(subjectText.getText().toString(), sourceText, imagePath);
+                postTicket(subjectText.getText().toString(), sourceText, imagePaths , pdfPaths);
             }
         });
 
@@ -165,7 +175,7 @@ public class TicketCreateFragment extends Fragment implements AdapterView.OnItem
 
     private void selectImage() {
 
-        final CharSequence[] items = {"Camera", "Gallery", "Cancel"};
+        final CharSequence[] items = {"Camera","PDF", "Gallery", "Cancel"};
 
         //alert dialog giving three options: Add Image from Camera,Gallery,Cancel
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
@@ -179,16 +189,26 @@ public class TicketCreateFragment extends Fragment implements AdapterView.OnItem
 
                     Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                     startActivityForResult(intent, REQUEST_CAMERA);
+                }
+                else if(items[i].equals("PDF")){
+                        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+                        intent.addCategory(Intent.CATEGORY_OPENABLE);
+                        intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+                        intent.setType("application/pdf");
+                        startActivityForResult(Intent.createChooser(intent,"Select PDF"), SELECT_FILE);
+                }
+                else if (items[i].equals("Gallery")) {
 
-                } else if (items[i].equals("Gallery")) {
-
-                    Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                    Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+                    intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+                    intent.addCategory(Intent.CATEGORY_OPENABLE);
                     intent.setType("image/*");
-                    startActivityForResult(intent, SELECT_FILE);
+                    startActivityForResult(Intent.createChooser(intent,"Select Pictures"), SELECT_FILE);
 
                 } else if (items[i].equals("Cancel")) {
                     dialogInterface.dismiss();
                 }
+
             }
         });
         builder.show();
@@ -196,44 +216,111 @@ public class TicketCreateFragment extends Fragment implements AdapterView.OnItem
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-
-        if (resultCode == Activity.RESULT_OK) {
-
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
             if (requestCode == REQUEST_CAMERA) {
-
                 Bundle bundle = data.getExtras();
                 bmp = (Bitmap) bundle.get("data");
-                bmp.compress(Bitmap.CompressFormat.PNG, 100, baos);
-                imageData = baos.toByteArray();
-            } else if (requestCode == SELECT_FILE) {
-
-                Uri selectedImageUri = data.getData();
                 try {
-                    bmp = MediaStore.Images.Media.getBitmap(getActivity().getApplicationContext().getContentResolver(),
-                            selectedImageUri);
-                } catch (IOException e) {
+                    bmp.compress(Bitmap.CompressFormat.PNG, 100, baos);
+                    handleAttachment(Arrays.asList(baos.toByteArray()), MimeTypeConst.imageMimeTypeInRequest);
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
-                bmp.compress(Bitmap.CompressFormat.JPEG, 10, baos);
-                imageData = baos.toByteArray();
+            } else if (requestCode == SELECT_FILE) {
+                if (data.getClipData() != null) {
+                    List<byte[]> imageDataList = new ArrayList<>();
+                    int count = data.getClipData().getItemCount(); //evaluate the count before the for loop --- otherwise, the count is evaluated every loop.
+                    String mimeType = data.getClipData().getDescription().getMimeType(0);
+                    for (int i = 0; i < count; i++) {
+                        Uri imageUri = data.getClipData().getItemAt(i).getUri();
+                        imageDataList.add(getBytes(imageUri));
+                    }
+                    handleAttachment(imageDataList, mimeType);
+                } else if (data.getData() != null) {
+                    String imagePath = data.getData().getPath();
+                    //do something with the image (save it to some directory or whatever you need to do with it here)
+                }
             }
-            uploadImage(imageData);
         }
 
     }
 
-    private void uploadImage(byte[] imageBytes) {
-        System.out.println("upload image");
+    /**
+     * get array of byte from uri of file (image/pdf)
+     * @param uri
+     * @return
+     */
+    private byte[] getBytes(Uri uri) {
+        try {
+            InputStream inputStream = getActivity()
+                    .getApplicationContext().getContentResolver().openInputStream(uri);
+            return readBytes(inputStream);
 
-        RequestBody requestFile = RequestBody.create(MediaType.parse("image/jpeg"), imageBytes);
-        MultipartBody.Part body = MultipartBody.Part.createFormData("image", "image.jpg", requestFile);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
 
-        Call<ImageUploadResponse> call = apiInterface.uploadImage(body);
+    /**
+     * get array of bytes from input stream
+     * @param inputStream
+     * @return
+     * @throws IOException
+     */
+    private byte[] readBytes(InputStream inputStream) throws IOException {
+        // this dynamically extends to take the bytes you read
+        ByteArrayOutputStream byteBuffer = new ByteArrayOutputStream();
+
+        // this is storage overwritten on each iteration with bytes
+        int bufferSize = 1024;
+        byte[] buffer = new byte[bufferSize];
+
+        // we need to know how may bytes were read to write them to the byteBuffer
+        int len = 0;
+        while ((len = inputStream.read(buffer)) != -1) {
+            byteBuffer.write(buffer, 0, len);
+        }
+
+        // and then we can return your byte array.
+        return byteBuffer.toByteArray();
+    }
+
+    private void handleAttachment(List<byte[]> imageDataList, String mimeType) {
+
+        List<MultipartBody.Part> parts = new ArrayList<>();
+        for (int i = 0; i < imageDataList.size(); i++) {
+            MultipartBody.Part body = null;
+            switch (mimeType) {
+                case MimeTypeConst.imageMimeTypeInRequest:
+                    RequestBody requestFile = RequestBody.create(MediaType.parse(MimeTypeConst.imageMimeType),
+                            imageDataList.get(i));
+                    String fileName = "attachment" + i + ".jpg";
+                    body = MultipartBody.Part.createFormData("image", fileName, requestFile);
+                    break;
+                case MimeTypeConst.pdfMimeType:
+                     requestFile = RequestBody.create(MediaType.parse(MimeTypeConst.pdfMimeType),
+                            imageDataList.get(i));
+                    fileName = "attachment" + i + ".pdf";
+                    body = MultipartBody.Part.createFormData("image", fileName, requestFile);
+                    break;
+            }
+            parts.add(body);
+        }
+        uploadAttachment(parts);
+    }
+
+    private void uploadAttachment(List<MultipartBody.Part> parts) {
+
+        String token = sessionCache.getToken();
+        Call<ImageUploadResponse> call = apiInterface.uploadImage(token, parts);
 
         call.enqueue(new Callback<ImageUploadResponse>() {
             @Override
             public void onResponse(Call<ImageUploadResponse> call, Response<ImageUploadResponse> response) {
-                imagePath =  response.body().getPath();
+                imagePaths.addAll(response.body().getImg());
+                pdfPaths.addAll(response.body().getPdf());
                 Toast.makeText(getContext(), "image scanned/attached",
                         Toast.LENGTH_LONG).show();
             }
@@ -245,18 +332,20 @@ public class TicketCreateFragment extends Fragment implements AdapterView.OnItem
         });
     }
 
-    private void postTicket(String subjectStr, String sourceStr, String imageSrcPath) {
+    private void postTicket(String subjectStr, String sourceStr, List<String> imagePaths, List<String> pdfPaths) {
 
         Ticket ticketBody = new Ticket();
         ticketBody.setSubject(subjectStr);
         ticketBody.setSource(sourceStr);
-        ticketBody.setFilePath(imageSrcPath);
+        ticketBody.setImageFilePath(imagePaths);
+        ticketBody.setPdfFilePath(pdfPaths);
         String token = sessionCache.getToken();
         Call<Ticket> ticketCall = apiInterface.createTicket(token, ticketBody);
 
         ticketCall.enqueue(new Callback<Ticket>() {
             @Override
             public void onResponse(Call<Ticket> call, Response<Ticket> response) {
+                ticketSuccess.setText("Ticket Created Successfully" + " " + response.body().getDocketId());
                 progressDialog.dismiss();
                 dialog.show();
                 btnYes.setOnClickListener(new View.OnClickListener() {
@@ -265,7 +354,8 @@ public class TicketCreateFragment extends Fragment implements AdapterView.OnItem
                         subjectText.setText("");
                         sourceSpiner.setSelection(0);
                         dialog.dismiss();
-                        imagePath = null;
+                        imagePaths.clear();
+                        pdfPaths.clear();
                     }
                 });
                 btnNo.setOnClickListener(new View.OnClickListener() {

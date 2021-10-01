@@ -40,6 +40,7 @@ public class TicketSearchFragment extends Fragment {
 
     String[] states = {"", "New", "Assigned", "In-Progress", "Resolved"};
     Spinner stateSpinner;
+    EditText docketIdEditText;
     EditText subjectEditText ;
     String[] priorities = {"", "High", "Medium", "Low"};
     Spinner prioritySpinner;
@@ -95,6 +96,7 @@ public class TicketSearchFragment extends Fragment {
         // Inflate the layout for this fragment
         View view=inflater.inflate(R.layout.fragment_search, container, false);
         subjectEditText = view.findViewById(R.id.assignSubjectText);
+        docketIdEditText = view.findViewById(R.id.searchDocketIdText);
         imageButton=view.findViewById(R.id.calendarImgButton);
         Calendar calendar=Calendar.getInstance();
         final int year=calendar.get(Calendar.YEAR);
@@ -160,7 +162,8 @@ public class TicketSearchFragment extends Fragment {
                     startDate = formatDate(date.getText().toString());
                     endDate = addDays(startDate, 5);
                 }
-                Bundle ticketSearchBundle = getTicketSearchBundle(subjectEditText.getText().toString(), state, priority, startDate, endDate);
+                Bundle ticketSearchBundle = getTicketSearchBundle(docketIdEditText.getText().toString(),
+                        subjectEditText.getText().toString(), state, priority, startDate, endDate);
                 ticketTableFragment.setArguments(ticketSearchBundle);
                 FragmentManager fragmentManager = getFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -173,10 +176,13 @@ public class TicketSearchFragment extends Fragment {
         return view;
     }
 
-    private Bundle getTicketSearchBundle(String subject, String state, String priority,
+    private Bundle getTicketSearchBundle(String docketId, String subject, String state, String priority,
                                          String startDate, String endDate) {
         Bundle ticketSearchBundle = new Bundle();
         ticketSearchBundle.putString(TicketConst.TICKET_SEARCH_FLOW_KEY, TicketConst.TICKET_SEARCH_FLOW_VALUE);
+        if(docketId!=null && !docketId.equals("")){
+            ticketSearchBundle.putString(TicketConst.TICKET_DOCKET_ID_KEY,docketId);
+        }
         if (subject != null && !subject.equals("")) {
             ticketSearchBundle.putString(TicketConst.TICKET_SUBJECT_KEY, subject);
         }

@@ -55,6 +55,7 @@ public class TicketAssignmentFragment extends Fragment {
     ApiInterface apiInterface = ApiClient.getApiService();
     SessionCache sessionCache = SessionCache.getSessionCache();
 
+    TextView docketIdTextView;
     TextView assignSubjectTextView;
     TextView assignSourceTextView;
     EditText commentText;
@@ -108,6 +109,7 @@ public class TicketAssignmentFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_assign_ticket, container, false);
         priorityList = TicketPriorityType.getTicketPriorityList();
         assignSubjectTextView = view.findViewById(R.id.assignSubjectText);
+        docketIdTextView = view.findViewById(R.id.assignDocketIdSubjectText);
         assignSourceTextView = view.findViewById(R.id.assignSourceText);
         commentText = view.findViewById(R.id.assignCommentEditText);
         showImageButton = view.findViewById(R.id.showImageBtn);
@@ -116,8 +118,10 @@ public class TicketAssignmentFragment extends Fragment {
         if (ticketDetailsBundle != null) {
             ticketId = (String) ticketDetailsBundle.get(TicketConst.TICKET_ID_KEY);
             ticketImagePath = (String) ticketDetailsBundle.get(TicketConst.TICKET_IMG_PATH);
+            String docketId = ticketDetailsBundle.getString(TicketConst.TICKET_DOCKET_ID_KEY);
             String subject = (String) ticketDetailsBundle.get(TicketConst.TICKET_SUBJECT_KEY);
             String source = (String) ticketDetailsBundle.get(TicketConst.TICKET_SOURCE_KEY);
+            docketIdTextView.setText(docketId);
             assignSubjectTextView.setText(subject);
             assignSourceTextView.setText(source);
         }
