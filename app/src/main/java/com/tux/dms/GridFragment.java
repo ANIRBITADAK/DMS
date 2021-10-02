@@ -16,15 +16,11 @@ import android.widget.GridView;
 import com.tux.dms.constants.AttachmentConst;
 import com.tux.dms.constants.TicketConst;
 import com.tux.dms.dto.Attachment;
-import com.tux.dms.dto.Image;
-import com.tux.dms.dto.Pdf;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import adapter.AttachmentAdapter;
-import adapter.ImageAdapter;
-import adapter.PdfAdapter;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -101,21 +97,20 @@ public class GridFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 // set an Intent to Another Activity
 
-                if(attachmentList.get(position).getType().equals(AttachmentConst.ATTACHMENT_IMAGE_TYPE)){
-                ShowImageFragment showImageFragment = new ShowImageFragment();
-                Bundle attachmentBundle=new Bundle();
-                attachmentBundle.putString(TicketConst.TICKET_IMG_PATH,attachmentList.get(position).getAttachmentPath() );
-                showImageFragment.setArguments(attachmentBundle);
-                FragmentManager manager = ((AppCompatActivity) view.getContext()).getSupportFragmentManager();
-                FragmentTransaction fragmentTransaction = manager.beginTransaction();
-                fragmentTransaction.replace(R.id.fragment_container, showImageFragment);
-                fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.commit();
-                }
-                else if(attachmentList.get(position).getType().equals(AttachmentConst.ATTACHMENT_PDF_TYPE)){
+                if (attachmentList.get(position).getType().equals(AttachmentConst.ATTACHMENT_IMAGE_TYPE)) {
+                    ShowImageFragment showImageFragment = new ShowImageFragment();
+                    Bundle attachmentBundle = new Bundle();
+                    attachmentBundle.putString(TicketConst.TICKET_IMG_PATH, attachmentList.get(position).getAttachmentPath());
+                    showImageFragment.setArguments(attachmentBundle);
+                    FragmentManager manager = ((AppCompatActivity) view.getContext()).getSupportFragmentManager();
+                    FragmentTransaction fragmentTransaction = manager.beginTransaction();
+                    fragmentTransaction.replace(R.id.fragment_container, showImageFragment);
+                    fragmentTransaction.addToBackStack(null);
+                    fragmentTransaction.commit();
+                } else if (attachmentList.get(position).getType().equals(AttachmentConst.ATTACHMENT_PDF_TYPE)) {
                     ShowPdfFragment showpdfFragment = new ShowPdfFragment();
-                    Bundle attachmentBundle=new Bundle();
-                    attachmentBundle.putString(TicketConst.TICKET_PDF_PATH,attachmentList.get(position).getAttachmentPath() );
+                    Bundle attachmentBundle = new Bundle();
+                    attachmentBundle.putString(TicketConst.TICKET_PDF_PATH, attachmentList.get(position).getAttachmentPath());
                     showpdfFragment.setArguments(attachmentBundle);
                     FragmentManager manager = ((AppCompatActivity) view.getContext()).getSupportFragmentManager();
                     FragmentTransaction fragmentTransaction = manager.beginTransaction();

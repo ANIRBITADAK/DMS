@@ -94,14 +94,14 @@ public class TicketSearchFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view=inflater.inflate(R.layout.fragment_search, container, false);
+        View view = inflater.inflate(R.layout.fragment_search, container, false);
         subjectEditText = view.findViewById(R.id.assignSubjectText);
         docketIdEditText = view.findViewById(R.id.searchDocketIdText);
-        imageButton=view.findViewById(R.id.calendarImgButton);
-        Calendar calendar=Calendar.getInstance();
-        final int year=calendar.get(Calendar.YEAR);
-        final int month=calendar.get(Calendar.MONTH);
-        final int day=calendar.get(Calendar.DAY_OF_MONTH);
+        imageButton = view.findViewById(R.id.calendarImgButton);
+        Calendar calendar = Calendar.getInstance();
+        final int year = calendar.get(Calendar.YEAR);
+        final int month = calendar.get(Calendar.MONTH);
+        final int day = calendar.get(Calendar.DAY_OF_MONTH);
         date = view.findViewById(R.id.date);
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override

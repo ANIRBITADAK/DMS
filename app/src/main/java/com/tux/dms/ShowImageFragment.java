@@ -80,7 +80,7 @@ public class ShowImageFragment extends Fragment {
         Bundle ticketImageBundle = getArguments();
         String imagePath = (String) ticketImageBundle.get(TicketConst.TICKET_IMG_PATH);
         if (imagePath != null) {
-            String imageUrl = "http://" + ApiClient.getIpAddress() + ":" + ApiClient.getPORT() + imagePath;
+            String imageUrl = "http://" + ApiClient.getIpAddress() + ":" + ApiClient.getPORT() +"/"+ imagePath;
             new DownloadImageTask(imageView)
                     .execute(imageUrl);
         }
