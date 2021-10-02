@@ -315,12 +315,17 @@ public class TicketCreateFragment extends Fragment implements AdapterView.OnItem
 
         String token = sessionCache.getToken();
         Call<ImageUploadResponse> call = apiInterface.uploadImage(token, parts);
+        final ProgressDialog progressDialogUpload;
+        progressDialogUpload = new ProgressDialog(getContext());
+        progressDialogUpload.setTitle("Uploading . . .");
+        progressDialogUpload.show();
 
         call.enqueue(new Callback<ImageUploadResponse>() {
             @Override
             public void onResponse(Call<ImageUploadResponse> call, Response<ImageUploadResponse> response) {
                 imagePaths.addAll(response.body().getImg());
                 pdfPaths.addAll(response.body().getPdf());
+                progressDialogUpload.dismiss();
                 Toast.makeText(getContext(), "image scanned/attached",
                         Toast.LENGTH_LONG).show();
             }
