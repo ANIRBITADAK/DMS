@@ -19,7 +19,7 @@ public class Ticket {
     private String priority;
     private String state;
     private List<String> pdfFilePath;
-    private List<String > imageFilePath;
+    private List<String> imageFilePath;
     private String createDate;
     private String assignDate;
     private List<Comment> comments;

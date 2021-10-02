@@ -28,11 +28,6 @@ public class GridFragment extends Fragment {
 
     GridView gridView;
 
-    Bundle attachmentBundle;
-    List<String> imagePaths = new ArrayList<>();
-    List<String> pdfPaths = new ArrayList<>();
-
-
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -77,19 +72,19 @@ public class GridFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view= inflater.inflate(R.layout.fragment_grid, container, false);
-        gridView=view.findViewById(R.id.gridview);
-        attachmentBundle=this.getArguments();
-        imagePaths=attachmentBundle.getStringArrayList(TicketConst.TICKET_IMG_PATH);
-        pdfPaths=attachmentBundle.getStringArrayList(TicketConst.TICKET_PDF_PATH);
+        View view = inflater.inflate(R.layout.fragment_grid, container, false);
+        gridView = view.findViewById(R.id.gridview);
+        Bundle attachmentBundle = this.getArguments();
+        List<String> imagePaths = attachmentBundle.getStringArrayList(TicketConst.TICKET_IMG_PATH);
+        List<String> pdfPaths = attachmentBundle.getStringArrayList(TicketConst.TICKET_PDF_PATH);
 
         ArrayList<Image> imageList = new ArrayList<Image>();
-        for(int i=0;i<imagePaths.size();i++)
-            imageList.add(new Image(imagePaths.get(i),R.drawable.ic_baseline_image_24));
+        for (int i = 0; i < imagePaths.size(); i++)
+            imageList.add(new Image(imagePaths.get(i), R.drawable.ic_baseline_image_24));
 
         ArrayList<Pdf> pdfList = new ArrayList<Pdf>();
-        for(int i=0;i<pdfPaths.size();i++)
-            pdfList.add(new Pdf(pdfPaths.get(i),R.drawable.ic_baseline_picture_as_pdf_24));
+        for (int i = 0; i < pdfPaths.size(); i++)
+            pdfList.add(new Pdf(pdfPaths.get(i), R.drawable.ic_baseline_picture_as_pdf_24));
 
 
         ImageAdapter imageAdapter = new ImageAdapter(getContext(), imageList);
@@ -99,8 +94,6 @@ public class GridFragment extends Fragment {
         gridView.setAdapter(pdfAdapter);
 
 
-
-        
         return view;
     }
 }

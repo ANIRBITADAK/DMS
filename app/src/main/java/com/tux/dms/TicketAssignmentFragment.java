@@ -23,6 +23,7 @@ import com.tux.dms.constants.TicketPriorityType;
 import com.tux.dms.constants.TicketStateType;
 import com.tux.dms.dto.Ticket;
 import com.tux.dms.dto.AssignTicket;
+import com.tux.dms.dto.TicketDetails;
 import com.tux.dms.dto.User;
 import com.tux.dms.rest.ApiClient;
 import com.tux.dms.rest.ApiInterface;
@@ -194,11 +195,12 @@ public class TicketAssignmentFragment extends Fragment {
                 assignTicket.setPriority(priority);
                 assignTicket.setAssigneeId(assignedToId);
                 assignTicket.setCommentText(commentText.getText().toString());
-                Call<Ticket> ticketCall = apiInterface.assignTicket(sessionCache.getToken(), ticketId, assignTicket);
+                Call<TicketDetails> ticketCall = apiInterface.assignTicket(sessionCache.getToken(), ticketId, assignTicket);
 
-                ticketCall.enqueue(new Callback<Ticket>() {
+                ticketCall.enqueue(new Callback<TicketDetails>() {
                     @Override
-                    public void onResponse(Call<Ticket> call, Response<Ticket> response) {
+                    public void onResponse(Call<TicketDetails> call, Response<TicketDetails> response) {
+                        Response<TicketDetails> response1 = response;
                         if (response.code() == 200) {
                             String msg = "Ticket assigned to " + assignedToName;
                             Toast.makeText(getContext(), msg, Toast.LENGTH_LONG).show();
@@ -215,7 +217,7 @@ public class TicketAssignmentFragment extends Fragment {
                     }
 
                     @Override
-                    public void onFailure(Call<Ticket> call, Throwable t) {
+                    public void onFailure(Call<TicketDetails> call, Throwable t) {
 
                     }
                 });

@@ -5,6 +5,7 @@ import com.tux.dms.dto.JWTToken;
 import com.tux.dms.dto.ImageUploadResponse;
 import com.tux.dms.dto.Office;
 import com.tux.dms.dto.Ticket;
+import com.tux.dms.dto.TicketDetails;
 import com.tux.dms.dto.TicketList;
 import com.tux.dms.dto.TicketCount;
 import com.tux.dms.dto.AssignTicket;
@@ -45,8 +46,8 @@ public interface ApiInterface {
     Call<Ticket> createTicket(@Header("x-auth-token") String authHeader, @Body Ticket ticket);
 
     @PUT("api/tickets/assign/{ticket_id}")
-    Call<Ticket> assignTicket(@Header("x-auth-token") String authHeader, @Path("ticket_id") String ticketId,
-                              @Body AssignTicket assignTicket);
+    Call<TicketDetails> assignTicket(@Header("x-auth-token") String authHeader, @Path("ticket_id") String ticketId,
+                                     @Body AssignTicket assignTicket);
 
     @POST("api/tickets/comment/{ticket_id}")
     Call<Ticket> commentTicket(@Header("x-auth-token") String authHeader, @Path("ticket_id") String ticketId,

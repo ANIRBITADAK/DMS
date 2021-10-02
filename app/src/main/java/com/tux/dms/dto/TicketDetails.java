@@ -6,7 +6,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.TimeZone;
 
-public class TicketCopy {
+public class TicketDetails {
     private String _id;
     private String docketId;
     private String creator;
