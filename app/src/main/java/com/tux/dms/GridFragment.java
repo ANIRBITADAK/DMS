@@ -20,7 +20,7 @@ import com.tux.dms.dto.Attachment;
 import java.util.ArrayList;
 import java.util.List;
 
-import adapter.AttachmentAdapter;
+import com.tux.dms.adapter.AttachmentAdapter;
 
 /**
  * A simple {@link Fragment} subclass.

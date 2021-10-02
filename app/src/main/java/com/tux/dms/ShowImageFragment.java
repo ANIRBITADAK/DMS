@@ -76,7 +76,6 @@ public class ShowImageFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_show_image, container, false);
         imageView = view.findViewById(R.id.showImgView);
 
-
         Bundle ticketImageBundle = getArguments();
         String imagePath = (String) ticketImageBundle.get(TicketConst.TICKET_IMG_PATH);
         if (imagePath != null) {

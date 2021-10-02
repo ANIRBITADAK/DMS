@@ -1,4 +1,4 @@
-package adapter;
+package com.tux.dms.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
