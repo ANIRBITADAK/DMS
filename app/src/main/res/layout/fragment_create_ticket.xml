@@ -58,8 +58,8 @@
             android:layout_below="@id/source"
             android:layout_marginTop="90sp"
             android:background="@drawable/login_button_bk"
-            android:text="Scan"
             android:fontFamily="@font/roboto_regular"
+            android:text="Scan/Attach"
             android:textColor="@color/white" />
 
         <Button

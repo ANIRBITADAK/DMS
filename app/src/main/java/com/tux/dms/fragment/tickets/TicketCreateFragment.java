@@ -27,11 +27,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.tux.dms.R;
+import com.tux.dms.TicketAssignDrawerFragment;
 import com.tux.dms.cache.SessionCache;
 import com.tux.dms.constants.MimeTypeConst;
+import com.tux.dms.constants.RoleConstants;
 import com.tux.dms.dto.ImageUploadResponse;
 import com.tux.dms.dto.Ticket;
 import com.tux.dms.fragment.dashboard.AdminDashboardFragment;
+import com.tux.dms.fragment.dashboard.TicketCreatorDashboardFragment;
 import com.tux.dms.rest.ApiClient;
 import com.tux.dms.rest.ApiInterface;
 
@@ -367,13 +370,23 @@ public class TicketCreateFragment extends Fragment implements AdapterView.OnItem
                 btnNo.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        AdminDashboardFragment adminDashboardFragment = new AdminDashboardFragment();
-                        FragmentManager fragmentManager = getFragmentManager();
-                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                        fragmentTransaction.replace(R.id.fragment_container, adminDashboardFragment);
-                        fragmentTransaction.commit();
-                        dialog.dismiss();
 
+                        if(sessionCache.getUser().getRole().equals(RoleConstants.ADMIN_ROLE)) {
+                            AdminDashboardFragment adminDashboardFragment = new AdminDashboardFragment();
+                            FragmentManager fragmentManager = getFragmentManager();
+                            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                            fragmentTransaction.replace(R.id.fragment_container, adminDashboardFragment);
+                            fragmentTransaction.commit();
+                            dialog.dismiss();
+                        }
+                        else if(sessionCache.getUser().getRole().equals(RoleConstants.CREATOR_ROLE)){
+                            TicketCreatorDashboardFragment ticketCreatorDashboardFragment = new TicketCreatorDashboardFragment();
+                            FragmentManager fragmentManager = getFragmentManager();
+                            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                            fragmentTransaction.replace(R.id.fragment_container, ticketCreatorDashboardFragment);
+                            fragmentTransaction.commit();
+                            dialog.dismiss();
+                        }
                     }
                 });
 
