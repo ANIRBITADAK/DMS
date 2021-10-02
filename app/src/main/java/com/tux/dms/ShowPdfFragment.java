@@ -94,7 +94,7 @@ public class ShowPdfFragment extends Fragment {
         String pdfPath=bundle.getString(TicketConst.TICKET_PDF_PATH);
         String finalPath= "http://" + ApiClient.getIpAddress() + ":" + ApiClient.getPORT() + "/" + pdfPath;
 
-        webView.loadUrl(finalPath);
+        webView.loadUrl("https://drive.google.com/viewerng/viewer?embedded=true&url=" + finalPath);
 
         return  view;
     }
