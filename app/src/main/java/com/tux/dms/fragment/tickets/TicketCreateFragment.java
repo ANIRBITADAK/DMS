@@ -328,6 +328,7 @@ public class TicketCreateFragment extends Fragment implements AdapterView.OnItem
                 progressDialogUpload.dismiss();
                 Toast.makeText(getContext(), "image scanned/attached",
                         Toast.LENGTH_LONG).show();
+
             }
 
             @Override

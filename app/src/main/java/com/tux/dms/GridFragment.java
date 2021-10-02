@@ -7,6 +7,17 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.GridView;
+
+import com.tux.dms.constants.TicketConst;
+import com.tux.dms.dto.Image;
+import com.tux.dms.dto.Pdf;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import adapter.ImageAdapter;
+import adapter.PdfAdapter;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -14,6 +25,13 @@ import android.view.ViewGroup;
  * create an instance of this fragment.
  */
 public class GridFragment extends Fragment {
+
+    GridView gridView;
+
+    Bundle attachmentBundle;
+    List<String> imagePaths = new ArrayList<>();
+    List<String> pdfPaths = new ArrayList<>();
+
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -60,6 +78,29 @@ public class GridFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view= inflater.inflate(R.layout.fragment_grid, container, false);
+        gridView=view.findViewById(R.id.gridview);
+        attachmentBundle=this.getArguments();
+        imagePaths=attachmentBundle.getStringArrayList(TicketConst.TICKET_IMG_PATH);
+        pdfPaths=attachmentBundle.getStringArrayList(TicketConst.TICKET_PDF_PATH);
+
+        ArrayList<Image> imageList = new ArrayList<Image>();
+        for(int i=0;i<imagePaths.size();i++)
+            imageList.add(new Image(imagePaths.get(i),R.drawable.ic_baseline_image_24));
+
+        ArrayList<Pdf> pdfList = new ArrayList<Pdf>();
+        for(int i=0;i<pdfPaths.size();i++)
+            pdfList.add(new Pdf(pdfPaths.get(i),R.drawable.ic_baseline_picture_as_pdf_24));
+
+
+        ImageAdapter imageAdapter = new ImageAdapter(getContext(), imageList);
+        gridView.setAdapter(imageAdapter);
+
+        PdfAdapter pdfAdapter = new PdfAdapter(getContext(), pdfList);
+        gridView.setAdapter(pdfAdapter);
+
+
+
+        
         return view;
     }
 }
