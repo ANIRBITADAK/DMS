@@ -16,9 +16,9 @@ public class ApiClient {
     private static Retrofit retrofit;
 
     private static ApiInterface retrofitInterface;
-  private static final String IP_ADDRESS = "143.244.131.27";
+    //private static final String IP_ADDRESS = "143.244.131.27";
     private static final String PORT = "5000";
-//    private static final String IP_ADDRESS = "10.0.2.2";
+    private static final String IP_ADDRESS = "10.0.2.2";
     private static String BASE_URL = "http://" + IP_ADDRESS + ":" + PORT;
 
     public static Retrofit getRetrofitInstance() {

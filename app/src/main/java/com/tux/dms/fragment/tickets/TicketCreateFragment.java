@@ -197,7 +197,7 @@ public class TicketCreateFragment extends Fragment implements AdapterView.OnItem
                         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
                         intent.addCategory(Intent.CATEGORY_OPENABLE);
                         intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
-                        intent.setType("application/pdf");
+                        intent.setType(MimeTypeConst.pdfMimeType);
                         startActivityForResult(Intent.createChooser(intent,"Select PDF"), SELECT_FILE);
                 }
                 else if (items[i].equals("Gallery")) {
@@ -205,7 +205,7 @@ public class TicketCreateFragment extends Fragment implements AdapterView.OnItem
                     Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
                     intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
                     intent.addCategory(Intent.CATEGORY_OPENABLE);
-                    intent.setType("image/*");
+                    intent.setType(MimeTypeConst.imageMimeType);
                     startActivityForResult(Intent.createChooser(intent,"Select Pictures"), SELECT_FILE);
 
                 } else if (items[i].equals("Cancel")) {
@@ -226,7 +226,7 @@ public class TicketCreateFragment extends Fragment implements AdapterView.OnItem
                 bmp = (Bitmap) bundle.get("data");
                 try {
                     bmp.compress(Bitmap.CompressFormat.PNG, 100, baos);
-                    handleAttachment(Arrays.asList(baos.toByteArray()), MimeTypeConst.imageMimeTypeInRequest);
+                    handleAttachment(Arrays.asList(baos.toByteArray()), MimeTypeConst.imageMimeType);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -296,7 +296,7 @@ public class TicketCreateFragment extends Fragment implements AdapterView.OnItem
         for (int i = 0; i < imageDataList.size(); i++) {
             MultipartBody.Part body = null;
             switch (mimeType) {
-                case MimeTypeConst.imageMimeTypeInRequest:
+                case MimeTypeConst.imageMimeType:
                     RequestBody requestFile = RequestBody.create(MediaType.parse(MimeTypeConst.imageMimeType),
                             imageDataList.get(i));
                     String fileName = "attachment" + i + ".jpg";
@@ -318,7 +318,7 @@ public class TicketCreateFragment extends Fragment implements AdapterView.OnItem
 
         String token = sessionCache.getToken();
         Call<ImageUploadResponse> call = apiInterface.uploadImage(token, parts);
-        final ProgressDialog progressDialogUpload;
+         final ProgressDialog progressDialogUpload;
         progressDialogUpload = new ProgressDialog(getContext());
         progressDialogUpload.setTitle("Uploading . . .");
         progressDialogUpload.show();
@@ -328,7 +328,7 @@ public class TicketCreateFragment extends Fragment implements AdapterView.OnItem
             public void onResponse(Call<ImageUploadResponse> call, Response<ImageUploadResponse> response) {
                 imagePaths.addAll(response.body().getImg());
                 pdfPaths.addAll(response.body().getPdf());
-                progressDialogUpload.dismiss();
+                //progressDialogUpload.dismiss();
                 Toast.makeText(getContext(), "image scanned/attached",
                         Toast.LENGTH_LONG).show();
 
