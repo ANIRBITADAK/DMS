@@ -133,7 +133,7 @@ public class TicketTableFragment extends Fragment {
         if (isSearch) {
 
             Call<TicketList> tickList = apiInterface.searchTicket(token, ticketDocketId,ticketSubject, ticketState,
-                    tickPriority, startDate, endDate, PAGE_COUNT, 5);
+                    tickPriority, startDate, endDate, PAGE_COUNT, 15);
 
             tickList.enqueue(new Callback<TicketList>() {
                 @Override
@@ -154,7 +154,7 @@ public class TicketTableFragment extends Fragment {
 
         } else {
             Call<TicketList> tickList = apiInterface.getTickets(token, assignedUserId, ticketState, tickPriority,
-                    PAGE_COUNT, 5);
+                    PAGE_COUNT, 15);
             tickList.enqueue(new Callback<TicketList>() {
                 @Override
                 public void onResponse(Call<TicketList> call, Response<TicketList> response) {
@@ -222,14 +222,14 @@ public class TicketTableFragment extends Fragment {
                 if (isSearch) {
 
                     Call<TicketList> tickList = apiInterface.searchTicket(token, ticketDocketId, ticketSubject, ticketState, tickPriority,
-                            startDate, endDate, ++PAGE_COUNT, 5);
+                            startDate, endDate, ++PAGE_COUNT, 15);
 
                     tickList.enqueue(new Callback<TicketList>() {
                         @Override
                         public void onResponse(Call<TicketList> call, Response<TicketList> response) {
                             System.out.println("got ticket list" + response.body());
                             TicketList ticketList = response.body();
-                            for (int i = 0; i < 5; i++) {
+                            for (int i = 0; i < 15; i++) {
                                 if (i < ticketList.getTickets().size() && ticketList.getTickets().get(i) != null) {
                                     rowsTicketList.add(ticketList.getTickets().get(i));
                                 }
@@ -245,14 +245,14 @@ public class TicketTableFragment extends Fragment {
                     });
                 } else {
                     Call<TicketList> tickList = apiInterface.getTickets(token, assignedUserId, ticketState, tickPriority,
-                            ++PAGE_COUNT, 5);
+                            ++PAGE_COUNT, 15);
 
                     tickList.enqueue(new Callback<TicketList>() {
                         @Override
                         public void onResponse(Call<TicketList> call, Response<TicketList> response) {
                             System.out.println("got ticket list" + response.body());
                             TicketList ticketList = response.body();
-                            for (int i = 0; i < 5; i++) {
+                            for (int i = 0; i < 15; i++) {
                                 if (i < ticketList.getTickets().size() && ticketList.getTickets().get(i) != null) {
                                     rowsTicketList.add(ticketList.getTickets().get(i));
                                 }

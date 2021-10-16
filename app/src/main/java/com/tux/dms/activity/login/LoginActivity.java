@@ -24,6 +24,13 @@ import com.tux.dms.dto.UserCredential;
 import com.tux.dms.rest.ApiClient;
 
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -80,18 +87,15 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<JWTToken> call, Response<JWTToken> response) {
                 if (response.code() == 200) {
-
                     JWTToken token = response.body();
                     sessionCache.setToken(token.getToken());
                     getUser();
-
-                } else if (response.code() == 400) {
-                    Toast.makeText(getApplicationContext(), "Invalid credential",
+                } else {
+                    String errorMsg = getErrorMessage(response.errorBody());
+                    Toast.makeText(getApplicationContext(), errorMsg,
                             Toast.LENGTH_LONG).show();
                 }
-
             }
-
             @Override
             public void onFailure(Call<JWTToken> call, Throwable t) {
 
@@ -99,7 +103,20 @@ public class LoginActivity extends AppCompatActivity {
         });
 
     }
+    private String getErrorMessage(ResponseBody errResponseBody) {
+        String errorMsg = "Invalid credential";
+        try {
+            String errorBody = errResponseBody.string();
+            JSONObject jsonObject = new JSONObject(errorBody.trim());
+            JSONArray obj1 = (JSONArray) jsonObject.get("errors");
+            JSONObject ob2 = (JSONObject) obj1.get(0);
+            errorMsg = (String) ob2.get("msg");
 
+        } catch (JSONException | IOException e) {
+            e.printStackTrace();
+        }
+        return errorMsg;
+    }
     private void getUser() {
         System.out.println("------called get user ");
         String token = sessionCache.getToken();

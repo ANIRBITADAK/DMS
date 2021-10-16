@@ -21,6 +21,7 @@ import com.tux.dms.constants.TicketPriorityType;
 import com.tux.dms.constants.TicketStateType;
 import com.tux.dms.dto.Ticket;
 
+import java.util.ArrayList;
 import java.util.List;
 
 class RecyclerAdapterView extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -111,8 +112,9 @@ class RecyclerAdapterView extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                             ticketDetailsBundle.putString(TicketConst.TICKET_ID_KEY, ticket.get_id());
                             ticketDetailsBundle.putString(TicketConst.TICKET_DOCKET_ID_KEY, ticket.getDocketId());
                             ticketDetailsBundle.putString(TicketConst.TICKET_SUBJECT_KEY, ticket.getSubject());
-                            ticketDetailsBundle.putString(TicketConst.TICKET_SOURCE_KEY, ticket.getSource());
-                            //ticketDetailsBundle.putString(TicketConst.TICKET_IMG_PATH, ticket.getFilePath());
+                            ticketDetailsBundle.putStringArrayList(TicketConst.TICKET_PDF_PATH, (ArrayList<String>) ticket.getPdfFilePath());
+                            ticketDetailsBundle.putStringArrayList(TicketConst.TICKET_IMG_PATH, (ArrayList<String>) ticket.getImageFilePath());
+
                             ticketAssignmentFragment.setArguments(ticketDetailsBundle);
                             FragmentManager manager = ((AppCompatActivity) context).getSupportFragmentManager();
                             FragmentTransaction fragmentTransaction = manager.beginTransaction();
@@ -128,8 +130,13 @@ class RecyclerAdapterView extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                             ticketBundle.putString(TicketConst.TICKET_SUBJECT_KEY, ticket.getSubject());
                             ticketBundle.putString(TicketStateType.TICKET_STATE_TYPE_KEY, ticket.getState());
                             ticketBundle.putString(TicketPriorityType.TICKET_PRIORITY_KEY, ticket.getPriority());
-                            //ticketBundle.putString(TicketConst.TICKET_IMG_PATH, ticket.getFilePath());
+                            ticketBundle.putStringArrayList(TicketConst.TICKET_PDF_PATH, (ArrayList<String>) ticket.getPdfFilePath());
+                            ticketBundle.putStringArrayList(TicketConst.TICKET_IMG_PATH, (ArrayList<String>) ticket.getImageFilePath());
+                            //attachmentBundle.putStringArrayList(TicketConst.TICKET_IMG_PATH, (ArrayList<String>) imagePaths);
+                            //attachmentBundle.putStringArrayList(TicketConst.TICKET_PDF_PATH, (ArrayList<String>) pdfPaths);
+
                             TicketDetailsFragment ticketDetailsFragment = new TicketDetailsFragment();
+
                             ticketDetailsFragment.setArguments(ticketBundle);
                             FragmentManager manager = ((AppCompatActivity) context).getSupportFragmentManager();
                             FragmentTransaction fragmentTransaction = manager.beginTransaction();

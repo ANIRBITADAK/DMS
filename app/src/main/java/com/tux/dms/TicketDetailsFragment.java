@@ -32,6 +32,9 @@ import com.tux.dms.dto.Ticket;
 import com.tux.dms.rest.ApiClient;
 import com.tux.dms.rest.ApiInterface;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -48,6 +51,10 @@ public class TicketDetailsFragment extends Fragment {
 
     String[] states = {"", "ASSIGNED", "IN-PROGRESS", "RESOLVED", "CLOSED"};
     Spinner stateSpinner;
+
+    List<String> imagePaths = new ArrayList<>();
+    List<String> pdfPaths = new ArrayList<>();
+
 
     ApiInterface apiInterface = ApiClient.getApiService();
     SessionCache sessionCache = SessionCache.getSessionCache();
@@ -148,6 +155,7 @@ public class TicketDetailsFragment extends Fragment {
         if (ticketPropertyBundle != null) {
             tickId = (String) ticketPropertyBundle.get(TicketConst.TICKET_ID_KEY);
         }
+
         Call<Ticket> ticketCall = apiInterface.getTicket(sessionCache.getToken(), tickId);
 
         ticketCall.enqueue(new Callback<Ticket>() {
@@ -161,6 +169,10 @@ public class TicketDetailsFragment extends Fragment {
                         sourceTextView.setText(ticket.getSource());
                         assignedToTextView.setText(ticket.getAssignedTo().getName());
                         assignDateTextView.setText(ticket.getAssignDate());
+                        imagePaths.addAll(ticket.getImageFilePath());
+                        pdfPaths.addAll(ticket.getPdfFilePath());
+
+
                         if (ticket.getComments() != null && ticket.getComments().size() > 0) {
                             recyclerView = (RecyclerView) view.findViewById(R.id.commentRecyclerView);
                             adapter = new CommentRecycleAdapter(ticket.getComments(), getContext());
@@ -230,11 +242,14 @@ public class TicketDetailsFragment extends Fragment {
         showImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ShowImageFragment showImageFragment = new ShowImageFragment();
-                showImageFragment.setArguments(ticketPropertyBundle);
+                GridFragment gridFragment = new GridFragment();
+                Bundle attachmentBundle=new Bundle();
+                attachmentBundle.putStringArrayList(TicketConst.TICKET_IMG_PATH, (ArrayList<String>) imagePaths);
+                attachmentBundle.putStringArrayList(TicketConst.TICKET_PDF_PATH, (ArrayList<String>) pdfPaths);
+                gridFragment.setArguments(attachmentBundle);
                 FragmentManager manager = ((AppCompatActivity) view.getContext()).getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = manager.beginTransaction();
-                fragmentTransaction.replace(R.id.fragment_container, showImageFragment);
+                fragmentTransaction.replace(R.id.fragment_container, gridFragment);
                 fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
             }

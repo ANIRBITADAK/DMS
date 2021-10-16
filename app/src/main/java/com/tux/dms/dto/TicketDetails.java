@@ -6,13 +6,12 @@ import java.util.Date;
 import java.util.List;
 import java.util.TimeZone;
 
-public class Ticket {
+public class TicketDetails {
     private String _id;
     private String docketId;
-    private User creator;
-    //private String creatorName;
-    private User assignedTo;
-    //private String assignedToName;
+    private String creator;
+    private String assignedTo;
+    private String office;
     private String subject;
     private String description;
     private String source;
@@ -40,7 +39,30 @@ public class Ticket {
         this.docketId = docketId;
     }
 
-    public User getCreator() {
+    public String getCreator() {
+        return creator;
+    }
+
+    public void setCreator(String creator) {
+        this.creator = creator;
+    }
+
+    public String getAssignedTo() {
+        return assignedTo;
+    }
+
+    public void setAssignedTo(String assignedTo) {
+        this.assignedTo = assignedTo;
+    }
+
+    public String getOffice() {
+        return office;
+    }
+
+    public void setOffice(String office) {
+        this.office = office;
+    }
+    /* public User getCreator() {
         return creator;
     }
 
@@ -54,7 +76,7 @@ public class Ticket {
 
     public void setAssignedTo(User assignedTo) {
         this.assignedTo = assignedTo;
-    }
+    }*/
 
     public String getSubject() {
         return subject;

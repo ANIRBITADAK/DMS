@@ -12,6 +12,9 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
 
+import com.tux.dms.constants.TicketConst;
+import com.tux.dms.rest.ApiClient;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link ShowPdfFragment#newInstance} factory method to
@@ -70,6 +73,8 @@ public class ShowPdfFragment extends Fragment {
         webView=view.findViewById(R.id.webView);
         progressBar=view.findViewById(R.id.progressBar);
 
+        Bundle bundle = this.getArguments();
+
         webView.getSettings().setBuiltInZoomControls(true);
         webView.getSettings().setJavaScriptEnabled(true);
         webView.setWebViewClient(new WebViewClient(){
@@ -85,7 +90,11 @@ public class ShowPdfFragment extends Fragment {
 
             }
         });
-        webView.loadUrl("");
+
+        String pdfPath=bundle.getString(TicketConst.TICKET_PDF_PATH);
+        String finalPath= "http://" + ApiClient.getIpAddress() + ":" + ApiClient.getPORT() + "/" + pdfPath;
+
+        webView.loadUrl("https://drive.google.com/viewerng/viewer?embedded=true&url=" + finalPath);
 
         return  view;
     }

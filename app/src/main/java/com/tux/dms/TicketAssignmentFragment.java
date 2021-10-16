@@ -23,6 +23,7 @@ import com.tux.dms.constants.TicketPriorityType;
 import com.tux.dms.constants.TicketStateType;
 import com.tux.dms.dto.Ticket;
 import com.tux.dms.dto.AssignTicket;
+import com.tux.dms.dto.TicketDetails;
 import com.tux.dms.dto.User;
 import com.tux.dms.rest.ApiClient;
 import com.tux.dms.rest.ApiInterface;
@@ -61,6 +62,9 @@ public class TicketAssignmentFragment extends Fragment {
     EditText commentText;
     Button saveButton;
     Button showImageButton;
+
+    ArrayList<String> imagePaths = new ArrayList<>();
+    ArrayList<String> pdfPaths = new ArrayList<>();
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -117,10 +121,12 @@ public class TicketAssignmentFragment extends Fragment {
         Bundle ticketDetailsBundle = this.getArguments();
         if (ticketDetailsBundle != null) {
             ticketId = (String) ticketDetailsBundle.get(TicketConst.TICKET_ID_KEY);
-            ticketImagePath = (String) ticketDetailsBundle.get(TicketConst.TICKET_IMG_PATH);
             String docketId = ticketDetailsBundle.getString(TicketConst.TICKET_DOCKET_ID_KEY);
             String subject = (String) ticketDetailsBundle.get(TicketConst.TICKET_SUBJECT_KEY);
             String source = (String) ticketDetailsBundle.get(TicketConst.TICKET_SOURCE_KEY);
+            imagePaths = ticketDetailsBundle.getStringArrayList(TicketConst.TICKET_IMG_PATH);
+            pdfPaths = ticketDetailsBundle.getStringArrayList(TicketConst.TICKET_PDF_PATH);
+
             docketIdTextView.setText(docketId);
             assignSubjectTextView.setText(subject);
             assignSourceTextView.setText(source);
@@ -194,11 +200,12 @@ public class TicketAssignmentFragment extends Fragment {
                 assignTicket.setPriority(priority);
                 assignTicket.setAssigneeId(assignedToId);
                 assignTicket.setCommentText(commentText.getText().toString());
-                Call<Ticket> ticketCall = apiInterface.assignTicket(sessionCache.getToken(), ticketId, assignTicket);
+                Call<TicketDetails> ticketCall = apiInterface.assignTicket(sessionCache.getToken(), ticketId, assignTicket);
 
-                ticketCall.enqueue(new Callback<Ticket>() {
+                ticketCall.enqueue(new Callback<TicketDetails>() {
                     @Override
-                    public void onResponse(Call<Ticket> call, Response<Ticket> response) {
+                    public void onResponse(Call<TicketDetails> call, Response<TicketDetails> response) {
+                        Response<TicketDetails> response1 = response;
                         if (response.code() == 200) {
                             String msg = "Ticket assigned to " + assignedToName;
                             Toast.makeText(getContext(), msg, Toast.LENGTH_LONG).show();
@@ -215,7 +222,7 @@ public class TicketAssignmentFragment extends Fragment {
                     }
 
                     @Override
-                    public void onFailure(Call<Ticket> call, Throwable t) {
+                    public void onFailure(Call<TicketDetails> call, Throwable t) {
 
                     }
                 });
@@ -225,13 +232,14 @@ public class TicketAssignmentFragment extends Fragment {
         showImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ShowImageFragment showImageFragment = new ShowImageFragment();
-                Bundle ticketImagePathBundle = new Bundle();
-                ticketImagePathBundle.putString(TicketConst.TICKET_IMG_PATH, ticketImagePath);
-                showImageFragment.setArguments(ticketImagePathBundle);
+                GridFragment gridFragment = new GridFragment();
+                Bundle attachmentBundle = new Bundle();
+                attachmentBundle.putStringArrayList(TicketConst.TICKET_IMG_PATH, imagePaths);
+                attachmentBundle.putStringArrayList(TicketConst.TICKET_PDF_PATH, pdfPaths);
+                gridFragment.setArguments(attachmentBundle);
                 FragmentManager manager = ((AppCompatActivity) view.getContext()).getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = manager.beginTransaction();
-                fragmentTransaction.replace(R.id.fragment_container, showImageFragment);
+                fragmentTransaction.replace(R.id.fragment_container, gridFragment);
                 fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
             }

@@ -10,4 +10,5 @@ public class TicketConst {
     public static final String TICKET_SEARCH_FLOW_KEY = "ticket_search_flow_key";
     public static final String TICKET_SEARCH_FLOW_VALUE = "ticket_search_flow_value";
     public static final String TICKET_IMG_PATH = "ticket_image_path";
+    public static final String TICKET_PDF_PATH = "ticket_pdf_path";
 }
