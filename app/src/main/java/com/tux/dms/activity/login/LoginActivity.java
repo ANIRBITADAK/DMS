@@ -79,7 +79,6 @@ public class LoginActivity extends AppCompatActivity {
         UserCredential user = new UserCredential();
         user.setPassword(password.getText().toString());
         user.setPhone(phoneNo.getText().toString());
-
         Call<JWTToken> call = apiInterface.executeLogin(user);
 
 
@@ -90,19 +89,22 @@ public class LoginActivity extends AppCompatActivity {
                     JWTToken token = response.body();
                     sessionCache.setToken(token.getToken());
                     getUser();
-                } else {
+                } else if (response.code() == 400) {
                     String errorMsg = getErrorMessage(response.errorBody());
                     Toast.makeText(getApplicationContext(), errorMsg,
                             Toast.LENGTH_LONG).show();
                 }
             }
+
+
             @Override
             public void onFailure(Call<JWTToken> call, Throwable t) {
-
+                Toast.makeText(getApplicationContext(), t.getMessage(),
+                        Toast.LENGTH_LONG).show();
             }
         });
-
     }
+
     private String getErrorMessage(ResponseBody errResponseBody) {
         String errorMsg = "Invalid credential";
         try {
@@ -157,7 +159,8 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
-
+                Toast.makeText(getApplicationContext(), t.getMessage(),
+                        Toast.LENGTH_LONG).show();
             }
         });
     }

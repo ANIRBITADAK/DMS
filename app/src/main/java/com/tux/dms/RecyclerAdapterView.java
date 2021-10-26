@@ -104,7 +104,6 @@ class RecyclerAdapterView extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                 viewHolder.cardViewTicket.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        //Toast.makeText(view.getContext(), "Position:" + Integer.toString(position), Toast.LENGTH_SHORT).show();
                         context = view.getContext();
                         if (TicketStateType.NEW_TICKET.equalsIgnoreCase(ticket.getState()) && !isEdit) {
                             Bundle ticketDetailsBundle = new Bundle();
@@ -132,9 +131,6 @@ class RecyclerAdapterView extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                             ticketBundle.putString(TicketPriorityType.TICKET_PRIORITY_KEY, ticket.getPriority());
                             ticketBundle.putStringArrayList(TicketConst.TICKET_PDF_PATH, (ArrayList<String>) ticket.getPdfFilePath());
                             ticketBundle.putStringArrayList(TicketConst.TICKET_IMG_PATH, (ArrayList<String>) ticket.getImageFilePath());
-                            //attachmentBundle.putStringArrayList(TicketConst.TICKET_IMG_PATH, (ArrayList<String>) imagePaths);
-                            //attachmentBundle.putStringArrayList(TicketConst.TICKET_PDF_PATH, (ArrayList<String>) pdfPaths);
-
                             TicketDetailsFragment ticketDetailsFragment = new TicketDetailsFragment();
 
                             ticketDetailsFragment.setArguments(ticketBundle);

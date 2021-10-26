@@ -187,7 +187,8 @@ public class TicketAssignmentFragment extends Fragment {
 
             @Override
             public void onFailure(Call<List<User>> call, Throwable t) {
-
+                Toast.makeText(getContext(), t.getMessage(),
+                        Toast.LENGTH_LONG).show();
             }
         });
 
@@ -205,7 +206,6 @@ public class TicketAssignmentFragment extends Fragment {
                 ticketCall.enqueue(new Callback<TicketDetails>() {
                     @Override
                     public void onResponse(Call<TicketDetails> call, Response<TicketDetails> response) {
-                        Response<TicketDetails> response1 = response;
                         if (response.code() == 200) {
                             String msg = "Ticket assigned to " + assignedToName;
                             Toast.makeText(getContext(), msg, Toast.LENGTH_LONG).show();
@@ -223,7 +223,8 @@ public class TicketAssignmentFragment extends Fragment {
 
                     @Override
                     public void onFailure(Call<TicketDetails> call, Throwable t) {
-
+                        Toast.makeText(getContext(), t.getMessage(),
+                                Toast.LENGTH_LONG).show();
                     }
                 });
             }

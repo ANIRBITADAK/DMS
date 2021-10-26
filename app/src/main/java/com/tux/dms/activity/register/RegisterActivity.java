@@ -78,7 +78,8 @@ public class RegisterActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<List<Office>> call, Throwable t) {
-
+                Toast.makeText(getApplicationContext(), t.getMessage(),
+                        Toast.LENGTH_LONG).show();
             }
         });
         officeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {

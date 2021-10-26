@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.tux.dms.R;
 import com.tux.dms.TicketAssignDrawerFragment;
@@ -126,7 +127,8 @@ public class AdminDashboardFragment extends Fragment implements AdapterView.OnIt
 
             @Override
             public void onFailure(Call<TicketCount> call, Throwable t) {
-
+                Toast.makeText(getContext(), t.getMessage(),
+                        Toast.LENGTH_LONG).show();
             }
         });
 

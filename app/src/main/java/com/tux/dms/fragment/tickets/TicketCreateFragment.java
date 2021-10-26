@@ -336,7 +336,8 @@ public class TicketCreateFragment extends Fragment implements AdapterView.OnItem
 
             @Override
             public void onFailure(Call<ImageUploadResponse> call, Throwable t) {
-
+                Toast.makeText(getContext(), t.getMessage(),
+                        Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -394,7 +395,8 @@ public class TicketCreateFragment extends Fragment implements AdapterView.OnItem
 
             @Override
             public void onFailure(Call<Ticket> call, Throwable t) {
-
+                Toast.makeText(getContext(), t.getMessage(),
+                        Toast.LENGTH_LONG).show();
             }
         });
     }

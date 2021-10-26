@@ -11,6 +11,7 @@ import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.tux.dms.cache.SessionCache;
 import com.tux.dms.constants.RoleConstants;
@@ -148,7 +149,8 @@ public class TicketTableFragment extends Fragment {
 
                 @Override
                 public void onFailure(Call<TicketList> call, Throwable t) {
-
+                    Toast.makeText(getContext(), t.getMessage(),
+                            Toast.LENGTH_LONG).show();
                 }
             });
 
@@ -170,7 +172,8 @@ public class TicketTableFragment extends Fragment {
 
                 @Override
                 public void onFailure(Call<TicketList> call, Throwable t) {
-
+                    Toast.makeText(getContext(), t.getMessage(),
+                            Toast.LENGTH_LONG).show();
                 }
             });
         }
@@ -240,7 +243,8 @@ public class TicketTableFragment extends Fragment {
 
                         @Override
                         public void onFailure(Call<TicketList> call, Throwable t) {
-
+                            Toast.makeText(getContext(), t.getMessage(),
+                                    Toast.LENGTH_LONG).show();
                         }
                     });
                 } else {
@@ -263,7 +267,8 @@ public class TicketTableFragment extends Fragment {
 
                         @Override
                         public void onFailure(Call<TicketList> call, Throwable t) {
-
+                            Toast.makeText(getContext(), t.getMessage(),
+                                    Toast.LENGTH_LONG).show();
                         }
                     });
                 }

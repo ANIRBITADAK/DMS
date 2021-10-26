@@ -115,7 +115,8 @@ public class ManageUserFragment extends Fragment {
 
             @Override
             public void onFailure(Call<List<User>> call, Throwable t) {
-
+                Toast.makeText(getContext(), t.getMessage(),
+                        Toast.LENGTH_LONG).show();
             }
         });
 
@@ -164,7 +165,8 @@ public class ManageUserFragment extends Fragment {
 
                     @Override
                     public void onFailure(Call<User> call, Throwable t) {
-
+                        Toast.makeText(getContext(), t.getMessage(),
+                                Toast.LENGTH_LONG).show();
                     }
                 });
             }

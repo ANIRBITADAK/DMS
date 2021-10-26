@@ -23,6 +23,7 @@ import android.widget.ScrollView;
 import android.widget.Spinner;
 
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.tux.dms.cache.SessionCache;
@@ -126,8 +127,8 @@ public class TicketDetailsFragment extends Fragment {
         saveTicketButton = view.findViewById(R.id.ticketDetailsSaveButton);
         showImageButton = view.findViewById(R.id.showImageBtn);
         commentText = view.findViewById(R.id.assignCommentEditText);
-        parentScroll=view.findViewById(R.id.parentScroll);
-        childScroll=view.findViewById(R.id.childScroll);
+        parentScroll = view.findViewById(R.id.parentScroll);
+        childScroll = view.findViewById(R.id.childScroll);
 
         parentScroll.setOnTouchListener(new View.OnTouchListener() {
 
@@ -186,7 +187,8 @@ public class TicketDetailsFragment extends Fragment {
 
             @Override
             public void onFailure(Call<Ticket> call, Throwable t) {
-
+                Toast.makeText(getContext(), t.getMessage(),
+                        Toast.LENGTH_LONG).show();
             }
         });
         stateSpinner = view.findViewById(R.id.ticketStateSpinner);
@@ -208,8 +210,10 @@ public class TicketDetailsFragment extends Fragment {
         saveTicketButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 if ((commentText.getText() != null && !commentText.getText().equals(""))
-                        && (ticketState != null && !ticketState.equals(""))) {
+                        || (ticketState != null && !ticketState.equals(""))) {
+
                     AssignTicket comment = new AssignTicket();
                     if (commentText.getText() != null) {
                         comment.setCommentText(commentText.getText().toString());
@@ -230,7 +234,8 @@ public class TicketDetailsFragment extends Fragment {
 
                         @Override
                         public void onFailure(Call<Ticket> call, Throwable t) {
-
+                            Toast.makeText(getContext(), t.getMessage(),
+                                    Toast.LENGTH_LONG).show();
                         }
                     });
 
@@ -243,7 +248,7 @@ public class TicketDetailsFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 GridFragment gridFragment = new GridFragment();
-                Bundle attachmentBundle=new Bundle();
+                Bundle attachmentBundle = new Bundle();
                 attachmentBundle.putStringArrayList(TicketConst.TICKET_IMG_PATH, (ArrayList<String>) imagePaths);
                 attachmentBundle.putStringArrayList(TicketConst.TICKET_PDF_PATH, (ArrayList<String>) pdfPaths);
                 gridFragment.setArguments(attachmentBundle);
