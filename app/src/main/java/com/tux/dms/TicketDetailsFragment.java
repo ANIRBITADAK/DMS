@@ -30,6 +30,7 @@ import com.tux.dms.cache.SessionCache;
 import com.tux.dms.constants.TicketConst;
 import com.tux.dms.dto.AssignTicket;
 import com.tux.dms.dto.Ticket;
+import com.tux.dms.dto.TicketDetails;
 import com.tux.dms.rest.ApiClient;
 import com.tux.dms.rest.ApiInterface;
 
@@ -221,19 +222,19 @@ public class TicketDetailsFragment extends Fragment {
                     if (ticketState != null) {
                         comment.setState(ticketState);
                     }
-                    Call<Ticket> commentTicketCall = apiInterface.commentTicket(sessionCache.getToken(),
+                    Call<TicketDetails> commentTicketCall = apiInterface.commentTicket(sessionCache.getToken(),
                             tickId, comment);
 
-                    commentTicketCall.enqueue(new Callback<Ticket>() {
+                    commentTicketCall.enqueue(new Callback<TicketDetails>() {
                         @Override
-                        public void onResponse(Call<Ticket> call, Response<Ticket> response) {
+                        public void onResponse(Call<TicketDetails> call, Response<TicketDetails> response) {
                             if (response.code() == 200) {
                                 moveTheFragment(view);
                             }
                         }
 
                         @Override
-                        public void onFailure(Call<Ticket> call, Throwable t) {
+                        public void onFailure(Call<TicketDetails> call, Throwable t) {
                             Toast.makeText(getContext(), t.getMessage(),
                                     Toast.LENGTH_LONG).show();
                         }

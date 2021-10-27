@@ -50,7 +50,7 @@ public interface ApiInterface {
                                      @Body AssignTicket assignTicket);
 
     @POST("api/tickets/comment/{ticket_id}")
-    Call<Ticket> commentTicket(@Header("x-auth-token") String authHeader, @Path("ticket_id") String ticketId,
+    Call<TicketDetails> commentTicket(@Header("x-auth-token") String authHeader, @Path("ticket_id") String ticketId,
                                @Body AssignTicket assignTicket);
 
     @GET("api/tickets")
