@@ -37,7 +37,7 @@ public interface ApiInterface {
     @PUT("api/users")
     Call<User> updateUser(@Header("x-auth-token") String authHeader, @Body User user);
     @GET("/api/users")
-    Call<List<User>> getAllUser(@Header("x-auth-token") String authHeader);
+    Call<List<User>> getAllUser(@Header("x-auth-token") String authHeader, @Query("role") String userRole);
 
     @GET("/api/auth")
     Call<User> getUser(@Header("x-auth-token") String authHeader);

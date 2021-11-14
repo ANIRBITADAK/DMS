@@ -95,7 +95,7 @@ public class ManageUserFragment extends Fragment {
         assignRoleButton = view.findViewById(R.id.assignRoleButton);
         userNameSpinner = view.findViewById(R.id.userListSpinner);
 
-        Call<List<User>> allUserCall = apiInterface.getAllUser(sessionCache.getToken());
+        Call<List<User>> allUserCall = apiInterface.getAllUser(sessionCache.getToken(), null);
         allUserCall.enqueue(new Callback<List<User>>() {
             @Override
             public void onResponse(Call<List<User>> call, Response<List<User>> response) {

@@ -18,6 +18,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.tux.dms.cache.SessionCache;
+import com.tux.dms.constants.RoleConstants;
 import com.tux.dms.constants.TicketConst;
 import com.tux.dms.constants.TicketPriorityType;
 import com.tux.dms.constants.TicketStateType;
@@ -168,7 +169,8 @@ public class TicketAssignmentFragment extends Fragment {
             }
         });
 
-        Call<List<User>> allUserCall = apiInterface.getAllUser(sessionCache.getToken());
+        Call<List<User>> allUserCall = apiInterface.getAllUser(sessionCache.getToken(),
+                RoleConstants.OPERATOR_ROLE);
         allUserCall.enqueue(new Callback<List<User>>() {
             @Override
             public void onResponse(Call<List<User>> call, Response<List<User>> response) {
