@@ -37,7 +37,7 @@
         <entry key="app/src/main/res/layout/fragment_create_ticket.xml" value="0.2" />
         <entry key="app/src/main/res/layout/fragment_dashboard.xml" value="0.23385416666666667" />
         <entry key="app/src/main/res/layout/fragment_generate_report.xml" value="0.12604166666666666" />
-        <entry key="app/src/main/res/layout/fragment_grid.xml" value="0.2" />
+        <entry key="app/src/main/res/layout/fragment_grid.xml" value="0.165" />
         <entry key="app/src/main/res/layout/fragment_manage_user.xml" value="0.24791666666666667" />
         <entry key="app/src/main/res/layout/fragment_priority_details.xml" value="0.31614583333333335" />
         <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.171875" />
