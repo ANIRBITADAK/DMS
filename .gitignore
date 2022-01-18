@@ -3,6 +3,7 @@
 /local.properties
 .idea/*
 .DS_Store
+<<<<<<< HEAD
 build/
 captures/
 app/release/
