@@ -27,7 +27,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.tux.dms.R;
-import com.tux.dms.TicketAssignDrawerFragment;
 import com.tux.dms.cache.SessionCache;
 import com.tux.dms.constants.MimeTypeConst;
 import com.tux.dms.constants.RoleConstants;
@@ -70,15 +69,19 @@ public class TicketCreateFragment extends Fragment implements AdapterView.OnItem
     Integer REQUEST_CAMERA = 1, SELECT_FILE = 0;
     Bitmap bmp;
     ByteArrayOutputStream baos = new ByteArrayOutputStream();
-    List<String> imagePaths = new ArrayList<>();
-    List<String> pdfPaths = new ArrayList<>();
 
-    String[] sources = {"State", "District", "Sub-Division", "Gram Panchayat", "Other Block Offices", "Others"};
     Spinner sourceSpiner;
     String sourceText;
     EditText subjectText;
     TextView ticketSuccess;
     AlertDialog dialog;
+
+    List<String> imagePaths = new ArrayList<>();
+    List<String> pdfPaths = new ArrayList<>();
+
+    String[] sources = {"State", "District", "Sub-Division", "Gram Panchayat", "Other Block Offices", "Others"};
+
+    String fileType ;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -146,7 +149,7 @@ public class TicketCreateFragment extends Fragment implements AdapterView.OnItem
         scanButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                selectImage();
+                selectAttachment();
             }
         });
         createTicket = (Button) view.findViewById(R.id.buttonCreateTicket);
@@ -176,7 +179,7 @@ public class TicketCreateFragment extends Fragment implements AdapterView.OnItem
 
     }
 
-    private void selectImage() {
+    private void selectAttachment() {
 
         final CharSequence[] items = {"Camera","PDF", "Gallery", "Cancel"};
 
@@ -192,21 +195,20 @@ public class TicketCreateFragment extends Fragment implements AdapterView.OnItem
 
                     Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                     startActivityForResult(intent, REQUEST_CAMERA);
-                }
-                else if(items[i].equals("PDF")){
-                        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-                        intent.addCategory(Intent.CATEGORY_OPENABLE);
-                        intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
-                        intent.setType(MimeTypeConst.pdfMimeType);
-                        startActivityForResult(Intent.createChooser(intent,"Select PDF"), SELECT_FILE);
-                }
-                else if (items[i].equals("Gallery")) {
-
+                } else if (items[i].equals("PDF")) {
+                    fileType = "PDF";
+                    Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+                    intent.addCategory(Intent.CATEGORY_OPENABLE);
+                    intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+                    intent.setType(MimeTypeConst.pdfMimeType);
+                    startActivityForResult(Intent.createChooser(intent, "Select PDF"), SELECT_FILE);
+                } else if (items[i].equals("Gallery")) {
+                    fileType = "IMAGE";
                     Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
                     intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
                     intent.addCategory(Intent.CATEGORY_OPENABLE);
                     intent.setType(MimeTypeConst.imageMimeType);
-                    startActivityForResult(Intent.createChooser(intent,"Select Pictures"), SELECT_FILE);
+                    startActivityForResult(Intent.createChooser(intent, "Select Pictures"), SELECT_FILE);
 
                 } else if (items[i].equals("Cancel")) {
                     dialogInterface.dismiss();
@@ -241,7 +243,15 @@ public class TicketCreateFragment extends Fragment implements AdapterView.OnItem
                     }
                     handleAttachment(imageDataList, mimeType);
                 } else if (data.getData() != null) {
-                    String imagePath = data.getData().getPath();
+                    Uri uri = data.getData();
+                    String mimeType = MimeTypeConst.imageMimeType;
+                    if (fileType != null && "PDF".equals(fileType)) {
+                        mimeType = MimeTypeConst.pdfMimeType;
+                    }
+                    //String imageUri = data.getData().getPath();
+                    List<byte[]> imageDataList = new ArrayList<>();
+                    imageDataList.add(getBytes(uri));
+                    handleAttachment(imageDataList, mimeType);
                     //do something with the image (save it to some directory or whatever you need to do with it here)
                 }
             }
