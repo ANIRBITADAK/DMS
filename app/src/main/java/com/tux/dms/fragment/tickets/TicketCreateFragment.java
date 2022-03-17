@@ -248,11 +248,9 @@ public class TicketCreateFragment extends Fragment implements AdapterView.OnItem
                     if (fileType != null && "PDF".equals(fileType)) {
                         mimeType = MimeTypeConst.pdfMimeType;
                     }
-                    //String imageUri = data.getData().getPath();
                     List<byte[]> imageDataList = new ArrayList<>();
                     imageDataList.add(getBytes(uri));
                     handleAttachment(imageDataList, mimeType);
-                    //do something with the image (save it to some directory or whatever you need to do with it here)
                 }
             }
         }
@@ -327,7 +325,13 @@ public class TicketCreateFragment extends Fragment implements AdapterView.OnItem
     private void uploadAttachment(List<MultipartBody.Part> parts) {
 
         String token = sessionCache.getToken();
-        Call<ImageUploadResponse> call = apiInterface.uploadImage(token, parts);
+        // making upload call with single file
+        // as api is timing out with multiple file.
+        parts.forEach(part -> uploadSingleAttachment(token, part));
+    }
+
+    private void uploadSingleAttachment(String accessToken, MultipartBody.Part part) {
+        Call<ImageUploadResponse> call = apiInterface.uploadImage(accessToken, Arrays.asList(part));
         final ProgressDialog progressDialogUpload;
         progressDialogUpload = new ProgressDialog(getContext());
         progressDialogUpload.setTitle("Uploading . . .");
@@ -351,7 +355,6 @@ public class TicketCreateFragment extends Fragment implements AdapterView.OnItem
             }
         });
     }
-
     private void postTicket(String subjectStr, String sourceStr, List<String> imagePaths, List<String> pdfPaths) {
 
         Ticket ticketBody = new Ticket();
