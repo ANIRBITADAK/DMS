@@ -69,33 +69,33 @@ public class ShowPdfFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view= inflater.inflate(R.layout.fragment_showpdf, container, false);
-        webView=view.findViewById(R.id.webView);
-        progressBar=view.findViewById(R.id.progressBar);
+        View view = inflater.inflate(R.layout.fragment_showpdf, container, false);
+        webView = view.findViewById(R.id.webView);
+        progressBar = view.findViewById(R.id.progressBar);
 
         Bundle bundle = this.getArguments();
 
         webView.getSettings().setBuiltInZoomControls(true);
         webView.getSettings().setJavaScriptEnabled(true);
-        webView.setWebViewClient(new WebViewClient(){
+        webView.setWebViewClient(new WebViewClient() {
             @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
                 super.onPageStarted(view, url, favicon);
                 progressBar.setVisibility(View.VISIBLE);
 
             }
-            @Override public void onPageFinished(WebView view, String url) {
+
+            @Override
+            public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
                 progressBar.setVisibility(View.GONE);
 
             }
         });
 
-        String pdfPath=bundle.getString(TicketConst.TICKET_PDF_PATH);
-        String finalPath= "http://" + ApiClient.getIpAddress() + ":" + ApiClient.getPORT() + "/" + pdfPath;
+        String pdfPath = bundle.getString(TicketConst.TICKET_PDF_PATH);
+        webView.loadUrl("https://drive.google.com/viewerng/viewer?embedded=true&url=" + pdfPath);
 
-        webView.loadUrl("https://drive.google.com/viewerng/viewer?embedded=true&url=" + finalPath);
-
-        return  view;
+        return view;
     }
 }

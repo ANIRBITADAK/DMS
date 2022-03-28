@@ -86,7 +86,7 @@ public class GridFragment extends Fragment {
             attachmentList.add(new Attachment(imagePaths.get(i), R.drawable.ic_baseline_image_24, AttachmentConst.ATTACHMENT_IMAGE_TYPE));
 
         for (int i = 0; i < pdfPaths.size(); i++)
-            attachmentList.add(new Attachment(pdfPaths.get(i), R.drawable.ic_baseline_picture_as_pdf_24,AttachmentConst.ATTACHMENT_PDF_TYPE));
+            attachmentList.add(new Attachment(pdfPaths.get(i), R.drawable.ic_baseline_picture_as_pdf_24, AttachmentConst.ATTACHMENT_PDF_TYPE));
 
 
         AttachmentAdapter attachmentAdapter = new AttachmentAdapter(getContext(), attachmentList);
