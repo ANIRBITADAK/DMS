@@ -171,7 +171,9 @@ public class TicketDetailsFragment extends Fragment {
                         sourceTextView.setText(ticket.getSource());
                         assignedToTextView.setText(ticket.getAssignedTo().getName());
                         assignDateTextView.setText(ticket.getAssignDate());
+                        imagePaths.clear();
                         imagePaths.addAll(ticket.getImageFilePath());
+                        pdfPaths.clear();
                         pdfPaths.addAll(ticket.getPdfFilePath());
 
 

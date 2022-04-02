@@ -94,8 +94,9 @@ public class ShowPdfFragment extends Fragment {
         });
 
         String pdfPath = bundle.getString(TicketConst.TICKET_PDF_PATH);
-        webView.loadUrl("https://drive.google.com/viewerng/viewer?embedded=true&url=" + pdfPath);
-
+        webView.loadUrl(pdfPath);
+        webView.loadUrl("https://docs.google.com/viewer?url=" + pdfPath);
+        //webView.loadUrl("https://drive.google.com/viewerng/viewer?embedded=true&url=" + pdfPath);
         return view;
     }
 }
