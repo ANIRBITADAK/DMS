@@ -8,12 +8,12 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
 
 import com.tux.dms.constants.TicketConst;
-import com.tux.dms.rest.ApiClient;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -68,7 +68,7 @@ public class ShowPdfFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+
         View view = inflater.inflate(R.layout.fragment_showpdf, container, false);
         webView = view.findViewById(R.id.webView);
         progressBar = view.findViewById(R.id.progressBar);
@@ -77,6 +77,7 @@ public class ShowPdfFragment extends Fragment {
 
         webView.getSettings().setBuiltInZoomControls(true);
         webView.getSettings().setJavaScriptEnabled(true);
+        webView.getSettings().setPluginState(WebSettings.PluginState.ON);
         webView.setWebViewClient(new WebViewClient() {
             @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
@@ -94,9 +95,9 @@ public class ShowPdfFragment extends Fragment {
         });
 
         String pdfPath = bundle.getString(TicketConst.TICKET_PDF_PATH);
-        webView.loadUrl(pdfPath);
         webView.loadUrl("https://docs.google.com/viewer?url=" + pdfPath);
         //webView.loadUrl("https://drive.google.com/viewerng/viewer?embedded=true&url=" + pdfPath);
         return view;
     }
+
 }
